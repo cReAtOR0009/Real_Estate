@@ -1,0 +1,38 @@
+:root {
+  --mainShade0: #703BF7;
+  --mainShade1: #8254F8;
+  --mainShade2: #946CF9;
+  --mainShade3: #A685FA;
+  --greyShade0:#141414;
+  --greyShade1:#1A1A1A;
+  --greyShade2:#262626;
+  --greyShade3:#333333;
+  --greyShade4:#4D4D4D;
+  --greyShade5:#666666;
+  --greyShade6:#808080;
+  --greyShade7:#999999;
+  --primary1:#141414;
+  --primary2:#1A1A1A;
+  --desktopNavPadding:20px 160px;
+  --PcNavPadding:14px 80px;
+}
+*{
+  /* border: 1px solid red; */
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  color: white;
+}
+
+html {
+  min-height:100%;
+  /* background:linear-gradient(0deg, rgba(74, 73, 73, 0.3), rgba(255, 241, 249, 0.3)), url(https://picsum.photos/id/1043/800/600); */
+  background-size:cover;
+}
+body {
+  font-family: Urbanist;
+}
+
+.container {
+  padding: 80px;
+}
