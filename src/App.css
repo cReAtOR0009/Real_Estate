@@ -258,7 +258,7 @@ header {
   font-size: 38px;
   font-style: normal;
   font-weight: 600;
-  line-height: 150%; 
+  line-height: 150%;
 }
 
 .featureItemHeader > div:first-child p {
@@ -290,13 +290,34 @@ header {
 .featuredItemListContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  padding: 30px;
-  border-radius: 10px;
+  /* padding: 20px; */
+  gap: 20px;
+  /* border-radius: 10px; */
   border: 1px solid var(--greyShade1);
 }
+
+.featuredItemWrapper {
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid var(--Grey-15, #262626);
+  background: var(--Grey-08, #141414);
+  /* background-color: red; */
+}
+
 .featuredItem {
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
+  /* background-color: red; */
+}
+
+.featuredItem h2 {
+  color: var(--Absolute-White, #fff);
+  font-family: Urbanist;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 30px */
 }
 
 .featuredItem > div:first-child {
@@ -306,13 +327,75 @@ header {
   height: 255px;
 }
 
+.featuredItem > div:first-child p {
+  color: var(--Grey-60, #999);
+  font-family: Urbanist;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+}
+
 .featuredItem > div:first-child img {
   width: 100%;
   height: 100%;
 }
 
+.featuredItem > div:last-child {
+}
+.featuredItemText {
+  padding-block: 20px;
+}
+.productTags {
+  display: flex;
+  flex-wrap: wrap;
+}
+.productTags p {
+  display: flex;
+  padding: 6px 14px;
+  align-items: center;
+  margin-block: 5px;
+  margin-right: 5px;
+  gap: 4px;
+  border-radius: 28px;
+  border: 1px solid var(--Grey-15, #262626);
+  background: var(--Grey-10, #1a1a1a);
+}
+
+.productTags img {
+  width: 22px;
+height: 17px;
+}
+.featureditemPriceContainer .buyButton button {
+  padding: 14px 20px;
+  background-color: var(--mainShade0);
+  display: flex;
+padding: 14px 20px;
+justify-content: center;
+align-items: center;
+/* gap: 8px;
+flex: 1 0 0; */
+border-radius: 8px;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; 
+}
 
 
+.featureditemPriceContainer {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  /* flex-wrap: wrap; */
+  /* background-color: red; */
+  justify-content: space-between;
+}
+
+.featureditemPriceContainer .price{
+  display: flex;
+  flex-direction: column;
+}
 
 
 

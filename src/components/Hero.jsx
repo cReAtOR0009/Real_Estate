@@ -1,6 +1,13 @@
 import React from "react";
 import { achievement1, offers } from "../assets/textAssets";
-import { hero, dreamcircle, iconContainer, iconContainer1, iconContainer2, iconContainer3 } from "../assets/imageImporter";
+import {
+  hero,
+  dreamcircle,
+  iconContainer,
+  iconContainer1,
+  iconContainer2,
+  iconContainer3,
+} from "../assets/imageImporter";
 
 const AchievementCard = ({ numbers, title }) => {
   return (
@@ -15,17 +22,17 @@ const AchievementCard = ({ numbers, title }) => {
   );
 };
 
-const OffersCard = ({offer, icon, icon2}) => {
-    return (
-        <div className="headerSection2Card">
-            <div>
-                <img src={icon} alt="" />
-            </div>
-            <p>{offer}</p>
-            <img src={icon2} alt="" />
-        </div>
-    )
-}
+const OffersCard = ({ offer, icon, icon2 }) => {
+  return (
+    <div className="headerSection2Card">
+      <div>
+        <img src={icon} alt="" />
+      </div>
+      <p>{offer}</p>
+      <img src={icon2} alt="" />
+    </div>
+  );
+};
 
 const Hero = () => {
   return (
@@ -50,17 +57,16 @@ const Hero = () => {
           </div>
         </section>
         <section className="headerRight">
-            <img src={hero} alt="" />
+          <img src={hero} alt="" />
           <div>
             <img src={dreamcircle} alt="" />
           </div>
         </section>
       </div>
       <div className="headerSection2">
-                {offers.map((offer, index) => 
-                      <OffersCard key={index} {...offer}/>  
-                )
-                }
+        {offers.map((offer, index) => (
+          <OffersCard key={index} {...offer} />
+        ))}
       </div>
     </header>
   );

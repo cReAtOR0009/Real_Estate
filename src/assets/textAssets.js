@@ -28,21 +28,21 @@ export const offers = [
 export const featuredProducts = [
     {
         title:"Seaside Serenity Villa",
-        about:"A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+        details:"A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
         image:house1,
         features:[{icon:bedroomicon, featureText:"4-Bedroom"},{icon:bathroomicon, featureText:"3-Bathroom"},{icon:villaicon, featureText:"villa"}],
         price:550000,
     },
     {
         title:"Metropolitan Haven",
-        about:"A chic and fully-furnished 2-bedroom apartment with panoramic city views... Read More",
+        details:"A chic and fully-furnished 2-bedroom apartment with panoramic city views... Read More",
         image:house2,
         features:[{icon:bedroomicon, featureText:"4-Bedroom"},{icon:bathroomicon, featureText:"3-Bathroom"},{icon:villaicon, featureText:"villa"}],
         price:550000,
     },
     {
         title:"Rustic Retreat Cottage",
-        about:"An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community... Read More",
+        details:"An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community... Read More",
         image:house3,
         features:[{icon:bedroomicon, featureText:"4-Bedroom"},{icon:bathroomicon, featureText:"3-Bathroom"},{icon:villaicon, featureText:"villa"}],
         price:550000,

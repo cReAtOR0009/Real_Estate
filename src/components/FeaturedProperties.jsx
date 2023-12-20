@@ -1,22 +1,30 @@
 import React from "react";
+import { featuredProducts } from "../assets/textAssets";
 
-const featuredItemCard = () => {
+const FeaturedItemCard = ({image, title, details, features, price}) => {
   return (
     <div className="featuredItemWrapper">
       <div className="featuredItem">
         <div>
-          <img src="" alt="" />
+          <img src={image} alt="" />
         </div>
         <div>
-          <div>
-            <h2></h2>
-            <p></p>
+          <div className="featuredItemText">
+            <h2>{title}</h2>
+            <p>{details}</p>
           </div>
-          <div className="productTags"></div>
-          <div>
-            <div className="price"></div>
+          <div className="productTags">
+            {features.map((feature, index) => (
+                <p key={index} className="feature">
+                   <span><img src={feature.icon} alt="" /></span>
+                   {feature.featureText}
+                </p>
+            ))}
+          </div>
+          <div className="featureditemPriceContainer" >
+            <div className="price"><span>Price:</span>{`$${price}`}</div>
             <div className="buyButton">
-              <button></button>
+              <button>View Property Details</button>
             </div>
           </div>
         </div>
@@ -25,7 +33,7 @@ const featuredItemCard = () => {
   );
 };
 
-export const FeaturedProperties = () => {
+ export const FeaturedProperties = () => {
   return (
     <div className="featuredItemsContainer">
       <div className="featureItemHeader">
@@ -45,7 +53,11 @@ export const FeaturedProperties = () => {
       </div>
 
       <div className="featuredItemsContainerWrapper">
-        <div className="featuredItemListContainer"></div>
+        <div className="featuredItemListContainer">
+            {featuredProducts.map((featuredProduct, index)=> (
+                <FeaturedItemCard key={index} {...featuredProduct} />
+            ))}
+        </div>
         <div></div>
       </div>
     </div>
