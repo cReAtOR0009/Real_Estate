@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { navLinks, companydetails } from "../assets/textAssets";
 import { logo, closeButton } from "../assets/imageImporter";
+import "../styles/nav.css"
 
 export const NavBar = () => {
   const [activeNav, setActiveNav] = useState("home");

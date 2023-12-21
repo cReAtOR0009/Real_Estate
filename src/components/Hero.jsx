@@ -8,6 +8,7 @@ import {
   iconContainer2,
   iconContainer3,
 } from "../assets/imageImporter";
+import "../styles/hero.css"
 
 const AchievementCard = ({ numbers, title }) => {
   return (

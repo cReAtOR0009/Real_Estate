@@ -1,0 +1,60 @@
+.testimonialsContainer {
+    padding: 90px 80px;
+}
+
+.testimonialsContainer > div:first-child {
+  display: flex;
+  justify-content: space-between;
+}
+.testimonialsContainer div .left {
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonialsContainer div .left button {
+  border-radius: 8px;
+  border: 1px solid var(--Grey-15, #262626);
+  background: var(--Grey-10, #1a1a1a);
+  display: flex;
+  padding: 14px 20px;
+  align-items: center;
+  gap: 8px;
+}
+.testimonialsCardContainer {
+    /* background-color: green; */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 10px;
+}
+.testimonialsCard {
+  padding: 40px;
+  margin-top: 40px;
+  display: flex;
+  padding: 40px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  /* flex: 1 0 0; */
+  border-radius: 10px;
+  border: 1px solid var(--Grey-15, #262626);
+  background: var(--Grey-08, #141414);
+}
+
+.startContainer {
+
+}
+.startContainer span {
+    padding: 9px;
+    border-radius: 50%;
+}
+
+.profileContainers {
+display: flex;
+justify-content: flex-start;
+}
+
+.profileContainers .profiledeatails {
+display: flex;
+flex-direction: column
+/* justify-content: ; */
+}

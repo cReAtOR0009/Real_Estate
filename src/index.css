@@ -1,23 +1,32 @@
 :root {
-  --mainShade0: #703BF7;
-  --mainShade1: #8254F8;
-  --mainShade2: #946CF9;
-  --mainShade3: #A685FA;
-  --greyShade0:#141414;
-  --greyShade1:#1A1A1A;
-  --greyShade2:#262626;
-  --greyShade3:#333333;
-  --greyShade4:#4D4D4D;
-  --greyShade5:#666666;
-  --greyShade6:#808080;
-  --greyShade7:#999999;
-  --primary1:#141414;
-  --primary2:#1A1A1A;
-  --desktopNavPadding:20px 160px;
-  --PcNavPadding:14px 80px;
+  --Purple-60: #703bf7;
+  --Purple-65: #8254f8;
+  --Purple-70: #946cf9;
+  --Purple-75: #a685fa;
+  --Purple-90: #dbcefd;
+  --Purple-95: #ede7fe;
+  --Purple-97: #f4f0fe;
+  --Purple-99: #fbfaff;
+
+  --Grey-08: #141414;
+  --Grey-10: #1a1a1a;
+  --Grey-15: #262626;
+  --Grey-20: #333;
+  --Grey-30: #4d4d4d;
+  --Grey-40: #666666;
+  --Grey-50: #808080;
+  --Grey-60: #999999;
+
+  --White-90: #e4e4e7;
+  --White-95: #f1f1f3;
+  --White-97: #f7f7f8;
+  --White-99: #fcfcfd;
+
+  --desktopNavPadding: 20px 160px;
+  --PcNavPadding: 14px 80px;
 }
-*{
-  /* border: 1px solid red; */
+* {
+  border: 1px solid red;
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
@@ -25,14 +34,44 @@
 }
 
 html {
-  min-height:100%;
+  min-height: 100%;
   /* background:linear-gradient(0deg, rgba(74, 73, 73, 0.3), rgba(255, 241, 249, 0.3)), url(https://picsum.photos/id/1043/800/600); */
-  background-size:cover;
+  background-size: cover;
 }
 body {
+  font-style: normal;
   font-family: Urbanist;
 }
 
 .container {
   padding: 80px;
+}
+
+.paragraphText {
+  color: var(--Absolute-White, #fff);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+.headerText {
+  color: var(--Absolute-White, #FFF);
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 57px */
+}
+
+.smallheaderText {
+  color: var(--Absolute-White, #FFF);
+font-size: 20px;
+font-weight: 600;
+line-height: 150%; /* 30px */
+}
+
+.smallerText {
+  color: var(--Absolute-White, #FFF);
+font-size: 14px;
+font-weight: 500;
+line-height: 150%; /* 21px */
 }

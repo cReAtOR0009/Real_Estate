@@ -1,0 +1,81 @@
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* align-items: start; */
+    /* padding: var(--PcNavPadding); */
+    align-content: start;
+    background-color: var(--Grey-40);
+  }
+  
+  .navigation {
+    background-color: var(--Grey-15);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-block: 20px;
+    padding: var(--PcNavPadding);
+  }
+  
+  .logo {
+    display: flex;
+    width: 113.33;
+    height: 34;
+    /* background-color: var(--Grey-10); */
+    width: auto;
+  }
+  .navigation ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+  
+  .navigation ul li {
+    align-self: center;
+    padding: 14px 20px;
+    /* border-radius: 8px; */
+    /* justify-content: center; */
+  }
+  
+  .navigation ul li + li {
+    margin-left: 20px;
+    /* background-color: red; */
+  }
+  .activeNav {
+    background-color: var(--Grey-08);
+    border: 1px solid var(--Grey-15);
+    border-radius: 8px;
+  }
+  .ContactBtn {
+    padding: 16px 20px;
+  }
+  .adverts {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    /* background: url("./assets/backgroundImage.png"); */
+    /* margin-left: 50%; */
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid var(--Grey-15);
+  }
+  .adverts div {
+    display: flex;
+    justify-self: start;
+  }
+  .adverts button {
+    text-decoration: underline;
+    background-color: transparent;
+    border: 0px;
+    padding-left: 10px;
+    outline: none;
+  }
+  .adverts img {
+    position: absolute;
+    width: 20px;
+    right: 30px;
+    top: 5px;
+  }
