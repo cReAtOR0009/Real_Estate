@@ -14,6 +14,16 @@ import villaicon from "./villaicon.svg"
 import house1 from "./house1.jpg"
 import house2 from "./house2.jpg"
 import house3 from "./house3.png"
+import leftarrow from "./leftarrow.jpg"
+import rightarrow from "./rightarrow.jpg"
+import biggeststar from "./biggeststar.svg"
+import biggerstar from "./biggerstar.svg"
+import bigstar from "./bigstar.svg"
+import ratingicon from "./ratingicon.svg"
+import profile1 from "./profile1.jpg"
+import profile2 from "./profile2.jpg"
+import profile3 from "./profile3.jpg"
+import profile4 from "./profile4.jpg"
 
 
-export {logo, closeButton, backgroundImage,hero, dreamcircle, iconContainer,iconContainer1, iconContainer2, iconContainer3, arrowIcon, bedroomicon, bathroomicon, villaicon, house1, house2, house3}
+export {logo, closeButton, backgroundImage,hero, dreamcircle, iconContainer,iconContainer1, iconContainer2, iconContainer3, arrowIcon, bedroomicon, bathroomicon, villaicon, house1, house2, house3, leftarrow, rightarrow, biggerstar, biggeststar, bigstar, ratingicon, profile1, profile2, profile3, profile4}
