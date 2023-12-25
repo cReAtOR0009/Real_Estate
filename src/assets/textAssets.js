@@ -82,10 +82,58 @@ export const featuredProducts = [
     price: 550000,
   },
   {
+    title: "Seaside Serenity Villa",
+    details:
+      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+    image: house1,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
     title: "Rustic Retreat Cottage",
     details:
       "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community... Read More",
     image: house3,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Metropolitan Haven",
+    details:
+      "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
+    image: house2,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Seaside Serenity Villa",
+    details:
+      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+    image: house1,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Seaside Serenity Villa",
+    details:
+      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+    image: house1,
     features: [
       { icon: bedroomicon, featureText: "4-Bedroom" },
       { icon: bathroomicon, featureText: "3-Bathroom" },
@@ -122,42 +170,78 @@ export const testimonials = [
     name: "Alex Johnson",
     address: "789 Pine Lane, Villagetown, Australia",
   },
-  //   {
-  //     rating: 5,
-  //     title: "Impressive Turnaround Time",
-  //     content:
-  //       "I needed a quick turnaround, and they delivered! The efficiency and speed of their service are truly commendable.",
-  //     profile: profile4,
-  //     name: "Emily Brown",
-  //     address: "101 Cedar Street, Hamletville, UK",
-  //   },
-  //   {
-  //     rating: 4,
-  //     title: "Reliable and Trustworthy",
-  //     content:
-  //       "Reliability is crucial for me, and this company has consistently proven to be trustworthy. I trust them with all my needs.",
-  //     profile: profile1,
-  //     name: "Robert Taylor",
-  //     address: "202 Birch Road, Suburbia, Germany",
-  //   },
-  //   {
-  //     rating: 2,
-  //     title: "Room for Improvement",
-  //     content:
-  //       "While the product was okay, I believe there is room for improvement in certain aspects. Hope to see positive changes in the future.",
-  //     profile: profile3,
-  //     name: "Lisa Davis",
-  //     address: "303 Elm Street, Downtown, France",
-  //   },
-  //   {
-  //     rating: 5,
-  //     title: "Excellent Communication",
-  //     content:
-  //       "Communication was excellent throughout the entire process. They kept me informed and ensured I was satisfied every step of the way.",
-  //     profile: profile2,
-  //     name: "Michael Wilson",
-  //     address: "404 Maple Lane, Uptown, Spain",
-  //   },
+    {
+      rating: 5,
+      title: "Impressive Turnaround Time",
+      content:
+        "I needed a quick turnaround, and they delivered! The efficiency and speed of their service are truly commendable.",
+      profile: profile4,
+      name: "Emily Brown",
+      address: "101 Cedar Street, Hamletville, UK",
+    },
+    {
+      rating: 4,
+      title: "Reliable and Trustworthy",
+      content:
+        "Reliability is crucial for me, and this company has consistently proven to be trustworthy. I trust them with all my needs.",
+      profile: profile1,
+      name: "Robert Taylor",
+      address: "202 Birch Road, Suburbia, Germany",
+    },
+    {
+      rating: 2,
+      title: "Room for Improvement",
+      content:
+        "While the product was okay, I believe there is room for improvement in certain aspects. Hope to see positive changes in the future.",
+      profile: profile3,
+      name: "Lisa Davis",
+      address: "303 Elm Street, Downtown, France",
+    },
+    {
+      rating: 5,
+      title: "Excellent Communication",
+      content:
+        "Communication was excellent throughout the entire process. They kept me informed and ensured I was satisfied every step of the way.",
+      profile: profile2,
+      name: "Michael Wilson",
+      address: "404 Maple Lane, Uptown, Spain",
+    },
+    {
+        rating: 5,
+        title: "Impressive Turnaround Time",
+        content:
+          "I needed a quick turnaround, and they delivered! The efficiency and speed of their service are truly commendable.",
+        profile: profile4,
+        name: "Emily Brown",
+        address: "101 Cedar Street, Hamletville, UK",
+      },
+      {
+        rating: 4,
+        title: "Reliable and Trustworthy",
+        content:
+          "Reliability is crucial for me, and this company has consistently proven to be trustworthy. I trust them with all my needs.",
+        profile: profile1,
+        name: "Robert Taylor",
+        address: "202 Birch Road, Suburbia, Germany",
+      },
+      {
+        rating: 2,
+        title: "Room for Improvement",
+        content:
+          "While the product was okay, I believe there is room for improvement in certain aspects. Hope to see positive changes in the future.",
+        profile: profile3,
+        name: "Lisa Davis",
+        address: "303 Elm Street, Downtown, France",
+      },
+      {
+        rating: 5,
+        title: "Excellent Communication",
+        content:
+          "Communication was excellent throughout the entire process. They kept me informed and ensured I was satisfied every step of the way.",
+        profile: profile2,
+        name: "Michael Wilson",
+        address: "404 Maple Lane, Uptown, Spain",
+      },
 ];
 
 export const faqs = [

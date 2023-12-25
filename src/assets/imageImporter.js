@@ -24,6 +24,8 @@ import profile1 from "./profile1.jpg"
 import profile2 from "./profile2.jpg"
 import profile3 from "./profile3.jpg"
 import profile4 from "./profile4.jpg"
+import messageIcon from "./messageIcon.svg"
+import telegramIcon from "./telegramIcon.svg"
 
 
-export {logo, closeButton, backgroundImage,hero, dreamcircle, iconContainer,iconContainer1, iconContainer2, iconContainer3, arrowIcon, bedroomicon, bathroomicon, villaicon, house1, house2, house3, leftarrow, rightarrow, biggerstar, biggeststar, bigstar, ratingicon, profile1, profile2, profile3, profile4}
+export {logo, closeButton, backgroundImage,hero, dreamcircle, iconContainer,iconContainer1, iconContainer2, iconContainer3, arrowIcon, bedroomicon, bathroomicon, villaicon, house1, house2, house3, leftarrow, rightarrow, biggerstar, biggeststar, bigstar, ratingicon, profile1, profile2, profile3, profile4,messageIcon, telegramIcon}
