@@ -1,7 +1,8 @@
 /* FEATURED CONTAINER STYLES */
 .featuredItemsContainer {
     padding: 90px 80px;
-    background-color: var(--Grey-08);
+    padding-bottom: 0px;
+    /* background-color: var(--Grey-08); */
   }
   .featureItemHeader {
     display: flex;
@@ -46,7 +47,7 @@
   }
   
   .featuredItemsContainerWrapper {
-    padding-block: 90px;
+    padding-top: 60px;
   }
   
   .featuredItemListContainer {

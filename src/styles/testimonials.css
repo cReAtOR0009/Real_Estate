@@ -5,19 +5,19 @@
 .testimonialsContainer > div:first-child {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-end;
 }
 .testimonialsContainer div .left {
   display: flex;
   flex-direction: column;
 }
 
-.testimonialsContainer div .left button {
+.testimonialsContainer   button {
   border-radius: 8px;
   border: 1px solid var(--Grey-15, #262626);
   background: var(--Grey-10, #1a1a1a);
-  display: flex;
   padding: 14px 20px;
-  align-items: center;
   gap: 8px;
 }
 .testimonialsCardContainer {
@@ -33,28 +33,51 @@
   padding: 40px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 30px;
+  /* gap: 30px; */
   /* flex: 1 0 0; */
   border-radius: 10px;
   border: 1px solid var(--Grey-15, #262626);
   background: var(--Grey-08, #141414);
 }
+.textContainers {
+  margin-block: 30px;
+}
 
-.startContainer {
+.starContainer {
 
 }
-.startContainer span {
+.starContainer span {
     padding: 9px;
+    margin-right: 10px;
     border-radius: 50%;
+    border: 1px solid var(--Grey-10);
 }
 
 .profileContainers {
 display: flex;
 justify-content: flex-start;
+gap: 12px;
+align-items: end  ;
+justify-content: center;
+}
+.profileContainers .profileImage img {
+  width: 60px;
+  height:60px ;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .profileContainers .profiledeatails {
 display: flex;
 flex-direction: column
 /* justify-content: ; */
+}
+.profileContainers .profiledeatails h2 {
+  font-size: 20px;
+  font-weight: 500;
+line-height: 150%;
+}
+
+.profiledeatails p{
+  font-size: 18px;
 }

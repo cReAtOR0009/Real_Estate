@@ -1,0 +1,78 @@
+.faqContainer {
+  padding: 90px 80px;
+}
+
+.faqContainer .headerText {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+  align-items: flex-end;
+  /* background-color: red;  */
+}
+
+.headerText .left {
+  display: flex;
+  flex-direction: column;
+  /* margin-right: 120px; */
+}
+.headerText h2 {
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 150%; /* 30px */
+}
+
+.headerText p {
+  color: var(--Grey-60, #999);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+  letter-spacing: -0.096px;
+}
+.faqContainer .headerText .left {
+  display: flex;
+  flex-direction: column;
+}
+
+.faqContainer .headerText div.right button,
+.faqCard button {
+  border-radius: 8px;
+  border: 1px solid var(--Grey-15, #262626);
+  width: auto;
+  background: var(--Grey-10, #1a1a1a);
+  white-space: nowrap;
+  padding: 14px 20px;
+  gap: 8px;
+}
+.faqCardContainer {
+  /* background-color: green; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 10px;
+}
+.faqCard {
+  padding: 40px;
+  margin-top: 60px;
+  display: flex;
+  padding: 40px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  border-radius: 10px;
+  border: 1px solid var(--Grey-15, #262626);
+  background: var(--Grey-08, #141414);
+}
+.faqCard p {
+  color: var(--Grey-60, #999);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+  letter-spacing: -0.096px;
+}
+
+a {
+  text-decoration: none;
+}
+.textContainers {
+  margin-block: 30px;
+}
