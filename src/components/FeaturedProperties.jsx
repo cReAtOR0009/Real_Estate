@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { featuredProducts, leftarrow, rightarrow } from "../assets/textAssets";
 import "../styles/featured.css"
 
@@ -34,7 +34,25 @@ const FeaturedItemCard = ({image, title, details, features, price}) => {
   );
 };
 
- export const FeaturedProperties = () => {
+ export const FeaturedProperties = ({featuredProduct = featuredProducts}) => {
+
+  const itemsPerDisplay = 3
+  const noOfPages = Math.ceil(featuredProduct.length/itemsPerDisplay)
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const startIndex = (currentPage - 1) * itemsPerDisplay
+  const endIndex = startIndex + itemsPerDisplay
+
+  const displayedFeaturedItems = featuredProduct.slice(startIndex, endIndex);
+
+  const handlePrevClick = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1)); // Ensure the page doesn't go below 0
+  };
+
+  // Handle click event for the "Next" button
+  const handleNextClick = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, noOfPages )); // Ensure the page doesn't exceed the total number of pages
+  };
   return (
     <div className="featuredItemsContainer">
       <div className="featureItemHeader">
@@ -55,18 +73,18 @@ const FeaturedItemCard = ({image, title, details, features, price}) => {
 
       <div className="featuredItemsContainerWrapper">
         <div className="featuredItemListContainer">
-            {featuredProducts.map((featuredProduct, index)=> (
+            {displayedFeaturedItems.map((featuredProduct, index)=> (
                 <FeaturedItemCard key={index} {...featuredProduct} />
             ))}
         </div>
         <div className="featuredToggle">
             <p>
-                <span className="currentPage">01</span>of
-                <span className="totalPage">60</span>
+                <span className="currentPage">{currentPage}</span>of
+                <span className="totalPage">{noOfPages}</span>
             </p>
             <div className="toggleButton">
-                <div className="previous"><img src={leftarrow} alt="" /></div>
-                <div className="next"><img src={rightarrow} alt="" /></div>
+                <div className="previous" onClick={handlePrevClick} disabled={currentPage === 0}><img src={leftarrow} alt="" /></div>
+                <div className="next" onClick={handleNextClick} disabled={currentPage === noOfPages - 1}><img src={rightarrow} alt="" /></div>
             </div>
         </div>
       </div>
