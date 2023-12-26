@@ -13,7 +13,7 @@ const FaqCard = ({question, answer, id}) => {
   )
 }
 
-export const Faq = () => {
+const   Faq = () => {
   return (
     <div className="faqContainer">
       <div className="headerText">
