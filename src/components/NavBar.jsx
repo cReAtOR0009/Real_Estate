@@ -3,7 +3,7 @@ import { NavigationContext } from "../context/navigationContext";
 import { NavLink, Link } from "react-router-dom";
 import { navLinks, companydetails } from "../assets/textAssets";
 import { logo, closeButton } from "../assets/imageImporter";
-import "../styles/nav.css";
+import "../styles/nav.css"
 
 const NavBar = () => {
   const { setNavActive, activeNav, setActiveNav } = useContext(NavigationContext);

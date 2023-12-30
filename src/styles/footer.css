@@ -1,0 +1,77 @@
+.footerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 80px;
+  gap: 80px;
+  align-self: stretch;
+}
+
+.footerContainer .inputText {
+  padding: 14px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--Grey-15, #262626);
+  background: var(--Grey-08, #141414);
+}
+input {
+  background: transparent;
+  border: 0px;
+  font-size: 14px;
+}
+
+.messageicon {
+  width: 24px;
+  margin: 5px;
+}
+
+.telegramicon {
+  width: 24px;
+
+}
+
+.footerContainer .left {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 30px;
+}
+
+.footerNavContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1 0 0;
+  flex-wrap: wrap;
+  color: var(--white-99, #fff);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px; /* 120% */
+  letter-spacing: -0.12px;
+  /* gap: 30px; */
+}
+
+.pageNavContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.footerNavLink {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+ul li {
+  list-style: none;
+  font-size: 18px;
+  letter-spacing: -0.108px;
+}
+.pageNavContainer p {
+  color: var(--Grey-60, #999);
+  font-size: 20px;
+}
+li a {
+  text-decoration: none;
+}

@@ -21,12 +21,18 @@ import {
   profile2,
   profile3,
   profile4,
+  searchIcon,
+  propertyTypeicon,
+  pricingRangeicon,
+  locationIcon,
+  calenderIcon,
+  arrowDownicon,
 } from "./imageImporter";
 export { leftarrow, rightarrow, biggeststar, biggerstar, bigstar, ratingicon };
 
 export const navLinks = [
   { title: "Home", id: "home" },
-  { title: "About us", id: "about-us" },
+  { title: "About us", id: "about us" },
   { title: "Properties", id: "properties" },
   { title: "Services", id: "services" },
 ];
@@ -170,78 +176,78 @@ export const testimonials = [
     name: "Alex Johnson",
     address: "789 Pine Lane, Villagetown, Australia",
   },
-    {
-      rating: 5,
-      title: "Impressive Turnaround Time",
-      content:
-        "I needed a quick turnaround, and they delivered! The efficiency and speed of their service are truly commendable.",
-      profile: profile4,
-      name: "Emily Brown",
-      address: "101 Cedar Street, Hamletville, UK",
-    },
-    {
-      rating: 4,
-      title: "Reliable and Trustworthy",
-      content:
-        "Reliability is crucial for me, and this company has consistently proven to be trustworthy. I trust them with all my needs.",
-      profile: profile1,
-      name: "Robert Taylor",
-      address: "202 Birch Road, Suburbia, Germany",
-    },
-    {
-      rating: 2,
-      title: "Room for Improvement",
-      content:
-        "While the product was okay, I believe there is room for improvement in certain aspects. Hope to see positive changes in the future.",
-      profile: profile3,
-      name: "Lisa Davis",
-      address: "303 Elm Street, Downtown, France",
-    },
-    {
-      rating: 5,
-      title: "Excellent Communication",
-      content:
-        "Communication was excellent throughout the entire process. They kept me informed and ensured I was satisfied every step of the way.",
-      profile: profile2,
-      name: "Michael Wilson",
-      address: "404 Maple Lane, Uptown, Spain",
-    },
-    {
-        rating: 5,
-        title: "Impressive Turnaround Time",
-        content:
-          "I needed a quick turnaround, and they delivered! The efficiency and speed of their service are truly commendable.",
-        profile: profile4,
-        name: "Emily Brown",
-        address: "101 Cedar Street, Hamletville, UK",
-      },
-      {
-        rating: 4,
-        title: "Reliable and Trustworthy",
-        content:
-          "Reliability is crucial for me, and this company has consistently proven to be trustworthy. I trust them with all my needs.",
-        profile: profile1,
-        name: "Robert Taylor",
-        address: "202 Birch Road, Suburbia, Germany",
-      },
-      {
-        rating: 2,
-        title: "Room for Improvement",
-        content:
-          "While the product was okay, I believe there is room for improvement in certain aspects. Hope to see positive changes in the future.",
-        profile: profile3,
-        name: "Lisa Davis",
-        address: "303 Elm Street, Downtown, France",
-      },
-      {
-        rating: 5,
-        title: "Excellent Communication",
-        content:
-          "Communication was excellent throughout the entire process. They kept me informed and ensured I was satisfied every step of the way.",
-        profile: profile2,
-        name: "Michael Wilson",
-        address: "404 Maple Lane, Uptown, Spain",
-      },
+  {
+    rating: 5,
+    title: "Impressive Turnaround Time",
+    content:
+      "I needed a quick turnaround, and they delivered! The efficiency and speed of their service are truly commendable.",
+    profile: profile4,
+    name: "Emily Brown",
+    address: "101 Cedar Street, Hamletville, UK",
+  },
+  {
+    rating: 4,
+    title: "Reliable and Trustworthy",
+    content:
+      "Reliability is crucial for me, and this company has consistently proven to be trustworthy. I trust them with all my needs.",
+    profile: profile1,
+    name: "Robert Taylor",
+    address: "202 Birch Road, Suburbia, Germany",
+  },
+  {
+    rating: 2,
+    title: "Room for Improvement",
+    content:
+      "While the product was okay, I believe there is room for improvement in certain aspects. Hope to see positive changes in the future.",
+    profile: profile3,
+    name: "Lisa Davis",
+    address: "303 Elm Street, Downtown, France",
+  },
+  {
+    rating: 5,
+    title: "Excellent Communication",
+    content:
+      "Communication was excellent throughout the entire process. They kept me informed and ensured I was satisfied every step of the way.",
+    profile: profile2,
+    name: "Michael Wilson",
+    address: "404 Maple Lane, Uptown, Spain",
+  },
+  {
+    rating: 5,
+    title: "Impressive Turnaround Time",
+    content:
+      "I needed a quick turnaround, and they delivered! The efficiency and speed of their service are truly commendable.",
+    profile: profile4,
+    name: "Emily Brown",
+    address: "101 Cedar Street, Hamletville, UK",
+  },
+  {
+    rating: 4,
+    title: "Reliable and Trustworthy",
+    content:
+      "Reliability is crucial for me, and this company has consistently proven to be trustworthy. I trust them with all my needs.",
+    profile: profile1,
+    name: "Robert Taylor",
+    address: "202 Birch Road, Suburbia, Germany",
+  },
+  {
+    rating: 2,
+    title: "Room for Improvement",
+    content:
+      "While the product was okay, I believe there is room for improvement in certain aspects. Hope to see positive changes in the future.",
+    profile: profile3,
+    name: "Lisa Davis",
+    address: "303 Elm Street, Downtown, France",
+  },
+  {
+    rating: 5,
+    title: "Excellent Communication",
+    content:
+      "Communication was excellent throughout the entire process. They kept me informed and ensured I was satisfied every step of the way.",
+    profile: profile2,
+    name: "Michael Wilson",
+    address: "404 Maple Lane, Uptown, Spain",
+  },
 ];
 
 export const faqs = [
@@ -260,10 +266,12 @@ export const faqs = [
     answer:
       "The market value of your home can be determined by conducting a comparative market analysis (CMA), considering recent sales of similar properties in your area, and consulting with a real estate agent.",
   },
-  // {
-  //   question: 'What is the role of a real estate agent in the home-buying process?',
-  //   answer: 'A real estate agent assists buyers by providing property listings, arranging property showings, negotiating offers, and guiding clients through the entire home-buying process, including inspections and closing.'
-  // },
+  {
+    question:
+      "What is the role of a real estate agent in the home-buying process?",
+    answer:
+      "A real estate agent assists buyers by providing property listings, arranging property showings, negotiating offers, and guiding clients through the entire home-buying process, including inspections and closing.",
+  },
   // {
   //   question: 'How long does it typically take to sell a property?',
   //   answer: 'The time it takes to sell a property can vary based on factors such as location, market conditions, and property features. On average, it may take a few weeks to several months to secure a buyer.'
@@ -279,46 +287,97 @@ export const faqs = [
 ];
 
 export const footerNav = [
-    {
-        title: "Home",
-        navigation: [
-          { title: "Hero Section", to: "#" },
-          { title: "Features", to: "#" },
-          { title: "Properties", to: "#" },
-          { title: "Testimonials", to: "#" },
-          { title: "FAQ's", to: "#" },
-        ],
-      }, {
-        title: "About Us",
-        navigation: [
-          { title: "Our Story", to: "#" },
-          { title: "Our Works", to: "#" },
-          { title: "How it Works", to: "#" },
-          { title: "Our Team", to: "#" },
-          { title: "Our Clients", to: "#" },
-        ],
-      }, {
-        title: "Properties",
-        navigation: [
-          { title: "Portfolio", to: "#" },
-          { title: "Categories", to: "#" },
-        ],
-      },
-       {
-        title: "Services",
-        navigation: [
-          { title: "Valuation Mastery", to: "#" },
-          { title: "Startegic Marketing", to: "#" },
-          { title: "Negotiation Wizardry", to: "#" },
-          { title: "Closing Success", to: "#" },
-          { title: "Property Management", to: "#" },
-        ],
-      },
-      {
-        title: "Contact Us",
-        navigation: [
-          { title: "Contact Form", to: "#" },
-          { title: "Our Offices", to: "#" },
-        ],
-      },
+  {
+    title: "Home",
+    navigation: [
+      { title: "Hero Section", to: "hero" },
+      { title: "Features", to: "features" },
+      { title: "Properties", to: "properties" },
+      { title: "Testimonials", to: "testimonials" },
+      { title: "FAQ's", to: "faq" },
+    ],
+  },
+  {
+    title: "About Us",
+    navigation: [
+      { title: "Our Story", to: "our story" },
+      { title: "Our Works", to: "our works" },
+      { title: "How it Works", to: "how it works" },
+      { title: "Our Team", to: "our team" },
+      { title: "Our Clients", to: "our clients" },
+    ],
+  },
+  {
+    title: "Properties",
+    navigation: [
+      { title: "Portfolio", to: "Portfolio" },
+      { title: "Categories", to: "Categories" },
+    ],
+  },
+  {
+    title: "Services",
+    navigation: [
+      { title: "Valuation Mastery", to: "Valuation Mastery" },
+      { title: "Startegic Marketing", to: "Startegic Marketing" },
+      { title: "Negotiation Wizardry", to: "Negotiation Wizardry" },
+      { title: "Closing Success", to: "Closing Success" },
+      { title: "Property Management", to: "Property Management" },
+    ],
+  },
+  {
+    title: "Contact Us",
+    navigation: [
+      { title: "Contact Form", to: "Contact Form" },
+      { title: "Our Offices", to: "Our Offices" },
+    ],
+  },
+];
+
+export const searchinputs = [
+  //icon, placeholder, id, name, value, type, onChange, searchBtn
+  {
+    icon: locationIcon,
+    placeholder: "Location",
+    id: "location",
+    name: "Location",
+    value:"",
+    type: "text",
+    searchBtn: arrowDownicon,
+  },
+  {
+    icon: propertyTypeicon,
+    placeholder: "property Type",
+    id: "propertyType",
+    name: "propertyType",
+    value:"",
+    type: "text",
+    searchBtn: arrowDownicon,
+  },
+  {
+    icon: pricingRangeicon,
+    placeholder: "Pricing Range",
+    id: "pricingRange",
+    name: "pricingRange",
+    value:"",
+    type: "text",
+    searchBtn: arrowDownicon,
+  },
+  {
+    icon: locationIcon,
+    placeholder: "Location",
+    id: "calender",
+    name: "calender",
+    value:"",
+    type: "text",
+    searchBtn: arrowDownicon,
+  },
+  {
+    icon: locationIcon,
+    placeholder: "Location",
+    id: "buildYear",
+    name: "buildYear",
+    value:"",
+    type: "text",
+    searchBtn: arrowDownicon,
+  },
 ];

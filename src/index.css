@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,400;0,600;0,700;0,800;1,500;1,600;1,900&display=swap');
+
 :root {
   --Purple-60: #703bf7;
   --Purple-65: #8254f8;
@@ -26,7 +32,7 @@
   --PcNavPadding: 14px 80px;
 }
 * {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
@@ -36,11 +42,13 @@
 html {
   min-height: 100%;
   /* background:linear-gradient(0deg, rgba(74, 73, 73, 0.3), rgba(255, 241, 249, 0.3)), url(https://picsum.photos/id/1043/800/600); */
+  scroll-behavior: smooth;
   background-size: cover;
 }
 body {
   font-style: normal;
   font-family: Urbanist;
+  background-color: var(--Grey-08);
 }
 
 .container {
@@ -74,4 +82,8 @@ line-height: 150%; /* 30px */
 font-size: 14px;
 font-weight: 500;
 line-height: 150%; /* 21px */
+}
+
+button {
+  cursor: pointer;
 }
