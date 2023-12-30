@@ -1,33 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { NavigationContext } from "../context/navigationContext";
+import { NavLink, Link } from "react-router-dom";
 import { navLinks, companydetails } from "../assets/textAssets";
 import { logo, closeButton } from "../assets/imageImporter";
-import "../styles/nav.css"
+import "../styles/nav.css";
 
-export const NavBar = () => {
-  const [activeNav, setActiveNav] = useState("home");
+const NavBar = () => {
+  const { setNavActive, activeNav, setActiveNav } = useContext(NavigationContext);
+
   return (
     <>
       <nav>
         <div className="adverts">
-            <div></div>
+          <div></div>
           <div className="smallText1">
-            <p>
-            ✨Discover Your Dream Property with Estatein
-            </p>
+            <p>✨Discover Your Dream Property with Estatein</p>
             <a href="">
               <button>Learn More</button>
             </a>
           </div>
           <div>
-
-          <img src={closeButton} alt="close button" />
+            <img src={closeButton} alt="close button" />
           </div>
         </div>
         {/* <div style={{ backgroundColor: `var(--greyShade0)` }}> */}
         <div className="navigation">
-          <div className="logo">
+          <Link to="/" className="logo">
             <img src={logo} alt={companydetails.title} />
-          </div>
+          </Link>
           <ul>
             {navLinks.map((navlink, index) => {
               return (
@@ -36,9 +36,11 @@ export const NavBar = () => {
                   className={`navItem ${
                     activeNav == navlink.id ? "activeNav" : ""
                   }`}
-                  onClick={() => setActiveNav(navlink.id)}
+                  onClick={() => setNavActive(navlink.id)}
                 >
-                  {navlink.title}
+                  <Link to={navlink.id === "home" ? `/` : navlink.id}>
+                    {navlink.title}
+                  </Link>
                 </li>
               );
             })}
@@ -47,8 +49,9 @@ export const NavBar = () => {
           <button className="ContactBtn activeNav">Contact</button>
         </div>
         {/* </div> */}
-        
       </nav>
     </>
   );
 };
+
+export default NavBar;
