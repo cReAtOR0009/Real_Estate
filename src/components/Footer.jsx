@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
 import { footerNav } from "../assets/textAssets";
 import { logo, messageIcon, telegramIcon } from "../assets/imageImporter";
 import "../styles/footer.css";
@@ -11,7 +12,7 @@ const FooterNavCard = ({ title, navigation }) => {
         {navigation.map((navigation, index) => {
           return (
             <li key={index}>
-              <a href={navigation.to}>{navigation.title}</a>
+              <a href={title.toLowerCase()!=="home"?`${title.toLowerCase()}/#${navigation.to}`:`/#${navigation.to}`}>{navigation.title}</a>
             </li>
           );
         })}
