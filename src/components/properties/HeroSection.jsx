@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { styles } from "../../styles/styles.js";
 import { searchinputs } from "../../assets/textAssets.js";
 import { searchIcon } from "../../assets/imageImporter.js";
+import { Houses } from "../../assets/textAssets.js";
 
 const SearchParameterInput = ({
   icon,
@@ -30,6 +31,45 @@ const SearchParameterInput = ({
   );
 };
 
+const HouseCard = ({ image, title, details, features, price }) => {
+  return (
+    <>
+      <div className={`${styles.houseCardPadding} flex flex-col md:w-[280px]border border-Grey-15 rounded-[12px]`}>
+        <div className="imageContainer w-[auto]">
+          <img className="object-cover w-[100%]" src={image} alt=""  />
+        </div>
+        <div>
+          <div className="pt-[24px] md:[30px] lg:[40px]">
+            <p className={`${styles.paragraph} w-[auto] px-[12px] py-[6px] lg:px-[14px] lg:py-[8px] text-[14px] rounded-[28px] border border-Grey-15 text-white-90`}>Lorem ipsum dolor sit.</p>
+            <h2 className={`${styles.cardHeading}`}>{title}</h2>
+            <p className={`${styles.paragraph}`}>{details}</p>
+          </div>
+          <div className="flex justify-between mt-[20px]">
+            <div>
+              <p className="text-[14px] lg:text-[18px] text-Grey-60">price</p>
+              <p className="text-[20px]">{price}</p>
+            </div>
+            
+              <button className={`${styles.buttonPadding} rounded-[8px] bg-Purple-60`}>View Property Details</button>
+
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const HeaderContainer = ({headerText, paragrapgText, styles}) => 
+  (
+   <div className={styles.TextContainer}>
+        <h1 className={styles.heading}>{headerText}</h1>
+        <p className={styles.paragraph}>
+         {paragrapgText}
+        </p>
+      </div>
+  )
+
+
 const HeroSection = () => {
   const [searchParams, setsearchParams] = useState({
     Location: "",
@@ -49,16 +89,11 @@ const HeroSection = () => {
     console.log(searchParams);
   };
 
+  const handleSubmit = () => {};
   return (
     <>
       <div className={styles.TextContainer}>
-        <h1 className={styles.heading}>Find Your Dream Property</h1>
-        <p className={styles.paragraph}>
-          Welcome to Estatein, where your dream property awaits in every corner
-          of our beautiful world. Explore our curated selection of properties,
-          each offering a unique story and a chance to redefine your life. With
-          categories to suit every dreamer, your journey{" "}
-        </p>
+      {<HeaderContainer headerText="Find Your Dream Property" paragrapgText="Welcome to Estatein, where your dream property awaits in every corner of our beautiful world. Explore our curated selection of properties, each offering a unique story and a chance to redefine your life. With categories to suit every dreamer, your journey " styles={styles} />}
       </div>
       <div className={` ${styles.subContainer} flex-col`}>
         <div className="flex justify-between  gap-[20px] px-[10px] py-[10px] rounded border border-solid border-Grey-15 md:mx-[90px] md:py-[16px] md:px-[20px]">
@@ -81,15 +116,21 @@ const HeroSection = () => {
             />
           ))}
         </div>
-
-        <div className={styles.TextContainer}>
-        <h1 className={styles.heading}>Discover a World of Possibilities</h1>
-        <p className={styles.paragraph}>
-        Our portfolio of properties is as diverse as your dreams. Explore the following categories to find the perfect property that resonates with your vision of home{" "}
-        </p>
       </div>
 
-        
+      <div className={styles.TextContainer}>
+       {<HeaderContainer headerText="Discover a World of Possibilities" paragrapgText="Our portfolio of properties is as diverse as your dreams. Explore the following categories to find the perfect property that resonates with your vision of home" styles={styles}/>}
+      </div>
+
+      <div className={`${styles.subContainer} houseCardContainer`}>
+        {Houses.map((house, index) => (
+          <HouseCard key={index} {...house}/>
+        ))} 
+      </div>
+
+
+      <div>
+       { <HeaderContainer headerText="Let's Make it Happen" paragrapgText="Ready to take the first step toward your dream property? Fill out the form below, and our real estate wizards will work their magic to find your perfect match. Don't wait; let's embark on this exciting journey together." styles={styles} />}
       </div>
     </>
   );
