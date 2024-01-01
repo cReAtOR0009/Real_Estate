@@ -1,5 +1,20 @@
+.houseCardContainer {
+  display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
 
+.propertyGradientBg {
+  background: linear-gradient(96deg, #262626 -26.82%, rgba(38, 38, 38, 0.00) 40.46%);
+}
 
+.propertyJourneybg {
+  background-image: url("./assets/leftAbstract.png"), url("./assets/rightAbstract.png");
+  background-position:  left,  right;
+  /* background-size: cover; */
+  background-repeat: no-repeat, repeat;
+  /* background-position: ; */
+}
 
 
 

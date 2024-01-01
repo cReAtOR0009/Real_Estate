@@ -517,22 +517,26 @@ export const Houses = [
 
 export const contactFieldDetails = [
   {
-    name: "First Name",
+    name: "firstName",
+    label: "First Name",
     placeholder: "Enter First Name",
     type: "text",
   },
   {
-    name: "Last Name",
+    name: "lastName",
+    label: "Last Name",
     placeholder: "Enter Last Name",
     type: "text",
   },
   {
-    name: "Email",
+    name: "email",
+    label: "Email",
     placeholder: "Enter your Email",
     type: "email",
   },
   {
-    name: "Phone",
+    name: "phone",
+    label: "Phone",
     placeholder: "Enter Phone Number",
     type: "phone",
   },

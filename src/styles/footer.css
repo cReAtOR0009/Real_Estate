@@ -18,7 +18,7 @@
 input {
   background: transparent;
   border: 0px;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 .messageicon {
@@ -45,7 +45,7 @@ input {
   flex: 1 0 0;
   flex-wrap: wrap;
   color: var(--white-99, #fff);
-  font-size: 20px;
+  /* font-size: 20px; */
   font-weight: 500;
   line-height: 24px; /* 120% */
   letter-spacing: -0.12px;
@@ -65,12 +65,12 @@ input {
 }
 ul li {
   list-style: none;
-  font-size: 18px;
+  /* font-size: 18px; */
   letter-spacing: -0.108px;
 }
 .pageNavContainer p {
   color: var(--Grey-60, #999);
-  font-size: 20px;
+  /* font-size: 20px; */
 }
 li a {
   text-decoration: none;
