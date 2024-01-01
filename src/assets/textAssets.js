@@ -27,6 +27,10 @@ import {
   locationIcon,
   calenderIcon,
   arrowDownicon,
+  iconfacebook,
+  iconlinkdn,
+  icontwitter,
+  iconyoutube,
 } from "./imageImporter";
 export { leftarrow, rightarrow, biggeststar, biggerstar, bigstar, ratingicon };
 
@@ -340,7 +344,6 @@ export const searchinputs = [
     placeholder: "Location",
     id: "location",
     name: "Location",
-    value:"",
     type: "text",
     searchBtn: arrowDownicon,
   },
@@ -349,7 +352,6 @@ export const searchinputs = [
     placeholder: "property Type",
     id: "propertyType",
     name: "propertyType",
-    value:"",
     type: "text",
     searchBtn: arrowDownicon,
   },
@@ -358,7 +360,6 @@ export const searchinputs = [
     placeholder: "Pricing Range",
     id: "pricingRange",
     name: "pricingRange",
-    value:"",
     type: "text",
     searchBtn: arrowDownicon,
   },
@@ -367,7 +368,6 @@ export const searchinputs = [
     placeholder: "Location",
     id: "calender",
     name: "calender",
-    value:"",
     type: "text",
     searchBtn: arrowDownicon,
   },
@@ -376,8 +376,210 @@ export const searchinputs = [
     placeholder: "Location",
     id: "buildYear",
     name: "buildYear",
-    value:"",
     type: "text",
     searchBtn: arrowDownicon,
+  },
+];
+export const propertyPreferences = [
+  {
+    value: "Property Type",
+    icon: locationIcon,
+    options: ["Property Type", "option2", "option3", "option4"],
+  },
+  {
+    value: "Pricing Range",
+    icon: locationIcon,
+    options: ["Pricing Range", "option2", "option3", "option4"],
+  },
+  {
+    value: "Property Size",
+    icon: locationIcon,
+    options: ["Property Size", "option2", "option3", "option4"],
+  },
+  {
+    value: "Build Year",
+    icon: locationIcon,
+    options: ["Build Year", "option2", "option3", "option4"],
+  },
+];
+
+export const Houses = [
+  {
+    title: "Metropolitan Haven",
+    details:
+      "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
+    image: house2,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Seaside Serenity Villa",
+    details:
+      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+    image: house1,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Metropolitan Haven",
+    details:
+      "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
+    image: house2,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Seaside Serenity Villa",
+    details:
+      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+    image: house1,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Rustic Retreat Cottage",
+    details:
+      "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community... Read More",
+    image: house3,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  ,
+  {
+    title: "Seaside Serenity Villa",
+    details:
+      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+    image: house1,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Metropolitan Haven",
+    details:
+      "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
+    image: house2,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Seaside Serenity Villa",
+    details:
+      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+    image: house1,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+  {
+    title: "Seaside Serenity Villa",
+    details:
+      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+    image: house1,
+    features: [
+      { icon: bedroomicon, featureText: "4-Bedroom" },
+      { icon: bathroomicon, featureText: "3-Bathroom" },
+      { icon: villaicon, featureText: "villa" },
+    ],
+    price: 550000,
+  },
+];
+
+export const contactFieldDetails = [
+  {
+    name: "First Name",
+    placeholder: "Enter First Name",
+    type: "text",
+  },
+  {
+    name: "Last Name",
+    placeholder: "Enter Last Name",
+    type: "text",
+  },
+  {
+    name: "Email",
+    placeholder: "Enter your Email",
+    type: "email",
+  },
+  {
+    name: "Phone",
+    placeholder: "Enter Phone Number",
+    type: "phone",
+  },
+];
+
+export const propertyPreferences2 = [
+  {
+    label: "Prefered Location",
+    options: ["Select Prefered Location", "option2", "option3", "option4"],
+  },
+  {
+    label: "Property Type",
+    options: ["Select Property Type", "option2", "option3", "option4"],
+  },
+  {
+    label: "No. of Bathrooms",
+    options: ["Select no. of Bathrooms", "option2", "option3", "option4"],
+  },
+  {
+    label: "No. of Bedrooms",
+    options: ["Select no. of Bedrooms", "option2", "option3", "option4"],
+  },
+];
+
+export const budget = 
+  { label: "", options: ["budget", "budget2", "budget3", "budget4"] }
+;
+
+export const socialHandles = [
+  {
+    name: "facebook",
+    icon: iconfacebook,
+    link: "https://www.facebook.com",
+  },
+  {
+    name: "twitter",
+    icon: icontwitter,
+    link: "https://www.twitter.com",
+  },
+  {
+    name: "iconlinkdn",
+    icon: iconlinkdn,
+    link: "https://www.linkdn.com",
+  },
+  {
+    name: "youtube",
+    icon: iconyoutube,
+    link: "https://www.youtube.com",
   },
 ];
