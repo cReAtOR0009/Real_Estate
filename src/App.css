@@ -31,13 +31,13 @@
 
 
 
-.background1 {
-  /* background: url("./assets/backgroundImage.png");
+/* .background1 {
+  background: url("./assets/backgroundImage.png");
   background-image: var(--Grey-60);
   background-size: cover;
   background-position: center center;
-  background-repeat: no-repeat; */
-}
+  background-repeat: no-repeat;
+} */
 
 .blackButton {
   background-color: var(--Grey-15);

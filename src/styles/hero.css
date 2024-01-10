@@ -104,9 +104,9 @@ header {
   }
   .headerRight {
     /* background-image: url("./assets/backgroundImage.png"); */
-    background: linear-gradient(238deg, #341186 8.76%, rgba(25, 25, 25, 0) 50.09%),
-      url("./assets/backgroundImage.png"), rgb(2, 2, 2) 50% / cover no-repeat;
-    background-size: cover;
+    /* background: linear-gradient(238deg, #341186 8.76%, rgba(25, 25, 25, 0) 50.09%),
+      url("./assets/backgroundImage.pngC:\WEB-DEVELOPMENT\Real_Estate\src\assets\backgroundImage.png"), rgb(2, 2, 2) 50% / cover no-repeat;
+    background-size: cover; */
     /* background-position: center center; */
     position: relative;
     background-repeat: no-repeat;
@@ -147,8 +147,8 @@ header {
     padding: 30px 16px;
     height: 150px;
   }
-  .headerSection2Card div {
-  }
+  /* .headerSection2Card div {
+  } */
   .headerSection2Card > img {
     position: absolute;
     right: 20px;

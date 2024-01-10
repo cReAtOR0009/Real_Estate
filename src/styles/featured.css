@@ -109,8 +109,8 @@
     object-fit: fill;
   }
   
-  .featuredItem > div:last-child {
-  }
+  /* .featuredItem > div:last-child {
+  } */
   .featuredItemText {
     padding-block: 20px;
   }

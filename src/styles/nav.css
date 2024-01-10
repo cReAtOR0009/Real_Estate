@@ -4,7 +4,7 @@ nav {
     justify-content: flex-start;
     /* align-items: start; */
     /* padding: var(--PcNavPadding); */
-    align-content: start;
+    align-content: flex-start;
     background-color: var(--Grey-40);
   }
   
