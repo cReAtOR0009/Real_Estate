@@ -37,10 +37,10 @@ import arrowDownicon from "./arrowDownIcon.svg";
 import leftAbstract from "./leftAbstract.png";
 import rightAbstract from "./leftAbstract.png";
 
-import iconfacebook from "./iconfacebook.png"
-import icontwitter from "./icontwitter.png"
-import iconlinkdn from "./iconlinkdn.png"
-import iconyoutube from "./iconyoutube.png"
+import iconfacebook from "./Iconfacebook.png"
+import icontwitter from "./Icontwitter.png"
+import iconlinkdn from "./Iconlinkdn.png"
+import iconyoutube from "./Iconyoutube.png"
 
 export {
   logo,
