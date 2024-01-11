@@ -39,7 +39,7 @@ const OffersCard = ({ offer, icon, icon2 }) => {
 const Hero = () => {
   return (
     <header id="hero" className="">
-    <div className={` ${styles} headerSection1  top-[190px] right-[80px]`}>
+    <div className={` ${styles} headerSection1  top-[190px] sm:top-[250px] right-[80px]`}>
         <section className="headerLeft mt-[70px]">
           <div className="headerTextContainer">
             <h1>Discover Your Dream Property with Estatein</h1>
