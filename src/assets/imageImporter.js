@@ -32,7 +32,7 @@ import propertyTypeicon from "./propertyTypeicon.svg";
 import pricingRangeicon from "./pricingRangeicon.svg";
 import locationIcon from "./locationIcon.svg";
 import calenderIcon from "./calenderIcon.svg";
-import arrowDownicon from "./arrowDownicon.svg";
+import arrowDownicon from "./arrowDownIcon.svg";
 
 import leftAbstract from "./leftAbstract.png";
 import rightAbstract from "./leftAbstract.png";
