@@ -1,5 +1,6 @@
 import logo from "./Logo.svg";
 import closeButton from "./closeButton.svg";
+import openNavButton from "./openNavIcon.png";
 import backgroundImage from "./backgroundImage.png";
 import hero from "./hero.png";
 import dreamcircle from "./dreamcircle.png";
@@ -45,6 +46,7 @@ import iconyoutube from "./Iconyoutube.png"
 export {
   logo,
   closeButton,
+  openNavButton,
   backgroundImage,
   hero,
   dreamcircle,

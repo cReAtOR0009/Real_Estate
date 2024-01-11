@@ -9,6 +9,7 @@ import {
   iconContainer3,
 } from "../../assets/imageImporter";
 import "../../styles/hero.css"
+import { styles } from "../../styles/styles";
 
 const AchievementCard = ({ numbers, title }) => {
   return (
@@ -38,8 +39,8 @@ const OffersCard = ({ offer, icon, icon2 }) => {
 const Hero = () => {
   return (
     <header id="hero" className="">
-      <div className="headerSection1">
-        <section className="headerLeft">
+    <div className={` ${styles} headerSection1  top-[190px] right-[80px]`}>
+        <section className="headerLeft mt-[70px]">
           <div className="headerTextContainer">
             <h1>Discover Your Dream Property with Estatein</h1>
             <p>
