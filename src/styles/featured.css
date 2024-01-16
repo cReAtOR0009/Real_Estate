@@ -56,15 +56,20 @@
     /* grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); */
 
     /* padding: 20px; */
+    /* background-color: red; */
     gap: 20px;
     /* border-radius: 10px; */
+    @media only screen and (max-width: 767px) {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+    }
   }
   
   .featuredItemWrapper {
     padding: 30px;
     border-radius: 12px;
     border: 1px solid var(--Grey-15);
-    background: var(--Grey-08, #141414);
+    background: var(--Grey-08, #ed0b0b);
     /* background-color: red; */
   }
   

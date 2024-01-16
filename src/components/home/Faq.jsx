@@ -2,10 +2,11 @@ import { React, useState } from "react";
 import { faqs } from "../../assets/textAssets";
 import { leftarrow, rightarrow } from "../../assets/textAssets";
 import "../../styles/faq.css";
+import { styles } from "../../styles/styles";
 
 const FaqCard = ({ question, answer, id }) => {
   return (
-    <div className="faqCard">
+    <div className="flex p-[10px] sm:p-[40px] flex-col items-center gap-[24px] rounded-[10px] border border-Grey-15 bg-Grey-08">
       <h3>{question}</h3>
       <p>{answer}</p>
       <button className="learnmore">
@@ -34,17 +35,17 @@ const Faq = ({ faq = faqs }) => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, noOfPages)); // Ensure the page doesn't exceed the total number of pages
   };
   return (
-    <div className="faqContainer">
-      <div className="headerText">
-        <div className="left">
-          <h2>Frequently Asked Questions</h2>
+    <div className={`${styles.homeheader}`}>
+      <div className={`flex sm:items-end justify-between flex-col sm:flex-row gap-[20px]`}>
+        <div className="">
+          <h2 className={`${styles.heading}`}>Frequently Asked Questions</h2>
           <p>
             Find answers to common questions about Estatein's services, property
             listings, and the real estate process.
           </p>
         </div>
-        <div className="right">
-          <button>View All FAQ's</button>
+        <div className="flex-1 text-center sm:text-right">
+          <button className={`${styles.buttonPadding}  w-[100%] sm:w-[auto]`}>View All FAQ's</button>
         </div>
       </div>
       <div className="faqCardContainer">

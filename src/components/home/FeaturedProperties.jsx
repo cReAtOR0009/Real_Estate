@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { featuredProducts, leftarrow, rightarrow } from "../../assets/textAssets";
 import "../../styles/featured.css"
+import {styles} from "../../styles/styles"
 
 const FeaturedItemCard = ({image, title, details, features, price}) => {
   return (
-    <div className="featuredItemWrapper">
+    <div className="featuredItemWrapper border border-Grey-15 bg-Grey-08 p-[20px] sm:p[30px] ">
       <div className="featuredItem">
         <div>
           <img src={image} alt="" />
@@ -54,11 +55,11 @@ const FeaturedProperties = ({featuredProduct = featuredProducts}) => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, noOfPages )); // Ensure the page doesn't exceed the total number of pages
   };
   return (
-    <div id="features" className="featuredItemsContainer">
-      <div className="featureItemHeader">
-        <div>
+    <div id="features" className={`${styles.homeheader}`}>
+      <div className={`${""} flex sm:items-end justify-between flex-col sm:flex-row gap-[20px]`}>
+        <div className={`${""} flex-1`}>
           <img src="" alt="" />
-          <h3>Featured Properties</h3>
+          <h3 className={`${styles.heading}`}>Featured Properties</h3>
           <p>
             Explore our handpicked selection of featured properties. Each
             listing offers a glimpse into exceptional homes and investments
@@ -66,13 +67,13 @@ const FeaturedProperties = ({featuredProduct = featuredProducts}) => {
             information.
           </p>
         </div>
-        <div>
-          <button>View All Properties</button>
+        <div className={`flex-1 text-center sm:text-right`}>
+          <button className={`${styles.buttonPadding}`}>View All Properties</button>
         </div>
       </div>
 
       <div className="featuredItemsContainerWrapper">
-        <div className="featuredItemListContainer">
+        <div className=" featuredItemListContainer ">
             {displayedFeaturedItems.map((featuredProduct, index)=> (
                 <FeaturedItemCard key={index} {...featuredProduct} />
             ))}

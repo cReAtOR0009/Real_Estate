@@ -3,6 +3,7 @@ import { leftarrow, rightarrow, ratingicon } from "../../assets/imageImporter";
 // imoort leftarrow
 import { testimonials } from "../../assets/textAssets";
 import "../../styles/testimonials.css";
+import { styles } from "../../styles/styles";
 
 const StarRating = ({ rating }) => {
   // Ensure the rating is within the valid range (1 to 5)
@@ -34,7 +35,7 @@ const TestimonialCard = ({
   address,
 }) => {
   return (
-    <div className="testimonialsCard">
+    <div className="flex flex-col items-center p-[20px] sm:p-[40px] rounded-[10px] border border-Grey-15 bg-Grey-08">
       <div className="">{<StarRating rating={rating} />}</div>
       <div className="textContainers">
         <h2>{title}</h2>
@@ -84,11 +85,11 @@ const Testimonials = ({realEstateTestimonials = testimonials}) => {
   // Extract the testimonials to display on the current page
   const displayedTestimonials = realEstateTestimonials.slice(startIndex, endIndex);
   return (
-    <div className="testimonialsContainer">
-      <div>
-        <div className="left">
-          <h2 className="headerText">What Our Clients Say</h2>
-          <p className="paragraphText">
+    <div className={`className={${styles.homeheader}`}>
+      <div className={` flex sm:items-end justify-between flex-col sm:flex-row gap-[20px]`}>
+        <div className="">
+          <h2 className={`${styles.heading}`}>What Our Clients Say</h2>
+          <p className={`${styles.paragraph}`}>
             Read the success stories and heartfelt testimonials from our valued
             clients. Discover why they chose Estatein for their real estate
             needs.
@@ -96,7 +97,7 @@ const Testimonials = ({realEstateTestimonials = testimonials}) => {
         </div>
         <div className="right">
           {" "}
-          <button>View All Testimonials</button>
+          <button className={`${styles.buttonPadding}`}>View All Testimonials</button>
         </div>
       </div>
 
