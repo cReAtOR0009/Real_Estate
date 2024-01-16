@@ -8,7 +8,7 @@
   background: linear-gradient(96deg, #262626 -26.82%, rgba(38, 38, 38, 0.00) 40.46%);
 }
 
-.propertyJourneybg {
+.propertyJourneybg { 
   background-image: url("./assets/leftAbstract.png"), url("./assets/rightAbstract.png");
   background-position:  left,  right;
   /* background-size: cover; */
