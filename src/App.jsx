@@ -14,13 +14,7 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 
 import "./App.css";
-// import { NavBar } from "./components/NavBar";
-// import Hero from "./components/Hero";
-// import { FeaturedProperties } from "./components/FeaturedProperties";
-// import { Testimonials } from "./components/Testimonials";
-// import Faq from "./components/Faq";
-// import StartJourney from "./components/StartJourney";
-// import Footer from "./components/Footer";
+
 
 const App = () => {
   const router = createBrowserRouter(

@@ -49,9 +49,9 @@ const Hero = () => {
               our listings to find the home that matches your dreams.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row py-[50px]">
-            <button className={`${styles.buttonPadding}`}>Learn More</button>
-            <button className={`${styles.buttonPadding}`}>Browse Properties</button>
+          <div className="flex flex-col sm:flex-row sm: gap-[20px] my-[60px]">
+            <button className={`${styles.buttonPadding} ${styles.blackButton}`}>Learn More</button>
+            <button className={`${styles.buttonPadding} ${styles.purpleButton}`}>Browse Properties</button>
           </div>
           <div className="headerAchievementContainer">
             {achievement1.map((achievement, index) => (

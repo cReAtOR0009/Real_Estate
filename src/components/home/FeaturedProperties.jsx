@@ -5,7 +5,7 @@ import {styles} from "../../styles/styles"
 
 const FeaturedItemCard = ({image, title, details, features, price}) => {
   return (
-    <div className="featuredItemWrapper border border-Grey-15 bg-Grey-08 p-[20px] sm:p[30px] ">
+    <div className="featuredItemWrapper border border-Grey-15  bg-Grey-08 p-[15px] sm:p[30px] rounded-[12px]">
       <div className="featuredItem">
         <div>
           <img src={image} alt="" />
@@ -25,8 +25,8 @@ const FeaturedItemCard = ({image, title, details, features, price}) => {
           </div>
           <div className="featureditemPriceContainer" >
             <div className="price"><span>Price</span>{`$${price}`}</div>
-            <div className="buyButton">
-              <button>View Property Details</button>
+            <div className={`buyButton ${styles.buttonPadding} ${styles.purpleButton}` }>
+              <button className="">View Property Details</button>
             </div>
           </div>
         </div>

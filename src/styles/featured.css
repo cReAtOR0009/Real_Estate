@@ -66,11 +66,7 @@
   }
   
   .featuredItemWrapper {
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid var(--Grey-15);
-    background: var(--Grey-08, #ed0b0b);
-    /* background-color: red; */
+
   }
   
   .featuredItem {
@@ -139,16 +135,7 @@
     width: 22px;
   height: 17px;
   }
-  .featureditemPriceContainer .buyButton button {
-    background-color: var(--Purple-60);
-  padding: 14px 30px;
-  border: 0px solid red;
-  border-radius: 8px;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 150%; 
-  }
+ 
   
   
   .featureditemPriceContainer {
