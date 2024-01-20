@@ -85,7 +85,7 @@ const Testimonials = ({realEstateTestimonials = testimonials}) => {
   // Extract the testimonials to display on the current page
   const displayedTestimonials = realEstateTestimonials.slice(startIndex, endIndex);
   return (
-    <div className={`className={${styles.homeheader}`}>
+    <div className={`${styles.homeheader}`}>
       <div className={` flex sm:items-end justify-between flex-col sm:flex-row gap-[20px]`}>
         <div className="">
           <h2 className={`${styles.heading}`}>What Our Clients Say</h2>

@@ -41,7 +41,7 @@ const Hero = () => {
     <>
     <header id="hero" className={`${styles.homeheader}`}>
     <div className={`  bg-Purple relative flex sm:flex-nowrap flex-wrap justify-center gap-[20px]  mt-[100px] sm:mt-[100px] `}>
-        <section className="mt-[70px]">
+        <section className="mt-[30px]">
           <div className="headerTextContainer">
             <h1 className={`${styles.heading} `}>Discover Your Dream Property with Estatein</h1>
             <p>
