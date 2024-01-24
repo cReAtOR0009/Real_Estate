@@ -1,77 +1,69 @@
 const mongoose = require('mongoose');
 
+// Sub-schema for property address
 const addressSchema = new mongoose.Schema({
-    street:String,
-    city:String,
-    state:String,
-    zipcode:String,
-})
+    street: String,
+    city: String,
+    state: String,
+    zipcode: String,
+});
 
+// Sub-schema for property amenities
 const AmenitySchema = new mongoose.Schema({
     swimmingPool: {
         type: Boolean,
-        description: String,
+        description: '',
+        default: false,
     },
     garden: {
         type: Boolean,
-        description: String,
+        description: '',
+        default: false,
     },
     garage: {
         type: Boolean,
-        description: String,
+        description: '',
+        default: false,
     },
     gym: {
         type: Boolean,
-        description: String,
+        description: '',
+        default: false,
     },
     securitySystem: {
         type: Boolean,
-        description: String,
+        description: '',
+        default: false,
     },
     balcony: {
         type: Boolean,
-        description: String,
+        description: '',
+        default: false,
     },
     centralHeating: {
         type: Boolean,
-        description: String,
+        description: '',
+        default: false,
     },
     airConditioning: {
         type: Boolean,
-        description: String,
-    },
-    // Add more unique amenities with descriptions as needed
-});
-
-  const AdditionalFeaturesSchema = new mongoose.Schema({
-    fireplace: {
-        type: Boolean,
-        description: String,
-    },
-    hardwoodFloors: {
-        type: Boolean,
-        description: String,
-    },
-    walkInClosets: {
-        type: Boolean,
-        description: String,
-    },
-    updatedKitchen: {
-        type: Boolean,
-        description: String,
-    },
-    highCeilings: {
-        type: Boolean,
-        description: String,
+        description: '',
+        default: false,
     },
 });
 
+// Sub-schema for additional features of the property
+const AdditionalFeaturesSchema = new mongoose.Schema({
+    name: String,
+    description: String,
+});
+
+// Sub-schema for property ratings
 const ratingSchema = new mongoose.Schema({
     value: {
         type: Number,
         min: 1,
         max: 5,
-        required: true,
     },
     review: String,
     createdAt: {
@@ -84,6 +76,7 @@ const ratingSchema = new mongoose.Schema({
     },
 });
 
+// Sub-schema for property historical information
 const propertyHistorySchema = new mongoose.Schema({
     previousOwners: [
         {
@@ -108,44 +101,62 @@ const propertyHistorySchema = new mongoose.Schema({
     ],
 });
 
-
+// Main property schema
 const propertySchema = new mongoose.Schema({
-  title: String,
-  description:String,
-  price:Number,
-  bedrooms: Number,
-  bathrooms: Number,
-  size:Number,
-  address: addressSchema,
-  amenities:AmenitySchema,
-  additionalFeatures: AdditionalFeaturesSchema,
-  rating:[ratingSchema],
-  images: [  { type: String},],
-  propertyType: {
-    type: String,
-    enum: ['House', 'Apartment', 'Condo', 'Land', 'Commercial', 'Villa']
-  },
-  locationTags: [String],
-  status: {
-    type: String,
-    enum: ['For Sale', 'For Rent', 'Sold', 'Rented'],
-    default: 'For Sale',
-},
-virtualTour: String, // URL or reference to virtual tour
-propertyHistory: {
-    // ... (customize based on your needs)
-},
-nearbyAmenities: [
-    {
-        type: String, // e.g., 'School', 'Hospital', 'Park'
+    title: String,
+    description: String,
+    price: Number,
+    bedrooms: {
+        type: Number,
+        min: 0,
+        default: 0,
     },
-],
-energyEfficiency: {
-    // ... (customize based on your needs)
-},
-  availability: {
-    type: Boolean,
-    default: true,},
+    bathrooms: {
+        type: Number,
+        min: 0,
+        default: 0,
+    },
+    size: {
+        type: Number,
+        min: 0,
+        default: 0,
+    },
+    address: addressSchema,
+    amenities: AmenitySchema,
+    additionalFeatures: AdditionalFeaturesSchema,
+    rating: [ratingSchema],
+    images: [
+        {
+            url: String,
+        },
+    ],
+    propertyType: {
+        type: String,
+        enum: ['House', 'Apartment', 'Condo', 'Land', 'Commercial', 'Villa'],
+    },
+    agent: {
+        id: mongoose.Schema.Types.ObjectId,
+    },
+    tags: [String],
+    status: {
+        type: String,
+        enum: ['For Sale', 'For Rent', 'Sold', 'Rented'],
+        default: 'For Sale',
+    },
+    virtualTour: {
+        url: String,
+    },
+    propertyHistory: propertyHistorySchema,
+    nearbyAmenities: [
+        {
+            type: String,
+        },
+    ],
+    availability: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 module.exports = mongoose.model('Property', propertySchema);
+

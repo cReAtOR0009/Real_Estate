@@ -13,9 +13,17 @@ const userSchema = mongoose.Schema({
     phone: Number,
     password: String,
     nationality: String,
-    role: Number,
     avatar:{type:String, default:"image"}, // "image" should be substituted for default image, if user is yet to upload image
-    purchasedProperty: [purchasedProperty]
+    purchasedProperty: [purchasedProperty],
+    role: {
+        type: String,
+        enum: ['buyer', 'seller', 'agent'],
+        default:"buyer",
+        required: true,
+    },
+    permissions: {
+        type: [String],
+    },
 }, {
     timestamp: true,
     toObject: {
