@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const dotEnv = require('dotenv');
 const cors = require('cors');
 const dbConnection = require('./database/connection');
@@ -13,6 +14,7 @@ dbConnection();
 
 //using json
 app.use(express.json());
+
 //cors
 app.use(cors());
 
@@ -20,9 +22,11 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const myMiddleware = (req, res, next) => {
-    console.log('Server Request');
+    console.log('Server Request'); 
     next();
 }
+
+app.use("/user", require("./routes/userRoutes"))
 
 
 
