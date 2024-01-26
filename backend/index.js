@@ -26,7 +26,7 @@ const myMiddleware = (req, res, next) => {
     next();
 }
 
-app.use("/user", require("./routes/userRoutes"))
+app.use("/user", require("./routes/userRoutes"))  
 
 
 
