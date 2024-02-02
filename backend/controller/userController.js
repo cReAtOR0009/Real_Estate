@@ -26,7 +26,7 @@ module.exports.signup = async (req, res) => {
     }
 
     salt = bcrypt.genSaltSync(parseInt(process.env.HASH_SALT));
-    encryptedPassword =  bcrypt.hashSync(password, salt || 15);
+    encryptedPassword = bcrypt.hashSync(password, salt || 15);
 
     let newUser = new User({
       firstName: firstName,
@@ -63,12 +63,12 @@ module.exports.signup = async (req, res) => {
   }
 };
 
-module.exports.sendVerify = async (req, res) => {
+module.exports.sendVerificationEmail = async (req, res) => {
   let response = serverResponse.defaultResponse;
 
   try {
     const { email } = req.body;
-    const userExist = User.find({ email });
+    const userExist = await User.findOne({ email });
     if (!userExist) {
       throw new Error(serverResponse.USER_ERROR.NO_USER_FOUND);
     }
@@ -80,9 +80,12 @@ module.exports.sendVerify = async (req, res) => {
     // create new token for user
     const token = jwt.sign(
       { id: userExist.id, role: userExist.role },
-      process.env.SECRET_KEY || "secretKey",
+      process.env.VERIFY_EMAIL_SECRET_KEY ||
+        "VERIFY_EMAIL_SECRET_KEY secretKey",
       { expiresIn: "1h" }
     );
+
+    console.log("token:", token);
 
     // send email and token to user
     const emailResponse = await nodemailerUtils.sendValidationEmail(req, token);
@@ -95,6 +98,50 @@ module.exports.sendVerify = async (req, res) => {
   } catch (error) {
     response.message = "error message";
     response.error = error.message;
+    console.log(
+      "something went wrong: controller: signUp sendinr verification email"
+    );
+  } finally {
+    return res.status(response.status).send(response);
+  }
+};
+
+module.exports.verifyEmail = async (req, res) => {
+  let response = serverResponse.defaultResponse;
+
+  try {
+    const token = req.params.token;
+
+    if (!token) {
+      throw new Error(serverResponse.requesteError.MISSING_TOKEN);
+    }
+
+    decodedToken = jwt.verify(
+      token,
+      process.env.VERIFY_EMAIL_SECRET_KEY || "VERIFY_EMAIL_SECRET_KEY secretKey"
+    );
+
+    if (!decodedToken) {
+      throw new Error(serverResponse.requesteError.USER_NOT_AUTHORIZED);
+    }
+
+    //CHANGE IN DB TO VERIFY
+    let userId = decodedToken.id;
+    let toVerifyUser = await User.findByIdAndUpdate(
+      { _id: userId },
+      { verified: true },
+      {
+        new: true,
+      }
+    );
+
+    response.status = 200;
+    response.message = "User verified successfully";
+    response.data = await formatMongoData(toVerifyUser);
+  } catch (error) {
+    response.message = "error message";
+    response.error = error.message;
+    console.log(error);
     console.log("something went wrong: controller: signUp verification");
   } finally {
     return res.status(response.status).send(response);
@@ -153,12 +200,33 @@ module.exports.updateuser = async (req, res) => {
 
   try {
     const userId = req.params.id;
-    const updateInfo = req.body;
-    const token = req.headers.authorization.split("Bearer")[1].trim();
-
     checkObjectId(userId);
 
-    const decode = jwt.verify(token, process.env.SECRET_KEY || "secretKey");
+    const { firstName, lastName, email, phone, password, nationality } =
+      req.body;
+
+    const updateInfo = {};
+
+    if (firstName || lastName || email || phone || nationality || password) {
+      // Assign properties to newUser only if they exist in req.body
+      if (firstName) updateInfo.firstName = firstName;
+      if (lastName) updateInfo.lastName = lastName;
+      if (email) updateInfo.email = email;
+      if (phone) updateInfo.phone = phone;
+      if (password) updateInfo.password = password;
+      if (nationality) updateInfo.nationality = nationality;
+    } else {
+      throw new Error("cant update provided field ");
+    }
+
+    console.log("updateInfo:", updateInfo);
+
+    const token = req.headers.authorization.split("Bearer")[1].trim();
+
+    const decode = await jwt.verify(
+      token,
+      process.env.SECRET_KEY || "secretKey"
+    );
 
     //update user profile by user
     //and by admin when role admin1
@@ -168,10 +236,9 @@ module.exports.updateuser = async (req, res) => {
 
     //encrypt password before updating password
     if (updateInfo.password) {
-      updateInfo.password = await bcrypt.hash(
-        updateInfo.password,
-        process.env.HASH_SALT || 15
-      );
+      const saltRounds = (await parseInt(process.env.HASH_SALT)) || 15;
+      const salt = await bcrypt.genSaltSync(saltRounds);
+      updateInfo.password = await bcrypt.hashSync(updateInfo.password, salt);
     }
 
     let user = await User.findByIdAndUpdate({ _id: userId }, updateInfo, {
@@ -191,6 +258,97 @@ module.exports.updateuser = async (req, res) => {
     console.log("something went wrong: controller: update user");
     console.log(error);
     response.message = error.message;
+  } finally {
+    return res.status(response.status).send(response);
+  }
+};
+
+module.exports.sendforgotPasswordEmail = async (req, res) => {
+  let response = serverResponse.defaultResponse;
+
+  try {
+    const { email, password1, password2 } = req.body;
+
+    if (password1 !== password2) {
+      throw new Error("passwords don't match");
+    }
+    const existingUser = User.findOne({ email });
+
+    if (!existingUser) {
+      throw new Error(serverResponse.USER_ERROR.ALREADY_EXISTING_USER);
+    }
+
+    const token = jwt.sign(
+      { id: userExist.id, password: password1 },
+      process.env.FORGOT_PASSWORD_SECRET_KEY || "FORGOT_PASSWORD_SECRET_KEY secretKey",
+      { expiresIn: "1h" }
+    );
+
+    // send email and token to user
+    const emailResponse = await nodemailerUtils.sendValidationEmail(req, token);
+
+    if (emailResponse) {
+      response.status = 200;
+      response.message = "PASSWORD RESET mail sent successfully";
+      response.data = emailResponse;
+    }
+  } catch (error) {
+    response.message = "error message";
+    response.error = error.message;
+    console.log(
+      "something went wrong: controller: signUp sending forgot password email"
+    );
+  } finally {
+    return res.status(response.status).send(response);
+  }
+};
+
+module.exports.verifyForgotEmailPassword = async (req, res) => {
+  let response = serverResponse.defaultResponse;
+
+  try {
+    const token = req.params.token;
+
+    if (!token) {
+      throw new Error(serverResponse.requesteError.MISSING_TOKEN);
+    }
+
+    decodedToken = jwt.verify(
+      token,
+      process.env.FORGOT_PASSWORD_SECRET_KEY || "FORGOT_PASSWORD_SECRET_KEY secretKey",
+    );
+
+    if (!decodedToken) {
+      throw new Error(serverResponse.requesteError.USER_NOT_AUTHORIZED);
+    }
+
+    let updateInfo = {}
+
+    //heck for and encrypt password before saving
+    if (decodedToken.password) {
+      const saltRounds = (parseInt(process.env.HASH_SALT)) || 15;
+      const salt =  bcrypt.genSaltSync(saltRounds);
+      updateInfo.password =  bcrypt.hashSync(decodedToken.password, salt);
+    }
+
+    //CHANGE IN DB TO VERIFY
+    let userId = decodedToken.id;
+    let toChangePassword = await User.findByIdAndUpdate(
+      { _id: userId },
+      updateInfo,
+      {
+        new: true,
+      }
+    );
+
+    response.status = 200;
+    response.message = "User password changed  successfully, kindly login with your new password";
+    response.data = await formatMongoData(toChangePassword);
+  } catch (error) {
+    response.message = "error message";
+    response.error = error.message;
+    console.log(error);
+    console.log("something went wrong: controller: verifyForgotEmailPassword");
   } finally {
     return res.status(response.status).send(response);
   }
