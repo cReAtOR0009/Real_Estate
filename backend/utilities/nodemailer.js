@@ -10,7 +10,7 @@ module.exports.sendValidationEmail = async (req, token) => {
 
     const output = `
       <h2>Please click the  link below to activate your account</h2>
-      <p>${CLIENT_URL}/user/activate/${token}</p>
+      <p>${CLIENT_URL}/user/verify/${token}</p>
       <p><b>NOTE: </b> The above activation link expires in 1 hour.</p>
       `;
 
