@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
-const formatMongoData = async (toFormatData) => {
-  if (Array.isArray(toFormatData)) {
+const formatMongoData = async (dataToFormat) => {
+  if (Array.isArray(dataToFormat)) {
     let convertedData = [];
-    toFormatData.forEach((data) => {
+    dataToFormat.forEach((data) => {
       convertedData.push(data.toObject());
     });
     return convertedData;
   }
 
-  return toFormatData.toObject();
+  return dataToFormat.toObject();
 };
 
 const checkObjectId = async (id) => {
