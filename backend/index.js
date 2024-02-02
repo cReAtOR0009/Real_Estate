@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const myMiddleware = (req, res, next) => {
-    console.log('Server Request'); 
+    console.log('Server Request');  
     next();
 }
 

@@ -9,6 +9,16 @@ router.post("/signup", (req, res) => {
     userController.signup(req, res)
 })
 
+router.post("/sendVerif", (req, res) => {
+
+    userController.sendVerify(req, res)
+})
+
+router.post("/verify", (req, res) => {
+
+    userController.verify(req, res)
+})
+
 router.post("/login", (req, res) => {
     userController.login(req, res)
 })

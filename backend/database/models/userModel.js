@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const purchasedProperty = mongoose.Schema({
+const purchasedPropertySchema = mongoose.Schema({
     name: String,
     id: mongoose.Schema.Types.ObjectId,
 });
@@ -13,19 +13,24 @@ const userSchema = mongoose.Schema({
     phone: Number,
     password: String,
     nationality: String,
+    verified:{type:Boolean, default:false},
     avatar:{type:String, default:"image"}, // "image" should be substituted for default image, if user is yet to upload image
-    purchasedProperty: [purchasedProperty],
-    role: {
-        type: String,
+    purchasedProperty:  {
+        type: [purchasedPropertySchema],
+        default: [],
+    },  
+    role: {  
+        type: String,   
         enum: ['buyer', 'seller', 'agent'],
         default:"buyer",
         required: true,
     },
     permissions: {
         type: [String],
+        default:"level1",
     },
 }, {
-    timestamp: true,
+    timestamps: true,
     toObject: {
         transform: (doc, ret, options) => {
             ret.id = ret._id;
