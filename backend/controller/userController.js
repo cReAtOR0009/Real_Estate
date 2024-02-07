@@ -5,6 +5,13 @@ const { formatMongoData, checkObjectId } = require("../utilities/formatData");
 const jwt = require("jsonwebtoken");
 const nodemailerUtils = require("../utilities/nodemailer");
 
+// const sentEmail = nodemailerUtils.sendEmail({
+//   subject: "Test",
+//   text: "I am sending an email from nodemailer!",
+//   to: "epidnugotaiwo02@gmail.com",
+//   from: process.env.EMAIL,
+// });
+
 // const adminRoles = ["admin1", "admin2", "admin3"];
 
 const serverResponse = constants.serverResponse;
@@ -280,7 +287,8 @@ module.exports.sendforgotPasswordEmail = async (req, res) => {
 
     const token = jwt.sign(
       { id: userExist.id, password: password1 },
-      process.env.FORGOT_PASSWORD_SECRET_KEY || "FORGOT_PASSWORD_SECRET_KEY secretKey",
+      process.env.FORGOT_PASSWORD_SECRET_KEY ||
+        "FORGOT_PASSWORD_SECRET_KEY secretKey",
       { expiresIn: "1h" }
     );
 
@@ -315,20 +323,21 @@ module.exports.verifyForgotEmailPassword = async (req, res) => {
 
     decodedToken = jwt.verify(
       token,
-      process.env.FORGOT_PASSWORD_SECRET_KEY || "FORGOT_PASSWORD_SECRET_KEY secretKey",
+      process.env.FORGOT_PASSWORD_SECRET_KEY ||
+        "FORGOT_PASSWORD_SECRET_KEY secretKey"
     );
 
     if (!decodedToken) {
       throw new Error(serverResponse.requesteError.USER_NOT_AUTHORIZED);
     }
 
-    let updateInfo = {}
+    let updateInfo = {};
 
     //heck for and encrypt password before saving
     if (decodedToken.password) {
-      const saltRounds = (parseInt(process.env.HASH_SALT)) || 15;
-      const salt =  bcrypt.genSaltSync(saltRounds);
-      updateInfo.password =  bcrypt.hashSync(decodedToken.password, salt);
+      const saltRounds = parseInt(process.env.HASH_SALT) || 15;
+      const salt = bcrypt.genSaltSync(saltRounds);
+      updateInfo.password = bcrypt.hashSync(decodedToken.password, salt);
     }
 
     //CHANGE IN DB TO VERIFY
@@ -342,7 +351,8 @@ module.exports.verifyForgotEmailPassword = async (req, res) => {
     );
 
     response.status = 200;
-    response.message = "User password changed  successfully, kindly login with your new password";
+    response.message =
+      "User password changed  successfully, kindly login with your new password";
     response.data = await formatMongoData(toChangePassword);
   } catch (error) {
     response.message = "error message";
