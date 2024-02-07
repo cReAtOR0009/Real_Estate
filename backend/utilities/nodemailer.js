@@ -2,6 +2,60 @@ const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 
+const createTransporter = async () => {
+  const oauth2Client = new OAuth2(
+    process.env.CLIENT_ID_MINE,
+    process.env.CLIENT_SECRET_MINE,
+    "https://developers.google.com/oauthplayground"
+  );
+
+  oauth2Client.setCredentials({
+    refresh_token: process.env.REFRESH_TOKEN_MINE,
+  });
+
+  const accessToken = await new Promise((resolve, reject) => {
+    oauth2Client.getAccessToken((err, token) => {
+      if (err) {
+        reject();
+      }
+      resolve(token);
+    });
+  });
+
+  const transporter = nodemailer.createTransport({ 
+    service: "gmail",
+    auth: {
+      type: "OAuth2",
+      user: process.env.EMAIL,
+      accessToken,
+      clientId: process.env.CLIENT_ID_MINE,
+      clientSecret: process.env.CLIENT_SECRET_MINE,
+      refreshToken: process.env.REFRESH_TOKEN_MINE,
+      tls: {
+        rejectUnauthorized: false
+      } 
+    },
+  });
+
+  return transporter;
+};
+
+const sendEmail = async (emailOptions) => {
+  try {
+    let emailTransporter = await createTransporter();
+    await emailTransporter.sendMail(emailOptions);
+  } catch (error) {
+    console.log("error:", error?.message);
+  }
+};
+
+const sendmail = sendEmail({
+  subject: "Test",
+  text: "I am sending an email from nodemailer!",
+  to: "epidnugotaiwo02@gmail.com",
+  from: process.env.EMAIL,
+});
+
 module.exports.sendValidationEmail = async (req, token) => {
   const { email } = req.body;
 
@@ -18,11 +72,14 @@ module.exports.sendValidationEmail = async (req, token) => {
       service: "gmail",
       auth: {
         type: "OAuth2",
-        user: "nodejsa@gmail.com",
-        clientId: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-        refreshToken: process.env.REFRESH_TOKEN,
+        user: "epidnugoairdrop@gmail.com",
+        clientId: process.env.CLIENT_ID_MINE,
+        clientSecret: process.env.CLIENT_SECRET_MINE,
+        refreshToken: process.env.REFRESH_TOKEN_MINE,
         accessToken: token,
+        tls: {
+            rejectUnauthorized: false
+          }
       },
     });
 
@@ -46,6 +103,7 @@ module.exports.sendValidationEmail = async (req, token) => {
     }
   } catch (error) {
     console.log("something went wrong: Service: sendAdminActivationLink");
+    console.log(error);
     throw new Error(error);
   }
 };
