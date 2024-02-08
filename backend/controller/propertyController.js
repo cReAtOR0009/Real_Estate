@@ -107,7 +107,7 @@ module.exports.getPropertyById = async (req, res) => {
     await checkObjectId(req.params.id);
     const id = req.params.id;
 
-    existingproperty = await Property.findById({ _id: id });
+    existingproperty = await Property.findById(id);
 
     if (!existingproperty) {
       throw new Error("property not found");
