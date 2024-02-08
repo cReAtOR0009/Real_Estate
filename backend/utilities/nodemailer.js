@@ -85,7 +85,7 @@ module.exports.sendValidationEmail = async (req, token) => {
 
     // send mail with defined transport object
     const mailOptions = {
-      from: "CREATOZ", // sender address
+      from: "CREATOZ", // sender address 
       to: email, // list of receivers
       subject: "Account Verification: CREATOZ REAL ESTATE ✔", // Subject line
       generateTextFromHTML: true,
