@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
- 
 :root {
   --Purple-60: #703bf7;
   --Purple-65: #8254f8;
@@ -31,8 +30,9 @@
   --desktopNavPadding: 20px 160px;
   --PcNavPadding: 14px 80px;
 }
-*, * + *{
-  /* border: 1px solid red; */
+*,
+* + * {
+  border: 1px solid red;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -92,7 +92,7 @@ select {
   top: 50%;
 }
 
-.custom-selectPatch::after{
+.custom-selectPatch::after {
   top: 65%;
 }
 .container {
@@ -132,8 +132,8 @@ button {
   cursor: pointer;
 }
 
-input[type=checkbox] {
-  accent-color:var(--Purple-60);
+input[type="checkbox"] {
+  accent-color: var(--Purple-60);
   background: var(--Grey-10);
   width: 20px;
 }

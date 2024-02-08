@@ -6,6 +6,8 @@ import { socialHandles } from "../assets/textAssets";
 import "../styles/footer.css";
 import { styles } from "../styles/styles";
 
+import PropertyForm from "./form/PropertyForm";
+
 const FooterNavCard = ({ title, navigation }) => {
   return (
     <div className={`${styles.paragraph} pageNavContainer`}>
@@ -62,16 +64,26 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className={`flex flex-nowrap md:flex-wrap md:flex-row flex-col-reverse  justify-between px-[16px] md:px-[80px] lg:px-[100px] py-[10px] md:py-[12px] lg:py-[12px] bg-Grey-10`}>
-        <div className="flex flex-col md:flex-row justify-center items-center gap-[20px]"><p>@2023 Estatein. All Rights Reserved.</p><p>Terms & Conditions</p></div>
-        <div className="flex justify-center gap-[20px]">{
-          socialHandles.map((handle, index) => (
-            <Link key={index} to={handle.link} className="w-[auto] h-[auto] p-[10px] rounded-[50%] bg-Grey-08">
+      <div
+        className={`flex flex-nowrap md:flex-wrap md:flex-row flex-col-reverse  justify-between px-[16px] md:px-[80px] lg:px-[100px] py-[10px] md:py-[12px] lg:py-[12px] bg-Grey-10`}
+      >
+        <div className="flex flex-col md:flex-row justify-center items-center gap-[20px]">
+          <p>@2023 Estatein. All Rights Reserved.</p>
+          <p>Terms & Conditions</p>
+        </div>
+        <div className="flex justify-center gap-[20px]">
+          {socialHandles.map((handle, index) => (
+            <Link
+              key={index}
+              to={handle.link}
+              className="w-[auto] h-[auto] p-[10px] rounded-[50%] bg-Grey-08"
+            >
               <img src={handle.icon} alt="" className="w-[20px] h-[auto]" />
             </Link>
-          ))
-          }</div>
+          ))}
+        </div>
       </div>
+      {/* <PropertyForm /> */}
     </>
   );
 };

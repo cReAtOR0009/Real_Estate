@@ -27,27 +27,27 @@ const AmenitySchema = new mongoose.Schema({
     },
     gym: {
         type: Boolean,
-        description: '',
+        description: { type:String,  maxlength: 200 },
         default: false,
     },
     securitySystem: {
         type: Boolean,
-        description: '',
+        description: { type:String,  maxlength: 200 },
         default: false,
     },
     balcony: {
         type: Boolean,
-        description: '',
+        description: { type:String,  maxlength: 200 },
         default: false,
     },
     centralHeating: {
         type: Boolean,
-        description: '',
+        description: { type:String,  maxlength: 200 },
         default: false,
     },
     airConditioning: {
         type: Boolean,
-        description: '',
+        description:  { type:String,  maxlength: 200 },
         default: false,
     },
 });
@@ -55,7 +55,7 @@ const AmenitySchema = new mongoose.Schema({
 // Sub-schema for additional features of the property
 const AdditionalFeaturesSchema = new mongoose.Schema({
     name: String,
-    description: String,
+    description:  { type:String,  maxlength: 200 },
 });
 
 // Sub-schema for property ratings
@@ -74,6 +74,7 @@ const ratingSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
+    default:1
 });
 
 // Sub-schema for property historical information
@@ -103,8 +104,8 @@ const propertyHistorySchema = new mongoose.Schema({
 
 // Main property schema
 const propertySchema = new mongoose.Schema({
-    title: String,
-    description: String,
+    name: String,
+    description:{ type:String,  maxlength: 500 },
     price: Number,
     bedrooms: {
         type: Number,
@@ -123,7 +124,7 @@ const propertySchema = new mongoose.Schema({
     },
     address: addressSchema,
     amenities: AmenitySchema,
-    additionalFeatures: AdditionalFeaturesSchema,
+    additionalFeatures: [AdditionalFeaturesSchema],
     rating: [ratingSchema],
     images: [
         {
@@ -136,6 +137,7 @@ const propertySchema = new mongoose.Schema({
     },
     agent: {
         id: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     },
     tags: [String],
     status: {
