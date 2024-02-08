@@ -1,5 +1,5 @@
 const express = require("express");
-const productControllers = require("../controller/productController");
+const propertyController = require("../controller/productController");
 
 const {
   AdminAuthenticateToken,
@@ -9,7 +9,15 @@ const {
 const router = express.Router();
 
 router.post("/create", (req, res) => {
-  productControllers.createProduct(req, res);  
+  propertyController.createProperty(req, res);  
 });
 
-module.exports = router
+router.get("/list", (req, res) => {
+    propertyController.listProperty(req, res);  
+  });
+
+router.get("/:id", (req, res) => {
+    propertyController.getPropertyById(req, res)
+})
+
+module.exports = router 

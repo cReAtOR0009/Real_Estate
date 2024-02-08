@@ -68,7 +68,7 @@ const Footer = () => {
         className={`flex flex-nowrap md:flex-wrap md:flex-row flex-col-reverse  justify-between px-[16px] md:px-[80px] lg:px-[100px] py-[10px] md:py-[12px] lg:py-[12px] bg-Grey-10`}
       >
         <div className="flex flex-col md:flex-row justify-center items-center gap-[20px]">
-          <p>@2023 Estatein. All Rights Reserved.</p>
+          <p>@2023 _creator. All Rights Reserved.</p>
           <p>Terms & Conditions</p>
         </div>
         <div className="flex justify-center gap-[20px]">

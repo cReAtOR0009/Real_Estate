@@ -1,11 +1,12 @@
 const constants = require("../constants/index");
+// const propertyModel = require("../database/models/propertyModel");
 const Property = require("../database/models/propertyModel");
 const { formatMongoData, checkObjectId } = require("../utilities/formatData");
 const jwt = require("jsonwebtoken");
 
 const serverResponse = constants.serverResponse.defaultResponse;
 
-module.exports.createProduct = async (req, res) => {
+module.exports.createProperty = async (req, res) => {
   let response = serverResponse;
   try {
     const {
@@ -23,7 +24,7 @@ module.exports.createProduct = async (req, res) => {
       tags,
       status,
       agent,
-      virtualTour, 
+      virtualTour,
       propertyHistory,
       nearbyAmenities,
       availability,
@@ -32,7 +33,7 @@ module.exports.createProduct = async (req, res) => {
     const existingPropertyName = await Property.findOne({ name: name });
 
     if (existingPropertyName) {
-      throw new Error( 
+      throw new Error(
         "this property already exist, kindly change prperty name "
       );
     }
@@ -57,17 +58,16 @@ module.exports.createProduct = async (req, res) => {
       virtualTour: virtualTour,
       propertyHistory: propertyHistory,
       nearbyAmenities: nearbyAmenities,
-      availability: availability, 
+      availability: availability,
     });
 
     let savedProperty = await newProperty.save();
     response.status = 200;
     response.message = "property added succesfully";
     response.data = await formatMongoData(savedProperty);
-
   } catch (error) {
     response.message = "error message";
-    response.data = {}
+    // response.data = {};
     response.error = error.message;
     console.log(error);
     console.log("something went wrong: controller:  create property");
@@ -75,3 +75,58 @@ module.exports.createProduct = async (req, res) => {
     return res.status(response.status).send(response);
   }
 };
+
+module.exports.listProperty = async (req, res, skip= 0, limit = 10) => {
+  let response = serverResponse;
+  try {
+
+     skip = req.params.skip?req.params.skip:skip
+     limit = req.params.limit?req.params.limit:limit
+
+    
+    const properties =await Property.find({})
+      .skip(parseInt(skip))
+      .limit(parseInt(limit));
+
+    response.status = 200;
+    response.message = "property fetched succesfully";
+    response.data = await formatMongoData(properties);
+  } catch (error) {
+    response.message = "error message";
+    response.data = {};
+    response.error = error.message;
+    console.log(error);
+    console.log("something went wrong: controller:  fetching properties");
+  } finally {
+    return res.status(response.status).send(response);
+  }
+};
+
+module.exports.getPropertyById = async (req, res) => {
+    let response = serverResponse
+
+    try {
+        await checkObjectId(req.params.id)
+        const id = req.params.id
+
+        existingproperty = await Property.findById({_id: id})
+
+        if(!existingproperty) {
+            throw new Error ("property not found") 
+        }
+
+        response.status = 200
+        response.message = "property fetched successfully"
+        response.data = await formatMongoData(existingproperty)
+        
+    } catch (error) {
+        response.message = "error message"
+        response.error = error.message
+        response.data = {}
+        console.log("error with product controller: getPropertyById ")
+        console.log(error)
+    } finally {
+        return res.status(response.status).send(response)
+    }
+}
+
