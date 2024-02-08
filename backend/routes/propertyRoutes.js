@@ -20,4 +20,8 @@ router.get("/:id", (req, res) => {
     propertyController.getPropertyById(req, res)
 })
 
+router.get("delete/:id", (req, res) => {
+    propertyController.deletePropertyById(req, res)
+})
+
 module.exports = router 

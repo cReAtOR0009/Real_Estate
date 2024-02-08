@@ -363,3 +363,34 @@ module.exports.verifyForgotEmailPassword = async (req, res) => {
     return res.status(response.status).send(response);
   }
 };
+
+// module.exports.getUserbyid = async (req, res) => {
+//   let response = serverResponse.defaultResponse;
+
+//   try {
+//     const userId = req.params.id;
+//     const userWithProperty = await User.findOne({ email: 'john.doe@example.com' }).populate(
+//       "propertyInfo"
+//     ).then(async (book) => {
+//      return book
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       // Handle error
+//     });
+    
+//     // console.log("userWithProperty:", userWithProperty)
+
+//     response.message = "user fetched with property successful1";
+//     response.status = 200;
+//     response.data = await formatMongoData(userWithProperty);
+
+//   } catch (error) {
+//     response.message = "error message";
+//     response.data = {};
+//     response.error = error.message;
+//     console.log(error);
+//   } finally {
+//     return res.status(response.status).send(response);
+//   }
+// };

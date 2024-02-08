@@ -76,15 +76,13 @@ module.exports.createProperty = async (req, res) => {
   }
 };
 
-module.exports.listProperty = async (req, res, skip= 0, limit = 10) => {
+module.exports.listProperty = async (req, res, skip = 0, limit = 10) => {
   let response = serverResponse;
   try {
+    skip = req.params.skip ? req.params.skip : skip;
+    limit = req.params.limit ? req.params.limit : limit;
 
-     skip = req.params.skip?req.params.skip:skip
-     limit = req.params.limit?req.params.limit:limit
-
-    
-    const properties =await Property.find({})
+    const properties = await Property.find({})
       .skip(parseInt(skip))
       .limit(parseInt(limit));
 
@@ -103,30 +101,56 @@ module.exports.listProperty = async (req, res, skip= 0, limit = 10) => {
 };
 
 module.exports.getPropertyById = async (req, res) => {
-    let response = serverResponse
+  let response = serverResponse;
 
-    try {
-        await checkObjectId(req.params.id)
-        const id = req.params.id
+  try {
+    await checkObjectId(req.params.id);
+    const id = req.params.id;
 
-        existingproperty = await Property.findById({_id: id})
+    existingproperty = await Property.findById({ _id: id });
 
-        if(!existingproperty) {
-            throw new Error ("property not found") 
-        }
-
-        response.status = 200
-        response.message = "property fetched successfully"
-        response.data = await formatMongoData(existingproperty)
-        
-    } catch (error) {
-        response.message = "error message"
-        response.error = error.message
-        response.data = {}
-        console.log("error with product controller: getPropertyById ")
-        console.log(error)
-    } finally {
-        return res.status(response.status).send(response)
+    if (!existingproperty) {
+      throw new Error("property not found");
     }
-}
+
+    response.status = 200;
+    response.message = "property fetched successfully";
+    response.data = await formatMongoData(existingproperty);
+  } catch (error) {
+    response.message = "error message";
+    response.error = error.message;
+    response.data = {};
+    console.log("error with product controller: getPropertyById ");
+    console.log(error);
+  } finally {
+    return res.status(response.status).send(response);
+  }
+};
+
+module.exports.deletePropertyById = async (req, res) => {
+  let response = serverResponse.defaultResponse;
+
+  try {
+    checkObjectId(req.params.id);
+    const id = req.params.id;
+    const existingproperty = await Property.findByIdAndDelete(id);
+
+    if (!existingproperty) {
+      throw new Error("property not found");
+    }
+
+    response.status = 200;
+    response.message = "property deleted successfully";
+    response.data = await formatMongoData(existingproperty);
+  } catch (error) {
+    response.message = "error message";
+    response.error = error.message;
+    response.data = {};
+    console.log("error with product controller: deletePropertyById ");
+    console.log(error);
+  } finally {
+    return res.status(response.status).send(response);
+  }
+};
+
 

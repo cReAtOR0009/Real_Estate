@@ -17,12 +17,14 @@ const userSchema = mongoose.Schema(
     verified: { type: Boolean, default: false },
     avatar: { type: String, default: "image" }, // "image" should be substituted for default image, if user is yet to upload image
     purchasedProperty: {
-        type: [{
+      type: [
+        {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Property',
-        }],
-        default: [],
-      },
+          ref: "Property",
+        },
+      ],
+      default: [],
+    },
     role: {
       type: String,
       enum: ["buyer", "seller", "agent"],
@@ -31,7 +33,7 @@ const userSchema = mongoose.Schema(
     },
     permissions: {
       type: [String],
-      default: "level1",
+      default: ["level1"],
     },
   },
   {
@@ -48,10 +50,10 @@ const userSchema = mongoose.Schema(
   }
 );
 
-userSchema.virtual("proprtyInfo", {
+userSchema.virtual("propertyInfo", {
   ref: "Property",
   localField: "purchasedProperty",
   foreignField: "_id",
-  justOne: true,
+  justOne: false,
 });
 module.exports = mongoose.model("User", userSchema);
