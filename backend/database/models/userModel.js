@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
     phone: Number,
     password: String,
     nationality: String,
-    verified:{type:Boolean, default:false},
+    verified:{type:Boolean, default:false}, 
     avatar:{type:String, default:"image"}, // "image" should be substituted for default image, if user is yet to upload image
     purchasedProperty:  {
         type: [purchasedPropertySchema],
