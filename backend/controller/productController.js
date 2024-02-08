@@ -9,7 +9,7 @@ module.exports.createProduct = async (req, res) => {
   let response = serverResponse;
   try {
     const {
-      propertyName,
+      name,
       description,
       price,
       bedrooms,
@@ -22,14 +22,17 @@ module.exports.createProduct = async (req, res) => {
       images,
       tags,
       status,
-      virtualTour,
+      agent,
+      virtualTour, 
+      propertyHistory,
       nearbyAmenities,
       availability,
     } = req.body;
-    const existingPropertyName = await Property.findOne({ name: propertyName });
+
+    const existingPropertyName = await Property.findOne({ name: name });
 
     if (existingPropertyName) {
-      throw new Error(
+      throw new Error( 
         "this property already exist, kindly change prperty name "
       );
     }
@@ -37,7 +40,7 @@ module.exports.createProduct = async (req, res) => {
     // const {}
 
     let newProperty = new Property({
-      name: propertyName,
+      name: name,
       description: description,
       price: price,
       bedrooms: bedrooms,
@@ -54,10 +57,21 @@ module.exports.createProduct = async (req, res) => {
       virtualTour: virtualTour,
       propertyHistory: propertyHistory,
       nearbyAmenities: nearbyAmenities,
-      availability: availability,
+      availability: availability, 
     });
 
- await newProperty.save()
+    let savedProperty = await newProperty.save();
+    response.status = 200;
+    response.message = "property added succesfully";
+    response.data = await formatMongoData(savedProperty);
 
-  } catch (error) {}
+  } catch (error) {
+    response.message = "error message";
+    response.data = {}
+    response.error = error.message;
+    console.log(error);
+    console.log("something went wrong: controller:  create property");
+  } finally {
+    return res.status(response.status).send(response);
+  }
 };

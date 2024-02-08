@@ -74,7 +74,7 @@ const ratingSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    default:1
+
 });
 
 // Sub-schema for property historical information
@@ -136,8 +136,11 @@ const propertySchema = new mongoose.Schema({
         enum: ['House', 'Apartment', 'Condo', 'Land', 'Commercial', 'Villa'],
     },
     agent: {
-        id: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+        ref: String // Assuming 'User' is a Mongoose model with a 'ref' property
     },
     tags: [String],
     status: {
