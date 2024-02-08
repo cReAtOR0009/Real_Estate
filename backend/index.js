@@ -28,6 +28,7 @@ const myMiddleware = (req, res, next) => {
 
 app.use("/user", require("./routes/userRoutes"))  
 app.use("/property", require("./routes/propertyRoutes"))  
+app.use("/checkout", require("./routes/checkoutRoutes"))   
 
 
 
