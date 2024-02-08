@@ -1,5 +1,5 @@
 const express = require("express");
-const propertyController = require("../controller/productController");
+const propertyController = require("../controller/propertyController");
 
 const {
   AdminAuthenticateToken,
@@ -7,7 +7,7 @@ const {
 } = require("../middleware/authenticateToken");
 
 const router = express.Router();
-
+ 
 router.post("/create", (req, res) => {
   propertyController.createProperty(req, res);  
 });
