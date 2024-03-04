@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { styles } from "../../styles/styles.js";
 import {
   budget,
@@ -36,7 +37,7 @@ const SearchParameterInput = ({
   );
 };
 
-const HouseCard = ({ image, title, details, features, price }) => {
+const HouseCard = ({ image, title, details, features, price, index }) => {
   return (
     <>
       <div
@@ -64,7 +65,7 @@ const HouseCard = ({ image, title, details, features, price }) => {
             <button
               className={`${styles.buttonPadding} rounded-[8px] bg-Purple-60`}
             >
-              View Property Details
+              <Link to={`${index}`}>View Property Details</Link>
             </button>
           </div>
         </div>
@@ -104,7 +105,10 @@ const InputField = ({ placeholder, name, label, type, onChange, styles }) => (
 
 const SelectField = ({ icon, label, options, styles, onChange }) => (
   <div className="custom-select flex flex-1 items-center relative">
-    <label htmlFor={label} className="absolute left-3 text-[16px] text-White-99">
+    <label
+      htmlFor={label}
+      className="absolute left-3 text-[16px] text-White-99"
+    >
       <img src={icon} alt="" />
     </label>
     <select
@@ -152,7 +156,7 @@ const HeroSection = () => {
     Email: "",
     Phone: "",
     "Prefered Location": "",
-    "Property Type" : "",
+    "Property Type": "",
     "No. of Bathrooms": "",
     "No. of Bedrooms": "",
     budget: "",
@@ -232,7 +236,7 @@ const HeroSection = () => {
 
       <div className={`${styles.subContainer} houseCardContainer`}>
         {Houses.map((house, index) => (
-          <HouseCard key={index} {...house} />
+          <HouseCard key={index} index={index} {...house} />
         ))}
       </div>
 
