@@ -17,7 +17,7 @@ const Property = () => {
   const { image, title, details, features, price, id } = house;
   const handleAddToCart = () => {
     addToCart(id, price);
-  };
+  }; 
   return (
     <>
       <div
