@@ -39,6 +39,7 @@ export const navLinks = [
   { title: "About us", id: "about us" },
   { title: "Properties", id: "properties" },
   { title: "Services", id: "services" },
+  { title: "Login", id: "login" },
 ];
 
 export const companydetails = {
@@ -405,6 +406,7 @@ export const propertyPreferences = [
 
 export const Houses = [
   {
+    id:"0",
     title: "Metropolitan Haven",
     details:
       "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
@@ -417,6 +419,7 @@ export const Houses = [
     price: 550000,
   },
   {
+    id:"1",
     title: "Seaside Serenity Villa",
     details:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
@@ -429,6 +432,7 @@ export const Houses = [
     price: 550000,
   },
   {
+    id:"2",
     title: "Metropolitan Haven",
     details:
       "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
@@ -441,6 +445,7 @@ export const Houses = [
     price: 550000,
   },
   {
+    id:"3",
     title: "Seaside Serenity Villa",
     details:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
@@ -453,6 +458,7 @@ export const Houses = [
     price: 550000,
   },
   {
+    id:"4",
     title: "Rustic Retreat Cottage",
     details:
       "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community... Read More",
@@ -466,6 +472,7 @@ export const Houses = [
   },
   ,
   {
+    id:"5",
     title: "Seaside Serenity Villa",
     details:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
@@ -478,6 +485,7 @@ export const Houses = [
     price: 550000,
   },
   {
+    id:"6",
     title: "Metropolitan Haven",
     details:
       "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
@@ -490,6 +498,7 @@ export const Houses = [
     price: 550000,
   },
   {
+    id:"7",
     title: "Seaside Serenity Villa",
     details:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
@@ -502,6 +511,7 @@ export const Houses = [
     price: 550000,
   },
   {
+    id:"8",
     title: "Seaside Serenity Villa",
     details:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
