@@ -8,17 +8,20 @@ const serverResponse = constants.serverResponse.defaultResponse;
 
 const validateIdandPrice = async (id, price, quantity) => {
   const existingProduct = await Property.findById(id);
+  //confirm if property exist and throw error if it dosent
   if (!existingProduct) {
     console.log("id: ", id)
     throw new Error("some property not found");
   }
-
+//  validate induvidual price to be correct with database
   const productPrice = existingProduct.price;
   if (productPrice !== price) { 
     throw new Error(
       "some property prices are not correct, kindly refresh page to get live prices"
     );
   }
+
+// validate cummulative price
 
   if (parseInt(productPrice * quantity) !== parseInt(price * quantity)) {
     throw new Error(
@@ -34,6 +37,7 @@ const validateProperty = async (propertyArray) => {
   for (let index = 0; index < propertyArray.length; index++) {
     const property = propertyArray[index];
     await checkObjectId(property.property);
+    //get coreect total price for each property and add to total
     const validatePrice = await validateIdandPrice(
       property.property,
       property.price,
@@ -74,23 +78,10 @@ module.exports.checkout = async (req, res) => {
 
     await order.save();
 
-    // const orderid =await order.user
-    // console.log("orderid :", orderid)
-
     response.status = 200;
     response.message = "property order placed successfully";
     response.data = await formatMongoData(order);
 
-    // const formatedOrder =await Order.findById(orderid)
-    // .populate('properties.property')
-    // .then(order => {
-    //   console.log("order: ", order);
-    //   // Handle retrieved order document with populated properties
-    // })
-    // .catch(err => {
-    //   console.error(err);
-    //   // Handle error
-    // });
   } catch (error) {
     response.message = "error message";
     response.error = error.message;
