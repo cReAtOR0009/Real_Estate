@@ -8,7 +8,7 @@ import {
   iconContainer2,
   iconContainer3,
 } from "../../assets/imageImporter";
-import "../../styles/hero.css"
+import "../../styles/hero.css";
 import { styles } from "../../styles/styles";
 
 const AchievementCard = ({ numbers, title }) => {
@@ -39,34 +39,49 @@ const OffersCard = ({ offer, icon, icon2 }) => {
 const Hero = () => {
   return (
     <>
-    <header id="hero" className={`${styles.homeheader}`}>
-    <div className={`  bg-Purple relative flex sm:flex-nowrap flex-wrap justify-center gap-[20px]  mt-[100px] sm:mt-[100px] `}>
-        <section className="mt-[30px]">
-          <div className="headerTextContainer">
-            <h1 className={`${styles.heading} `}>Discover Your Dream Property with Estatein</h1>
-            <p>
-              Your journey to finding the perfect property begins here. Explore
-              our listings to find the home that matches your dreams.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row sm: gap-[20px] my-[60px]">
-            <button className={`${styles.buttonPadding} ${styles.blackButton}`}>Learn More</button>
-            <button className={`${styles.buttonPadding} ${styles.purpleButton}`}>Browse Properties</button>
-          </div>
-          <div className="headerAchievementContainer">
-            {achievement1.map((achievement, index) => (
-              <AchievementCard key={index} {...achievement} />
-            ))}
-          </div>
-        </section>
-        <section className="headerRight ">
-          <img src={hero} alt="" />
-          <div>
-            <img src={dreamcircle} alt="" />
-          </div>
-        </section>
-      </div>
-    </header>
+      <header
+        id="hero"
+        className={`${styles.homeheader} mt-[100px] sm:mt-[100px] `}
+      >
+        <div
+          className={`  bg-Purple relative flex sm:flex-nowrap flex-wrap justify-center gap-[20px]`}
+        >
+          <section className="mt-[30px]">
+            <div className="headerTextContainer">
+              <h1 className={`${styles.heading} `}>
+                Discover Your Dream Property with Estatein
+              </h1>
+              <p>
+                Your journey to finding the perfect property begins here.
+                Explore our listings to find the home that matches your dreams.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row sm: gap-[20px] my-[60px]">
+              <button
+                className={`${styles.buttonPadding} ${styles.blackButton}`}
+              >
+                Learn More
+              </button>
+              <button
+                className={`${styles.buttonPadding} ${styles.purpleButton}`}
+              >
+                Browse Properties
+              </button>
+            </div>
+            <div className="headerAchievementContainer">
+              {achievement1.map((achievement, index) => (
+                <AchievementCard key={index} {...achievement} />
+              ))}
+            </div>
+          </section>
+          <section className="headerRight ">
+            <img src={hero} alt="" />
+            <div>
+              <img src={dreamcircle} alt="" />
+            </div>
+          </section>
+        </div>
+      </header>
       <div className=" headerSection2">
         {offers.map((offer, index) => (
           <OffersCard key={index} {...offer} />
