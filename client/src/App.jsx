@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Properties from "./pages/Properties";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import Property from "./pages/Property";
 
 import "./App.css";
 
@@ -25,6 +26,8 @@ const App = () => {
         <Route path="services" element={<Services />} />
         <Route path="properties" element={<Properties />} />
         <Route path="Contact us" element={<Contact />} />
+        <Route  path="properties/:propertyid" element={<Property />} />
+
       </Route>
       // </Route>
     )
