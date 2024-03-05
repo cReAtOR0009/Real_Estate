@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
 import { Houses } from "../assets/textAssets";
 import { styles } from "../styles/styles";
+import Amenity from "../components/Amenity";
 
-import { MdBathroom } from "react-icons/md";
+import { MdBathroom, MdLocationOn } from "react-icons/md";
 import { MdBedroomChild } from "react-icons/md";
 import { BsRulers } from "react-icons/bs";
 import { FaSwimmingPool } from "react-icons/fa";
@@ -16,15 +17,32 @@ import { GrShieldSecurity } from "react-icons/gr";
 import { MdBalcony } from "react-icons/md";
 import { GiHotSpices } from "react-icons/gi";
 import { TbAirConditioning } from "react-icons/tb";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import AdditionalFeatures from "../components/AdditionalFeatures";
 
-const AmenitiesCard = ({ icon, name }) => {
+const StarRating = ({ value, review }) => {
+  // Ensure the rating is within the valid range (1 to 5)
+  const normalizedRating = Math.min(5, Math.max(1, value));
+
+  // Create an array of stars based on the rating
+  const stars = Array.from(
+    { length: normalizedRating },
+    (_, index) => index + 1
+  );
+
   return (
-    <p
-      className={`${styles.paragraph} w-[auto] inline-block px-[12px] py-[6px] lg:px-[14px] lg:py-[8px] text-[14px] rounded-[28px] border border-Grey-15 text-white-90`}
-    ></p>
+    <div className="flex flex-col max-w-[200px] p-[10px] border border-solid border-Grey-60 rounded-[5px]">
+      <div>
+        {stars.map((star) => (
+          <span key={star} role="img" aria-label="star">
+            ⭐
+          </span>
+        ))}
+      </div>
+      <p>{review}</p>
+    </div>
   );
 };
-
 const Property2 = () => {
   const { propertyid } = useParams();
   const { addToCart, toggleCart } = useContext(CartContext);
@@ -32,7 +50,8 @@ const Property2 = () => {
   const dummyData = [
     {
       title: "Cozy Family Home",
-      description: "A beautiful family home with stunning views",
+      description:
+        "A beautiful family home with stunning views,  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
       price: 300000,
       bedrooms: 4,
       bathrooms: 2,
@@ -60,6 +79,18 @@ const Property2 = () => {
       rating: [
         {
           value: 4,
+          review: "Great property, loved the neighborhood!",
+          createdAt: new Date(),
+          createdBy: "user123",
+        },
+        {
+          value: 5,
+          review: "Great property, loved the neighborhood!",
+          createdAt: new Date(),
+          createdBy: "user123",
+        },
+        {
+          value: 5,
           review: "Great property, loved the neighborhood!",
           createdAt: new Date(),
           createdBy: "user123",
@@ -119,7 +150,7 @@ const Property2 = () => {
     nearbyAmenities,
     availability,
   } = dummyData[0];
-  console.log("images", images);
+  // console.log("images", images);
 
   const handleAddToCart = () => {
     let image = images[0];
@@ -130,107 +161,144 @@ const Property2 = () => {
   return (
     <>
       <div
-        className={`${styles.houseCardForProperty} flex flex-col text-[20px] border border-Grey-15 rounded-[12px]`}
+        className={`${styles.houseCardForProperty} flex flex-col text-[15px] p-[20px] border border-Grey-15 rounded-[12px]`}
       >
         <div className="imageContainer w-[auto]">
           <img className="object-cover w-[100%]" src={images[0].url} alt="" />
         </div>
-        <h2 className={`${styles.cardHeading} text-center`}>{title}</h2>
+        <div>
+          <h2 className={`${styles.cardHeading} text-center`}>{title}</h2>
+          <div className="flex items-center text-[20px]">
+            <IoMdCheckmarkCircleOutline size={25} />
+            <p
+              className={`${
+                availability ? "text-Purple-60" : "text-[red]"
+              } text-[20px uppercase]`}
+            >
+              {availability
+                ? "This Property Is Available"
+                : "This Property Is currently not Available for Sale or Lease"}
+            </p>
+          </div>
+        </div>
         <div className="pt-[24px] md:[30px] lg:[40px]">
           <p className={`${styles.paragraph}`}>{description}</p>
         </div>
-        <div className="pt-[24px] md:[30px] lg:[40px]">
-          <p className={`${styles.paragraph}`}>
-            <MdBedroomChild size={50} />
-            {bedrooms}
-            <MdBathroom size={50} />
-            {bathrooms}
+        <div className="flex">
+          <MdLocationOn size={25} />
+          <p className="text-[20px]">
+            {address.street},{address.city},{address.state},{address.zipcode}
           </p>
-          <BsRulers size={50} /> {size}
+        </div>
+        <div className="flex justify-between mt-[20px] border-Purple-60 py-[10px] border-y-2">
+          <div>
+            <p className="text-[20px] lg:text-[22px] text-Grey-60">Price</p>
+            <p className="text-[20px]">{price}</p>
+          </div>
+
+          <button
+            className={`${styles.buttonPadding} rounded-[8px] bg-Purple-60`}
+            onClick={handleAddToCart}
+          >
+            Buy Property
+          </button>
+        </div>
+        <div className=" flex flex-wrap pt-[24px] md:[30px] lg:[40px]">
+          <p className="flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-40 bg-Grey-10">
+            <MdBedroomChild size={22} />
+            BedRooms-{bedrooms}
+          </p>
+          <p className="flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-40 bg-Grey-10">
+            <MdBathroom size={22} />
+            Bathrooms-{bathrooms}
+          </p>
+          <p className="flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-40 bg-Grey-10">
+            <BsRulers size={22} /> Size-{size}squareMeter
+          </p>
         </div>
 
         <div>
-          <div className="flex justify-between pt-[24px] md:[30px] lg:[40px]">
-            <p className={`${styles.paragraph}`}>
-              {" "}
-              {amenities.swimmingPool == true ? (
-                <FaSwimmingPool size={50} />
-              ) : (
-                " no pool"
-              )}
-            </p>
-            <p className={`${styles.paragraph}`}>
-              {" "}
-              {amenities.garden == true ? (
-                <FaPlantWilt size={50} />
-              ) : (
-                "no garden"
-              )}
-            </p>
-            <p className={`${styles.paragraph}`}>
-              {" "}
-              {amenities.garage == true ? (
-                <GiHomeGarage size={50} />
-              ) : (
-                "no garage"
-              )}
-            </p>
-            <p className={`${styles.paragraph}`}>
-              {" "}
-              {amenities.gym === true ? <CgGym size={50} /> : "no gym"}
-            </p>
-            <p className={`${styles.paragraph}`}>
-              {" "}
-              {amenities.securitySystem ? (
-                <GrShieldSecurity size={50} />
-              ) : (
-                "no security system"
-              )}
-            </p>
-            <p className={`${styles.paragraph}`}>
-              {" "}
-              {amenities.balcony === true ? (
-                <MdBalcony size={50} />
-              ) : (
-                "no balcony"
-              )}
-            </p>
-            <p className={`${styles.paragraph}`}>
-              {" "}
-              {amenities.centralHeating === true ? (
-                <GiHotSpices size={50} />
-              ) : (
-                "no central heating"
-              )}
-            </p>
-            <p className={`${styles.paragraph}`}>
-              {" "}
-              {amenities.airConditioning ? (
-                <TbAirConditioning size={50} />
-              ) : (
-                "no aAir Conditioning system"
-              )}
-            </p>
-          </div>
-          <div>
-            <p>
-              {address.street},{address.city},{address.state},{address.zipcode}
-            </p>
+          <h2 className="text-[20px] ">Features: </h2>
+          <div className="flex flex-wrap border border-y-[2px] border-Grey-15 p-[10px] gap-[0px]">
+            <Amenity
+              icon={<FaSwimmingPool size={25} />}
+              text="Swimming Pool"
+              available={amenities.swimmingPool}
+            />
+            <Amenity
+              icon={<FaPlantWilt size={25} />}
+              text="Garden"
+              available={amenities.garden}
+            />
+            <Amenity
+              icon={<GiHomeGarage size={25} />}
+              text="Garage"
+              available={amenities.garage}
+            />
+            <Amenity
+              icon={<CgGym size={25} />}
+              text="Gym"
+              available={amenities.gym}
+            />
+            <Amenity
+              icon={<GrShieldSecurity size={25} />}
+              text="Security System"
+              available={amenities.securitySystem}
+            />
+            <Amenity
+              icon={<MdBalcony size={25} />}
+              text="Balcony"
+              available={amenities.balcony}
+            />
+            <Amenity
+              icon={<GiHotSpices size={25} />}
+              text="Central Heating"
+              available={amenities.centralHeating}
+            />
+            <Amenity
+              icon={<TbAirConditioning size={25} />}
+              text="Air Conditioning"
+              available={amenities.airConditioning}
+            />
           </div>
           <div>{propertyType}</div>
-          <div className="flex justify-between mt-[20px]">
-            <div>
-              <p className="text-[14px] lg:text-[18px] text-Grey-60">price</p>
-              <p className="text-[20px]">{price}</p>
-            </div>
+        </div>
 
-            <button
-              className={`${styles.buttonPadding} rounded-[8px] bg-Purple-60`}
-              onClick={handleAddToCart}
-            >
-              Buy Property
-            </button>
+        <div>
+          <h1 className="text-[25px]">Additional Features:</h1>
+          <div className="flex gap-[10px]">
+            {additionalFeatures.map((additionalFeature, index) => {
+              return <AdditionalFeatures key={index} {...additionalFeature} />;
+            })}
           </div>
+        </div>
+
+        <div className="flex flex-col">
+          <h1 className="text-[25px]">Nearby amenities: </h1>
+          <div className="flex flex-wrap gap-[10px]">
+            {nearbyAmenities.map((nearbyAmenity, index) => {
+              return (
+                <>
+                  <div className="flex items-center p-[10px] hover:scale-[1.2] transition-all">
+                    <IoMdCheckmarkCircleOutline size={25} />
+                    <span
+                      className="p-[5px] bg-Purple-70 border border-solid border-Purple-50 rounded-[10px]"
+                      key={index}
+                    >
+                      {nearbyAmenity}
+                    </span>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+
+        <h2 className="text-[25px]">Ratings</h2>
+        <div className="flex flex-wrap gap-[10px]">
+          {rating.map((properties, index) => {
+            return <StarRating key={index} {...properties} />;
+          })}
         </div>
       </div>
     </>
