@@ -364,7 +364,7 @@ const HeroSection = () => {
                   id="agreement"
                   name="agreement"
                   value="true"
-                  className={`${styles.inputFied} mr-[0px] md:mr-[5px] bg-Grey-08 text-Purple-60 text-center align`}
+                  className={`${styles.inputFied} mr-[0px] md:mr-[5px] bg-Grey-08 text-Purple-60 text-center`}
                 />
                 <label
                   htmlFor="agreement"
