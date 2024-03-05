@@ -10,6 +10,7 @@ import {
 } from "../../assets/imageImporter";
 import "../../styles/hero.css";
 import { styles } from "../../styles/styles";
+import { Link } from "react-router-dom";
 
 const AchievementCard = ({ numbers, title }) => {
   return (
@@ -65,7 +66,9 @@ const Hero = () => {
               <button
                 className={`${styles.buttonPadding} ${styles.purpleButton}`}
               >
+                <Link to={"/properties"}>
                 Browse Properties
+                </Link>
               </button>
             </div>
             <div className="headerAchievementContainer">
