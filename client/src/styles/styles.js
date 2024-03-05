@@ -3,7 +3,7 @@ import { Container } from "postcss";
 const styles = {
   homeheader: "px-[10px] md:px-[80px] xl:px-[162px] ",
   navContainer:
-    "px-[16px] py-[30px]  md:px-[80px] md:py-[20px]  lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px] color-[red]",
+    "px-[16px] py-[25px]  md:px-[80px] md:py-[20px]  lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px] color-[red]",
   searchContainer:
     "px-[16px] py-[50px]  md:px-[80px] md:pt-[0px]  md:pb-[0px] lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px] color-[red]",
   TextContainer:
@@ -14,7 +14,7 @@ const styles = {
     "text-[28px] md:text-[38px] lg:text-[48px] xl:text-[48px] lg:leading-[150%]",
   paragraph:
     "text-[14px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-Grey-60",
-    cartParagraph:
+  cartParagraph:
     "text-[14px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-Grey-10",
   subContainer:
     "px-[5px] pt-[40px] md:px-[50px] md:py-[0px] lg:px-[80px] lg:mt-[10px] xl:px-[162px]",
