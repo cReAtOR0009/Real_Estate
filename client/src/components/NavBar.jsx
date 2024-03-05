@@ -101,7 +101,7 @@ const NavBar = () => {
                     className={`w-[150px] my-[10px] text-center  ${
                       activeNav === navlink.id
                         ? "rounded-[8px]  bg-Grey-10 border border-Grey-15"
-                        : "hover: rounded-[8px]  bg-Grey-10 border border-Grey-15"
+                        : "hover:rounded-[8px]  hover:bg-Grey-10  hover:border-Grey-15 outline-none"
                     }`}
                     onClick={() => {
                       setNavActive(navlink.id), setShowNav(false);
