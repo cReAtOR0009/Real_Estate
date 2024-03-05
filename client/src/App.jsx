@@ -13,6 +13,7 @@ import Properties from "./pages/Properties";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Property from "./pages/Property";
+import Login from "./pages/Login";
 
 import "./App.css";
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="services" element={<Services />} />
         <Route path="properties" element={<Properties />} />
         <Route path="Contact us" element={<Contact />} />
+        <Route path="Login" element={<Login />} />
         <Route  path="properties/:propertyid" element={<Property />} />
 
       </Route>
