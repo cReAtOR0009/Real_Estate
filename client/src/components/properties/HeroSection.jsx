@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { styles } from "../../styles/styles.js";
 import {
@@ -9,6 +9,8 @@ import {
 } from "../../assets/textAssets.js";
 import { searchIcon } from "../../assets/imageImporter.js";
 import { Houses } from "../../assets/textAssets.js";
+import { NavigationContext } from "../../context/navigationContext.jsx";
+import { CartContext } from "../../context/cartContext.jsx";
 
 const SearchParameterInput = ({
   icon,
@@ -37,7 +39,21 @@ const SearchParameterInput = ({
   );
 };
 
-const HouseCard = ({ image, title, details, features, price, index }) => {
+const HouseCard = ({ id, image, title, details, features, price, index }) => {
+  const { setNavActive, activeNav } = useContext(NavigationContext);
+  const {addToCart, toggleCart} = useContext(CartContext)
+
+  const handleAddToCart = () => {
+    addToCart(id, price, details, image, title);
+    toggleCart()
+  }; 
+  const truncateDetails = (content, maxLength) => {
+    const words = content.split(" ");
+    const truncatedWords = words.slice(0, maxLength).join(" ");
+    return words.length > maxLength ? `${truncatedWords}...` : content;
+  };
+
+  const trauncatedDetails = truncateDetails(details, 10);
   return (
     <>
       <div
@@ -54,7 +70,12 @@ const HouseCard = ({ image, title, details, features, price, index }) => {
               Lorem ipsum dolor sit.
             </p>
             <h2 className={`${styles.cardHeading}`}>{title}</h2>
-            <p className={`${styles.paragraph}`}>{details}</p>
+            <p className={`${styles.paragraph}`}>
+              {trauncatedDetails}{" "}
+              <Link to={`/properties/${id}`} className="text-Purple-60">
+                Read More
+              </Link>
+            </p>
           </div>
           <div className="flex justify-between mt-[20px]">
             <div>
