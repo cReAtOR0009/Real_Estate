@@ -28,7 +28,6 @@ input {
 
 .telegramicon {
   width: 24px;
-
 }
 
 .footerContainer .left {
@@ -42,14 +41,14 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  flex: 1 0 0;
+  flex: 1 1 0;
   flex-wrap: wrap;
   color: var(--white-99, #fff);
   /* font-size: 20px; */
   font-weight: 500;
   line-height: 24px; /* 120% */
   letter-spacing: -0.12px;
-  /* gap: 30px; */
+  gap: 10px;
 }
 
 .pageNavContainer {
