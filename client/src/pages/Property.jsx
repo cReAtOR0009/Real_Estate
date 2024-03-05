@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
 import { Houses } from "../assets/textAssets";
-import { styles } from "../styles/styles";
+import { styles } from "../styles/styles";  
 
 const Property = () => {
   const { propertyid } = useParams();
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, toggleCart } = useContext(CartContext);
 
   const house = Houses.find((house, index) => index == parseInt(propertyid));
   // console.log("house found:", house);
@@ -15,8 +15,11 @@ const Property = () => {
   }
 
   const { image, title, details, features, price, id } = house;
+  // console.log("details: ",{ image, title, details, features, price, id})
   const handleAddToCart = () => {
-    addToCart(id, price);
+    addToCart(id, price, details, image, title);
+    toggleCart()
+    // console.log("add to cart handler console: ", { image, title, details, features, price, id})
   }; 
   return (
     <>

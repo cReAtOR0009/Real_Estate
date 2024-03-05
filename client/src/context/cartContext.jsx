@@ -4,37 +4,44 @@ import React, { useEffect, createContext, useContext, useReducer } from "react";
 const initialState = {
   cartstate: false,
   user: "",
-  properties: JSON.parse(localStorage.getItem("carted_Properties"))?.properties || [],
+  properties:
+    JSON.parse(localStorage.getItem("carted_Properties"))?.properties || [],
   total: 0,
 };
 // {id, price, quantity}
 
 // Define the reducer function to handle actions
 const cartReducer = (state, action) => {
-    switch (action.type) {
-      case "ADD_TO_CART":
-        const { id, price } = action.payload;
-        // Check if property exists in cart already
-        const alreadyExistInCart = state.properties.find(
-          (property) => property.id === id
-        );
-        if (alreadyExistInCart) {
-          return {
-            ...state,
-            
-          };
-        } else {
-          return {
-            ...state,
-            properties: [...state.properties, { id, quantity: 1, price }],
-          };
-        }
-      default:
-        return state;
-    }
-    
-  };
-  
+  switch (action.type) {
+    case "ADD_TO_CART":
+      const { id, price, details, image, title } = action.payload;
+      // console.log("payload data", { id, price, details, image, title });
+      // Check if property exists in cart already
+      const alreadyExistInCart = state.properties.find(
+        (property) => property.id === id
+      );
+      if (alreadyExistInCart) {
+        return {
+          ...state,
+        };
+      } else {
+        return {
+          ...state,
+          properties: [
+            ...state.properties,
+            { id, quantity: 1, price, details, image, title },
+          ],
+        };
+      }
+    case "TOGGLE_CART":
+      return {
+        ...state,
+        cartstate: !state.cartstate,
+      };
+    default:
+      return state;
+  }
+};
 
 // Create the cart context
 export const CartContext = createContext();
@@ -43,10 +50,17 @@ export const CartContext = createContext();
 export const CartContextProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, initialState);
 
+  // console.log("cart :", cart);
+
   // Function to add an item to the cart
-  const addToCart = (id, price) => {
-    dispatch({ type: "ADD_TO_CART", payload: { id, price } });
-    console.log('cart state:', cart)
+  const addToCart = (id, price, details, image, title) => {
+    dispatch({ type: "ADD_TO_CART", payload: { id, price, details, image, title } });
+    // console.log("cart state:", cart);
+  };
+
+  const toggleCart = () => {
+    dispatch({ type: "TOGGLE_CART" });
+    console.log("cart state", cart.cartstate);
   };
 
   useEffect(() => {
@@ -54,7 +68,7 @@ export const CartContextProvider = ({ children }) => {
   }, [cart.properties]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={{ cart, addToCart, toggleCart }}>
       {children}
     </CartContext.Provider>
   );
