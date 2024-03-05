@@ -19,7 +19,7 @@ const FooterNavCard = ({ title, navigation }) => {
               <a
                 href={
                   title.toLowerCase() !== "home"
-                    ? `${title.toLowerCase()}/#${navigation.to}`
+                    ? `/${title.toLowerCase()}/#${navigation.to}`
                     : `/#${navigation.to}`
                 }
               >
@@ -36,21 +36,29 @@ const FooterNavCard = ({ title, navigation }) => {
 const Footer = () => {
   return (
     <>
-      <div className={`${styles.TextContainer} flex flex-wrap`}>
-        <div className="left">
-          <div className="logo">
-            <img src={logo} alt="company logo" />
+      <div
+        className={`${styles.TextContainer} flex flex-wrap  gap-[10px] justify-center `}
+      >
+        <div className="left max-w-[100vw]">
+          <div className="logo ">
+            <img className="w-[150px]" src={logo} alt="company logo" />
           </div>
-          <div className="inputText">
+          <div className="inputText ">
             <img
               className="messageicon"
               src={messageIcon}
               alt="send us a message icon"
             />
-            <input type="email" name="" id="" placeholder="Enter your Email" />
+            <input
+              className="border border-solid border-Grey-50"
+              type="email"
+              name=""
+              id=""
+              placeholder="Enter your Email"
+            />
             {/* <button> */}
             <img
-              className="telegramicon"
+              className="telegramicon cursor-pointer"
               src={telegramIcon}
               alt="send image icon"
             />
