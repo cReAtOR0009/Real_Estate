@@ -14,10 +14,12 @@ const styles = {
     "text-[28px] md:text-[38px] lg:text-[48px] xl:text-[48px] lg:leading-[150%]",
   paragraph:
     "text-[14px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-Grey-60",
+    cartParagraph:
+    "text-[14px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-Grey-10",
   subContainer:
     "px-[5px] pt-[40px] md:px-[50px] md:py-[0px] lg:px-[80px] lg:mt-[10px] xl:px-[162px]",
   houseCardPadding: "p-[20px] md:p-[30px] lg:pl[40px] xl:p-[40px]",
-  houseCardForProperty: "mt-[120px] sm:mt-[120px] ",
+  houseCardForProperty: "mt-[120px] sm:mt-[120px] mx-[20px] md:mx-[80px]",
   cardHeading:
     "text-[18px] md:text-[20px] lg:text-[24px] xl:text-[24px] text-white-90",
   cardHeadingForProperty:
