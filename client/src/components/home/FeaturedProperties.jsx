@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   featuredProducts,
   leftarrow,
@@ -7,8 +7,26 @@ import {
 import "../../styles/featured.css";
 import { styles } from "../../styles/styles";
 import { Link } from "react-router-dom";
+import { NavigationContext } from "../../context/navigationContext";
 
-const FeaturedItemCard = ({ image, title, details, features, price, index }) => {
+const FeaturedItemCard = ({
+  id,
+  image,
+  title,
+  details,
+  features,
+  price,
+  index,
+}) => {
+
+  const {setNavActive, activeNav} = useContext(NavigationContext)
+  const truncateDetails = (content, maxLength) => {
+    const words = content.split(" ");
+    const truncatedWords = words.slice(0, maxLength).join(" ");
+    return words.length > maxLength ? `${truncatedWords}...` : content;
+  };
+
+  const truncatedDetails = truncateDetails(details, 10);
   return (
     <div className="featuredItemWrapper border border-Grey-15  bg-Grey-08 p-[15px] sm:p[30px] rounded-[12px]">
       <div className="featuredItem">
@@ -18,7 +36,12 @@ const FeaturedItemCard = ({ image, title, details, features, price, index }) => 
         <div>
           <div className="featuredItemText">
             <h2>{title}</h2>
-            <p>{details}</p>
+            <p>
+              {truncatedDetails}{" "}
+              <Link to={`properties/${id}`} onClick={() => setNavActive("properties")} className="text-Purple-60">
+                Read More
+              </Link>
+            </p>
           </div>
           <div className="productTags">
             {features.map((feature, index) => (
@@ -39,7 +62,7 @@ const FeaturedItemCard = ({ image, title, details, features, price, index }) => 
               className={`buyButton ${styles.buttonPadding} ${styles.purpleButton}`}
             >
               <button className="">
-                <Link to={`properties/${index}`}>View Property Details</Link>{" "}
+                <Link to={`properties/${index}`} onClick={() => setNavActive("properties")}>View Property Details</Link>{" "}
               </button>
             </div>
           </div>
