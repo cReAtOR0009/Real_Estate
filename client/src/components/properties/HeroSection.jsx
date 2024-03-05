@@ -41,12 +41,12 @@ const SearchParameterInput = ({
 
 const HouseCard = ({ id, image, title, details, features, price, index }) => {
   const { setNavActive, activeNav } = useContext(NavigationContext);
-  const {addToCart, toggleCart} = useContext(CartContext)
+  const { addToCart, toggleCart } = useContext(CartContext);
 
   const handleAddToCart = () => {
     addToCart(id, price, details, image, title);
-    toggleCart()
-  }; 
+    toggleCart();
+  };
   const truncateDetails = (content, maxLength) => {
     const words = content.split(" ");
     const truncatedWords = words.slice(0, maxLength).join(" ");
@@ -209,7 +209,7 @@ const HeroSection = () => {
   };
   return (
     <>
-      <div className="propertyGradientBg">
+      <div className="propertyGradientBg mt-[100px] sm-mt[100px]">
         {
           <MainHeaderContainer
             headerText="Find Your Dream Property"
