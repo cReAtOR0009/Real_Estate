@@ -18,8 +18,7 @@ const FeaturedItemCard = ({
   price,
   index,
 }) => {
-
-  const {setNavActive, activeNav} = useContext(NavigationContext)
+  const { setNavActive, activeNav } = useContext(NavigationContext);
   const truncateDetails = (content, maxLength) => {
     const words = content.split(" ");
     const truncatedWords = words.slice(0, maxLength).join(" ");
@@ -38,16 +37,27 @@ const FeaturedItemCard = ({
             <h2>{title}</h2>
             <p>
               {truncatedDetails}{" "}
-              <Link to={`properties/${id}`} onClick={() => setNavActive("properties")} className="text-Purple-60">
+              <Link
+                to={`properties/${id}`}
+                onClick={() => setNavActive("properties")}
+                className="text-Purple-60"
+              >
                 Read More
               </Link>
             </p>
           </div>
-          <div className="productTags">
+          <div className="flex flex-wrap gap-[5px]">
             {features.map((feature, index) => (
-              <p key={index} className="feature">
+              <p
+                key={index}
+                className="flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-15 bg-Grey-10"
+              >
                 <span>
-                  <img src={feature.icon} alt="" />
+                  <img
+                    className="w-[22px] h-[17px]"
+                    src={feature.icon}
+                    alt=""
+                  />
                 </span>
                 {feature.featureText}
               </p>
@@ -62,7 +72,12 @@ const FeaturedItemCard = ({
               className={`buyButton ${styles.buttonPadding} ${styles.purpleButton}`}
             >
               <button className="">
-                <Link to={`properties/${index}`} onClick={() => setNavActive("properties")}>View Property Details</Link>{" "}
+                <Link
+                  to={`properties/${index}`}
+                  onClick={() => setNavActive("properties")}
+                >
+                  View Property Details
+                </Link>{" "}
               </button>
             </div>
           </div>
@@ -106,7 +121,7 @@ const FeaturedProperties = ({ featuredProduct = featuredProducts }) => {
           </p>
         </div>
         <div className={`flex-1 text-center sm:text-right`}>
-          <button className={`${styles.buttonPadding}`}>
+          <button className={`${styles.buttonPadding} bg-Purple-60`}>
             View All Properties
           </button>
         </div>
