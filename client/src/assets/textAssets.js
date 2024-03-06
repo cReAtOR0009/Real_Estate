@@ -11,6 +11,9 @@ import {
   house1,
   house2,
   house3,
+  house4,
+  house5,
+  house6,
   leftarrow,
   rightarrow,
   biggeststar,
@@ -69,7 +72,7 @@ export const offers = [
 
 export const featuredProducts = [
   {
-    id:"0",
+    id: "0",
     title: "Seaside Serenity Villa",
     details:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
@@ -82,7 +85,7 @@ export const featuredProducts = [
     price: 550000,
   },
   {
-    id:"1",
+    id: "1",
     title: "Metropolitan Haven",
     details:
       "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
@@ -95,7 +98,7 @@ export const featuredProducts = [
     price: 550000,
   },
   {
-    id:"2",
+    id: "2",
     title: "Seaside Serenity Villa",
     details:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
@@ -108,7 +111,7 @@ export const featuredProducts = [
     price: 550000,
   },
   {
-    id:"3",
+    id: "3",
     title: "Rustic Retreat Cottage",
     details:
       "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community... Read More",
@@ -121,7 +124,7 @@ export const featuredProducts = [
     price: 550000,
   },
   {
-    id:"4",
+    id: "4",
     title: "Metropolitan Haven",
     details:
       "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
@@ -134,7 +137,7 @@ export const featuredProducts = [
     price: 550000,
   },
   {
-    id:"5",
+    id: "5",
     title: "Seaside Serenity Villa",
     details:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
@@ -147,7 +150,7 @@ export const featuredProducts = [
     price: 550000,
   },
   {
-    id:"6",
+    id: "6",
     title: "Seaside Serenity Villa",
     details:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
@@ -411,124 +414,394 @@ export const propertyPreferences = [
   },
 ];
 
+// export const Houses = [
+//   {
+//     id:"0",
+//     title: "Metropolitan Haven",
+//     details:
+//       "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
+//     image: house2,
+//     features: [
+//       { icon: bedroomicon, featureText: "4-Bedroom" },
+//       { icon: bathroomicon, featureText: "3-Bathroom" },
+//       { icon: villaicon, featureText: "villa" },
+//     ],
+//     price: 550000,
+//   },
+//   {
+//     id:"1",
+//     title: "Seaside Serenity Villa",
+//     details:
+//       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+//     image: house1,
+//     features: [
+//       { icon: bedroomicon, featureText: "4-Bedroom" },
+//       { icon: bathroomicon, featureText: "3-Bathroom" },
+//       { icon: villaicon, featureText: "villa" },
+//     ],
+//     price: 550000,
+//   },
+//   {
+//     id:"2",
+//     title: "Metropolitan Haven",
+//     details:
+//       "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
+//     image: house2,
+//     features: [
+//       { icon: bedroomicon, featureText: "4-Bedroom" },
+//       { icon: bathroomicon, featureText: "3-Bathroom" },
+//       { icon: villaicon, featureText: "villa" },
+//     ],
+//     price: 550000,
+//   },
+//   {
+//     id:"3",
+//     title: "Seaside Serenity Villa",
+//     details:
+//       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+//     image: house1,
+//     features: [
+//       { icon: bedroomicon, featureText: "4-Bedroom" },
+//       { icon: bathroomicon, featureText: "3-Bathroom" },
+//       { icon: villaicon, featureText: "villa" },
+//     ],
+//     price: 550000,
+//   },
+//   {
+//     id:"4",
+//     title: "Rustic Retreat Cottage",
+//     details:
+//       "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community... Read More",
+//     image: house3,
+//     features: [
+//       { icon: bedroomicon, featureText: "4-Bedroom" },
+//       { icon: bathroomicon, featureText: "3-Bathroom" },
+//       { icon: villaicon, featureText: "villa" },
+//     ],
+//     price: 550000,
+//   },
+//   ,
+//   {
+//     id:"5",
+//     title: "Seaside Serenity Villa",
+//     details:
+//       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+//     image: house1,
+//     features: [
+//       { icon: bedroomicon, featureText: "4-Bedroom" },
+//       { icon: bathroomicon, featureText: "3-Bathroom" },
+//       { icon: villaicon, featureText: "villa" },
+//     ],
+//     price: 550000,
+//   },
+//   {
+//     id:"6",
+//     title: "Metropolitan Haven",
+//     details:
+//       "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
+//     image: house2,
+//     features: [
+//       { icon: bedroomicon, featureText: "4-Bedroom" },
+//       { icon: bathroomicon, featureText: "3-Bathroom" },
+//       { icon: villaicon, featureText: "villa" },
+//     ],
+//     price: 550000,
+//   },
+//   {
+//     id:"7",
+//     title: "Seaside Serenity Villa",
+//     details:
+//       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+//     image: house1,
+//     features: [
+//       { icon: bedroomicon, featureText: "4-Bedroom" },
+//       { icon: bathroomicon, featureText: "3-Bathroom" },
+//       { icon: villaicon, featureText: "villa" },
+//     ],
+//     price: 550000,
+//   },
+//   {
+//     id:"8",
+//     title: "Seaside Serenity Villa",
+//     details:
+//       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
+//     image: house1,
+//     features: [
+//       { icon: bedroomicon, featureText: "4-Bedroom" },
+//       { icon: bathroomicon, featureText: "3-Bathroom" },
+//       { icon: villaicon, featureText: "villa" },
+//     ],
+//     price: 550000,
+//   },
+// ];
+
 export const Houses = [
   {
-    id:"0",
-    title: "Metropolitan Haven",
-    details:
-      "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
-    image: house2,
-    features: [
-      { icon: bedroomicon, featureText: "4-Bedroom" },
-      { icon: bathroomicon, featureText: "3-Bathroom" },
-      { icon: villaicon, featureText: "villa" },
+    id: "1",
+    title: "Cozy Family Home",
+    description: "A beautiful family home with stunning views Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    price: 300000,
+    bedrooms: 4,
+    bathrooms: 2,
+    size: 2000,
+    address: {
+      street: "123 Main St",
+      city: "Cityville",
+      state: "Stateville",
+      zipcode: "12345",
+    },
+    amenities: {
+      swimmingPool: true,
+      garden: true,
+      garage: true,
+      gym: false,
+      securitySystem: true,
+      balcony: false,
+      centralHeating: true,
+      airConditioning: true,
+    },
+    additionalFeatures: [
+      { name: "Fireplace", description: "Cozy fireplace for winter nights" },
+      { name: "Deck", description: "Spacious deck for outdoor entertaining" },
     ],
-    price: 550000,
+    rating: [
+      {
+        value: 4,
+        review: "Great property, loved the neighborhood!",
+        createdAt: new Date(),
+        createdBy: "user123",
+      },
+    ],
+    images: [{ url: "/src/assets/house3.png" }, { url: "/src/assets/house3.png" }],
+    propertyType: "House",
+    agent: { id: "agent123", ref: "John Doe" },
+    tags: ["family-friendly", "great-view"],
+    status: "For Sale",
+    virtualTour: { url: "https://example.com/virtualtour" },
+    propertyHistory: {
+      previousOwners: [
+        { name: "Previous Owner", contact: "previous@example.com" },
+      ],
+      saleHistory: [
+        {
+          soldPrice: 250000,
+          soldDate: new Date("2023-01-15"),
+          buyer: "Buyer1",
+        },
+      ],
+      rentalHistory: [],
+    },
+    nearbyAmenities: ["Park", "School", "Supermarket"],
+    availability: true,
   },
   {
-    id:"1",
-    title: "Seaside Serenity Villa",
-    details:
-      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
-    image: house1,
-    features: [
-      { icon: bedroomicon, featureText: "4-Bedroom" },
-      { icon: bathroomicon, featureText: "3-Bathroom" },
-      { icon: villaicon, featureText: "villa" },
+    id: "2",
+    title: "Modern City Apartment",
+    description: "Luxurious apartment in the heart of the city Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    price: 500000,
+    bedrooms: 2,
+    bathrooms: 1,
+    size: 1200,
+    address: {
+      street: "456 Downtown Ave",
+      city: "Metropolis",
+      state: "Urbania",
+      zipcode: "54321",
+    },
+    amenities: {
+      swimmingPool: false,
+      garden: false,
+      garage: true,
+      gym: true,
+      securitySystem: true,
+      balcony: true,
+      centralHeating: true,
+      airConditioning: true,
+    },
+    additionalFeatures: [
+      {
+        name: "City Views",
+        description: "Breathtaking views of the city skyline",
+      },
+      {
+        name: "Security Patrol",
+        description: "24/7 security patrol for peace of mind",
+      },
     ],
-    price: 550000,
+    rating: [
+      {
+        value: 5,
+        review: "Absolutely stunning apartment, exceeded all expectations!",
+        createdAt: new Date(),
+        createdBy: "user456",
+      },
+    ],
+    images: [{ url: "/src/assets/house2.jpg" }, { url: "/src/assets/house2.jpg" }],
+    propertyType: "Apartment",
+    agent: { id: "agent456", ref: "Jane Smith" },
+    tags: ["city-living", "luxury"],
+    status: "For Sale",
+    virtualTour: { url: "https://example.com/virtualtour" },
+    propertyHistory: {
+      previousOwners: [
+        { name: "Previous Owner", contact: "previous@example.com" },
+      ],
+      saleHistory: [
+        {
+          soldPrice: 480000,
+          soldDate: new Date("2023-03-20"),
+          buyer: "Buyer2",
+        },
+      ],
+      rentalHistory: [],
+    },
+    nearbyAmenities: ["Shopping Mall", "Restaurants", "Public Transit"],
+    availability: true,
   },
   {
-    id:"2",
-    title: "Metropolitan Haven",
-    details:
-      "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
-    image: house2,
-    features: [
-      { icon: bedroomicon, featureText: "4-Bedroom" },
-      { icon: bathroomicon, featureText: "3-Bathroom" },
-      { icon: villaicon, featureText: "villa" },
+    id: "3",
+    title: "Seaside Villa",
+    description: "Elegant villa overlooking the ocean Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    price: 800000,
+    bedrooms: 5,
+    bathrooms: 4,
+    size: 3500,
+    address: {
+      street: "789 Oceanfront Rd",
+      city: "Seaview",
+      state: "Coastal",
+      zipcode: "67890",
+    },
+    amenities: {
+      swimmingPool: true,
+      garden: true,
+      garage: true,
+      gym: true,
+      securitySystem: true,
+      balcony: true,
+      centralHeating: true,
+      airConditioning: true,
+    },
+    additionalFeatures: [
+      { name: "Private Beach Access", description: "Direct access to a secluded beach" },
+      { name: "Oceanfront Terrace", description: "Spacious terrace with panoramic ocean views" },
     ],
-    price: 550000,
+    rating: [
+      {
+        value: 4.5,
+        review: "Absolutely stunning villa, perfect for a relaxing getaway!",
+        createdAt: new Date(),
+        createdBy: "user789",
+      },
+    ],
+    images: [
+      { url: "/src/assets/house3.png" },
+      { url: "/src/assets/house3.png" },
+    ],
+    propertyType: "Villa",
+    agent: { id: "agent789", ref: "Emily Johnson" },
+    tags: ["ocean-view", "luxury-living"],
+    status: "For Sale",
+    virtualTour: { url: "https://example.com/virtualtour" },
+    propertyHistory: {
+      previousOwners: [{ name: "Previous Owner", contact: "previous@example.com" }],
+      saleHistory: [{ soldPrice: 750000, soldDate: new Date("2023-05-10"), buyer: "Buyer3" }],
+      rentalHistory: [],
+    },
+    nearbyAmenities: ["Beach Club", "Marina", "Fine Dining"],
+    availability: true,
   },
   {
-    id:"3",
-    title: "Seaside Serenity Villa",
-    details:
-      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
-    image: house1,
-    features: [
-      { icon: bedroomicon, featureText: "4-Bedroom" },
-      { icon: bathroomicon, featureText: "3-Bathroom" },
-      { icon: villaicon, featureText: "villa" },
+    id: "4",
+    title: "Rustic Mountain Cabin",
+    description: "Cozy cabin nestled in the mountains Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    price: 250000,
+    bedrooms: 3,
+    bathrooms: 1,
+    size: 1500,
+    address: {
+      street: "321 Mountain Trail",
+      city: "Peakville",
+      state: "Highland",
+      zipcode: "54321",
+    },
+    amenities: {
+      swimmingPool: false,
+      garden: true,
+      garage: false,
+      gym: false,
+      securitySystem: false,
+      balcony: true,
+      centralHeating: true,
+      airConditioning: false,
+    },
+    additionalFeatures: [
+      { name: "Wood-Burning Stove", description: "Traditional stove for cozy evenings" },
+      { name: "Hiking Trails Nearby", description: "Access to scenic hiking trails" },
     ],
-    price: 550000,
+    rating: [],
+    images: [
+      { url: "/src/assets/house4.jpg" },
+      { url: "/src/assets/house4.jpg" },
+    ],
+    propertyType: "Cabin",
+    agent: { id: "agent987", ref: "Michael Brown" },
+    tags: ["mountain-view", "rustic"],
+    status: "For Sale",
+    virtualTour: { url: "https://example.com/virtualtour" },
+    propertyHistory: {
+      previousOwners: [{ name: "Previous Owner", contact: "previous@example.com" }],
+      saleHistory: [],
+      rentalHistory: [],
+    },
+    nearbyAmenities: ["Ski Resort", "National Park", "Cafes"],
+    availability: true,
   },
   {
-    id:"4",
-    title: "Rustic Retreat Cottage",
-    details:
-      "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community... Read More",
-    image: house3,
-    features: [
-      { icon: bedroomicon, featureText: "4-Bedroom" },
-      { icon: bathroomicon, featureText: "3-Bathroom" },
-      { icon: villaicon, featureText: "villa" },
+    id: "5",
+    title: "Cosmopolitan Loft",
+    description: "Chic loft in the heart of downtown. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    price: 600000,
+    bedrooms: 2,
+    bathrooms: 2,
+    size: 1800,
+    address: {
+      street: "789 Loft Avenue",
+      city: "Downtown",
+      state: "Metropolis",
+      zipcode: "11223",
+    },
+    amenities: {
+      swimmingPool: false,
+      garden: false,
+      garage: true,
+      gym: true,
+      securitySystem: true,
+      balcony: true,
+      centralHeating: true,
+      airConditioning: true,
+    },
+    additionalFeatures: [
+      { name: "Exposed Brick Walls", description: "Characteristic loft features" },
+      { name: "City Views", description: "Panoramic views of the bustling city streets" },
     ],
-    price: 550000,
-  },
-  ,
-  {
-    id:"5",
-    title: "Seaside Serenity Villa",
-    details:
-      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
-    image: house1,
-    features: [
-      { icon: bedroomicon, featureText: "4-Bedroom" },
-      { icon: bathroomicon, featureText: "3-Bathroom" },
-      { icon: villaicon, featureText: "villa" },
+    rating: [],
+    images: [
+      { url: "/src/assets/house5.jpg" },
+      { url: "/src/assets/house5.jpg" },
     ],
-    price: 550000,
-  },
-  {
-    id:"6",
-    title: "Metropolitan Haven",
-    details:
-      "A chic and fully-furnished 2-bedroom apartment with panoramic city... Read More",
-    image: house2,
-    features: [
-      { icon: bedroomicon, featureText: "4-Bedroom" },
-      { icon: bathroomicon, featureText: "3-Bathroom" },
-      { icon: villaicon, featureText: "villa" },
-    ],
-    price: 550000,
-  },
-  {
-    id:"7",
-    title: "Seaside Serenity Villa",
-    details:
-      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
-    image: house1,
-    features: [
-      { icon: bedroomicon, featureText: "4-Bedroom" },
-      { icon: bathroomicon, featureText: "3-Bathroom" },
-      { icon: villaicon, featureText: "villa" },
-    ],
-    price: 550000,
-  },
-  {
-    id:"8",
-    title: "Seaside Serenity Villa",
-    details:
-      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood... Read More",
-    image: house1,
-    features: [
-      { icon: bedroomicon, featureText: "4-Bedroom" },
-      { icon: bathroomicon, featureText: "3-Bathroom" },
-      { icon: villaicon, featureText: "villa" },
-    ],
-    price: 550000,
+    propertyType: "Loft",
+    agent: { id: "agent654", ref: "Sophia Rodriguez" },
+    tags: ["urban-living", "modern"],
+    status: "For Sale",
+    virtualTour: { url: "https://example.com/virtualtour" },
+    propertyHistory: {
+      previousOwners: [{ name: "Previous Owner", contact: "previous@example.com" }],
+      saleHistory: [],
+      rentalHistory: [],
+    },
+    nearbyAmenities: ["Art Galleries", "Nightlife", "Cultural Attractions"],
+    availability: true,
   },
 ];
 
@@ -578,9 +851,10 @@ export const propertyPreferences2 = [
   },
 ];
 
-export const budget = 
-  { label: "", options: ["budget", "budget2", "budget3", "budget4"] }
-;
+export const budget = {
+  label: "",
+  options: ["budget", "budget2", "budget3", "budget4"],
+};
 
 export const socialHandles = [
   {
