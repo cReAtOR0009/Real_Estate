@@ -25,7 +25,7 @@ const styles = {
   cardHeadingForProperty:
     "text-[20px] md:text-[25px] lg:text-[25px] xl:text-[25px] text-white-90 text-center",
   buttonPadding:
-    "hover:bg-[#946cf9] px-[10px] py-[14px] lg:px-[24px] lg:py-[18px] text-[14px] md:text-[18px] rounded-[8px]",
+    "hover:bg-[#946cf9] transition-all px-[10px] py-[14px] lg:px-[24px] lg:py-[18px] text-[14px] md:text-[18px] rounded-[8px]",
   purpleButton: "bg-Purple-60 rounded-[8px]",
   blackButton: "border border-Grey-15  rounded-[8px]",
   formContainer:
