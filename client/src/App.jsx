@@ -14,9 +14,9 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Property from "./pages/Property";
 import Login from "./pages/Login";
+import AddProperty from "./components/AddProperty";
 
 import "./App.css";
-
 
 const App = () => {
   const router = createBrowserRouter(
@@ -28,8 +28,8 @@ const App = () => {
         <Route path="properties" element={<Properties />} />
         <Route path="Contact us" element={<Contact />} />
         <Route path="Login" element={<Login />} />
-        <Route  path="properties/:propertyid" element={<Property />} />
-
+        <Route path="AddProperties" element={<AddProperty />} />
+        <Route path="properties/:propertyid" element={<Property />} />
       </Route>
       // </Route>
     )
