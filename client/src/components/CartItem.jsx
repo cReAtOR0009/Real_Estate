@@ -2,14 +2,14 @@ import React from "react";
 import { MdDelete } from "react-icons/md";
 import { styles } from "../styles/styles";
 
-const CartItem = ({ image, title, id, details, price }) => {
+const CartItem = ({ image, title, id, description, price }) => {
   const truncateDetails = (content, maxLength) => {
     const words = content.split(" ");
     const truncatedWords = words.slice(0, maxLength).join(" ");
     return words.length > maxLength ? `${truncatedWords}...` : content;
   };
 
-  const truncatedDetails = truncateDetails(details, 10);
+  const truncatedDetails = truncateDetails(description, 10);
   return (
     <>
       <div
