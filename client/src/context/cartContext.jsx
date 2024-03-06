@@ -14,8 +14,8 @@ const initialState = {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      const { id, price, details, image, title } = action.payload;
-      // console.log("payload data", { id, price, details, image, title });
+      const { id, price, description, image, title } = action.payload;
+      // console.log("payload data", { id, price, description, image, title });
       // Check if property exists in cart already
       const alreadyExistInCart = state.properties.find(
         (property) => property.id === id
@@ -29,7 +29,7 @@ const cartReducer = (state, action) => {
           ...state,
           properties: [
             ...state.properties,
-            { id, quantity: 1, price, details, image, title },
+            { id, quantity: 1, price, description, image, title },
           ],
         };
       }
@@ -53,8 +53,8 @@ export const CartContextProvider = ({ children }) => {
   // console.log("cart :", cart);
 
   // Function to add an item to the cart
-  const addToCart = (id, price, details, image, title) => {
-    dispatch({ type: "ADD_TO_CART", payload: { id, price, details, image, title } });
+  const addToCart = (id, price, description, image, title) => {
+    dispatch({ type: "ADD_TO_CART", payload: { id, price, description, image, title } });
     // console.log("cart state:", cart);
   };
 

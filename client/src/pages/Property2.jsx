@@ -49,6 +49,7 @@ const Property2 = () => {
 
   const dummyData = [
     {
+      id:"7",
       title: "Cozy Family Home",
       description:
         "A beautiful family home with stunning views,  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
@@ -134,6 +135,7 @@ const Property2 = () => {
   }
 
   const {
+    id,
     title,
     description,
     price,
@@ -154,9 +156,9 @@ const Property2 = () => {
 
   const handleAddToCart = () => {
     let image = images[0];
-    addToCart(id, price, details, image, title);
+    addToCart(id, price, description, image, title);
     toggleCart();
-    // console.log("add to cart handler console: ", { image, title, details, features, price, id})
+    // console.log("add to cart handler console: ", { image, title, description, features, price, id})
   };
   return (
     <>
@@ -165,6 +167,7 @@ const Property2 = () => {
       >
         <div className="imageContainer w-[auto]">
           <img className="object-cover w-[100%]" src={images[0].url} alt="" />
+          {console.log("image url",images[0].url)}
         </div>
         <div>
           <h2 className={`${styles.cardHeading} text-center`}>{title}</h2>
@@ -204,15 +207,15 @@ const Property2 = () => {
           </button>
         </div>
         <div className=" flex flex-wrap pt-[24px] md:[30px] lg:[40px]">
-          <p className="flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-40 bg-Grey-10">
+          <p className="hover:scale-[1.2] transition-all flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-40 bg-Grey-10">
             <MdBedroomChild size={22} />
             BedRooms-{bedrooms}
           </p>
-          <p className="flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-40 bg-Grey-10">
+          <p className="hover:scale-[1.2] transition-all flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-40 bg-Grey-10">
             <MdBathroom size={22} />
             Bathrooms-{bathrooms}
           </p>
-          <p className="flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-40 bg-Grey-10">
+          <p className="hover:scale-[1.2] transition-all flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-40 bg-Grey-10">
             <BsRulers size={22} /> Size-{size}squareMeter
           </p>
         </div>

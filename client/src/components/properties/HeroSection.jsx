@@ -39,12 +39,20 @@ const SearchParameterInput = ({
   );
 };
 
-const HouseCard = ({ id, image, title, details, features, price, index }) => {
+const HouseCard = ({
+  id,
+  images,
+  title,
+  description,
+  features,
+  price,
+  index,
+}) => {
   const { setNavActive, activeNav } = useContext(NavigationContext);
   const { addToCart, toggleCart } = useContext(CartContext);
 
   const handleAddToCart = () => {
-    addToCart(id, price, details, image, title);
+    addToCart(id, price, description, image, title);
     toggleCart();
   };
   const truncateDetails = (content, maxLength) => {
@@ -53,14 +61,18 @@ const HouseCard = ({ id, image, title, details, features, price, index }) => {
     return words.length > maxLength ? `${truncatedWords}...` : content;
   };
 
-  const trauncatedDetails = truncateDetails(details, 10);
+  const trauncatedDetails = truncateDetails(description, 10);
   return (
     <>
       <div
         className={`${styles.houseCardPadding} flex flex-col  border border-Grey-15 rounded-[12px]`}
       >
         <div className="imageContainer w-[auto]">
-          <img className="object-cover w-[100%]" src={image} alt="" />
+          <img
+            className="object-cover w-[100%] rounded-[10px] max-h-[400px] max-w-[400px]"
+            src={images[0].url}
+            alt=""
+          />
         </div>
         <div>
           <div className="pt-[24px] md:[30px] lg:[40px]">
@@ -187,7 +199,7 @@ const HeroSection = () => {
     budget: "",
   });
 
-  console.log(propertyChoice);
+  // console.log(propertyChoice);
 
   const handleSearchChange = (e, property) => {
     setsearchParams((initialValue) => ({

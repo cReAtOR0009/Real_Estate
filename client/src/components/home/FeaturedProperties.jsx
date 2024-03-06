@@ -1,20 +1,31 @@
 import React, { useState, useContext } from "react";
 import {
   featuredProducts,
+  Houses,
   leftarrow,
   rightarrow,
 } from "../../assets/textAssets";
+import Amenity from "../Amenity";
 import "../../styles/featured.css";
 import { styles } from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { NavigationContext } from "../../context/navigationContext";
 
+import { FaSwimmingPool } from "react-icons/fa";
+import { FaPlantWilt } from "react-icons/fa6";
+import { GiHomeGarage } from "react-icons/gi";
+import { CgGym } from "react-icons/cg";
+import { GrShieldSecurity } from "react-icons/gr";
+import { MdBalcony } from "react-icons/md";
+import { GiHotSpices } from "react-icons/gi";
+import { TbAirConditioning } from "react-icons/tb";
+
 const FeaturedItemCard = ({
   id,
-  image,
+  images,
   title,
-  details,
-  features,
+  description,
+  amenities,
   price,
   index,
 }) => {
@@ -25,12 +36,12 @@ const FeaturedItemCard = ({
     return words.length > maxLength ? `${truncatedWords}...` : content;
   };
 
-  const truncatedDetails = truncateDetails(details, 10);
+  const truncatedDetails = truncateDetails(description, 20);
   return (
     <div className="featuredItemWrapper border border-Grey-15  bg-Grey-08 p-[15px] sm:p[30px] rounded-[12px]">
       <div className="featuredItem">
         <div>
-          <img src={image} alt="" />
+          <img src={images[0].url} alt="" />
         </div>
         <div>
           <div className="featuredItemText">
@@ -47,21 +58,31 @@ const FeaturedItemCard = ({
             </p>
           </div>
           <div className="flex flex-wrap gap-[5px]">
-            {features.map((feature, index) => (
-              <p
-                key={index}
-                className="flex px-[14px] py-[10px] items-center m-[0px] gap-[2px] rounded-[28px] border border-solid border-Grey-15 bg-Grey-10"
-              >
-                <span>
-                  <img
-                    className="w-[22px] h-[17px]"
-                    src={feature.icon}
-                    alt=""
-                  />
-                </span>
-                {feature.featureText}
+            <div className="flex flex-wrap items-center border border-y-[2px] border-Grey-15 p-[10px] gap-[5px]">
+              <Amenity
+                icon={<FaSwimmingPool size={25} />}
+                text="Swimming Pool"
+                available={amenities.swimmingPool}
+              />
+              <Amenity
+                icon={<FaPlantWilt size={25} />}
+                text="Garden"
+                available={amenities.garden}
+              />
+              <Amenity
+                icon={<GiHomeGarage size={25} />}
+                text="Garage"
+                available={amenities.garage}
+              />
+              <Amenity
+                icon={<CgGym size={25} />}
+                text="Gym"
+                available={amenities.gym}
+              />
+              <p className="text-Purple-60 align-bottom">
+                <Link to={`/properties/${id}`}>Check More...</Link>
               </p>
-            ))}
+            </div>
           </div>
           <div className="featureditemPriceContainer">
             <div className="price">
@@ -87,7 +108,7 @@ const FeaturedItemCard = ({
   );
 };
 
-const FeaturedProperties = ({ featuredProduct = featuredProducts }) => {
+const FeaturedProperties = ({ featuredProduct = Houses }) => {
   const itemsPerDisplay = 3;
   const noOfPages = Math.ceil(featuredProduct.length / itemsPerDisplay);
   const [currentPage, setCurrentPage] = useState(1);
