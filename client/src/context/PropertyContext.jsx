@@ -45,17 +45,18 @@ export const formReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_FORM":
       const { name, value } = action.payload;
-      // console.log("payload value here", action.payload);
+      console.log("payload value here", action.payload);
       return {
         ...state,
         [name]: value,
       };
     case "ADD_AMENITIES":
       const { name: amenityName, value: checked } = action.payload;
-      // console.log("amenity name:", amenityName, "checked:", checked)
+      console.log("amenity name:", amenityName, "checked:", checked);
       return {
         ...state,
         amenities: { ...state.amenities, [amenityName]: checked },
+        // amenities: { ...state.amenities[amenityName], [amenityName]: checked },
       };
 
     case "ADD_LOCATION":
@@ -69,11 +70,11 @@ export const formReducer = (state, action) => {
       };
     case "ADD_TAGS":
       const { name: tagName, value: tagValue } = action.payload;
-      let tagValueArray = tagValue.split(",").map((tag) => tag.trim());
+      // let tagValueArray = tagValue.split(",").map((tag) => tag.trim());
       console.log("tagname :", tagName, "tagvalue", tagValue);
       return {
         ...state,
-        [tagName]: [tagValueArray],
+        [tagName]: tagValue,
       };
 
     case "ADD_NEARBY_AMENIIES":
@@ -84,7 +85,7 @@ export const formReducer = (state, action) => {
       console.log("amenity :", amenity, "amenityValue", amenityValue);
       return {
         ...state,
-        [amenity]: [amenityValueValueArray],
+        [amenity]: {...state.amenities, ...[amenityValueValueArray]},
       };
     case "ADD_ADDITIONAL_FEATURES_FIELD":
       return {
@@ -107,12 +108,12 @@ export const formReducer = (state, action) => {
         additionalFeatures: updatedFeatures,
       };
 
-      case "ADD_IMAGES":
-        const { value: imageUrls } = action.payload;
-        return {
-          ...state,
-          images: [...state.images,...imageUrls],
-        };
+    case "ADD_IMAGES":
+      const { value: imageUrls } = action.payload;
+      return {
+        ...state,
+        images: [...state.images, ...imageUrls],
+      };
 
     default:
       return state;
