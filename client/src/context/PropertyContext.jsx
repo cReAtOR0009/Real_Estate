@@ -32,9 +32,9 @@ export const initialFormData = {
   status: "",
   virtualTour: "",
   propertyHistory: {
-    previousOwners: [],
-    saleHistory: [],
-    rentalHistory: [],
+    previousOwners: ["john Doe"],
+    saleHistory: ["john Doe"],
+    rentalHistory: ["john Doe"],
   },
   nearbyAmenities: [],
   availability: false,

@@ -147,6 +147,7 @@ const AddProperty = () => {
 
         <label>Description:</label>
         <textarea
+          className="text-[black]"
           name="description"
           value={formData.description}
           onChange={handleChange}
