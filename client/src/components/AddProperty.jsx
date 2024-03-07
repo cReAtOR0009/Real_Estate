@@ -9,6 +9,7 @@ const AddProperty = () => {
     const { name, value, type, checked } = e.target;
     console.log(checked, name, type, value, checked);
     // const newValue = type === "checkbox" ? checked : value;
+
     if (name === "tags") {
       dispatch({
         type: "ADD_TAGS",
@@ -40,20 +41,18 @@ const AddProperty = () => {
     } else {
       dispatch({ type: "ADD_TO_FORM", payload: { name, value } }); // Dispatch action to update other fields
     }
+
   };
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
-    console.log("files :", files)
-    // let value = files
-    const imageFiles = files.map((file) => {
+    const FileswithUrl = files.map((file) => {
       const imageUrl = URL.createObjectURL(file);
-      console.log("imageUrl:", imageUrl)
-      return imageUrl;
+      file.imageUrl = imageUrl;
+      return file;
     });
 
-    console.log("imageFiles:", imageFiles)
-    dispatch({ type: "ADD_IMAGES", payload: {value:files} });
+    dispatch({ type: "ADD_IMAGES", payload: { value: FileswithUrl } });
   };
 
   const handleFeatureDescriptionChange = (e, index) => {
@@ -275,14 +274,15 @@ const AddProperty = () => {
           value={formData.nearbyAmenities}
           type="text"
           name="nearbyAmenities"
+          placeholder="seperate additional feature with comma"
           onChange={handleChange}
         />
 
         {/* Additional Features */}
-        <div className="flex flex-col justify-center items-center flex-wrap gap-[10px]">
-          <label>Additional Features:</label>
+        <div className="flex flex-col justify-center items-center flex-wrap gap-[10px] my-[5px]">
+          {/* <label>Additional Features:</label> */}
           {formData.additionalFeatures.map((feature, index) => (
-            <div key={index} className="flex justify-center flex-wrap w-[100]">
+            <div key={index} className="">
               <input
                 className="p-[5px] border border-solid border-Grey-60 h-[50px]"
                 type="text"
@@ -302,21 +302,28 @@ const AddProperty = () => {
             </div>
           ))}
           <button
-            className={`${styles.buttonPadding} bg-Purple-60`}
+            className={`${styles.buttonPadding} w-[100%] bg-Purple-60`}
             type="button"
             onClick={addAdditionalFeature}
           >
-            Add Feature
+            Add Extra Feature
           </button>
         </div>
 
         {/* Images */}
-        <div className="flex flex-col justify-center items-center flex-wrap gap-[10px]">
-          <label>Images:</label>
+        <div className="flex  justify-center items-center flex-wrap gap-[10px]">
+          <label>Add Property Images:</label>
           <input type="file" multiple onChange={handleImageUpload} />
-          {formData.images.map((image, index) => (
-            <img key={index} src={image} alt={`Image ${index}`} />
-          ))}
+          <div className="flex flex-wrap gap-[10px] border border-solid border-Purple-60 rounded-[10px] p-[10px]">
+            {formData.images.map((image, index) => (
+              <img
+                className="w-[100px] h-[100px] rounded-[10px]"
+                key={index}
+                src={image.imageUrl}
+                alt={`Image ${index}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Add input className="p-[5px] border border-solid border-Grey-60 h-[50px]" fields for other properties */}
@@ -348,8 +355,8 @@ const AddProperty = () => {
         <label>Status:</label>
         <select
           className="bg-Grey-10 text-[white]"
-          name="propertyType"
-          id="propertyType"
+          name="status"
+          id="status"
           onChange={handleChange}
         >
           <option value="status">status</option>
