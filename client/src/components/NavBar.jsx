@@ -7,6 +7,7 @@ import { navLinks, companydetails } from "../assets/textAssets";
 import { logo, closeButton, openNavButton } from "../assets/imageImporter";
 import { styles } from "../styles/styles";
 import CartItem from "./CartItem";
+import { FaOpencart } from "react-icons/fa6";
 
 import { MdOutlineClose } from "react-icons/md";
 
@@ -61,8 +62,8 @@ const NavBar = () => {
             </button>
 
             <button className="relative" onClick={toggleCart}>
-              cart{" "}
-              <span className="absolute top-[-5px] right-[-5px]">
+              <FaOpencart size={20} />
+              <span className="absolute top-[-10px] right-[-10px]">
                 {cart.properties.length}
               </span>
               {/* {console.log(cart.properties.length)} */}

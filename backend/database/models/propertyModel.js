@@ -149,7 +149,7 @@ const propertySchema = new mongoose.Schema({
         default: 'For Sale',
     },
     virtualTour: {
-        url: String,
+        type: String,
     },
     propertyHistory: propertyHistorySchema,
     nearbyAmenities: [

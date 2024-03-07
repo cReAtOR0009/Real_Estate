@@ -1,92 +1,98 @@
 import React, { useState, useContext, useReducer } from "react";
-import { PropertyContext } from "../context/PropertyContext"; // assuming you have a PropertyContext defined
 import { styles } from "../styles/styles";
+import { formReducer, initialFormData } from "../context/PropertyContext";
 
 const AddProperty = () => {
-  const { addProperty } = useContext(PropertyContext); // assuming you have an addProperty action in your PropertyContext
-
-  const [formData, setFormData] = useState({
-    id: "",
-    title: "",
-    description: "",
-    price: 0,
-    bedrooms: 0,
-    bathrooms: 0,
-    size: 0,
-    address: {
-      street: "",
-      city: "",
-      state: "",
-      zipcode: "",
-    },
-    amenities: {
-      swimmingPool: false,
-      garden: false,
-      garage: false,
-      gym: false,
-      securitySystem: false,
-      balcony: false,
-      centralHeating: false,
-      airConditioning: false,
-    },
-    additionalFeatures: [],
-    rating: [],
-    images: [],
-    propertyType: "",
-    agent: { id: "", ref: "" },
-    tags: [],
-    status: "",
-    virtualTour: { url: "" },
-    propertyHistory: {
-      previousOwners: [],
-      saleHistory: [],
-      rentalHistory: [],
-    },
-    nearbyAmenities: [],
-    availability: false,
-  });
+  const [formData, dispatch] = useReducer(formReducer, initialFormData);
 
   const handleChange = (e) => {
-    const { name, checked } = e.target;
-    setFormData({
-      ...formData,
-      amenities: { ...formData.amenities, [name]: checked },
-    });
+    const { name, value, type, checked } = e.target;
+    console.log(checked, name, type, checked);
+    // const newValue = type === "checkbox" ? checked : value;
+    if (name === "tags") {
+      dispatch({
+        type: "ADD_TAGS",
+        payload: { tagName: name, tagValue: value },
+      });
+    }
+
+    if (name.startsWith("address.")) {
+      // Check if the field is in the address object
+      const detailName = name.split(".")[1]; // Extract the detail name
+      dispatch({
+        type: "ADD_LOCATION",
+        payload: { name: detailName, newValue: value },
+      }); // Dispatch action to update address
+    } else if (name.startsWith("amenities.")) {
+      const detailName = name.split(".")[1];
+      let name = detailName;
+      dispatch({
+        type: "ADD_AMENITIES",
+        payload: { name, value: checked },
+      });
+    } else {
+      dispatch({ type: "ADD_TO_FORM", payload: { name, value } }); // Dispatch action to update other fields
+    }
+  };
+
+  const [errors, setErrors] = useState({});
+
+  console.log("errors", errors);
+
+  const validateForm = () => {
+    let isValid = true;
+    for (const [key, value] of Object.entries(formData)) {
+      if (value === "" && key !== "availability") {
+        setErrors({
+          ...errors,
+          [key]: `${key.charAt(0).toUpperCase() + key.slice(1)} is required`,
+        });
+        isValid = false;
+      }
+    }
+    return isValid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addProperty(formData);
+    console.log("formData,", formData);
+    const formIsValid = validateForm();
+    if (formIsValid) {
+      alert("form submitted successfuly");
+      //   setFormData({ ...initialFormData });
+    } else {
+      alert(errors.status);
+    }
     // Reset form data after submission if needed
-    setFormData({ ...initialFormData });
   };
 
   const addAdditionalFeature = () => {
-    setFormData({
-      ...formData,
-      additionalFeatures: [
-        ...formData.additionalFeatures,
-        { name: "", description: "" },
-      ],
-    });
+    // setFormData({
+    //   ...formData,
+    //   additionalFeatures: [
+    //     ...formData.additionalFeatures,
+    //     { name: "", description: "" },
+    //   ],
+    // });
   };
 
   const addImage = () => {
-    setFormData({
-      ...formData,
-      images: [...formData.images, { url: "" }],
-    });
+    // setFormData({
+    //   ...formData,
+    //   images: [...formData.images, { url: "" }],
+    // });
   };
 
   const handleTagsChange = (e) => {
     const tagsString = e.target.value;
     const tagsArray = tagsString.split(",").map((tag) => tag.trim());
-    setFormData({ ...formData, tags: tagsArray });
+    // setFormData({ ...formData, tags: tagsArray });
   };
 
   return (
     <div className=" mt-[150px] p-[10px]">
       <h2 className="text-[25px] text-center">Add New Property</h2>
+      {errors.title && <span className="text-[20px]">{errors.title}</span>}
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <label>Title:</label>
         <input
@@ -144,7 +150,7 @@ const AddProperty = () => {
         <input
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="text"
-          name="street"
+          name="address.street"
           value={formData.address.street}
           onChange={handleChange}
         />
@@ -153,7 +159,7 @@ const AddProperty = () => {
         <input
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="text"
-          name="city"
+          name="address.city"
           value={formData.address.city}
           onChange={handleChange}
         />
@@ -162,7 +168,7 @@ const AddProperty = () => {
         <input
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="text"
-          name="state"
+          name="address.state"
           value={formData.address.state}
           onChange={handleChange}
         />
@@ -171,7 +177,7 @@ const AddProperty = () => {
         <input
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="text"
-          name="zipcode"
+          name="address.zipcode"
           value={formData.address.zipcode}
           onChange={handleChange}
         />
@@ -182,7 +188,7 @@ const AddProperty = () => {
           <input
             className="p-[5px] border border-solid border-Grey-60 h-[50px]"
             type="checkbox"
-            name="swimmingPool"
+            name="amenities.swimmingPool"
             checked={formData.amenities.swimmingPool}
             onChange={handleChange}
           />
@@ -191,7 +197,7 @@ const AddProperty = () => {
           <input
             className="p-[5px] border border-solid border-Grey-60 h-[50px]"
             type="checkbox"
-            name="garden"
+            name="amenities.garden"
             checked={formData.amenities.garden}
             onChange={handleChange}
           />
@@ -200,7 +206,7 @@ const AddProperty = () => {
           <input
             className="p-[5px] border border-solid border-Grey-60 h-[50px]"
             type="checkbox"
-            name="garage"
+            name="amenities.garage"
             checked={formData.amenities.garage}
             onChange={handleChange}
           />
@@ -208,7 +214,7 @@ const AddProperty = () => {
           <label>Gym:</label>
           <input
             className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="checkbox"
+            type="amenities.checkbox"
             name="gym"
             checked={formData.amenities.gym}
             onChange={handleChange}
@@ -218,7 +224,7 @@ const AddProperty = () => {
           <input
             className="p-[5px] border border-solid border-Grey-60 h-[50px]"
             type="checkbox"
-            name="securitySystem"
+            name="amenities.securitySystem"
             checked={formData.amenities.securitySystem}
             onChange={handleChange}
           />
@@ -227,7 +233,7 @@ const AddProperty = () => {
           <input
             className="p-[5px] border border-solid border-Grey-60 h-[50px]"
             type="checkbox"
-            name="balcony"
+            name="amenities.balcony"
             checked={formData.amenities.balcony}
             onChange={handleChange}
           />
@@ -236,7 +242,7 @@ const AddProperty = () => {
           <input
             className="p-[5px] border border-solid border-Grey-60 h-[50px]"
             type="checkbox"
-            name="centralHeating"
+            name="amenities.centralHeating"
             checked={formData.amenities.centralHeating}
             onChange={handleChange}
           />
@@ -245,7 +251,7 @@ const AddProperty = () => {
           <input
             className="p-[5px] border border-solid border-Grey-60 h-[50px]"
             type="checkbox"
-            name="airConditioning"
+            name="amenities.airConditioning"
             checked={formData.amenities.airConditioning}
             onChange={handleChange}
           />
@@ -319,31 +325,13 @@ const AddProperty = () => {
           <option value="Villa">Villa</option>
         </select>
 
-        <label>Agent ID:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="text"
-          name="agentId"
-          value={formData.agent.id}
-          onChange={handleChange}
-        />
-
-        <label>Agent Reference:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="text"
-          name="agentRef"
-          value={formData.agent.ref}
-          onChange={handleChange}
-        />
-
         <label>Tags:</label>
         <input
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="text"
           name="tags"
-          value={formData.tags.join(", ")}
-          onChange={handleTagsChange}
+          value={formData.tags}
+          onChange={handleChange}
           placeholder="Separate tags with comma"
         />
 
@@ -359,6 +347,15 @@ const AddProperty = () => {
           <option value="Sold">Sold</option>
           <option value="Rented">Rented</option>
         </select>
+
+        <label>Virtual Tour:</label>
+        <input
+          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
+          type="text"
+          name="virtualTour"
+          value={formData.virtualTour}
+          onChange={handleChange}
+        />
 
         {/* Add more input className="p-[5px] border border-solid border-Grey-60 h-[50px]" fields for other properties */}
         {/* <div className="flex tetx-center items-center justify-center"> */}
