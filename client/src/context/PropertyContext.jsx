@@ -1,7 +1,7 @@
 import React, { useEffect, createContext, useContext, useReducer } from "react";
 
 export const initialFormData = {
-  id: "",
+  id: "01",
   title: "",
   description: "",
   price: 0,
@@ -85,7 +85,7 @@ export const formReducer = (state, action) => {
       console.log("amenity :", amenity, "amenityValue", amenityValue);
       return {
         ...state,
-        [amenity]: {...state.amenities, ...[amenityValueValueArray]},
+        [amenity]: { ...state.amenities, ...[amenityValueValueArray] },
       };
     case "ADD_ADDITIONAL_FEATURES_FIELD":
       return {

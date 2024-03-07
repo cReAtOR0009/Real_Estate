@@ -1,9 +1,11 @@
-import React, { useState, useContext, useReducer } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import { styles } from "../styles/styles";
 import { formReducer, initialFormData } from "../context/PropertyContext";
 
 const AddProperty = () => {
   const [formData, dispatch] = useReducer(formReducer, initialFormData);
+  const [visible, setVisible] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -41,7 +43,6 @@ const AddProperty = () => {
     } else {
       dispatch({ type: "ADD_TO_FORM", payload: { name, value } }); // Dispatch action to update other fields
     }
-
   };
 
   const handleImageUpload = (e) => {
@@ -62,8 +63,6 @@ const AddProperty = () => {
       payload: { index, name, value },
     });
   };
-
-  const [errors, setErrors] = useState({});
 
   console.log("errors", errors);
 
@@ -89,7 +88,14 @@ const AddProperty = () => {
       alert("form submitted successfuly");
       //   setFormData({ ...initialFormData });
     } else {
-      alert(errors.status);
+      // const hasErrors = Object.keys(errors).length > 0;
+
+      setVisible(true);
+      setTimeout(() => {
+        setVisible(false);
+        setErrors({});
+      }, 5000); // Display errors for 5 seconds
+      // }
     }
     // Reset form data after submission if needed
   };
@@ -98,8 +104,35 @@ const AddProperty = () => {
     dispatch({ type: "ADD_ADDITIONAL_FEATURES_FIELD" });
   };
 
+  // useEffect(() => {
+  //   // Check if there are any errors
+  //   const hasErrors = Object.keys(errors).length > 0;
+
+  //   // If there are errors, display them for 5 seconds
+  //   if (hasErrors) {
+  //     setVisible(true);
+  //     setTimeout(() => {
+  //       setVisible(false);
+  //     }, 5000); // Display errors for 5 seconds
+  //   }
+  // }, [errors]);
+
   return (
     <div className=" mt-[150px] p-[10px]">
+      <div className="fixed m-0 top-[100px] z-[200] text-center text-[15px]">
+        {/* errors */}
+        {visible && (
+          <div className="text-[red]">
+            {/* Display all errors */}
+            {Object.values(errors).map((error, index) => (
+              <p className="text-[red]" key={index}>
+                {error}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+
       <h2 className="text-[25px] text-center">Add New Property</h2>
       {errors.title && <span className="text-[20px]">{errors.title}</span>}
       <form className="flex flex-col" onSubmit={handleSubmit}>
@@ -279,10 +312,12 @@ const AddProperty = () => {
         />
 
         {/* Additional Features */}
-        <div className="flex flex-col justify-center items-center flex-wrap gap-[10px] my-[5px]">
+        <div className="flex flex-col flex-grow  flex-wrap gap-[10px] my-[5px]">
+          <h2 className="text-[20px] text-center">Additional Features</h2>
           {/* <label>Additional Features:</label> */}
           {formData.additionalFeatures.map((feature, index) => (
-            <div key={index} className="">
+            <div key={index} className=" flex flex-col">
+              <label>Feature Name:</label>
               <input
                 className="p-[5px] border border-solid border-Grey-60 h-[50px]"
                 type="text"
@@ -291,6 +326,7 @@ const AddProperty = () => {
                 onChange={(e) => handleFeatureDescriptionChange(e, index)}
                 placeholder="Name"
               />
+              <label>Feature Description:</label>
               <input
                 className="p-[5px] border border-solid border-Grey-60 h-[50px]"
                 type="text"
