@@ -122,7 +122,7 @@ const AddProperty = () => {
       <div className="fixed m-0 top-[100px] z-[200] text-center text-[15px]">
         {/* errors */}
         {visible && (
-          <div className="text-[red]">
+          <div className= "bg-Purple-60 h-[40px] rounded-[10px]">
             {/* Display all errors */}
             {Object.values(errors).map((error, index) => (
               <p className="text-[red]" key={index}>
