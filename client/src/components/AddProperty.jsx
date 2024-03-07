@@ -7,12 +7,19 @@ const AddProperty = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    console.log(checked, name, type, checked);
+    console.log(checked, name, type, value, checked);
     // const newValue = type === "checkbox" ? checked : value;
     if (name === "tags") {
       dispatch({
         type: "ADD_TAGS",
-        payload: { tagName: name, tagValue: value },
+        payload: { name, value },
+      });
+    }
+
+    if (name === "nearbyAmenities") {
+      dispatch({
+        type: "ADD_NEARBY_AMENIIES",
+        payload: { name, value },
       });
     }
 
@@ -21,18 +28,40 @@ const AddProperty = () => {
       const detailName = name.split(".")[1]; // Extract the detail name
       dispatch({
         type: "ADD_LOCATION",
-        payload: { name: detailName, newValue: value },
+        payload: { name: detailName, value },
       }); // Dispatch action to update address
     } else if (name.startsWith("amenities.")) {
       const detailName = name.split(".")[1];
-      let name = detailName;
+      // let name = detailName;
       dispatch({
         type: "ADD_AMENITIES",
-        payload: { name, value: checked },
+        payload: { name: detailName, value: checked },
       });
     } else {
       dispatch({ type: "ADD_TO_FORM", payload: { name, value } }); // Dispatch action to update other fields
     }
+  };
+
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    console.log("files :", files)
+    // let value = files
+    const imageFiles = files.map((file) => {
+      const imageUrl = URL.createObjectURL(file);
+      console.log("imageUrl:", imageUrl)
+      return imageUrl;
+    });
+
+    console.log("imageFiles:", imageFiles)
+    dispatch({ type: "ADD_IMAGES", payload: {value:files} });
+  };
+
+  const handleFeatureDescriptionChange = (e, index) => {
+    const { value, name } = e.target;
+    dispatch({
+      type: "ADD_CONTENT_TO_FEATURES",
+      payload: { index, name, value },
+    });
   };
 
   const [errors, setErrors] = useState({});
@@ -67,26 +96,7 @@ const AddProperty = () => {
   };
 
   const addAdditionalFeature = () => {
-    // setFormData({
-    //   ...formData,
-    //   additionalFeatures: [
-    //     ...formData.additionalFeatures,
-    //     { name: "", description: "" },
-    //   ],
-    // });
-  };
-
-  const addImage = () => {
-    // setFormData({
-    //   ...formData,
-    //   images: [...formData.images, { url: "" }],
-    // });
-  };
-
-  const handleTagsChange = (e) => {
-    const tagsString = e.target.value;
-    const tagsArray = tagsString.split(",").map((tag) => tag.trim());
-    // setFormData({ ...formData, tags: tagsArray });
+    dispatch({ type: "ADD_ADDITIONAL_FEATURES_FIELD" });
   };
 
   return (
@@ -214,8 +224,8 @@ const AddProperty = () => {
           <label>Gym:</label>
           <input
             className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="amenities.checkbox"
-            name="gym"
+            type="checkbox"
+            name="amenities.gym"
             checked={formData.amenities.gym}
             onChange={handleChange}
           />
@@ -257,6 +267,17 @@ const AddProperty = () => {
           />
         </div>
 
+        {/* nearby amenities */}
+
+        <label>Nearby Amenities:</label>
+        <input
+          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
+          value={formData.nearbyAmenities}
+          type="text"
+          name="nearbyAmenities"
+          onChange={handleChange}
+        />
+
         {/* Additional Features */}
         <div className="flex flex-col justify-center items-center flex-wrap gap-[10px]">
           <label>Additional Features:</label>
@@ -265,13 +286,15 @@ const AddProperty = () => {
               <input
                 className="p-[5px] border border-solid border-Grey-60 h-[50px]"
                 type="text"
+                name="name"
                 value={feature.name}
-                onChange={(e) => handleFeatureChange(e, index)}
+                onChange={(e) => handleFeatureDescriptionChange(e, index)}
                 placeholder="Name"
               />
               <input
                 className="p-[5px] border border-solid border-Grey-60 h-[50px]"
                 type="text"
+                name="description"
                 value={feature.description}
                 onChange={(e) => handleFeatureDescriptionChange(e, index)}
                 placeholder="Description"
@@ -290,24 +313,10 @@ const AddProperty = () => {
         {/* Images */}
         <div className="flex flex-col justify-center items-center flex-wrap gap-[10px]">
           <label>Images:</label>
+          <input type="file" multiple onChange={handleImageUpload} />
           {formData.images.map((image, index) => (
-            <div key={index} className="flex justify-center flex-wrap w-[100]">
-              <input
-                className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-                type="text"
-                value={image.url}
-                onChange={(e) => handleImageChange(e, index)}
-                placeholder="Image URL"
-              />
-            </div>
+            <img key={index} src={image} alt={`Image ${index}`} />
           ))}
-          <button
-            className={`${styles.buttonPadding} bg-Purple-60`}
-            type="button"
-            onClick={addImage}
-          >
-            Add Image
-          </button>
         </div>
 
         {/* Add input className="p-[5px] border border-solid border-Grey-60 h-[50px]" fields for other properties */}
@@ -316,6 +325,7 @@ const AddProperty = () => {
           className="bg-Grey-10 text-[white]"
           name="propertyType"
           id="propertyType"
+          onChange={handleChange}
         >
           <option value="House">House</option>
           <option value="Apartment">Apartment</option>
@@ -340,6 +350,7 @@ const AddProperty = () => {
           className="bg-Grey-10 text-[white]"
           name="propertyType"
           id="propertyType"
+          onChange={handleChange}
         >
           <option value="status">status</option>
           <option value="For Sale">For Sale</option>

@@ -30,7 +30,7 @@ export const initialFormData = {
   agent: { id: "", ref: "" },
   tags: [],
   status: "",
-  virtualTour:"",
+  virtualTour: "",
   propertyHistory: {
     previousOwners: [],
     saleHistory: [],
@@ -41,7 +41,7 @@ export const initialFormData = {
 };
 
 export const formReducer = (state, action) => {
-  console.log("state", state)
+  console.log("state", state);
   switch (action.type) {
     case "ADD_TO_FORM":
       const { name, value } = action.payload;
@@ -51,14 +51,15 @@ export const formReducer = (state, action) => {
         [name]: value,
       };
     case "ADD_AMENITIES":
-      const { name: amenityName, checked } = action.payload;
+      const { name: amenityName, value: checked } = action.payload;
+      // console.log("amenity name:", amenityName, "checked:", checked)
       return {
         ...state,
-        amenities: {  [amenityName]: checked },
+        amenities: { ...state.amenities, [amenityName]: checked },
       };
 
     case "ADD_LOCATION":
-      const { name: detailName, newValue } = action.payload;
+      const { name: detailName, value: newValue } = action.payload;
       return {
         ...state,
         address: {
@@ -68,10 +69,50 @@ export const formReducer = (state, action) => {
       };
     case "ADD_TAGS":
       const { name: tagName, value: tagValue } = action.payload;
+      let tagValueArray = tagValue.split(",").map((tag) => tag.trim());
+      console.log("tagname :", tagName, "tagvalue", tagValue);
       return {
         ...state,
-        [tagName]: [...state.tags, tagValue].join(", "),
+        [tagName]: [tagValueArray],
       };
+
+    case "ADD_NEARBY_AMENIIES":
+      const { name: amenity, value: amenityValue } = action.payload;
+      let amenityValueValueArray = amenityValue
+        .split(",")
+        .map((tag) => tag.trim());
+      console.log("amenity :", amenity, "amenityValue", amenityValue);
+      return {
+        ...state,
+        [amenity]: [amenityValueValueArray],
+      };
+    case "ADD_ADDITIONAL_FEATURES_FIELD":
+      return {
+        ...state,
+        additionalFeatures: [
+          ...state.additionalFeatures,
+          { name: "", description: "" },
+        ],
+      };
+    case "ADD_CONTENT_TO_FEATURES":
+      const { index, name: featureName, value: featureValue } = action.payload;
+      // console.log("name_: ", featureName, "value_ :", featureValue);
+      const updatedFeatures = [...state.additionalFeatures];
+      updatedFeatures[index] = {
+        ...updatedFeatures[index],
+        [featureName]: featureValue,
+      };
+      return {
+        ...state,
+        additionalFeatures: updatedFeatures,
+      };
+
+      case "ADD_IMAGES":
+        const { value: imageUrls } = action.payload;
+        return {
+          ...state,
+          images: [...state.images,...imageUrls],
+        };
 
     default:
       return state;
