@@ -164,7 +164,7 @@ module.exports.login = async (req, res) => {
 
   try {
     console.log("body: ", req.body)
-    console.log("request object",req)
+    // console.log("request object",req)
     const { email, password } = req.body;
     console.log("email", email, "password: ", password)
 
