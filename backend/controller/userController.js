@@ -163,7 +163,10 @@ module.exports.login = async (req, res) => {
   };
 
   try {
+    console.log("body: ", req.body)
+    console.log("request object",req)
     const { email, password } = req.body;
+    console.log("email", email, "password: ", password)
 
     const existingUser = await User.findOne({ email });
 
@@ -192,6 +195,7 @@ module.exports.login = async (req, res) => {
   } catch (error) {
     response.message = "error";
     response.error = error.message;
+    console.log("error:", error)
     console.log("something went wrong: controller: login user");
   } finally {
     return res.status(response.status).send(response);
