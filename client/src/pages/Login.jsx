@@ -1,13 +1,73 @@
-import React from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../features/auth/authSlice";
+import { useLoginMutation } from "../features/auth/authApiSlice";
+
 import { styles } from "../styles/styles";
 import { logo } from "../assets/imageImporter";
+import { Link } from "react-router-dom";
+
 const Login = () => {
-  return (
+  const userRef = useRef();
+  const errRef = useRef();
+  const [user, setUser] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const navigate = useNavigate();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  // console.log("login: ", login, "isloading: ", isLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [user, pwd]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      console.log("email: ", user, "password", pwd);
+      const userData = await login({ user, pwd }).unwrap();
+      console.log("userdata:", userData);
+      dispatch(setCredentials({ ...userData, user }));
+      setUser("");
+      setPwd("");
+      navigate("/welcome");
+    } catch (err) {
+      console.log("error: ", err);
+      if (!err?.originalStatus) {
+        // isLoading: true until timeout occurs
+        setErrMsg("No Server Response");
+      } else if (err.originalStatus === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.originalStatus === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      errRef.current.focus();
+    }
+  };
+
+  const handleUserInput = (e) => setUser(e.target.value);
+
+  const handlePwdInput = (e) => setPwd(e.target.value);
+
+  return isLoading ? (
+    <h1>Loading...</h1>
+  ) : (
     <div className="mt-[100px] sm:mt-[100px] flex flex-col">
       <div className="flex items-center min-h-screen p-4  lg:justify-center">
         <div className="flex flex-col overflow-hidden  border border-solid border-Grey-50 rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md">
           <div className="p-4 py-6 text-white md:w-[50%]  border-r-[0px] md:border-r-[2px] border-Purple-65">
-            <div className="flex flex-col items-center my-3 text-4xl font-bold tracking-wider text-center">
+            <div className="flex flex-col items-center my-3 py-2 border-b border-b-solid  border-b-Purple-65">
               <img className="text-center" src={logo} alt="company logo" />
             </div>
             <p className={`${styles.paragraph} mt-6  text-center md:mt-0`}>
@@ -22,50 +82,71 @@ const Login = () => {
               <span className={`${styles.paragraph}`}>
                 Don't have an account?
               </span>
-              <a href="#" className="underline text-Purple-60">
-                Get Started!
-              </a>
+              <Link to="/signup" className="underline text-Purple-60">
+                {" "}
+                Get Started
+              </Link>
             </p>
             <p className="mt-6  text-center">
               Read our{" "}
-              <a href="#" className="underline text-Purple-60">
+              <Link to="#" className="underline text-Purple-60">
                 terms
-              </a>{" "}
-              and{" "}
-              <a href="#" className="underline text-Purple-60">
+              </Link>
+              <span className="mx-[5px]">and</span>
+              <Link to="#" className="underline text-Purple-60">
                 conditions
-              </a>
+              </Link>
             </p>
           </div>
           <div className="p-5 md:flex-1 border border-solid border-Purple-65">
+            <p
+              ref={errRef}
+              className={errMsg ? "errmsg" : "offscreen"}
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
             <h3 className="my-4 text-[20px]  text-center font-semibold">
               Account Login
             </h3>
-            <form action="#" className="flex flex-col space-y-5">
+            <form
+              onSubmit={handleSubmit}
+              action="#"
+              className="flex flex-col space-y-5"
+            >
               <div className="flex flex-col flex-1  gap-[12px] md:gap-[16px]">
-                <label for="email" className="text-sm font-semibold">
+                <label htmlFor="email" className="text-sm font-semibold">
                   Email address
                 </label>
                 <input
                   type="email"
                   id="email"
-                  autofocus
-                  className={`${styles.inputFied}`}
+                  ref={userRef}
+                  value={user}
+                  onChange={handleUserInput}
+                  autoComplete="off"
+                  required
+                  autoFocus
+                  className={`${styles.inputFied} text-[18px] py-[5px]`}
                 />
               </div>
               <div className="flex flex-col flex-1  gap-[12px] md:gap-[16px]">
                 <div className="flex items-center justify-between">
-                  <label for="password" className="text-sm font-semibold">
+                  <label htmlFor="password" className="text-sm font-semibold">
                     Password
                   </label>
-                  <a href="#" className="underline text-Purple-60">
+                  <Link to="#" className="underline text-Purple-60">
+                    {" "}
                     Forgot Password?
-                  </a>
+                  </Link>
                 </div>
                 <input
                   type="password"
                   id="password"
-                  className={`${styles.inputFied}`}
+                  onChange={handlePwdInput}
+                  value={pwd}
+                  required
+                  className={`${styles.inputFied} text-[18px] py-[5px]`}
                 />
               </div>
               <div className="flex items-center space-x-2">
@@ -74,7 +155,7 @@ const Login = () => {
                   id="remember"
                   className="w-4 h-4 transition duration-300 rounded focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-blue-200"
                 />
-                <label for="remember" className="text-sm font-semibold">
+                <label htmlFor="remember" className="text-sm font-semibold">
                   Remember me
                 </label>
               </div>

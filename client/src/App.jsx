@@ -13,10 +13,12 @@ import Properties from "./pages/Properties";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Property from "./pages/Property";
+import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import AddProperty from "./components/AddProperty";
-
+import RequireAuth from "./features/auth/RequireAuth";
 import "./App.css";
+import Welcome from "./features/auth/Welcome";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -28,7 +30,11 @@ const App = () => {
         <Route path="properties" element={<Properties />} />
         <Route path="Contact us" element={<Contact />} />
         <Route path="Login" element={<Login />} />
-        <Route path="AddProperties" element={<AddProperty />} />
+        <Route path="signup" element={<Signup />} />
+        <Route element={<RequireAuth />}>
+          <Route path="AddProperties" element={<AddProperty />} />
+          <Route path="welcome" element={<Welcome />} />
+        </Route>
         <Route path="properties/:propertyid" element={<Property />} />
       </Route>
       // </Route>
