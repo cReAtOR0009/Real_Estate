@@ -12,6 +12,12 @@ import "../../styles/hero.css";
 import { styles } from "../../styles/styles";
 import { Link } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+import {
+  selectCurrentToken,
+  selectCurrentUser,
+} from "../../features/auth/authSlice";
+
 const AchievementCard = ({ numbers, title }) => {
   return (
     <div className="achievementsCard">
@@ -38,6 +44,7 @@ const OffersCard = ({ offer, icon, icon2 }) => {
 };
 
 const Hero = () => {
+  const user = useSelector(selectCurrentUser);
   return (
     <>
       <header
@@ -50,7 +57,7 @@ const Hero = () => {
           <section className="mt-[30px]">
             <div className="headerTextContainer">
               <h1 className={`${styles.heading} `}>
-                Discover Your Dream Property with Estatein
+                Discover Your Dream Property with Estatein{user}
               </h1>
               <p>
                 Your journey to finding the perfect property begins here.
@@ -66,9 +73,7 @@ const Hero = () => {
               <button
                 className={`${styles.buttonPadding} ${styles.purpleButton}`}
               >
-                <Link to={"/properties"}>
-                Browse Properties
-                </Link>
+                <Link to={"/properties"}>Browse Properties</Link>
               </button>
             </div>
             <div className="headerAchievementContainer">
