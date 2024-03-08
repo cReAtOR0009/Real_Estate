@@ -9,10 +9,10 @@ import { logo } from "../assets/imageImporter";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const userRef = useRef();
+  const emailRef = useRef();
   const errRef = useRef();
-  const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
 
@@ -22,23 +22,28 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    userRef.current.focus();
+    emailRef.current.focus();
   }, []);
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd]);
+  }, [email, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      console.log("email: ", user, "password", pwd);
-      const userData = await login({ user, pwd }).unwrap();
-      console.log("userdata:", userData);
-      dispatch(setCredentials({ ...userData, user }));
-      setUser("");
-      setPwd("");
+      console.log("email: ", email, "password", password);
+      const userData = await login({ email, password }).unwrap();
+      // console.log("userdata:", userData);
+      const {
+        data: { email: userEmail },
+        token,
+      } = userData;
+      // console.log("token", token, "email", userEmail);
+      dispatch(setCredentials({ user: userEmail, accessToken: token }));
+      setEmail("");
+      setPassword("");
       navigate("/welcome");
     } catch (err) {
       console.log("error: ", err);
@@ -56,9 +61,9 @@ const Login = () => {
     }
   };
 
-  const handleUserInput = (e) => setUser(e.target.value);
+  const handleUserInput = (e) => setEmail(e.target.value);
 
-  const handlePwdInput = (e) => setPwd(e.target.value);
+  const handlePasswordInput = (e) => setPassword(e.target.value);
 
   return isLoading ? (
     <h1>Loading...</h1>
@@ -121,8 +126,8 @@ const Login = () => {
                 <input
                   type="email"
                   id="email"
-                  ref={userRef}
-                  value={user}
+                  ref={emailRef}
+                  value={email}
                   onChange={handleUserInput}
                   autoComplete="off"
                   required
@@ -143,8 +148,8 @@ const Login = () => {
                 <input
                   type="password"
                   id="password"
-                  onChange={handlePwdInput}
-                  value={pwd}
+                  onChange={handlePasswordInput}
+                  value={password}
                   required
                   className={`${styles.inputFied} text-[18px] py-[5px]`}
                 />
