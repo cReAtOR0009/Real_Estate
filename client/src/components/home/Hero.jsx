@@ -45,6 +45,7 @@ const OffersCard = ({ offer, icon, icon2 }) => {
 
 const Hero = () => {
   const user = useSelector(selectCurrentUser);
+  const token = useSelector(selectCurrentToken);
   return (
     <>
       <header
@@ -59,6 +60,7 @@ const Hero = () => {
               <h1 className={`${styles.heading} `}>
                 Discover Your Dream Property with Estatein{user}
               </h1>
+              <p>{token?.slice(180)}</p>
               <p>
                 Your journey to finding the perfect property begins here.
                 Explore our listings to find the home that matches your dreams.

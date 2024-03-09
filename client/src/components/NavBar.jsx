@@ -8,6 +8,11 @@ import { logo, closeButton, openNavButton } from "../assets/imageImporter";
 import { styles } from "../styles/styles";
 import CartItem from "./CartItem";
 import { FaOpencart } from "react-icons/fa6";
+import {
+  selectCurrentToken,
+  selectCurrentUser,
+} from "../features/auth/authSlice";
+import { useSelector } from "react-redux";
 
 import { MdOutlineClose } from "react-icons/md";
 
@@ -18,6 +23,8 @@ const ItemContainer = (image, title, quantity) => {
 const NavBar = () => {
   const { setNavActive, activeNav } = useContext(NavigationContext);
   const { cart, toggleCart } = useContext(CartContext);
+  const user = useSelector(selectCurrentUser);
+  const token = useSelector(selectCurrentToken);
   // console.log("cart: ", cart);
   const [showNav, setShowNav] = useState(false);
 

@@ -185,7 +185,8 @@ module.exports.login = async (req, res) => {
       process.env.SECRET_KEY || "secretKey",
       { expiresIn: "1h" }
     );
-
+      //set token as authorization header and cookie for testing and learning only, I would remove one later
+    res.set('Authorization', `Bearer ${token}`);
     res.cookie("token", token, { httpOnly: true });
 
     response.status = 200;

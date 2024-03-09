@@ -21,6 +21,12 @@ const authenticateToken =async (req, res, next) => {
     // Verify the token
     const decoded = jwt.verify(token, process.env.SECRET_KEY || "secretKey");
 
+    const decodedForHeaders = jwt.verify(token.split(' ')[1], secretKey, (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ message: 'Failed to authenticate token' });
+      }
+    })
+
     // Continue to the next middleware or route handler
     return next();
   } catch (error) {

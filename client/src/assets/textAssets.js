@@ -43,6 +43,7 @@ export const navLinks = [
   { title: "Properties", id: "properties" },
   { title: "Services", id: "services" },
   { title: "Login", id: "login" },
+  { title: "AddProperties", id: "AddProperties" },
 ];
 
 export const companydetails = {
