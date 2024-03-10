@@ -29,11 +29,11 @@ const Login = () => {
     setErrMsg("");
   }, [email, password]);
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      console.log("email: ", email, "password", password);
+      // console.log("email: ", email, "password", password);
       const userData = await login({ email, password }).unwrap();
       // console.log("userdata:", userData);
       const {
@@ -47,11 +47,12 @@ const Login = () => {
       navigate("/welcome");
     } catch (err) {
       console.log("error: ", err);
-      if (!err?.originalStatus) {
+      if (!err?.data) {
         // isLoading: true until timeout occurs
+        // console.log("original status:", err.originalStatus)
         setErrMsg("No Server Response");
-      } else if (err.originalStatus === 400) {
-        setErrMsg("Missing Username or Password");
+      } else if (err.data.status === 400) {
+        setErrMsg(err.data.error);
       } else if (err.originalStatus === 401) {
         setErrMsg("Unauthorized");
       } else {
@@ -106,7 +107,7 @@ const Login = () => {
           <div className="p-5 md:flex-1 border border-solid border-Purple-65">
             <p
               ref={errRef}
-              className={errMsg ? "errmsg" : "offscreen"}
+              className={errMsg ? "text-[red]" : "hidden"}
               aria-live="assertive"
             >
               {errMsg}
@@ -115,7 +116,7 @@ const Login = () => {
               Account Login
             </h3>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={handleLogin}
               action="#"
               className="flex flex-col space-y-5"
             >
@@ -167,6 +168,7 @@ const Login = () => {
               <div>
                 <button
                   type="submit"
+                  disabled={isLoading}
                   className={`${styles.buttonPadding} bg-Purple-60 w-full  transition duration-300  shadow  focus:outline-none focus: focus:ring-4`}
                 >
                   Log in

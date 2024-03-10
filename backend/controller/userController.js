@@ -24,7 +24,7 @@ module.exports.signup = async (req, res) => {
     data: {},
   };
   try {
-    const { firstName, lastName, email, phone, password, nationality, role } =
+    const { firstName, lastName, email, phone, password, nationality } =
       req.body;
 
     const userExist = await User.findOne({ email });
@@ -54,12 +54,14 @@ module.exports.signup = async (req, res) => {
       { expiresIn: "1h" }
     );
 
+    //set token as authorization header and cookie for testing and learning only, I would remove one later
+    res.set('Authorization', `Bearer ${token}`);
     res.cookie("token", token, { httpOnly: true });
-
     // Return any data you want as a response
     response.status = 400;
     response.message = "User signed up successfully";
     response.data = formattedData;
+    response.token = token;
   } catch (error) {
     response.message = "error message";
     response.error = error.message;
