@@ -26,7 +26,7 @@ module.exports.signup = async (req, res) => {
   try {
     const { firstName, lastName, email, phone, password, nationality } =
       req.body;
-
+    role = "buyer";
     const userExist = await User.findOne({ email });
     if (userExist) {
       throw new Error(serverResponse.USER_ERROR.ALREADY_EXISTING_USER);
@@ -55,13 +55,14 @@ module.exports.signup = async (req, res) => {
     );
 
     //set token as authorization header and cookie for testing and learning only, I would remove one later
-    res.set('Authorization', `Bearer ${token}`);
+    res.set("Authorization", `Bearer ${token}`);
     res.cookie("token", token, { httpOnly: true });
     // Return any data you want as a response
-    response.status = 400;
+    response.status = 200;
     response.message = "User signed up successfully";
     response.data = formattedData;
     response.token = token;
+    console.log("succesful ");
   } catch (error) {
     response.message = "error message";
     response.error = error.message;
@@ -165,10 +166,10 @@ module.exports.login = async (req, res) => {
   };
 
   try {
-    console.log("body: ", req.body)
+    console.log("body: ", req.body);
     // console.log("request object",req)
     const { email, password } = req.body;
-    console.log("email", email, "password: ", password)
+    console.log("email", email, "password: ", password);
 
     const existingUser = await User.findOne({ email });
 
@@ -187,8 +188,8 @@ module.exports.login = async (req, res) => {
       process.env.SECRET_KEY || "secretKey",
       { expiresIn: "1h" }
     );
-      //set token as authorization header and cookie for testing and learning only, I would remove one later
-    res.set('Authorization', `Bearer ${token}`);
+    //set token as authorization header and cookie for testing and learning only, I would remove one later
+    res.set("Authorization", `Bearer ${token}`);
     res.cookie("token", token, { httpOnly: true });
 
     response.status = 200;
@@ -198,7 +199,7 @@ module.exports.login = async (req, res) => {
   } catch (error) {
     response.message = "error";
     response.error = error.message;
-    console.log("error:", error)
+    console.log("error:", error);
     console.log("something went wrong: controller: login user");
   } finally {
     return res.status(response.status).send(response);
@@ -385,7 +386,7 @@ module.exports.verifyForgotEmailPassword = async (req, res) => {
 //       console.error(err);
 //       // Handle error
 //     });
-    
+
 //     // console.log("userWithProperty:", userWithProperty)
 
 //     response.message = "user fetched with property successful1";
