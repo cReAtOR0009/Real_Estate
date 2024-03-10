@@ -54,11 +54,11 @@ const NavBar = () => {
                       ? `/`
                       : navlink.id === "login"
                       ? "/login"
-                      : navlink.id
+                      : token? "/login": navlink.id
                   }
                   className="px-[15px] py-[10px] w-[150px] h-[50px] text-center "
                 >
-                  {navlink.title}
+                  {navlink.title ==="Login" && token?"Logout":navlink.title}
                 </Link>
               </li>
             ))}
