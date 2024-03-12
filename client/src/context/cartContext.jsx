@@ -20,6 +20,7 @@ const cartReducer = (state, action) => {
       const alreadyExistInCart = state.properties.find(
         (property) => property.id === id
       );
+      console.log("alreadyExistInCart: ", alreadyExistInCart);
       if (alreadyExistInCart) {
         return {
           ...state,
@@ -33,10 +34,24 @@ const cartReducer = (state, action) => {
           ],
         };
       }
+    case "DELETE_ITEM":
+      const { id: itemId } = action.payload;
+      return {
+        ...state,
+        properties: [
+          ...state.properties.filter((property) => property.id !== itemId),
+        ],
+      };
     case "TOGGLE_CART":
       return {
         ...state,
         cartstate: !state.cartstate,
+      };
+
+    case "SET_CART_TO_FALSE":
+      return {
+        ...state,
+        cartstate: (state.cartstate = false),
       };
     default:
       return state;
@@ -54,8 +69,11 @@ export const CartContextProvider = ({ children }) => {
 
   // Function to add an item to the cart
   const addToCart = (id, price, description, image, title) => {
-    dispatch({ type: "ADD_TO_CART", payload: { id, price, description, image, title } });
-    // console.log("cart state:", cart);
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: { id, price, description, image, title },
+    });
+    console.log("cart :", cart);
   };
 
   const toggleCart = () => {
@@ -63,12 +81,23 @@ export const CartContextProvider = ({ children }) => {
     console.log("cart state", cart.cartstate);
   };
 
+  const deleteCartItem = (id) => {
+    dispatch({ type: "DELETE_ITEM", payload: { id } });
+    console.log("cart Delete Operation Performed: ", cart, "id :", id);
+  };
+
+  const setCartToFalse = () => {
+    dispatch({ type: "SET_CART_TO_FALSE" });
+  };
+
   useEffect(() => {
     localStorage.setItem("carted_Properties", JSON.stringify(cart));
   }, [cart.properties]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, toggleCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, toggleCart, deleteCartItem, setCartToFalse }}
+    >
       {children}
     </CartContext.Provider>
   );
