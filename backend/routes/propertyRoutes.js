@@ -8,7 +8,7 @@ const {
 
 const router = express.Router();
  
-router.post("/create", (req, res) => {
+router.post("/add", (req, res) => {
   propertyController.createProperty(req, res);  
 });
 
