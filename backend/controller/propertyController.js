@@ -10,7 +10,8 @@ module.exports.createProperty = async (req, res) => {
   let response = serverResponse;
   try {
     const {
-      name,
+      // id,
+      title,
       description,
       price,
       bedrooms,
@@ -29,10 +30,12 @@ module.exports.createProperty = async (req, res) => {
       nearbyAmenities,
       availability,
     } = req.body;
+    console.log("request data-body,", req.body);
 
-    const existingPropertyName = await Property.findOne({ name: name });
+    const existingPropertyName = await Property.findOne({ name: title });
 
     if (existingPropertyName) {
+      console.log("existingPropertyName: ", existingPropertyName);
       throw new Error(
         "this property already exist, kindly change prperty name "
       );
@@ -41,7 +44,7 @@ module.exports.createProperty = async (req, res) => {
     // const {}
 
     let newProperty = new Property({
-      name: name,
+      name: title,
       description: description,
       price: price,
       bedrooms: bedrooms,
@@ -50,7 +53,7 @@ module.exports.createProperty = async (req, res) => {
       address: address,
       amenities: amenities,
       additionalFeatures: additionalFeatures,
-      images: images,
+      images: [images],
       propertyType: propertyType,
       agent: agent,
       tags: tags,
@@ -62,12 +65,16 @@ module.exports.createProperty = async (req, res) => {
     });
 
     let savedProperty = await newProperty.save();
+
+    console.log("saved property: ", savedProperty);
     response.status = 200;
+    response.error = {};
     response.message = "property added succesfully";
     response.data = await formatMongoData(savedProperty);
   } catch (error) {
     response.message = "error message";
-    // response.data = {};
+    response.data = {};
+    response.status = 400;
     response.error = error.message;
     console.log(error);
     console.log("something went wrong: controller:  create property");
@@ -152,5 +159,3 @@ module.exports.deletePropertyById = async (req, res) => {
     return res.status(response.status).send(response);
   }
 };
-
-
