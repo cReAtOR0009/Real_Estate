@@ -79,33 +79,43 @@ const ratingSchema = new mongoose.Schema({
 
 // Sub-schema for property historical information
 const propertyHistorySchema = new mongoose.Schema({
-    previousOwners: [
-        {
-            name: String,
-            contact: String,
-        },
-    ],
-    saleHistory: [
-        {
-            soldPrice: Number,
-            soldDate: Date,
-            buyer: String,
-        },
-    ],
-    rentalHistory: [
-        {
-            rentPrice: Number,
-            rentStartDate: Date,
-            rentEndDate: Date,
-            tenant: String,
-        },
-    ],
+    previousOwners: {
+        type: [
+            {
+                name: String,
+                contact: String,
+            },
+        ],
+        default: [],
+    },
+    saleHistory: {
+        type: [
+            {
+                soldPrice: Number,
+                soldDate: Date,
+                buyer: String,
+            },
+        ],
+        default: [],
+    },
+    rentalHistory: {
+        type: [
+            {
+                rentPrice: Number,
+                rentStartDate: Date,
+                rentEndDate: Date,
+                tenant: String,
+            },
+        ],
+        default: [],
+    },
 });
+
 
 // Main property schema
 const propertySchema = new mongoose.Schema({
     name: String,
-    description:{ type:String,  maxlength: 500 },
+    description:{ type:String,  maxlength: 15000 },
     price: Number,
     bedrooms: {
         type: Number,
@@ -128,7 +138,7 @@ const propertySchema = new mongoose.Schema({
     rating: [ratingSchema],
     images: [
         {
-            url: String,
+            // url: String,
         },
     ],
     propertyType: {
@@ -140,12 +150,12 @@ const propertySchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
         },
-        ref: String // Assuming 'User' is a Mongoose model with a 'ref' property
+        // ref: String // Assuming 'User' is a Mongoose model with a 'ref' property
     },
     tags: [String],
     status: {
         type: String,
-        enum: ['For Sale', 'For Rent', 'Sold', 'Rented'],
+        enum: ['For Sale', 'For Rent', 'Sold', 'Rented', "For Lease", "Leased"],
         default: 'For Sale',
     },
     virtualTour: {
