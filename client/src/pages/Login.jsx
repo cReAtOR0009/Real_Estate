@@ -35,7 +35,7 @@ const Login = () => {
     try {
       // console.log("email: ", email, "password", password);
       const userData = await login({ email, password }).unwrap();
-      // console.log("userdata:", userData);
+      console.log("userdata:", userData);
       const {
         data: { email: userEmail },
         token,

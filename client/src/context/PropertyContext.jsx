@@ -27,14 +27,23 @@ export const initialFormData = {
   additionalFeatures: [],
   images: [],
   propertyType: "",
-  agent: { id: "", ref: "" },
+  agent: { id: "65b281a5f2965658eaabce1e" },
   tags: [],
   status: "",
   virtualTour: "",
   propertyHistory: {
-    previousOwners: ["john Doe"],
-    saleHistory: ["john Doe"],
-    rentalHistory: ["john Doe"],
+    previousOwners: [{ name: "John Doe", contact: "New York" }],
+    saleHistory: [
+      { soldPrice: 404000, soldDate: new Date(), buyer: "John Doe" },
+    ],
+    rentalHistory: [
+      {
+        rentPrice: 38000,
+        rentStartDate: new Date(),
+        rentEndDate: null,
+        tenant: "John Doe",
+      },
+    ],
   },
   nearbyAmenities: [],
   availability: false,
@@ -109,10 +118,11 @@ export const formReducer = (state, action) => {
       };
 
     case "ADD_IMAGES":
-      const { value: imageUrls } = action.payload;
+      const { value: images } = action.payload;
+      // console.log("images values: ", images)
       return {
         ...state,
-        images: [...state.images, ...imageUrls],
+        images: [...state.images, ...images],
       };
 
     default:
