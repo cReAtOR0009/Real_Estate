@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext, useReducer } from "react";
 import { styles } from "../styles/styles";
 import { formReducer, initialFormData } from "../context/PropertyContext";
+// import { useDispatch } from "react-redux";
+import { useAddpropertyMutation } from "../features/auth/authApiSlice";
 
 const AddProperty = () => {
   const [formData, dispatch] = useReducer(formReducer, initialFormData);
   const [visible, setVisible] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]);
+  const [addProperty, { isLoading }] = useAddpropertyMutation();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -47,11 +50,14 @@ const AddProperty = () => {
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
+    console.log("files: ", files);
     const FileswithUrl = files.map((file) => {
       const imageUrl = URL.createObjectURL(file);
-      file.imageUrl = imageUrl;
+      file.url = imageUrl;
       return file;
     });
+
+    console.log("files with uri: ", FileswithUrl);
 
     dispatch({ type: "ADD_IMAGES", payload: { value: FileswithUrl } });
   };
@@ -68,64 +74,78 @@ const AddProperty = () => {
 
   const validateForm = () => {
     let isValid = true;
+    const newErrors = [];
+
     for (const [key, value] of Object.entries(formData)) {
       if (value === "" && key !== "availability") {
-        setErrors({
-          ...errors,
-          [key]: `${key.charAt(0).toUpperCase() + key.slice(1)} is required`,
-        });
+        newErrors.push(
+          `${key.charAt(0).toUpperCase() + key.slice(1)} is required`
+        );
         isValid = false;
       }
     }
+
+    setErrors(newErrors);
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("formData,", formData);
+    console.log("formData:", formData);
     const formIsValid = validateForm();
-    if (formIsValid) {
-      alert("form submitted successfuly");
-      //   setFormData({ ...initialFormData });
-    } else {
-      // const hasErrors = Object.keys(errors).length > 0;
 
+    try {
+      if (formIsValid) {
+        console.log("valid-formData:", formData);
+      } else {
+        throw new Error("invalid or Empty Form Field");
+      }
+
+      const propertyDetails = await addProperty({ ...formData }).unwrap();
+      console.log("propertyDetails:", propertyDetails.data);
+      setErrors([]);
+    } catch (error) {
+      console.log("error:", error);
+      if (error.data.error) {
+        setErrors((err) => [...err, error.data.error]);
+      } else {
+        setErrors((err) => [...err, error.message]);
+      }
       setVisible(true);
+      console.log("visible state:", visible);
       setTimeout(() => {
         setVisible(false);
-        setErrors({});
-      }, 5000); // Display errors for 5 seconds
-      // }
+        // setErrors(error.data.error);
+      }, 15000);
     }
-    // Reset form data after submission if needed
   };
 
   const addAdditionalFeature = () => {
     dispatch({ type: "ADD_ADDITIONAL_FEATURES_FIELD" });
   };
 
-  // useEffect(() => {
-  //   // Check if there are any errors
-  //   const hasErrors = Object.keys(errors).length > 0;
-
-  //   // If there are errors, display them for 5 seconds
-  //   if (hasErrors) {
-  //     setVisible(true);
-  //     setTimeout(() => {
-  //       setVisible(false);
-  //     }, 5000); // Display errors for 5 seconds
-  //   }
-  // }, [errors]);
+  useEffect(() => {
+    if (errors.length > 0) {
+      setVisible(true);
+      setTimeout(() => {
+        setVisible(false);
+        setErrors([]);
+      }, 5000);
+    }
+  }, [errors]);
 
   return (
     <div className=" mt-[150px] p-[10px]">
       <div className="fixed m-0 top-[100px] z-[200] text-center text-[15px]">
         {/* errors */}
         {visible && (
-          <div className= "bg-Purple-60 h-[40px] rounded-[10px]">
-            {/* Display all errors */}
-            {Object.values(errors).map((error, index) => (
-              <p className="text-[red]" key={index}>
+          <div className="flex flex-wrap  h-[40px] rounded-[10px] gap-[5px]">
+            {/* Display all errors hello people lorem500 */}
+            {errors.map((error, index) => (
+              <p
+                className="text-[red] p-[5px] bg-Purple-75 rounded-[5px]"
+                key={index}
+              >
                 {error}
               </p>
             ))}
@@ -134,21 +154,23 @@ const AddProperty = () => {
       </div>
 
       <h2 className="text-[25px] text-center">Add New Property</h2>
-      {errors.title && <span className="text-[20px]">{errors.title}</span>}
+      {/* {errors.title && <span className="text-[20px]">{errors.title}</span>} */}
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <label>Title:</label>
         <input
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="text"
           name="title"
+          placeholder="Property Name"
           value={formData.title}
           onChange={handleChange}
         />
 
         <label>Description:</label>
         <textarea
-          className="text-[black]"
+          className="text-[black] "
           name="description"
+          placeholder="describe Property as detailed as possible with 5000 characters"
           value={formData.description}
           onChange={handleChange}
         />
@@ -158,6 +180,7 @@ const AddProperty = () => {
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="number"
           name="price"
+          placeholder="property Price"
           value={formData.price}
           onChange={handleChange}
         />
@@ -167,6 +190,7 @@ const AddProperty = () => {
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="number"
           name="bedrooms"
+          placeholder="number of Bedrooms"
           value={formData.bedrooms}
           onChange={handleChange}
         />
@@ -176,6 +200,7 @@ const AddProperty = () => {
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="number"
           name="bathrooms"
+          placeholder="number of Bathrooms"
           value={formData.bathrooms}
           onChange={handleChange}
         />
@@ -185,6 +210,7 @@ const AddProperty = () => {
           className="p-[5px] border border-solid border-Grey-60 h-[50px]"
           type="number"
           name="size"
+          placeholder="property Size"
           value={formData.size}
           onChange={handleChange}
         />
@@ -356,7 +382,7 @@ const AddProperty = () => {
               <img
                 className="w-[100px] h-[100px] rounded-[10px]"
                 key={index}
-                src={image.imageUrl}
+                src={image.url}
                 alt={`Image ${index}`}
               />
             ))}
@@ -396,11 +422,10 @@ const AddProperty = () => {
           id="status"
           onChange={handleChange}
         >
-          <option value="status">status</option>
+          <option value="">status</option>
           <option value="For Sale">For Sale</option>
-          <option value="For Sale">For Sale</option>
-          <option value="Sold">Sold</option>
-          <option value="Rented">Rented</option>
+          <option value="For Rent">For Rent</option>
+          <option value="For Lease">For Lease</option>
         </select>
 
         <label>Virtual Tour:</label>
