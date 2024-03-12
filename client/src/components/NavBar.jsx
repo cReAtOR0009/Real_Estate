@@ -2,11 +2,10 @@ import React, { useContext, useState } from "react";
 import { NavigationContext } from "../context/navigationContext";
 import { CartContext } from "../context/cartContext";
 
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { navLinks, companydetails } from "../assets/textAssets";
 import { logo, closeButton, openNavButton } from "../assets/imageImporter";
 import { styles } from "../styles/styles";
-import CartItem from "./CartItem";
 import { FaOpencart } from "react-icons/fa6";
 import {
   selectCurrentToken,
@@ -14,7 +13,7 @@ import {
 } from "../features/auth/authSlice";
 import { useSelector } from "react-redux";
 
-import { MdOutlineClose } from "react-icons/md";
+import CartList from "./properties/cartList";
 
 const ItemContainer = (image, title, quantity) => {
   return <></>;
@@ -54,11 +53,15 @@ const NavBar = () => {
                       ? `/`
                       : navlink.id === "login"
                       ? "/login"
-                      : token? "/login": navlink.id
+                      : !token
+                      ? "/login"
+                      : navlink.id
                   }
                   className="px-[15px] py-[10px] w-[150px] h-[50px] text-center "
                 >
-                  {navlink.title ==="Login" && token?"Logout":navlink.title}
+                  {navlink.title === "Login" && token
+                    ? "Logout"
+                    : navlink.title}
                 </Link>
               </li>
             ))}
@@ -139,38 +142,8 @@ const NavBar = () => {
           )}
         </div>
       </nav>
-      {cart.cartstate && (
-        <div className=" z-[100] right-[0px] fixed top-0 bg-[#a685fa] p-[20px] w-[300px] sm:w-[500px] h-[100vh]">
-          <MdOutlineClose
-            className="cursor-pointer text-[30px]"
-            onClick={toggleCart}
-          />
-          <h1 className="text-center font-semibold uppercase ">
-            PROPERTIES ORDER
-          </h1>
-          {cart.properties.map((property, index) => (
-            <CartItem key={index} {...property} />
-          ))}
-
-          <div className=" w-full absolute bottom-0 px-5 py-2 grid items-center text-white">
-            <div className="flex items-center justify-between">
-              <h1 className="text-base font-semibold uppercase">SubTotal</h1>
-              <h1 className="text-sm rounded px-1 py-0.5">${}Amount</h1>
-            </div>
-            <div className="grid items-center gap-2 text-White-90">
-              <p className="font-medium text-center text-White-90">
-                Taxes and Shipping Will Calculate At Shipping
-              </p>
-              <button
-                type="button"
-                className={`${styles.buttonPadding} text-white`}
-              >
-                Check Out
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {console.log("cartstate from nav", cart.cartstate)}
+      {cart.cartstate && <CartList />}
     </>
   );
 };
