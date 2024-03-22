@@ -3,22 +3,11 @@ import { faqs } from "../../assets/textAssets";
 import { leftarrow, rightarrow } from "../../assets/textAssets";
 import "../../styles/faq.css";
 import { styles } from "../../styles/styles";
-
-const FaqCard = ({ question, answer, id }) => {
-  return (
-    <div className="flex p-[10px] sm:p-[40px] flex-col items-center gap-[24px] rounded-[10px] border border-Grey-15 bg-Grey-08">
-      <h3>{question}</h3>
-      <p>{answer}</p>
-      <button className="learnmore">
-        <a href="#">Read More</a>
-      </button>
-    </div>
-  );
-};
+import FaqCard from "../smallcomponents/FaqCard";
 
 const Faq = ({ faq = faqs }) => {
   const itemsPerDisplay = 3;
-  const noOfPages = Math.ceil(faqs.length / itemsPerDisplay);
+  const noOfPages = Math.ceil(faq.length / itemsPerDisplay);
   const [currentPage, setCurrentPage] = useState(1);
 
   const startIndex = (currentPage - 1) * itemsPerDisplay;
