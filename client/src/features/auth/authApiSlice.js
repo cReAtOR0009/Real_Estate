@@ -23,8 +23,26 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    checkout: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/checkout/",
+        method: "POST",
+        body: { ...credentials },
+      }),
+    }),
+    fetchProperties: builder.query({
+      query: () => ({
+        url: "/auth/property/list",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useSignupMutation, useAddpropertyMutation } = authApiSlice;
-
+export const {
+  useLoginMutation,
+  useSignupMutation,
+  useAddpropertyMutation,
+  useCheckoutMutation,
+  useFetchPropertiesQuery,
+} = authApiSlice;
