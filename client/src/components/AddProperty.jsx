@@ -1,4 +1,11 @@
 import React, { useState, useEffect, useContext, useReducer } from "react";
+import {
+  getStorage,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  app,
+} from "../firebase.config";
 import { styles } from "../styles/styles";
 import { formReducer, initialFormData } from "../context/PropertyContext";
 // import { useDispatch } from "react-redux";
@@ -9,6 +16,7 @@ const AddProperty = () => {
   const [visible, setVisible] = useState(false);
   const [errors, setErrors] = useState([]);
   const [addProperty, { isLoading }] = useAddpropertyMutation();
+  const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -48,18 +56,35 @@ const AddProperty = () => {
     }
   };
 
+  const deleteAmenity = (index) => {
+    dispatch({ type: "DELETE_AMENITIES", payload: {index} });
+  };
+
+  const resetForm = () => {
+    dispatch({ type: "RESET_form" });
+  };
+
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
-    console.log("files: ", files);
-    const FileswithUrl = files.map((file) => {
+    console.log("files: ", files[0].name);
+    let FilesData = [];
+    for (const file of files) {
       const imageUrl = URL.createObjectURL(file);
-      file.url = imageUrl;
-      return file;
-    });
+      let fileWithUrl = {
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        lastModified: file.lastModified,
+        // Add more properties if needed
+        imageUrl: imageUrl, // Assuming imageUrl is the URL you want to add
+      };
+      FilesData.push({ ...fileWithUrl, file });
+    }
 
-    console.log("files with uri: ", FileswithUrl);
+    console.log("files with uri: ", FilesData);
+    console.log("last file with uri: ", FilesData[FilesData.length - 1].file);
 
-    dispatch({ type: "ADD_IMAGES", payload: { value: FileswithUrl } });
+    dispatch({ type: "ADD_IMAGES", payload: { value: FilesData } });
   };
 
   const handleFeatureDescriptionChange = (e, index) => {
@@ -94,29 +119,133 @@ const AddProperty = () => {
     console.log("formData:", formData);
     const formIsValid = validateForm();
 
-    try {
-      if (formIsValid) {
-        console.log("valid-formData:", formData);
-      } else {
-        throw new Error("invalid or Empty Form Field");
-      }
+    // try {
+    if (formIsValid) {
+      const storage = getStorage(app);
+      const folder = formData.propertyType;
+      let urlArray = [];
+      let progress;
+      console.log("formdata image length:", formData.images.length);
 
-      const propertyDetails = await addProperty({ ...formData }).unwrap();
-      console.log("propertyDetails:", propertyDetails.data);
-      setErrors([]);
-    } catch (error) {
-      console.log("error:", error);
-      if (error.data.error) {
-        setErrors((err) => [...err, error.data.error]);
-      } else {
-        setErrors((err) => [...err, error.message]);
-      }
-      setVisible(true);
-      console.log("visible state:", visible);
-      setTimeout(() => {
-        setVisible(false);
-        // setErrors(error.data.error);
-      }, 15000);
+      formData.images.length > 0
+        ? await Promise.all(
+            formData.images.map(async (image, index) => {
+              console.log("image: ", image);
+              console.log(`image to upload ${index}:`, image.file);
+              const file = image.file;
+              console.log("image type: ", file.type);
+
+              const storageRef = ref(storage, `${folder}/${file.name}`);
+              const metadata = {
+                contentType: file.type,
+              };
+
+              try {
+                const uploadTask = uploadBytesResumable(
+                  storageRef,
+                  file,
+                  metadata
+                );
+
+                uploadTask.on(
+                  "state_changed",
+                  (snapshot) => {
+                    progress =
+                      (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    setUploadPercentage(Math.round(progress));
+                    console.log("Upload is " + progress + "% done");
+                    switch (snapshot.state) {
+                      case "paused":
+                        console.log("Upload is paused");
+                        break;
+                      case "running":
+                        console.log("Upload is running");
+                        break;
+                    }
+                  },
+                  (error) => {
+                    switch (error.code) {
+                      case "storage/unauthorized":
+                        // User doesn't have permission to access the object
+                        break;
+                      case "storage/canceled":
+                        // User canceled the upload
+                        break;
+                      // ...
+                      case "storage/unknown":
+                        // Unknown error occurred, inspect error.serverResponse
+                        break;
+                    }
+                  },
+                  async () => {
+                    // Upload completed successfully, now we can get the download URL
+                    const downloadURL = await getDownloadURL(
+                      uploadTask.snapshot.ref
+                    );
+                    urlArray.push({ imageUrl: downloadURL });
+                    // console.log("url array: ", urlArray)
+                    formData.images[index].imageUrl = downloadURL;
+                    // formData.images[index] = { imageUrl: downloadURL };
+                    console.log(`File ${index} available at ${downloadURL}`);
+                    console.log(
+                      "formdata images before submisiion: ",
+                      formData.images
+                    );
+                    if (
+                      index == formData.images.length - 1 &&
+                      progress == 100
+                    ) {
+                      // console.log("this is the last image", formData.images[index])
+                      let formatDataToSend = formData;
+                      formatDataToSend.images = urlArray;
+                      const propertyDetails = await addProperty({
+                        ...formatDataToSend,
+                      }).unwrap();
+                      // console.log("formdata images after submisiion: ", formData.images)
+                      resetForm();
+                      console.log("propertyDetails:", propertyDetails.data);
+                    }
+                  }
+                );
+                setErrors([]);
+              } catch (error) {
+                console.error("Error uploading image:", error);
+                if (error.data?.error) {
+                  setErrors((err) => [...err, error.data.error]);
+                } else {
+                  setErrors((err) => [...err, error.message]);
+                }
+                setVisible(true);
+                console.log("visible state:", visible);
+                setTimeout(() => {
+                  setVisible(false);
+                  // setErrors(error.data.error);
+                }, 15000);
+              }
+            })
+          )
+        : (async () => {
+            try {
+              console.log("this is formdata without image", formData.images);
+              const propertyDetails = await addProperty({
+                ...formData,
+              }).unwrap();
+              console.log("propertyDetails:", propertyDetails.data);
+              resetForm();
+            } catch (error) {
+              if (error.data?.error) {
+                setErrors((err) => [...err, error.data.error]);
+              } else {
+                setErrors((err) => [...err, error.message]);
+              }
+              setVisible(true);
+              console.log("visible state:", visible);
+              setTimeout(() => {
+                setVisible(false);
+                // setErrors(error.data.error);
+              }, 15000);
+            }
+          })();
     }
   };
 
@@ -343,7 +472,10 @@ const AddProperty = () => {
           <h2 className="text-[20px] text-center">Additional Features</h2>
           {/* <label>Additional Features:</label> */}
           {formData.additionalFeatures.map((feature, index) => (
-            <div key={index} className=" flex flex-col">
+            <div
+              key={index}
+              className=" flex flex-col border border-solid relative"
+            >
               <label>Feature Name:</label>
               <input
                 className="p-[5px] border border-solid border-Grey-60 h-[50px]"
@@ -362,6 +494,12 @@ const AddProperty = () => {
                 onChange={(e) => handleFeatureDescriptionChange(e, index)}
                 placeholder="Description"
               />
+              <button
+                onClick={() => deleteAmenity(index)}
+                className="absolute right-2 top-0 bg-[red]"
+              >
+                delete
+              </button>
             </div>
           ))}
           <button
@@ -382,7 +520,7 @@ const AddProperty = () => {
               <img
                 className="w-[100px] h-[100px] rounded-[10px]"
                 key={index}
-                src={image.url}
+                src={image.imageUrl}
                 alt={`Image ${index}`}
               />
             ))}
