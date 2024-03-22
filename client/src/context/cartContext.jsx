@@ -14,7 +14,7 @@ const initialState = {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      const { id, price, description, image, title } = action.payload;
+      const { id, price, description, image, name } = action.payload;
       // console.log("payload data", { id, price, description, image, title });
       // Check if property exists in cart already
       const alreadyExistInCart = state.properties.find(
@@ -30,7 +30,7 @@ const cartReducer = (state, action) => {
           ...state,
           properties: [
             ...state.properties,
-            { id, quantity: 1, price, description, image, title },
+            { id, quantity: 1, price, description, image, name },
           ],
         };
       }
@@ -53,10 +53,27 @@ const cartReducer = (state, action) => {
         ...state,
         cartstate: (state.cartstate = false),
       };
+
+    case "GET_TOTAL":
+      const prices = state.properties.map((property) => property.price);
+      let total = 0;
+      prices.forEach((price) => {
+        total += price;
+        // console.log("tot:", total);
+      });
+
+      // console.log("prices:", prices);
+      // console.log("total:", total);
+      return {
+        ...state,
+        total: total,
+      };
     default:
       return state;
   }
 };
+
+// console.log("total:", cart)
 
 // Create the cart context
 export const CartContext = createContext();
@@ -68,11 +85,13 @@ export const CartContextProvider = ({ children }) => {
   // console.log("cart :", cart);
 
   // Function to add an item to the cart
-  const addToCart = (id, price, description, image, title) => {
+  const addToCart = (id, price, description, image, name) => {
     dispatch({
       type: "ADD_TO_CART",
-      payload: { id, price, description, image, title },
+      payload: { id, price, description, image, name },
     });
+    getTotal();
+    toggleCart()
     console.log("cart :", cart);
   };
 
@@ -83,6 +102,7 @@ export const CartContextProvider = ({ children }) => {
 
   const deleteCartItem = (id) => {
     dispatch({ type: "DELETE_ITEM", payload: { id } });
+    getTotal();
     console.log("cart Delete Operation Performed: ", cart, "id :", id);
   };
 
@@ -90,13 +110,23 @@ export const CartContextProvider = ({ children }) => {
     dispatch({ type: "SET_CART_TO_FALSE" });
   };
 
+  const getTotal = () => {
+    dispatch({ type: "GET_TOTAL" });
+  };
   useEffect(() => {
     localStorage.setItem("carted_Properties", JSON.stringify(cart));
   }, [cart.properties]);
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, toggleCart, deleteCartItem, setCartToFalse }}
+      value={{
+        cart,
+        addToCart,
+        toggleCart,
+        deleteCartItem,
+        setCartToFalse,
+        getTotal,
+      }}
     >
       {children}
     </CartContext.Provider>
