@@ -1,16 +1,15 @@
+// Import necessary modules and configurations
 const constants = require("../constants/index");
-// const propertyModel = require("../database/models/propertyModel");
 const Property = require("../database/models/propertyModel");
 const { formatMongoData, checkObjectId } = require("../utilities/formatData");
-const jwt = require("jsonwebtoken");
-
 const serverResponse = constants.serverResponse.defaultResponse;
 
+// Function to create a new property
 module.exports.createProperty = async (req, res) => {
   let response = serverResponse;
   try {
+    // Extract property data from request body
     const {
-      // id,
       title,
       description,
       price,
@@ -30,131 +29,120 @@ module.exports.createProperty = async (req, res) => {
       nearbyAmenities,
       availability,
     } = req.body;
-    console.log("request data-body,", req.body);
 
+    images?console.log("images: ", images) : ""
+
+    console.log("request body: ", req.body)
+
+    // Check if property with the same title already exists
     const existingPropertyName = await Property.findOne({ name: title });
-
     if (existingPropertyName) {
-      console.log("existingPropertyName: ", existingPropertyName);
       throw new Error(
-        "this property already exist, kindly change prperty name "
+        "This property already exists. Please change the property name."
       );
     }
 
-    // const {}
+      const splitTags = tags.split(",")
+      const splitnearbyAmenities = nearbyAmenities.split(",")
 
-    let newProperty = new Property({
+    // Create new property object
+    const newProperty = new Property({
       name: title,
-      description: description,
-      price: price,
-      bedrooms: bedrooms,
-      bathrooms: bathrooms,
-      size: size,
-      address: address,
-      amenities: amenities,
-      additionalFeatures: additionalFeatures,
-      images: [images],
-      propertyType: propertyType,
-      agent: agent,
-      tags: tags,
-      status: status,
-      virtualTour: virtualTour,
-      propertyHistory: propertyHistory,
-      nearbyAmenities: nearbyAmenities,
-      availability: availability,
+      description,
+      price,
+      bedrooms,
+      bathrooms,
+      size,
+      address,
+      amenities:splitnearbyAmenities,
+      additionalFeatures,
+      images: images,
+      propertyType,
+      agent,
+      tags:splitTags,
+      status,
+      virtualTour,
+      propertyHistory,
+      nearbyAmenities,
+      availability,
     });
 
-    let savedProperty = await newProperty.save();
+    // Save the new property to the database
+    const savedProperty = await newProperty.save();
 
-    console.log("saved property: ", savedProperty);
     response.status = 200;
-    response.error = {};
-    response.message = "property added succesfully";
+    response.message = "Property added successfully";
     response.data = await formatMongoData(savedProperty);
   } catch (error) {
-    response.message = "error message";
-    response.data = {};
-    response.status = 400;
+    response.message = "Error adding property";
     response.error = error.message;
-    console.log(error);
-    console.log("something went wrong: controller:  create property");
+    response.status = 400;
+    console.log("Error: ", error);
   } finally {
     return res.status(response.status).send(response);
   }
 };
 
-module.exports.listProperty = async (req, res, skip = 0, limit = 10) => {
-  let response = serverResponse;
+module.exports.listProperty = async (req, res) => {
+  let response = { ...serverResponse };
   try {
-    skip = req.params.skip ? req.params.skip : skip;
-    limit = req.params.limit ? req.params.limit : limit;
+    let { skip = 0, limit = 10 } = req.params;
+    skip = parseInt(skip);
+    limit = parseInt(limit);
 
-    const properties = await Property.find({})
-      .skip(parseInt(skip))
-      .limit(parseInt(limit));
+    const properties = await Property.find({}).skip(skip).limit(limit);
 
     response.status = 200;
-    response.message = "property fetched succesfully";
+    response.message = "Properties fetched successfully.";
     response.data = await formatMongoData(properties);
   } catch (error) {
-    response.message = "error message";
-    response.data = {};
+    response.message = "Error fetching properties.";
     response.error = error.message;
-    console.log(error);
-    console.log("something went wrong: controller:  fetching properties");
+    console.log("Error in listing properties:", error);
   } finally {
     return res.status(response.status).send(response);
   }
 };
 
 module.exports.getPropertyById = async (req, res) => {
-  let response = serverResponse;
-
+  let response = { ...serverResponse };
   try {
     await checkObjectId(req.params.id);
-    const id = req.params.id;
+    const existingProperty = await Property.findById(req.params.id);
 
-    existingproperty = await Property.findById(id);
-
-    if (!existingproperty) {
-      throw new Error("property not found");
+    if (!existingProperty) {
+      throw new Error("Property not found.");
     }
 
     response.status = 200;
-    response.message = "property fetched successfully";
-    response.data = await formatMongoData(existingproperty);
+    response.message = "Property fetched successfully.";
+    response.data = await formatMongoData(existingProperty);
   } catch (error) {
-    response.message = "error message";
+    response.message = "Error fetching property.";
     response.error = error.message;
-    response.data = {};
-    console.log("error with product controller: getPropertyById ");
-    console.log(error);
+    console.log("Error in getting property by id:", error);
   } finally {
     return res.status(response.status).send(response);
   }
 };
 
 module.exports.deletePropertyById = async (req, res) => {
-  let response = serverResponse.defaultResponse;
-
+  let response = { ...serverResponse };
   try {
-    checkObjectId(req.params.id);
-    const id = req.params.id;
-    const existingproperty = await Property.findByIdAndDelete(id);
+    await checkObjectId(req.params.id);
+    const deletedProperty = await Property.findByIdAndDelete(req.params.id);
 
-    if (!existingproperty) {
-      throw new Error("property not found");
+    if (!deletedProperty) {
+      throw new Error("Property not found.");
     }
 
     response.status = 200;
-    response.message = "property deleted successfully";
-    response.data = await formatMongoData(existingproperty);
+    response.message = "Property deleted successfully.";
+    response.data = await formatMongoData(deletedProperty);
   } catch (error) {
-    response.message = "error message";
+    response.message = "Error deleting property.";
     response.error = error.message;
-    response.data = {};
-    console.log("error with product controller: deletePropertyById ");
-    console.log(error);
+    console.log("Error in deleting property by id:", error);
   } finally {
     return res.status(response.status).send(response);
   }
