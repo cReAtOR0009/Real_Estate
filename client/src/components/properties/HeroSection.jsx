@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useFetchPropertiesQuery } from "../../features/auth/authApiSlice.js";
 import { styles } from "../../styles/styles.js";
-import axios from "axios";
+import InputField from "../formComponent/InputField.jsx";
+import SelectField from "../formComponent/selectField.jsx";
+import SelectField2 from "../formComponent/SelectField2.jsx";
+import HeaderContainer from "../textComponents/HeaderContainer.jsx";
+import Journey from "../smallcomponents/Journey.jsx";
+
 import {
   budget,
   contactFieldDetails,
@@ -12,6 +18,7 @@ import { searchIcon } from "../../assets/imageImporter.js";
 import { Houses } from "../../assets/textAssets.js";
 import { NavigationContext } from "../../context/navigationContext.jsx";
 import { CartContext } from "../../context/cartContext.jsx";
+import MainHeaderContainer from "../smallcomponents/MainHeaderContainer.jsx";
 
 const SearchParameterInput = ({
   icon,
@@ -41,19 +48,20 @@ const SearchParameterInput = ({
 };
 
 const HouseCard = ({
-  id,
+  _id,
   images,
-  title,
+  name,
   description,
   features,
   price,
   index,
 }) => {
+  let id = _id;
+  console.log("id: ", id);
   const { setNavActive, activeNav } = useContext(NavigationContext);
   const { addToCart, toggleCart } = useContext(CartContext);
-
   const handleAddToCart = () => {
-    addToCart(id, price, description, image, title);
+    addToCart(id, price, description, image, name);
     toggleCart();
   };
   const truncateDetails = (content, maxLength) => {
@@ -71,7 +79,7 @@ const HouseCard = ({
         <div className="imageContainer w-[auto]">
           <img
             className="object-cover w-[100%] rounded-[10px] max-h-[400px] max-w-[400px]"
-            src={images[0].url}
+            src={images[0]?.imageUrl}
             alt=""
           />
         </div>
@@ -82,7 +90,7 @@ const HouseCard = ({
             >
               Lorem ipsum dolor sit.
             </p>
-            <h2 className={`${styles.cardHeading}`}>{title}</h2>
+            <h2 className={`${styles.cardHeading}`}>{name}</h2>
             <p className={`${styles.paragraph}`}>
               {trauncatedDetails}{" "}
               <Link to={`/properties/${id}`} className="text-Purple-60">
@@ -99,7 +107,7 @@ const HouseCard = ({
             <button
               className={`${styles.buttonPadding} rounded-[8px] bg-Purple-60`}
             >
-              <Link to={`${index}`}>View Property Details</Link>
+              <Link to={`${id}`}>View Property Details</Link>
             </button>
           </div>
         </div>
@@ -108,76 +116,8 @@ const HouseCard = ({
   );
 };
 
-const MainHeaderContainer = ({ headerText, paragrapgText, styles }) => (
-  <div className={styles.TextContainer}>
-    <h1 className={styles.heading}>{headerText}</h1>
-    <p className={styles.paragraph}>{paragrapgText}</p>
-  </div>
-);
-
-const HeaderContainer = ({ headerText, paragrapgText, styles }) => (
-  <div className={styles.headerTextContainer}>
-    <h1 className={styles.heading}>{headerText}</h1>
-    <p className={styles.paragraph}>{paragrapgText}</p>
-  </div>
-);
-
-const InputField = ({ placeholder, name, label, type, onChange, styles }) => (
-  <div className="flex flex-col flex-1  gap-[12px] md:gap-[16px]">
-    <label htmlFor={label} className="text-[16px] text-White-99">
-      {label}
-    </label>
-    <input
-      type={type}
-      placeholder={placeholder}
-      name={name}
-      onChange={onChange}
-      className={styles}
-    />
-  </div>
-);
-
-const SelectField = ({ icon, label, options, styles, onChange }) => (
-  <div className="custom-select flex flex-1 items-center relative">
-    <label
-      htmlFor={label}
-      className="absolute left-3 text-[16px] text-White-99"
-    >
-      <img src={icon} alt="" />
-    </label>
-    <select
-      name={label}
-      id={label}
-      onChange={onChange}
-      className={`${styles} `}
-    >
-      {/* <option value="">{placeholder}</option> */}
-      {options.map((option, index) => (
-        <option key={index} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
-  </div>
-);
-const SelectField2 = ({ label, options, styles, onChange }) => (
-  <div className="custom-select custom-selectPatch flex flex-col   flex-1 gap-[12px] md:gap-[16px] ">
-    <label for={label} className="text-[16px] text-White-99">
-      {label}
-    </label>
-    <select name={label} id={label} onChange={onChange} className={styles}>
-      {/* <option value="">{name}</option> */}
-      {options.map((option, index) => (
-        <option key={index} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
-  </div>
-);
-
 const HeroSection = () => {
-  const [HouseData, setHouses] = useState(null);
+  // const [HouseData, setHouses] = useState(null);
 
   const [searchParams, setsearchParams] = useState({
     Location: "",
@@ -203,8 +143,6 @@ const HeroSection = () => {
     budget: "",
   });
 
-  // console.log(propertyChoice);
-
   const handleSearchChange = (e, property) => {
     setsearchParams((initialValue) => ({
       ...initialValue,
@@ -223,6 +161,70 @@ const HeroSection = () => {
     e.preventDefault();
     console.log("Form data submitted:", propertyChoice);
   };
+
+  const [Houses, setHouses] = useState([]);
+  const {
+    currentData,
+    data: data,
+    isLoading,
+    isError,
+    error,
+    isFetching,
+    isSuccess,
+    isUninitialized,
+    refetch,
+  } = useFetchPropertiesQuery();
+  const scrollToTop = (() => {
+    window.scrollTo(0, 0);
+  })();
+  let content;
+  console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
+
+  if (Houses.length > 0) {
+    content = Houses.map((house, index) => {
+      console.log("housecars: " + index, house);
+      return <HouseCard key={index} {...house} index={index} />;
+    });
+  } else if (isLoading) {
+    content = <div className="mt-[200px]">fetching Data.....</div>;
+  } else if (isError) {
+    console.log("error: ", isError);
+    let errorHere = error.error;
+    // setError(errorHere);
+    console.log("error:", errorHere);
+    content = (
+      <div className="mt-[200px]">Error fetching Data: {errorHere}</div>
+    );
+  } else if (Houses.length < 0) {
+    console.log("data: ", data);
+    content = (
+      <div className="mt-[200px]">
+        Opps, no Property Found in Db :({" "}
+        <button onClick={handleFetchProperties}>Fetch</button>
+      </div>
+    );
+    // return content;
+  }
+
+  useEffect(() => {
+    const handleFetchProperties = async () => {
+      console.log("fectching Properties.....");
+      if (isError) {
+        // console.log("error fetching properties");
+        // return setError(["Error fetching Properties"]);
+      } else {
+        // If no error, set houses data from the fetched data
+        setHouses(data.data);
+        // console.log("Houses: ", data);
+        console.log("currentData: ", currentData);
+        console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
+        // house = Houses.find((house, index) => house._id == propertyid);
+      }
+    };
+    handleFetchProperties();
+    console.log("content: ", content);
+  }, [data, isLoading, isError, isSuccess]);
+
   return (
     <>
       <div className="propertyGradientBg mt-[100px] sm-mt[100px]">
@@ -272,9 +274,7 @@ const HeroSection = () => {
       </div>
 
       <div className={`${styles.subContainer} houseCardContainer`}>
-        {Houses.map((house, index) => (
-          <HouseCard key={index} index={index} {...house} />
-        ))}
+        {content}
       </div>
 
       <div className="">
@@ -398,28 +398,16 @@ const HeroSection = () => {
             </div>
           </form>
         </div>
-        <div
-          className={`${styles.headerTextContainer}  flex flex-wrap md:flex-nowrap justify-center gap-[20px] md:gap-[100px] items-center propertyJourneybg`}
-        >
-          <div className="">
-            <h1 className={styles.heading}>
-              Start Your Real Estate Journey Today
-            </h1>
-            <p className={styles.paragraph}>
-              Your dream property is just a click away. Whether you're looking
-              for a new home, a strategic investment, or expert real estate
-              advice, Estatein is here to assist you every step of the way. Take
-              the first step towards your real estate goals and explore our
-              available properties or get in touch with our team for
-              personalized assistance.
-            </p>
-          </div>
-          <button
-            className={`${styles.buttonPadding} flex-1 whitespace-nowrap bg-Purple-60`}
-          >
-            Explore Properties
-          </button>
-        </div>
+        <Journey
+          paragraphText="Your dream property is just a click away. Whether you're looking
+        for a new home, a strategic investment, or expert real estate
+        advice, Estatein is here to assist you every step of the way. Take
+        the first step towards your real estate goals and explore our
+        available properties or get in touch with our team for
+        personalized assistance."
+          HeaderText="Start Your Real Estate Journey Today"
+          buttonText="Explore Properties"
+        />
       </div>
     </>
   );
