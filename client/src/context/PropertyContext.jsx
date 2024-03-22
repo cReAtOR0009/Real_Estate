@@ -50,7 +50,8 @@ export const initialFormData = {
 };
 
 export const formReducer = (state, action) => {
-  console.log("state", state);
+  // console.log("state", state);
+  // console.log("state", state.images);
   switch (action.type) {
     case "ADD_TO_FORM":
       const { name, value } = action.payload;
@@ -116,14 +117,36 @@ export const formReducer = (state, action) => {
         ...state,
         additionalFeatures: updatedFeatures,
       };
+    case "DELETE_AMENITIES":
+      const { index: toDeleteIndex } = action.payload;
+      const amenitiesWithout = state.additionalFeatures.filter(
+        (amenity, index) => {
+          console.log(
+            "index: ",
+            index,
+            "amenity",
+            amenity,
+            "todelete: ",
+            index
+          );
+          return index !== toDeleteIndex;
+        }
+      );
+      return {
+        ...state,
+        additionalFeatures: [...amenitiesWithout],
+      };
 
     case "ADD_IMAGES":
       const { value: images } = action.payload;
       // console.log("images values: ", images)
+      console.log("images:", state.images);
       return {
         ...state,
         images: [...state.images, ...images],
       };
+    case "RESET_form":
+      return initialFormData;
 
     default:
       return state;
