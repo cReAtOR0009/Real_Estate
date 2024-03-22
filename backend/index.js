@@ -4,6 +4,7 @@ const dotEnv = require("dotenv");
 const cors = require("cors");
 const dbConnection = require("./database/connection");
 
+
 dotEnv.config();
 
 //initialize express framework
@@ -17,7 +18,7 @@ app.use(express.json());
 
 //cors
 const corsOptions = {
-  origin: "*",
+  origin: true,
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -30,7 +31,7 @@ const myMiddleware = (req, res, next) => {
   console.log("Server Request");
   next();
 };
- 
+
 app.use("/auth/user", require("./routes/userRoutes"));
 app.use("/auth/property", require("./routes/propertyRoutes"));
 app.use("/auth/checkout", require("./routes/checkoutRoutes"));
