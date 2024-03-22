@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { styles } from "../../styles/styles.js";
+import axios from "axios";
 import {
   budget,
   contactFieldDetails,
@@ -174,7 +175,10 @@ const SelectField2 = ({ label, options, styles, onChange }) => (
     </select>
   </div>
 );
+
 const HeroSection = () => {
+  const [HouseData, setHouses] = useState(null);
+
   const [searchParams, setsearchParams] = useState({
     Location: "",
     propertyType: "",
