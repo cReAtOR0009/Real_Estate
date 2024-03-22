@@ -7,12 +7,14 @@ import { useLoginMutation } from "../features/auth/authApiSlice";
 import { styles } from "../styles/styles";
 import { logo } from "../assets/imageImporter";
 import { Link } from "react-router-dom";
+import { BsEyeSlash, BsEyeFill } from "react-icons/bs";
 
 const Login = () => {
   const emailRef = useRef();
   const errRef = useRef();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setshowPassword] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
 
@@ -21,13 +23,9 @@ const Login = () => {
   // console.log("login: ", login, "isloading: ", isLoading);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    emailRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [email, password]);
+  // const handleShowPassword = () => {
+  //   setshowPassword(!showPassword);
+  // };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -65,6 +63,14 @@ const Login = () => {
   const handleUserInput = (e) => setEmail(e.target.value);
 
   const handlePasswordInput = (e) => setPassword(e.target.value);
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [email, password]);
 
   return isLoading ? (
     <h1>Loading...</h1>
@@ -136,7 +142,7 @@ const Login = () => {
                   className={`${styles.inputFied} text-[18px] py-[5px]`}
                 />
               </div>
-              <div className="flex flex-col flex-1  gap-[12px] md:gap-[16px]">
+              <div className="relative flex flex-col flex-1  gap-[12px] md:gap-[16px]">
                 <div className="flex items-center justify-between">
                   <label htmlFor="password" className="text-sm font-semibold">
                     Password
@@ -147,13 +153,30 @@ const Login = () => {
                   </Link>
                 </div>
                 <input
-                  type="password"
+                  type={showPassword ? `text` : "password"}
                   id="password"
                   onChange={handlePasswordInput}
                   value={password}
                   required
-                  className={`${styles.inputFied} text-[18px] py-[5px]`}
+                  className={`${styles.inputFied} relative text-[18px] py-[5px]`}
                 />
+                {showPassword ? (
+                  <BsEyeFill
+                    onClick={() => setshowPassword(false)}
+                    className="w-4 h-4 absolute transition right-5 bottom-2 duration-300 rounded focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-blue-200"
+                  />
+                ) : (
+                  <BsEyeSlash
+                    onClick={() => setshowPassword(true)}
+                    className="w-4 h-4 absolute transition right-5 bottom-2 duration-300 rounded focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-blue-200"
+                  />
+                )}
+                {/* <input
+                  type="checkbox"
+                  id="remember"s
+                  onClick={handleShowPassword}
+                  className="w-4 h-4 absolute transition right-5 bottom-2 duration-300 rounded focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-blue-200"
+                /> */}
               </div>
               <div className="flex items-center space-x-2">
                 <input
