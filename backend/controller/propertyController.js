@@ -69,7 +69,7 @@ module.exports.createProperty = async (req, res) => {
 
     // Save the new property to the database
     const savedProperty = await newProperty.save();
-
+    response.error = {};
     response.status = 200;
     response.message = "Property added successfully";
     response.data = await formatMongoData(savedProperty);
