@@ -540,7 +540,8 @@ export const Houses = [
   {
     id: "1",
     title: "Cozy Family Home",
-    description: "A beautiful family home with stunning views Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    description:
+      "A beautiful family home with stunning views Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
     price: 300000,
     bedrooms: 4,
     bathrooms: 2,
@@ -598,7 +599,8 @@ export const Houses = [
   {
     id: "2",
     title: "Modern City Apartment",
-    description: "Luxurious apartment in the heart of the city Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    description:
+      "Luxurious apartment in the heart of the city Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
     price: 500000,
     bedrooms: 2,
     bathrooms: 1,
@@ -662,7 +664,8 @@ export const Houses = [
   {
     id: "3",
     title: "Seaside Villa",
-    description: "Elegant villa overlooking the ocean Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    description:
+      "Elegant villa overlooking the ocean Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
     price: 800000,
     bedrooms: 5,
     bathrooms: 4,
@@ -684,8 +687,14 @@ export const Houses = [
       airConditioning: true,
     },
     additionalFeatures: [
-      { name: "Private Beach Access", description: "Direct access to a secluded beach" },
-      { name: "Oceanfront Terrace", description: "Spacious terrace with panoramic ocean views" },
+      {
+        name: "Private Beach Access",
+        description: "Direct access to a secluded beach",
+      },
+      {
+        name: "Oceanfront Terrace",
+        description: "Spacious terrace with panoramic ocean views",
+      },
     ],
     rating: [
       {
@@ -695,18 +704,23 @@ export const Houses = [
         createdBy: "user789",
       },
     ],
-    images: [
-      { url: "/house3.png" },
-      { url: "/house3.png" },
-    ],
+    images: [{ url: "/house3.png" }, { url: "/house3.png" }],
     propertyType: "Villa",
     agent: { id: "agent789", ref: "Emily Johnson" },
     tags: ["ocean-view", "luxury-living"],
     status: "For Sale",
     virtualTour: { url: "https://example.com/virtualtour" },
     propertyHistory: {
-      previousOwners: [{ name: "Previous Owner", contact: "previous@example.com" }],
-      saleHistory: [{ soldPrice: 750000, soldDate: new Date("2023-05-10"), buyer: "Buyer3" }],
+      previousOwners: [
+        { name: "Previous Owner", contact: "previous@example.com" },
+      ],
+      saleHistory: [
+        {
+          soldPrice: 750000,
+          soldDate: new Date("2023-05-10"),
+          buyer: "Buyer3",
+        },
+      ],
       rentalHistory: [],
     },
     nearbyAmenities: ["Beach Club", "Marina", "Fine Dining"],
@@ -715,7 +729,8 @@ export const Houses = [
   {
     id: "4",
     title: "Rustic Mountain Cabin",
-    description: "Cozy cabin nestled in the mountains Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    description:
+      "Cozy cabin nestled in the mountains Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
     price: 250000,
     bedrooms: 3,
     bathrooms: 1,
@@ -737,21 +752,26 @@ export const Houses = [
       airConditioning: false,
     },
     additionalFeatures: [
-      { name: "Wood-Burning Stove", description: "Traditional stove for cozy evenings" },
-      { name: "Hiking Trails Nearby", description: "Access to scenic hiking trails" },
+      {
+        name: "Wood-Burning Stove",
+        description: "Traditional stove for cozy evenings",
+      },
+      {
+        name: "Hiking Trails Nearby",
+        description: "Access to scenic hiking trails",
+      },
     ],
     rating: [],
-    images: [
-      { url: "/house4.jpg" },
-      { url: "/house4.jpg" },
-    ],
+    images: [{ url: "/house4.jpg" }, { url: "/house4.jpg" }],
     propertyType: "Cabin",
     agent: { id: "agent987", ref: "Michael Brown" },
     tags: ["mountain-view", "rustic"],
     status: "For Sale",
     virtualTour: { url: "https://example.com/virtualtour" },
     propertyHistory: {
-      previousOwners: [{ name: "Previous Owner", contact: "previous@example.com" }],
+      previousOwners: [
+        { name: "Previous Owner", contact: "previous@example.com" },
+      ],
       saleHistory: [],
       rentalHistory: [],
     },
@@ -761,7 +781,8 @@ export const Houses = [
   {
     id: "5",
     title: "Cosmopolitan Loft",
-    description: "Chic loft in the heart of downtown. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
+    description:
+      "Chic loft in the heart of downtown. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque harum totam odit fugiat illo esse, velit, magni necessitatibus reprehenderit, vero impedit ex amet porro assumenda? At voluptatum impedit veniam laudantium nulla eligendi expedita quam deserunt, quaerat recusandae rerum vel quos, id cum fugit maiores harum ipsum ipsa? Nemo in eos, suscipit hic ipsam natus cupiditate est placeat exercitationem laboriosam minima dolorum eaque quam, voluptatem id provident culpa consequatur ratione fuga officia repudiandae numquam. Consequatur asperiores, quod voluptates eum odio aliquam quia vitae voluptatum eveniet beatae veritatis at architecto, quam doloremque quae! Natus, minus quibusdam hic nostrum reprehenderit iste nisi dicta vitae facilis nulla ex laborum rem adipisci mollitia! Aut soluta placeat explicabo dolore consequatur iure molestias doloremque nihil reprehenderit cum eum velit quae, ipsum minus ullam, nostrum mollitia recusandae repellat! Molestiae eius vel quod perspiciatis, neque dignissimos optio mollitia? Eaque pariatur qui ullam! Expedita optio molestias excepturi quaerat praesentium perspiciatis error at officiis earum laboriosam, qui recusandae impedit modi sed labore iste nobis. Vel fugiat veniam laborum architecto modi odit dicta ipsum inventore mollitia incidunt. Nesciunt nostrum provident accusamus blanditiis perspiciatis, quasi cum neque doloremque excepturi in enim? Quae debitis tempora sit beatae molestiae? Repudiandae eum ratione voluptates maxime doloribus.",
     price: 600000,
     bedrooms: 2,
     bathrooms: 2,
@@ -783,21 +804,26 @@ export const Houses = [
       airConditioning: true,
     },
     additionalFeatures: [
-      { name: "Exposed Brick Walls", description: "Characteristic loft features" },
-      { name: "City Views", description: "Panoramic views of the bustling city streets" },
+      {
+        name: "Exposed Brick Walls",
+        description: "Characteristic loft features",
+      },
+      {
+        name: "City Views",
+        description: "Panoramic views of the bustling city streets",
+      },
     ],
     rating: [],
-    images: [
-      { url: "/house5.jpg" },
-      { url: "/house5.jpg" },
-    ],
+    images: [{ url: "/house5.jpg" }, { url: "/house5.jpg" }],
     propertyType: "Loft",
     agent: { id: "agent654", ref: "Sophia Rodriguez" },
     tags: ["urban-living", "modern"],
     status: "For Sale",
     virtualTour: { url: "https://example.com/virtualtour" },
     propertyHistory: {
-      previousOwners: [{ name: "Previous Owner", contact: "previous@example.com" }],
+      previousOwners: [
+        { name: "Previous Owner", contact: "previous@example.com" },
+      ],
       saleHistory: [],
       rentalHistory: [],
     },
@@ -877,5 +903,113 @@ export const socialHandles = [
     name: "youtube",
     icon: iconyoutube,
     link: "https://www.youtube.com",
+  },
+];
+
+export const Fees = [
+  {
+    type: "Property Transfer Tax",
+    description: "Based on the sale price and local regulations",
+    price: "25000",
+  },
+  {
+    type: "Legal Fees",
+    description:
+      "Approximate cost for legal services, including title transfer",
+    price: "25000",
+  },
+  {
+    type: "Home Inspection",
+    description: "Recommended for due diligence",
+    price: "500",
+  },
+  {
+    type: "Property Insurance",
+    description: "Annual cost for comprehensive property insurance",
+    price: "1200",
+  },
+  {
+    type: "Mortgage Fees",
+    description: "If applicable, consult with your lender for specific details",
+    price: "varies",
+  },
+];
+export const monthlyFees = [
+  {
+    type: "Property Tax",
+    description:
+      "Approximate monthly property tax based on the sale price and local rates",
+    price: "12500",
+  },
+  // {
+  //   type: "Homeowners' Association Fee",
+  //   description: "Monthly fee for common area maintenance and security",
+  //   price: "300",
+  // },
+  // {
+  //   type: "Home Inspection",
+  //   description: "Recommended for due diligence",
+  //   price: "500",
+  // },
+  // {
+  //   type: "Property Insurance",
+  //   description: "Annual cost for comprehensive property insurance",
+  //   price: "1200",
+  // },
+  // {
+  //   type: "Property Insurance",
+  //   description: "Annual cost for comprehensive property insurance",
+  //   price: "1200",
+  // },
+];
+
+export const feeTotalInitialCostss = [
+  {
+    type: "Listing Price",
+    description: "",
+    price: "1250000",
+  },
+  {
+    type: "Additional Fees",
+    description: "Property transfer tax, legal fees, inspection, insurance",
+    price: "29700",
+  },
+  {
+    type: "Down Payment",
+    description: "",
+    price: "250000",
+  },
+  {
+    type: "Mortgage Amount",
+    description: "if Applicable",
+    price: "1000000",
+  },
+  // {
+  //   type: "Property Insurance",
+  //   description: "Annual cost for comprehensive property insurance",
+  //   price: "1200",
+  // },
+];
+
+export const monthlyExpenses = [
+  {
+    type: "Property Taxes",
+    description: "",
+    price: "1250",
+  },
+  {
+    type: "Homeowners' Association Fee",
+    description: "",
+    price: "300",
+  },
+  {
+    type: "Mortgage Payment",
+    description: "if Applicable",
+    price: "Varies based on terms and interest rate",
+  },
+  {
+    type: "Property Insurance",
+    description: "Approximate monthly cost",
+    price: "100",
   },
 ];
