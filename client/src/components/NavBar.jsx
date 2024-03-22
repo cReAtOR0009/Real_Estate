@@ -13,7 +13,7 @@ import {
 } from "../features/auth/authSlice";
 import { useSelector } from "react-redux";
 
-import CartList from "./properties/cartList";
+import CartList from "./cartList";
 
 const ItemContainer = (image, title, quantity) => {
   return <></>;
@@ -53,8 +53,8 @@ const NavBar = () => {
                       ? `/`
                       : navlink.id === "login"
                       ? "/login"
-                      : !token
-                      ? "/login"
+                      // : !token
+                      // ? "/login"
                       : navlink.id
                   }
                   className="px-[15px] py-[10px] w-[150px] h-[50px] text-center "
@@ -142,7 +142,7 @@ const NavBar = () => {
           )}
         </div>
       </nav>
-      {console.log("cartstate from nav", cart.cartstate)}
+      {/* {console.log("cartstate from nav", cart.cartstate)} */}
       {cart.cartstate && <CartList />}
     </>
   );
