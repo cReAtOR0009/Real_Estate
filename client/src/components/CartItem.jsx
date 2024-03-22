@@ -11,10 +11,10 @@ const truncateDetails = (words, maxLength) => {
   return truncatedWords;
 };
 
-const CartItem = ({ image, title, id, description, price }) => {
-
-  
-  const truncatedDetails = truncateDetails(description, 10);
+const CartItem = ({ image, name, id, description, price }) => {
+  const truncatedDetails = truncateDetails(description, 30);
+  // console.log("trauncated truncateDetails: ", truncatedDetails)
+  // console.log("name", name);
   const { deleteCartItem } = useContext(CartContext);
 
   const DeleteItemFromCart = () => {
@@ -28,11 +28,15 @@ const CartItem = ({ image, title, id, description, price }) => {
         className="flex  items-center justify-between gap-[10px] w-full"
       >
         <div className=" relative  hover:scale-105 transition-all duration-75 ease-in-out grid items-center">
-          <img
-            className=" w-36 h-[auto] object-fill lg:w-40 lg:h-15"
-            src={image.url}
-            alt={`cart image for ${title}`}
-          />
+          {image ? (
+            <img
+              className=" w-36 h-[auto] object-fill lg:w-40 lg:h-15"
+              src={image?.url}
+              alt={`cart image for ${name}`}
+            />
+          ) : (
+            <div>no Image Found </div>
+          )}
           {/* <div className="absolute right-1 top-1 bg-white/80 text-black text-xs px-1 rounded">
             ${price}
           </div> */}
@@ -40,8 +44,12 @@ const CartItem = ({ image, title, id, description, price }) => {
         <div>
           <div className="grid items-center gap-4">
             <div className="grid items-center leading-none">
-              <h1 className="font-medium">{title}</h1>
-              <p className={`${styles.cartParagraph}`}>{truncatedDetails}</p>
+              <h1 className="font-medium">{name}</h1>
+              <p
+                className={`${styles.cartParagraph} justify-self-start text-left`}
+              >
+                {truncatedDetails}
+              </p>
             </div>
           </div>
         </div>
