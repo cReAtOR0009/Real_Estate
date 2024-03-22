@@ -8,8 +8,16 @@ const {
 
 const router = express.Router();
 
-router.post("/checkout", (req, res) => {
+router.post("/", (req, res) => {
     checkoutController.checkout(req, res)
+})
+
+router.get("/successfull", (req, res) => {
+  checkoutController.checkoutSuccesfull(req, res)
+})
+
+router.get("/failed", (req, res) => {
+  checkoutController.checkoutFailed(req, res)
 })
 
 module.exports = router
