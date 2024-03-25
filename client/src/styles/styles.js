@@ -34,6 +34,7 @@ const styles = {
     "px-[16px] py-[20px] border border-Grey-15 rounded-[6px] bg-Grey-10 text-Grey-40 lg:rounded-[8px] text-[14px]",
   inputFied2:
     "px-[36px] py-[20px] border border-Grey-15 rounded-[6px] bg-Grey-08 text-Grey-40 lg:rounded-[8px] text-[14px]",
+  checkbox: "p-[5px] border border-solid border-Grey-60 h-[50px]",
 };
 
 export { styles };

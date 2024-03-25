@@ -6,10 +6,13 @@ import {
   uploadBytesResumable,
   app,
 } from "../firebase.config";
+import InputField from "./formComponent/InputField";
+import SelectField2 from "./formComponent/SelectField2";
 import { styles } from "../styles/styles";
 import { formReducer, initialFormData } from "../context/PropertyContext";
 // import { useDispatch } from "react-redux";
 import { useAddpropertyMutation } from "../features/auth/authApiSlice";
+import CheckBox from "./formComponent/CheckBox";
 
 const AddProperty = () => {
   const [formData, dispatch] = useReducer(formReducer, initialFormData);
@@ -57,7 +60,7 @@ const AddProperty = () => {
   };
 
   const deleteAmenity = (index) => {
-    dispatch({ type: "DELETE_AMENITIES", payload: {index} });
+    dispatch({ type: "DELETE_AMENITIES", payload: { index } });
   };
 
   const resetForm = () => {
@@ -112,6 +115,29 @@ const AddProperty = () => {
 
     setErrors(newErrors);
     return isValid;
+  };
+
+  const addPropertyWithoutImages = async () => {
+    try {
+      console.log("this is formdata without image", formData.images);
+      const propertyDetails = await addProperty({
+        ...formData,
+      }).unwrap();
+      console.log("propertyDetails:", propertyDetails.data);
+      resetForm();
+    } catch (error) {
+      if (error.data?.error) {
+        setErrors((err) => [...err, error.data.error]);
+      } else {
+        setErrors((err) => [...err, error.message]);
+      }
+      setVisible(true);
+      console.log("visible state:", visible);
+      setTimeout(() => {
+        setVisible(false);
+        // setErrors(error.data.error);
+      }, 15000);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -224,28 +250,7 @@ const AddProperty = () => {
               }
             })
           )
-        : (async () => {
-            try {
-              console.log("this is formdata without image", formData.images);
-              const propertyDetails = await addProperty({
-                ...formData,
-              }).unwrap();
-              console.log("propertyDetails:", propertyDetails.data);
-              resetForm();
-            } catch (error) {
-              if (error.data?.error) {
-                setErrors((err) => [...err, error.data.error]);
-              } else {
-                setErrors((err) => [...err, error.message]);
-              }
-              setVisible(true);
-              console.log("visible state:", visible);
-              setTimeout(() => {
-                setVisible(false);
-                // setErrors(error.data.error);
-              }, 15000);
-            }
-          })();
+        : addPropertyWithoutImages;
     }
   };
 
@@ -285,16 +290,15 @@ const AddProperty = () => {
       <h2 className="text-[25px] text-center">Add New Property</h2>
       {/* {errors.title && <span className="text-[20px]">{errors.title}</span>} */}
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label>Title:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
+        <InputField
+          placeholder="Property Name"
           type="text"
           name="title"
-          placeholder="Property Name"
-          value={formData.title}
+          label="title"
+          styles={styles.inputFied}
           onChange={handleChange}
+          value={formData.title}
         />
-
         <label>Description:</label>
         <textarea
           className="text-[black] "
@@ -303,191 +307,200 @@ const AddProperty = () => {
           value={formData.description}
           onChange={handleChange}
         />
-
-        <label>Price:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="number"
-          name="price"
-          placeholder="property Price"
-          value={formData.price}
-          onChange={handleChange}
-        />
-
-        <label>Bedrooms:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="number"
-          name="bedrooms"
-          placeholder="number of Bedrooms"
-          value={formData.bedrooms}
-          onChange={handleChange}
-        />
-
-        <label>Bathrooms:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="number"
-          name="bathrooms"
-          placeholder="number of Bathrooms"
-          value={formData.bathrooms}
-          onChange={handleChange}
-        />
-
-        <label>Size:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="number"
-          name="size"
-          placeholder="property Size"
-          value={formData.size}
-          onChange={handleChange}
-        />
-
-        <label>Street:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="text"
-          name="address.street"
-          value={formData.address.street}
-          onChange={handleChange}
-        />
-
-        <label>City:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="text"
-          name="address.city"
-          value={formData.address.city}
-          onChange={handleChange}
-        />
-
-        <label>State:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="text"
-          name="address.state"
-          value={formData.address.state}
-          onChange={handleChange}
-        />
-
-        <label>Zipcode:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="text"
-          name="address.zipcode"
-          value={formData.address.zipcode}
-          onChange={handleChange}
-        />
-
-        {/* Amenities */}
-        <div className="flex flex-wrap items-center gap-[10px] border border-solid border-Grey-60 my-[10px] p-[5px]">
-          <label>Swimming Pool:</label>
-          <input
-            className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="checkbox"
-            name="amenities.swimmingPool"
-            checked={formData.amenities.swimmingPool}
+        <div className="flex flex-wrap gap-[30px]">
+          <InputField
+            placeholder="Set property Price"
+            type="number"
+            name="price"
+            label="price"
+            styles={`${styles.inputFied}`}
             onChange={handleChange}
+            value={formData.price}
+          />
+          <InputField
+            type="number"
+            name="bedrooms"
+            label="No of Bedrooms"
+            placeholder="number of Bedrooms"
+            value={formData.bedrooms}
+            onChange={handleChange}
+            styles={styles.inputFied}
+          />
+          <InputField
+            type="number"
+            name="bathrooms"
+            label="No of Bathrooms"
+            placeholder="number of Bathrooms"
+            value={formData.bathrooms}
+            onChange={handleChange}
+            styles={styles.inputFied}
           />
 
-          <label>Garden:</label>
-          <input
-            className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="checkbox"
-            name="amenities.garden"
-            checked={formData.amenities.garden}
+          <InputField
+            type="number"
+            name="size"
+            label="Property Size"
+            placeholder="property Size"
+            value={formData.size}
             onChange={handleChange}
+            styles={styles.inputFied}
           />
 
-          <label>Garage:</label>
-          <input
-            className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="checkbox"
-            name="amenities.garage"
-            checked={formData.amenities.garage}
+          <InputField
+            type="text"
+            name="address.street"
+            label="Property Adress: Street"
+            value={formData.address.street}
             onChange={handleChange}
+            placeholder="property Address Street"
+            styles={styles.inputFied}
           />
-
-          <label>Gym:</label>
-          <input
-            className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="checkbox"
-            name="amenities.gym"
-            checked={formData.amenities.gym}
+          <InputField
+            type="text"
+            name="address.city"
+            label="Property Adress: City"
+            value={formData.address.city}
             onChange={handleChange}
+            placeholder="property Address"
+            styles={styles.inputFied}
           />
-
-          <label>securitySystem:</label>
-          <input
-            className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="checkbox"
-            name="amenities.securitySystem"
-            checked={formData.amenities.securitySystem}
+          <InputField
+            type="text"
+            name="address.state"
+            label="Property Adress: State"
+            value={formData.address.state}
             onChange={handleChange}
+            placeholder="property Address City"
+            styles={styles.inputFied}
           />
-
-          <label>balcony:</label>
-          <input
-            className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="checkbox"
-            name="amenities.balcony"
-            checked={formData.amenities.balcony}
+          <InputField
+            type="text"
+            name="address.zipcode"
+            label="Property Adress: Zipcode"
+            value={formData.address.zipcode}
             onChange={handleChange}
-          />
-
-          <label>centralHeating:</label>
-          <input
-            className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="checkbox"
-            name="amenities.centralHeating"
-            checked={formData.amenities.centralHeating}
-            onChange={handleChange}
-          />
-
-          <label>airConditioning:</label>
-          <input
-            className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-            type="checkbox"
-            name="amenities.airConditioning"
-            checked={formData.amenities.airConditioning}
-            onChange={handleChange}
+            placeholder="property address zipcode"
+            styles={styles.inputFied}
           />
         </div>
 
-        {/* nearby amenities */}
+        {/* Amenities */}
+        <div className="flex flex-wrap items-center gap-[10px] border border-solid border-Grey-60 my-[10px] p-[5px]">
+          <div className=" flex items-center justify-between min-w-[130px] max-w-[150px] grow">
+            <CheckBox
+              className={`${styles.checkbox}`}
+              type="checkbox"
+              name="amenities.swimmingPool"
+              label="Swimming Pool"
+              checked={formData.amenities.swimmingPool}
+              onChange={handleChange}
+            />
+          </div>
+          <div className=" flex items-center justify-between min-w-[130px] max-w-[150px] grow">
+            <CheckBox
+              className={`${styles.checkbox}`}
+              type="checkbox"
+              name="amenities.garden"
+              label="Garden"
+              checked={formData.amenities.garden}
+              onChange={handleChange}
+            />
+          </div>
+          <div className=" flex items-center justify-between min-w-[130px] max-w-[150px] grow">
+            <CheckBox
+              className={`${styles.checkbox}`}
+              type="checkbox"
+              name="amenities.garage"
+              checked={formData.amenities.garage}
+              onChange={handleChange}
+              label="Garage"
+            />
+          </div>
+          <div className=" flex items-center justify-between min-w-[130px] max-w-[150px] grow">
+            <CheckBox
+              className={`${styles.checkbox}`}
+              type="checkbox"
+              name="amenities.gym"
+              checked={formData.amenities.gym}
+              onChange={handleChange}
+              label="Gym"
+            />
+          </div>
+          <div className=" flex items-center justify-between min-w-[130px] max-w-[150px] grow">
+            <CheckBox
+              className={`${styles.checkbox}`}
+              type="checkbox"
+              name="amenities.securitySystem"
+              checked={formData.amenities.securitySystem}
+              onChange={handleChange}
+              label="securitySystem"
+            />
+          </div>
+          <div className=" flex items-center justify-between min-w-[130px] max-w-[150px] grow">
+            <CheckBox
+              className={`${styles.checkbox}`}
+              type="checkbox"
+              name="amenities.balcony"
+              checked={formData.amenities.balcony}
+              onChange={handleChange}
+              label="balcony"
+            />
+          </div>
+          <div className=" flex items-center justify-between min-w-[130px] max-w-[150px] grow">
+            <CheckBox
+              className={`${styles.checkbox}`}
+              type="checkbox"
+              name="amenities.centralHeating"
+              checked={formData.amenities.centralHeating}
+              onChange={handleChange}
+              label="centralHeating"
+            />
+          </div>
 
-        <label>Nearby Amenities:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
+          <div className=" flex items-center justify-between min-w-[130px] max-w-[150px] grow">
+            <CheckBox
+              className={`${styles.checkbox}`}
+              type="checkbox"
+              name="amenities.airConditioning"
+              checked={formData.amenities.airConditioning}
+              onChange={handleChange}
+              label="airConditioning"
+            />
+          </div>
+        </div>
+
+        {/* nearby amenities */}
+        <InputField
+          label="Nearby Amenities"
+          styles={styles.inputFied}
           value={formData.nearbyAmenities}
           type="text"
           name="nearbyAmenities"
-          placeholder="seperate additional feature with comma"
+          placeholder={`seperate additional feature with comm(",")`}
           onChange={handleChange}
         />
 
         {/* Additional Features */}
-        <div className="flex flex-col flex-grow  flex-wrap gap-[10px] my-[5px]">
-          <h2 className="text-[20px] text-center">Additional Features</h2>
+        <div className="flex flex-wrap flex-grow  gap-[10px] my-[15px]">
+          {/* <h2 className="text-[20px] text-center">Additional Features</h2> */}
           {/* <label>Additional Features:</label> */}
           {formData.additionalFeatures.map((feature, index) => (
             <div
               key={index}
-              className=" flex flex-col border border-solid relative"
+              className=" flex flex-wrap grow gap-[20px] p-[10px] border border-solid rounded-[10px] relative"
             >
-              <label>Feature Name:</label>
-              <input
-                className="p-[5px] border border-solid border-Grey-60 h-[50px]"
+              <InputField
+                label="Feature Name"
+                styles={styles.inputFied}
                 type="text"
                 name="name"
                 value={feature.name}
                 onChange={(e) => handleFeatureDescriptionChange(e, index)}
                 placeholder="Name"
               />
-              <label>Feature Description:</label>
-              <input
-                className="p-[5px] border border-solid border-Grey-60 h-[50px]"
+              <InputField
+                label="Feature Description"
+                styles={styles.inputFied}
                 type="text"
                 name="description"
                 value={feature.description}
@@ -496,7 +509,7 @@ const AddProperty = () => {
               />
               <button
                 onClick={() => deleteAmenity(index)}
-                className="absolute right-2 top-0 bg-[red]"
+                className="absolute right-2 top-5 bg-[red]"
               >
                 delete
               </button>
@@ -507,81 +520,74 @@ const AddProperty = () => {
             type="button"
             onClick={addAdditionalFeature}
           >
-            Add Extra Feature
+            Click to Add Extra Feature
           </button>
+        </div>
+
+        {/* Add input className="p-[5px] border border-solid border-Grey-60 h-[50px]" fields for other properties */}
+        <div className="flex flex-wrap gap-[30px]">
+          <SelectField2
+            label={"Property Type"}
+            onChange={handleChange}
+            styles={`${styles.inputFied}  min-w-[100px]`}
+            options={[
+              "House",
+              "Apartment",
+              "Condo",
+              "Land",
+              "Commercial",
+              "Villa",
+            ]}
+          />
+          <SelectField2
+            label="status"
+            onChange={handleChange}
+            styles={`${styles.inputFied} min-w-[100px] `}
+            options={["For Sale", "For Rent", "For Lease"]}
+          />
+          <InputField
+            styles={styles.inputFied}
+            type="text"
+            name="tags"
+            label="Tags"
+            value={formData.tags}
+            onChange={handleChange}
+            placeholder="Separate tags with comma"
+          />
+          <InputField
+            styles={styles.inputFied}
+            type="text"
+            name="virtualTour"
+            label={"Virtual Tour"}
+            value={formData.virtualTour}
+            onChange={handleChange}
+          />
         </div>
 
         {/* Images */}
         <div className="flex  justify-center items-center flex-wrap gap-[10px]">
-          <label>Add Property Images:</label>
-          <input type="file" multiple onChange={handleImageUpload} />
-          <div className="flex flex-wrap gap-[10px] border border-solid border-Purple-60 rounded-[10px] p-[10px]">
-            {formData.images.map((image, index) => (
-              <img
-                className="w-[100px] h-[100px] rounded-[10px]"
-                key={index}
-                src={image.imageUrl}
-                alt={`Image ${index}`}
-              />
-            ))}
+          <div className="my-[20px]">
+            <label>Add Property Images:</label>
+            <input type="file" multiple onChange={handleImageUpload} />
+            {formData.images.length > 0 && (
+              <div className="flex flex-wrap gap-[10px] border border-solid border-Purple-60 rounded-[10px] p-[10px]">
+                {formData.images.map((image, index) => (
+                  <img
+                    className="w-[100px] h-[100px] rounded-[10px]"
+                    key={index}
+                    src={image.imageUrl}
+                    alt={`Image ${index}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
-
-        {/* Add input className="p-[5px] border border-solid border-Grey-60 h-[50px]" fields for other properties */}
-        <label>Property Type:</label>
-        <select
-          className="bg-Grey-10 text-[white]"
-          name="propertyType"
-          id="propertyType"
-          onChange={handleChange}
-        >
-          <option value="House">House</option>
-          <option value="Apartment">Apartment</option>
-          <option value="Condo">Condo</option>
-          <option value="Land">Land</option>
-          <option value="Commercial">Commercial</option>
-          <option value="Villa">Villa</option>
-        </select>
-
-        <label>Tags:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="text"
-          name="tags"
-          value={formData.tags}
-          onChange={handleChange}
-          placeholder="Separate tags with comma"
-        />
-
-        <label>Status:</label>
-        <select
-          className="bg-Grey-10 text-[white]"
-          name="status"
-          id="status"
-          onChange={handleChange}
-        >
-          <option value="">status</option>
-          <option value="For Sale">For Sale</option>
-          <option value="For Rent">For Rent</option>
-          <option value="For Lease">For Lease</option>
-        </select>
-
-        <label>Virtual Tour:</label>
-        <input
-          className="p-[5px] border border-solid border-Grey-60 h-[50px]"
-          type="text"
-          name="virtualTour"
-          value={formData.virtualTour}
-          onChange={handleChange}
-        />
-
-        {/* Add more input className="p-[5px] border border-solid border-Grey-60 h-[50px]" fields for other properties */}
-        {/* <div className="flex tetx-center items-center justify-center"> */}
         <button
-          className=" px-[10px] my-[20px] py-[15px] bg-Purple-60"
+          className={`${styles.buttonPadding} bg-Purple-60`}
           type="submit"
         >
-          Submit
+          Add Property
         </button>
         {/* </div> */}
       </form>

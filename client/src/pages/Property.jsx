@@ -443,13 +443,11 @@ const Property = () => {
                         )
                     )}
                     <div className="flex flex-col">
-                      <label htmlFor="selected property">
-                        Selected Property
-                      </label>
                       <InputField
                         type={"text"}
                         placeholder={`${name} ${address.street},${address.city},${address.state} `}
                         name={"selected property"}
+                        label={"Selected Property"}
                         onChange={() => {}}
                         styles={styles.inputFied}
                         value={`${name} ${address.street},${address.city},${address.state}`}

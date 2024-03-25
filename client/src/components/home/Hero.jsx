@@ -8,6 +8,8 @@ import {
   iconContainer2,
   iconContainer3,
 } from "../../assets/imageImporter";
+import OffersCard from "../smallcomponents/OffersCard";
+import AchievementCard from "../smallcomponents/AchievementCard";
 import "../../styles/hero.css";
 import { styles } from "../../styles/styles";
 import { Link } from "react-router-dom";
@@ -17,31 +19,6 @@ import {
   selectCurrentToken,
   selectCurrentUser,
 } from "../../features/auth/authSlice";
-
-const AchievementCard = ({ numbers, title }) => {
-  return (
-    <div className="achievementsCard">
-      <div>
-        <h2 className="fontWeight2">{`${
-          numbers > 1000 ? numbers / 1000 + "K" : numbers + "+"
-        }`}</h2>
-      </div>
-      <p className="greyText smallText2">{title}</p>
-    </div>
-  );
-};
-
-const OffersCard = ({ offer, icon, icon2 }) => {
-  return (
-    <div className="headerSection2Card">
-      <div>
-        <img src={icon} alt="" />
-      </div>
-      <p>{offer}</p>
-      <img src={icon2} alt="" />
-    </div>
-  );
-};
 
 const Hero = () => {
   const user = useSelector(selectCurrentUser);
@@ -66,7 +43,7 @@ const Hero = () => {
                 Explore our listings to find the home that matches your dreams.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row sm: gap-[20px] my-[60px]">
+            <div className="flex flex-col sm:flex-row sm:gap-[20px] my-[60px]">
               <button
                 className={`${styles.buttonPadding} ${styles.blackButton}`}
               >
@@ -92,7 +69,7 @@ const Hero = () => {
           </section>
         </div>
       </header>
-      <div className=" headerSection2">
+      <div className=" ">
         {offers.map((offer, index) => (
           <OffersCard key={index} {...offer} />
         ))}
