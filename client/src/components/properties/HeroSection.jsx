@@ -19,6 +19,7 @@ import { Houses } from "../../assets/textAssets.js";
 import { NavigationContext } from "../../context/navigationContext.jsx";
 import { CartContext } from "../../context/cartContext.jsx";
 import MainHeaderContainer from "../smallcomponents/MainHeaderContainer.jsx";
+import Amenity from "../Amenity.jsx";
 
 const SearchParameterInput = ({
   icon,
@@ -52,6 +53,7 @@ const HouseCard = ({
   images,
   name,
   description,
+  amenities,
   features,
   price,
   index,
@@ -61,7 +63,7 @@ const HouseCard = ({
   const { setNavActive, activeNav } = useContext(NavigationContext);
   const { addToCart, toggleCart } = useContext(CartContext);
   const handleAddToCart = () => {
-    addToCart(id, price, description, image, name);
+    addToCart(id, price, description, images[0]?.imageUrl, name);
     toggleCart();
   };
   const truncateDetails = (content, maxLength) => {
@@ -85,6 +87,26 @@ const HouseCard = ({
         </div>
         <div>
           <div className="pt-[24px] md:[30px] lg:[40px]">
+            {/* {console.log("ammenities", amenities)}
+            {console.log(
+              "Object.keys(ammenities): ",
+              amenities ? Object.keys(amenities) : "null"
+            )}
+            {console.log(
+              "Object.keys(ammenities): ",
+              amenities ? Object.values(amenities) : "null"
+            )} */}
+            <div className="flex flex-wrap border border-y-[2px] border-Grey-15 p-[10px] gap-[10px]">
+              {Object.keys(amenities).map((ammenity, index) => {
+                return (
+                  <Amenity
+                    icon={Object.keys(amenities)[index]}
+                    available={Object.values(amenities)[index]}
+                    text={Object.keys(amenities)[index]}
+                  />
+                );
+              })}
+            </div>
             <p
               className={`${styles.paragraph} w-[auto] inline-block px-[12px] py-[6px] lg:px-[14px] lg:py-[8px] text-[14px] rounded-[28px] border border-Grey-15 text-white-90`}
             >
