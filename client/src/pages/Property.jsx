@@ -21,14 +21,6 @@ import InputField from "../components/formComponent/InputField";
 import { MdBathroom, MdLocationOn } from "react-icons/md";
 import { MdBedroomChild } from "react-icons/md";
 import { BsRulers } from "react-icons/bs";
-import { FaSwimmingPool } from "react-icons/fa";
-import { FaPlantWilt } from "react-icons/fa6";
-import { GiHomeGarage } from "react-icons/gi";
-import { CgGym } from "react-icons/cg";
-import { GrShieldSecurity } from "react-icons/gr";
-import { MdBalcony } from "react-icons/md";
-import { GiHotSpices } from "react-icons/gi";
-import { TbAirConditioning } from "react-icons/tb";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import AdditionalFeatures from "../components/AdditionalFeatures";
 import HeaderContainer from "../components/textComponents/HeaderContainer";
@@ -255,46 +247,15 @@ const Property = () => {
                   <div>
                     <h2 className="text-[20px] ">Common Features: </h2>
                     <div className="flex flex-wrap border border-y-[2px] border-Grey-15 p-[10px] gap-[10px]">
-                      <Amenity
-                        icon={<FaSwimmingPool size={25} />}
-                        text="Swimming Pool"
-                        available={amenities.swimmingPool}
-                      />
-                      <Amenity
-                        icon={<FaPlantWilt size={25} />}
-                        text="Garden"
-                        available={amenities.garden}
-                      />
-                      <Amenity
-                        icon={<GiHomeGarage size={25} />}
-                        text="Garage"
-                        available={amenities.garage}
-                      />
-                      <Amenity
-                        icon={<CgGym size={25} />}
-                        text="Gym"
-                        available={amenities.gym}
-                      />
-                      <Amenity
-                        icon={<GrShieldSecurity size={25} />}
-                        text="Security System"
-                        available={amenities.securitySystem}
-                      />
-                      <Amenity
-                        icon={<MdBalcony size={25} />}
-                        text="Balcony"
-                        available={amenities.balcony}
-                      />
-                      <Amenity
-                        icon={<GiHotSpices size={25} />}
-                        text="Central Heating"
-                        available={amenities.centralHeating}
-                      />
-                      <Amenity
-                        icon={<TbAirConditioning size={25} />}
-                        text="Air Conditioning"
-                        available={amenities.airConditioning}
-                      />
+                       {Object.keys(amenities).map((ammenity, index) => {
+                return (
+                  <Amenity
+                    icon={Object.keys(amenities)[index]}
+                    available={Object.values(amenities)[index]}
+                    text={Object.keys(amenities)[index]}
+                  />
+                );
+              })}
                     </div>
                     <div>{propertyType}</div>
                   </div>
