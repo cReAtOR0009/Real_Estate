@@ -8,6 +8,7 @@ import {
   iconContainer2,
   iconContainer3,
 } from "../../assets/imageImporter";
+import { PropertyContext } from "../../context/PropertiesContext";
 import OffersCard from "../smallcomponents/OffersCard";
 import AchievementCard from "../smallcomponents/AchievementCard";
 import "../../styles/hero.css";
@@ -69,7 +70,7 @@ const Hero = () => {
           </section>
         </div>
       </header>
-      <div className=" ">
+      <div className=" headerSection2">
         {offers.map((offer, index) => (
           <OffersCard key={index} {...offer} />
         ))}
