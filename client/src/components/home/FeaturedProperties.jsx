@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   featuredProducts,
   Houses,
@@ -10,15 +10,7 @@ import "../../styles/featured.css";
 import { styles } from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { NavigationContext } from "../../context/navigationContext";
-
-import { FaSwimmingPool } from "react-icons/fa";
-import { FaPlantWilt } from "react-icons/fa6";
-import { GiHomeGarage } from "react-icons/gi";
-import { CgGym } from "react-icons/cg";
-import { GrShieldSecurity } from "react-icons/gr";
-import { MdBalcony } from "react-icons/md";
-import { GiHotSpices } from "react-icons/gi";
-import { TbAirConditioning } from "react-icons/tb";
+import { PropertyContext } from "../../context/PropertiesContext";
 
 const FeaturedItemCard = ({
   id,
@@ -59,26 +51,16 @@ const FeaturedItemCard = ({
           </div>
           <div className="flex flex-wrap gap-[5px]">
             <div className="flex flex-wrap items-center border border-y-[2px] border-Grey-15 p-[10px] gap-[5px]">
-              <Amenity
-                icon={<FaSwimmingPool size={25} />}
-                text="Swimming Pool"
-                available={amenities.swimmingPool}
-              />
-              <Amenity
-                icon={<FaPlantWilt size={25} />}
-                text="Garden"
-                available={amenities.garden}
-              />
-              <Amenity
-                icon={<GiHomeGarage size={25} />}
-                text="Garage"
-                available={amenities.garage}
-              />
-              <Amenity
-                icon={<CgGym size={25} />}
-                text="Gym"
-                available={amenities.gym}
-              />
+              {Object.keys(amenities).map((ammenity, index) => {
+                return (
+                  <Amenity
+                    key={index}
+                    icon={Object.keys(amenities)[index]}
+                    available={Object.values(amenities)[index]}
+                    text={Object.keys(amenities)[index]}
+                  />
+                );
+              })}
               <p className="text-Purple-60 align-bottom">
                 <Link to={`/properties/${id}`}>Check More...</Link>
               </p>
@@ -108,24 +90,123 @@ const FeaturedItemCard = ({
   );
 };
 
-const FeaturedProperties = ({ featuredProduct = Houses }) => {
-  const itemsPerDisplay = 3;
-  const noOfPages = Math.ceil(featuredProduct.length / itemsPerDisplay);
+const FeaturedProperties = () => {
+  const [FeaturedHouse, setFeaturedHouse] = useState([]);
+  // const [content, setContent] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  //  const itemsPerDisplay = 3;
+  // const noOfPages = Math.ceil(featuredProduct.length / itemsPerDisplay);
+  // const [currentPage, setCurrentPage] = useState(1);
 
-  const startIndex = (currentPage - 1) * itemsPerDisplay;
-  const endIndex = startIndex + itemsPerDisplay;
+  // const startIndex = (currentPage - 1) * itemsPerDisplay;
+  // const endIndex = startIndex + itemsPerDisplay;
 
-  const displayedFeaturedItems = featuredProduct.slice(startIndex, endIndex);
+  // const displayedFeaturedItems = featuredProduct.slice(startIndex, endIndex);
 
-  const handlePrevClick = () => {
+  // const handlePrevClick = () => {
+  //   setCurrentPage((prevPage) => Math.max(prevPage - 1, 1)); // Ensure the page doesn't go below 0
+  // };
+
+  // // Handle click event for the "Next" button
+  // const handleNextClick = () => {
+  //   setCurrentPage((prevPage) => Math.min(prevPage + 1, noOfPages)); // Ensure the page doesn't exceed the total number of pages
+  // }; 
+  let content;
+  // let properties;
+
+  const {
+    // fetchProperties,
+    getProperties,
+    properties,
+    // handleFetchProperties,
+    // setProperties,
+    // setPropertiesError,
+    // setErrorValue,
+    // setPropertiesLoading,
+  } = useContext(PropertyContext);
+
+  const handlePrevClick = (noOfPages) => {
+    console.log("number of page: ", noOfPages);
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1)); // Ensure the page doesn't go below 0
   };
 
   // Handle click event for the "Next" button
-  const handleNextClick = () => {
+  const handleNextClick = (noOfPages) => {
+    console.log("number of page: ", noOfPages);
     setCurrentPage((prevPage) => Math.min(prevPage + 1, noOfPages)); // Ensure the page doesn't exceed the total number of pages
   };
+  if (properties.error) {
+    // return (<h1>error fetching data</h1>)
+    content = <h1>error fetching data</h1>;
+  } else if (properties.isLoading) {
+    console.log("properties.isLoading", properties.isLoading);
+    content = <h1>is loading...</h1>;
+  } else if (properties.properties.length > 0) {
+    console.log("properties.properties.length: ", properties.properties.length);
+    const itemsPerDisplay = 3;
+    const noOfPages =
+      FeaturedHouse.length >= 3
+        ? Math.ceil(FeaturedHouse.length / itemsPerDisplay)
+        : 1;
+    // const [currentPage, setCurrentPage] = useState(1);
+
+    const startIndex = (currentPage - 1) * itemsPerDisplay;
+    const endIndex = startIndex + itemsPerDisplay;
+
+    const displayedFeaturedItems =
+      FeaturedHouse >= 3
+        ? FeaturedHouse.slice(startIndex, endIndex)
+        : FeaturedHouse;
+    console.log("displayedFeaturedItems: ", displayedFeaturedItems);
+    console.log("noOfPages: ", noOfPages);
+    content = (
+      <div>
+        <div className="featuredItemListContainer">
+          {displayedFeaturedItems.map((FeaturedHouse, index) => (
+            <FeaturedItemCard key={index} index={index} {...FeaturedHouse} />
+          ))}
+          ;
+        </div>
+
+        <div className="featuredToggle">
+          <p>
+            <span className="currentPage">{currentPage}</span>of
+            <span className="totalPage">{noOfPages}</span>
+          </p>
+          <div className="toggleButton">
+            <div
+              className="previous"
+              onClick={() => handlePrevClick()}
+              disabled={currentPage === 0}
+            >
+              <img src={leftarrow} alt="" />
+            </div>
+            <div
+              className="next"
+              onClick={() => handleNextClick(noOfPages)}
+              disabled={currentPage === noOfPages - 1}
+            >
+              <img src={rightarrow} alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    content = <div>interesting...................</div>;
+  }
+
+  console.log("properties from featured: ", properties);
+  useEffect(() => {
+    // getProperties();
+    // console.log("useeffect content: ", content);
+    setFeaturedHouse(properties.properties);
+    // console.log("getProperties: ", properties);
+    // console.log("isLoading: ", properties.isLoading);
+    // return content
+    // return () => content;
+  }, [properties]);
+
   return (
     <div id="features" className={`${styles.homeheader}`}>
       <div
@@ -149,33 +230,8 @@ const FeaturedProperties = ({ featuredProduct = Houses }) => {
       </div>
 
       <div className="featuredItemsContainerWrapper">
-        <div className=" featuredItemListContainer ">
-          {displayedFeaturedItems.map((featuredProduct, index) => (
-            <FeaturedItemCard key={index} index={index} {...featuredProduct} />
-          ))}
-        </div>
-        <div className="featuredToggle">
-          <p>
-            <span className="currentPage">{currentPage}</span>of
-            <span className="totalPage">{noOfPages}</span>
-          </p>
-          <div className="toggleButton">
-            <div
-              className="previous"
-              onClick={handlePrevClick}
-              disabled={currentPage === 0}
-            >
-              <img src={leftarrow} alt="" />
-            </div>
-            <div
-              className="next"
-              onClick={handleNextClick}
-              disabled={currentPage === noOfPages - 1}
-            >
-              <img src={rightarrow} alt="" />
-            </div>
-          </div>
-        </div>
+        {content}
+        {console.log("content", content)}
       </div>
     </div>
   );
