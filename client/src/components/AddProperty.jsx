@@ -9,7 +9,7 @@ import {
 import InputField from "./formComponent/InputField";
 import SelectField2 from "./formComponent/SelectField2";
 import { styles } from "../styles/styles";
-import { formReducer, initialFormData } from "../context/PropertyContext";
+import { formReducer, initialFormData } from "../context/AddPropertyContext";
 // import { useDispatch } from "react-redux";
 import { useAddpropertyMutation } from "../features/auth/authApiSlice";
 import CheckBox from "./formComponent/CheckBox";
