@@ -114,7 +114,7 @@ export const CartContextProvider = ({ children }) => {
     dispatch({ type: "GET_TOTAL" });
   };
   useEffect(() => {
-    localStorage.setItem("carted_Properties", JSON.stringify(cart));
+    return localStorage.setItem("carted_Properties", JSON.stringify(cart));
   }, [cart.properties]);
 
   return (
