@@ -71,13 +71,10 @@ const Property = () => {
     isUninitialized,
     refetch,
   } = useFetchPropertiesQuery();
-  // const scrollToTop = (() => {
-  //   window.scrollTo(0, 0);
-  // })();
   let handleAddToCart;
   let content;
   let house;
-  console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
+  // console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
 
   if (Houses.length > 0) {
     house = Houses.find((house, index) => house._id == propertyid);
@@ -119,10 +116,13 @@ const Property = () => {
         addToCart(id, price, description, image, name);
       };
       let displayImage = images[0].imageUrl;
+      const scrollToTop = (() => {
+        window.scrollTo(0, 0);
+      })();
       // setImageToDisplay(displayImage);
-      console.log("house", house);
-      console.log("nearbyAmenities", nearbyAmenities);
-      console.log("tags", tags);
+      // console.log("house", house);
+      // console.log("nearbyAmenities", nearbyAmenities);
+      // console.log("tags", tags);
       // console.log("tags", tags[0].split(","));
       content = (
         <>
@@ -247,15 +247,15 @@ const Property = () => {
                   <div>
                     <h2 className="text-[20px] ">Common Features: </h2>
                     <div className="flex flex-wrap border border-y-[2px] border-Grey-15 p-[10px] gap-[10px]">
-                       {Object.keys(amenities).map((ammenity, index) => {
-                return (
-                  <Amenity
-                    icon={Object.keys(amenities)[index]}
-                    available={Object.values(amenities)[index]}
-                    text={Object.keys(amenities)[index]}
-                  />
-                );
-              })}
+                      {Object.keys(amenities).map((ammenity, index) => {
+                        return (
+                          <Amenity
+                            icon={Object.keys(amenities)[index]}
+                            available={Object.values(amenities)[index]}
+                            text={Object.keys(amenities)[index]}
+                          />
+                        );
+                      })}
                     </div>
                     <div>{propertyType}</div>
                   </div>
@@ -606,7 +606,7 @@ const Property = () => {
       <div className="mt-[200px]">Error fetching Data: {errorHere}</div>
     );
   } else if (Houses.length < 0) {
-    console.log("data: ", data);
+    // console.log("data: ", data);
     content = (
       <div className="mt-[200px]">
         Opps, no Property Found in Db :({" "}
@@ -627,8 +627,8 @@ const Property = () => {
         setHouses(data.data);
         setImageToDisplay(data.data[0].images[0].imageUrl);
         // console.log("Houses: ", data);
-        console.log("currentData: ", currentData);
-        console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
+        // console.log("currentData: ", currentData);
+        // console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
         // house = Houses.find((house, index) => house._id == propertyid);
       }
     };
