@@ -5,8 +5,7 @@ import "../../styles/faq.css";
 import { leftarrow, rightarrow } from "../../assets/imageImporter";
 
 const FaqBox = ({ faq }) => {
-  console.log("faq: ", faq);
-  const itemsPerDisplay = 3;
+    const itemsPerDisplay = 3;
   const faqLength = faq.length;
   const noOfPages = Math.ceil(faqLength / itemsPerDisplay);
   const [currentPage, setCurrentPage] = useState(1);
