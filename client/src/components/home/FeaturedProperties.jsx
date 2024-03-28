@@ -13,7 +13,7 @@ import { NavigationContext } from "../../context/navigationContext";
 import { PropertyContext } from "../../context/PropertiesContext";
 
 const FeaturedItemCard = ({
-  id,
+  _id,
   images,
   title,
   description,
@@ -21,6 +21,7 @@ const FeaturedItemCard = ({
   price,
   index,
 }) => {
+  let id = _id;
   const { setNavActive, activeNav } = useContext(NavigationContext);
   const truncateDetails = (content, maxLength) => {
     const words = content.split(" ");
@@ -76,7 +77,7 @@ const FeaturedItemCard = ({
             >
               <button className="">
                 <Link
-                  to={`properties/${index}`}
+                  to={`properties/${id}`}
                   onClick={() => setNavActive("properties")}
                 >
                   View Property Details
@@ -110,7 +111,7 @@ const FeaturedProperties = () => {
   // // Handle click event for the "Next" button
   // const handleNextClick = () => {
   //   setCurrentPage((prevPage) => Math.min(prevPage + 1, noOfPages)); // Ensure the page doesn't exceed the total number of pages
-  // }; 
+  // };
   let content;
   // let properties;
 
