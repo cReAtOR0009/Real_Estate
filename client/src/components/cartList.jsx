@@ -41,25 +41,10 @@ const CartList = () => {
     }
   };
 
-  // getTotal;
-
-  //   useEffect(() => {
-  //     const handleClick = (e) => {
-  //       if (componentRef.current && componentRef.current.contains(e.target)) {
-  //         console.log("Clicked inside!");
-  //       } else if (cart.cartstate) {
-  //         console.log("hello");
-  //         // if (cart.cartstate == true) {
-  //         console.log("cart state true, so Hello");
-  //         toggleCart();
-  //         // }
-  //       }
-  //     };
-  //     document.addEventListener("click", handleClick);
-  //     return () => {
-  //       document.removeEventListener("click", handleClick);
-  //     };
-  //   }, [cart.cartstate]);
+  useEffect(() => {
+    getTotal();
+    console.log("CartList:.............");
+  }, []);
 
   return (
     <>
@@ -77,7 +62,7 @@ const CartList = () => {
           </h1>
           <div className="flex flex-col gap-[10px] grow">
             {cart.properties.map((property, index) => {
-              console.log("properties...", property, index);
+              // console.log("properties...", property, index);
               return <CartItem key={index} {...property} />;
             })}
           </div>
