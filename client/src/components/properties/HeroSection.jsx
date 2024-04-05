@@ -230,7 +230,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     const handleFetchProperties = async () => {
-      console.log("fectching Properties.....");
+      // console.log("fectching Properties.....");
       if (isError) {
         // console.log("error fetching properties");
         // return setError(["Error fetching Properties"]);
@@ -356,7 +356,7 @@ const HeroSection = () => {
 
               <div className="flex flex-col  gap-[12px] md:gap-[16px]">
                 <p>Preferred Contact Method</p>
-                <div className="flex-col justify-between self-stretch gap-[30px] md:flex md:flex-row">
+                <div className="flex-col justify-between self-stretch gap-[10px] flex md:gap-[30px]  md:flex-row">
                   <input
                     name="phone"
                     type="phone"
@@ -413,7 +413,7 @@ const HeroSection = () => {
               </div>
               <button
                 onClick={handleSubmit}
-                className={`${styles.buttonPadding} flex-1  bg-Purple-60`}
+                className={`${styles.buttonPadding}   bg-Purple-60`}
               >
                 Send Your Message
               </button>
