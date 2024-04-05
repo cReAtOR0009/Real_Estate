@@ -2,6 +2,7 @@
 export default {
   content: ["./src/**/*.{js,jsx}"],
   theme: {
+    backgroundImage: { serviceCard: "url('./assets/serviceCardBg.png')" },
     screens: {
       sm: "640px",
       // => @media (min-width: 640px) { ... }
@@ -17,6 +18,9 @@ export default {
 
       "2xl": "1920px",
       // => @media (min-width: 1536px) { ... }
+    },
+    boxShadow: {
+      cardlineshadow: "0px 0px 0px 6px  #191919",
     },
     colors: {
       "Purple-60": "#703bf7",

@@ -1,6 +1,11 @@
 import { Container } from "postcss";
 
 const styles = {
+  paddedContainer:
+    " px-[16px] py-[50px]  md:p-[80px] md:pt-[100px] md:pr-[200px] md:pb-[130px] lg:pl[100px] lg:pt-[100px] lg:pr-[200px] lg:pb-[130px] xl:px-[400px] xl:py-[150px]",
+    marginnedContainer:
+    " mx-[16px] my-[50px]  md:m-[80px] md:mt-[100px] md:mr-[200px] md:mb-[130px] lg:ml[100px] lg:mt-[100px] lg:mr-[200px] lg:mb-[130px] xl:mx-[400px] xl:my-[150px]",
+  
   homeheader: "px-[10px] md:px-[80px] xl:px-[162px] ",
   navContainer:
     "px-[16px] py-[25px]  md:px-[80px] md:py-[20px]  lg:pl[80px] lg:pt-[-100px] lg:pr-[80px]  xl:px-[400px] xl:py-[150px] color-[red]",
@@ -12,6 +17,7 @@ const styles = {
     "px-[16px] py-[50px]  md:p-[80px] md:py-[10px] md:pr-[200px] md:pb-[130px] lg:py-[80px] lg:px-[80px]  xl:px-[400px] xl:py-[150px]",
   heading:
     "text-[28px] md:text-[38px] lg:text-[48px] xl:text-[48px] lg:leading-[150%]",
+  boldHeader1: "text-bold",
   paragraph:
     "text-[14px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-Grey-60",
   cartParagraph:
