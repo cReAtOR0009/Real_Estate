@@ -290,23 +290,27 @@ const AddProperty = () => {
       <h2 className="text-[25px] text-center">Add New Property</h2>
       {/* {errors.title && <span className="text-[20px]">{errors.title}</span>} */}
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        <InputField
-          placeholder="Property Name"
-          type="text"
-          name="title"
-          label="title"
-          styles={styles.inputFied}
-          onChange={handleChange}
-          value={formData.title}
-        />
-        <label>Description:</label>
-        <textarea
-          className="text-[black] "
-          name="description"
-          placeholder="describe Property as detailed as possible with 5000 characters"
-          value={formData.description}
-          onChange={handleChange}
-        />
+        <div className="flex items-end justify-between flex-wrap gap-[20px] my-[20px]">
+          <InputField
+            placeholder="Property Name"
+            type="text"
+            name="title"
+            label="title"
+            styles={`${styles.inputFied} md:max-w-[100%]`}
+            onChange={handleChange}
+            value={formData.title}
+          />
+          <div className="flex flex-col w-[100%] md:max-w-[50%]">
+            <label>Description:</label>
+            <textarea
+              className={`${styles.inputFied}`}
+              name="description"
+              placeholder="describe Property as detailed as possible with 5000 characters"
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
         <div className="flex flex-wrap gap-[30px]">
           <InputField
             placeholder="Set property Price"
