@@ -34,6 +34,12 @@ import {
   iconlinkdn,
   icontwitter,
   iconyoutube,
+
+  //service cards
+  serviceCardIcon1,
+  serviceCardIcon2,
+  serviceCardIcon3,
+  serviceCardIcon4,
 } from "./imageImporter";
 export { leftarrow, rightarrow, biggeststar, biggerstar, bigstar, ratingicon };
 
@@ -68,6 +74,32 @@ export const offers = [
     offer: "Smart Investments, Informed Decisions",
     icon: iconContainer3,
     icon2: arrowIcon,
+  },
+];
+export const serviceOffers = [
+  {
+    offer: "Valuation Mastery",
+    icon: serviceCardIcon1,
+    description:
+      "Discover the true worth of your property with our expert valuation services.",
+  },
+  {
+    offer: "Strategic Marketing",
+    icon: serviceCardIcon4,
+    description:
+      "Selling a property requires more than just a listing; it demands a strategic marketing approach.",
+  },
+  {
+    offer: "Negotiation Wizardry",
+    description:
+      "Negotiating the best deal is an art, and our negotiation experts are masters of it.",
+    icon: serviceCardIcon2,
+  },
+  {
+    offer: "Closing Success",
+    description:
+      "A successful sale is not complete until the closing. We guide you through the intricate closing process.",
+    icon: serviceCardIcon3,
   },
 ];
 

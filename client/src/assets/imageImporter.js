@@ -41,6 +41,11 @@ import arrowDownicon from "./arrowDownIcon.svg";
 import leftAbstract from "./leftAbstract.png";
 import rightAbstract from "./leftAbstract.png";
 
+import serviceCardIcon1 from "./serviceCardIcon1.png"
+import serviceCardIcon2 from "./serviceCardIcon2.png"
+import serviceCardIcon3 from "./serviceCardIcon3.png"
+import serviceCardIcon4 from "./serviceCardIcon4.png"
+
 import iconfacebook from "./Iconfacebook.png"
 import icontwitter from "./Icontwitter.png"
 import iconlinkdn from "./Iconlinkdn.png"
@@ -90,5 +95,11 @@ export {
   iconfacebook,
   iconlinkdn,
   icontwitter,
-  iconyoutube
+  iconyoutube,
+
+  //service card icons
+  serviceCardIcon1,
+  serviceCardIcon2,
+  serviceCardIcon3,
+  serviceCardIcon4,
 };
