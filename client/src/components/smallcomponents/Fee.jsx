@@ -14,7 +14,9 @@ const Fee = ({ type, price, description, index }) => {
       <div className="flex justify-start items-center gap-[10px]">
         <span className="font-bold text-[17px]">${price}</span>{" "}
         <span
-          className={`${styles.paragraph} rounded-[10px] sm:rounded-full border borser-solid border-Grey-40 p-[8px] `}
+          className={`${styles.paragraph} rounded-[10px] sm:rounded-full ${
+            description ? "border" : ""
+          } border-solid border-Grey-40 p-[8px] `}
         >
           {description}
         </span>
