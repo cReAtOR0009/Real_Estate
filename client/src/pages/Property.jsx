@@ -122,7 +122,7 @@ const Property = () => {
       // setImageToDisplay(displayImage);
       // console.log("house", house);
       // console.log("nearbyAmenities", nearbyAmenities);
-      // console.log("tags", tags);
+      // console.log("tags", tags[0].split(","));
       // console.log("tags", tags[0].split(","));
       content = (
         <>
@@ -330,7 +330,7 @@ const Property = () => {
                       key={index}
                       className="p-[5px] border border-solid rounded-[5px]"
                     >
-                      {tag}
+                      {`#${tag}`}
                     </span>
                   );
                 })}
