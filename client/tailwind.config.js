@@ -3,6 +3,9 @@ export default {
   content: ["./src/**/*.{js,jsx}"],
   theme: {
     backgroundImage: { serviceCard: "url('./assets/serviceCardBg.png')" },
+    display: {
+      grid1: "grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))",
+    },
     screens: {
       sm: "640px",
       // => @media (min-width: 640px) { ... }
@@ -49,7 +52,19 @@ export default {
       // sans: ['Graphik', 'sans-serif'],
       // serif: ['Merriweather', 'serif'],
     },
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        grid1Mobile: "repeat(auto-fill, minmax(300px, auto))",
+        grid2: "repeat(auto-fill, minmax(auto, 2fr))",
+      },
+      gridTemplateRows: {
+        grid1RowMobile: "2fr min-content",
+        grid2: "repeat(auto, minmax(100px, 100px))",
+      },
+      gridAutoRows: {
+        fr: "1fr",
+      },
+    },
   },
   plugins: [],
 };
