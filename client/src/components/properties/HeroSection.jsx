@@ -162,7 +162,6 @@ const HeroSection = () => {
     preferedContact: "",
     message: "",
     agree: false,
-    budget: "",
   });
 
   const handleSearchChange = (e, property) => {

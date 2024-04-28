@@ -60,7 +60,7 @@
 display: flex;
 justify-content: flex-start;
 gap: 12px;
-align-items: end  ;
+align-items: flex-end;
 justify-content: center;
 }
 .profileContainers .profileImage img {
