@@ -93,37 +93,13 @@ const FeaturedItemCard = ({
 
 const FeaturedProperties = () => {
   const [FeaturedHouse, setFeaturedHouse] = useState([]);
-  // const [content, setContent] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  //  const itemsPerDisplay = 3;
-  // const noOfPages = Math.ceil(featuredProduct.length / itemsPerDisplay);
-  // const [currentPage, setCurrentPage] = useState(1);
-
-  // const startIndex = (currentPage - 1) * itemsPerDisplay;
-  // const endIndex = startIndex + itemsPerDisplay;
-
-  // const displayedFeaturedItems = featuredProduct.slice(startIndex, endIndex);
-
-  // const handlePrevClick = () => {
-  //   setCurrentPage((prevPage) => Math.max(prevPage - 1, 1)); // Ensure the page doesn't go below 0
-  // };
-
-  // // Handle click event for the "Next" button
-  // const handleNextClick = () => {
-  //   setCurrentPage((prevPage) => Math.min(prevPage + 1, noOfPages)); // Ensure the page doesn't exceed the total number of pages
-  // };
   let content;
-  // let properties;
 
   const {
-    // fetchProperties,
     getProperties,
     properties,
-    // handleFetchProperties,
-    // setProperties,
-    // setPropertiesError,
-    // setErrorValue,
-    // setPropertiesLoading,
+
   } = useContext(PropertyContext);
 
   const handlePrevClick = (noOfPages) => {
