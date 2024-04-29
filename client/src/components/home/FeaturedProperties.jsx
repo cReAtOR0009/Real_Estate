@@ -46,7 +46,7 @@ const FeaturedItemCard = ({
                 onClick={() => setNavActive("properties")}
                 className="text-Purple-60"
               >
-                Read More
+                {truncatedDetails.length > 20?"Read More":""}
               </Link>
             </p>
           </div>
