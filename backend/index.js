@@ -40,6 +40,9 @@ app.use("/auth/checkout", require("./routes/checkoutRoutes"));
 app.get("/auth", myMiddleware, (req, res, next) =>
   res.send("Nodejs Server is Running")
 );
+app.get("/", myMiddleware, (req, res, next) =>
+  res.send("Nodejs Server is Running")
+);
 
 app.use((err, res, req, next) => {
   res.status(500).send({
