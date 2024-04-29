@@ -33,16 +33,16 @@ const NavBar = () => {
         <div
           className={`${styles.navContainer} bg-Grey-15 fixed top-0 z-20 w-full flex justify-between items-center p-4`}
         >
-          <a href="/" className="logo">
+          <a href="/" className="logo sm:min-w-[200px]">
             <img src={logo} alt={companydetails.title} />
           </a>
-          <ul className="hidden py-[10px] sm:flex justify-between items-center space-x-4">
+          <ul className="hidden py-[10px] sm:flex justify-between items-center max-lg:space-x-2  space-x-4">
             {navLinks.map((navlink, index) => (
               <li
                 key={index}
-                className={` ${
+                className={` text-nowrap max-lg:text-[15px]  ${
                   activeNav === navlink.id
-                    ? "rounded-[8px] py-[10px] bg-Grey-10 border border-Grey-15 "
+                    ? "rounded-[8px] py-[10px]  bg-Grey-10 border border-Grey-15 "
                     : "hover:bg-Grey-10 rounded-[8px] py-[10px]"
                 }`}
                 onClick={() => setNavActive(navlink.id)}

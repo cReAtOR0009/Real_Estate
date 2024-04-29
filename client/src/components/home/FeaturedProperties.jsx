@@ -118,7 +118,8 @@ const FeaturedProperties = () => {
   } else if (properties.isLoading) {
     console.log("properties.isLoading", properties.isLoading);
     content = <h1>is loading...</h1>;
-  } else if (properties.properties.length > 0) {
+  // } else if (properties.properties.length > 0) {
+  } else if (properties.properties) {
     console.log("properties.properties.length: ", properties.properties.length);
     const itemsPerDisplay = 3;
     const noOfPages =

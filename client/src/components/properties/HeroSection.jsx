@@ -311,7 +311,7 @@ const HeroSection = () => {
           className={`${styles.formContainer} formContainer border border-Grey-15 rounded-[12px]`}
         >
           <form className="flex flex-col gap-[30px]" action="" method="post">
-            <div className="flex-col justify-between self-stretch gap-[30px] md:flex md:flex-row">
+            <div className="flex-col justify-between self-stretch gap-[30px] md:flex md:flex-row flex-wrap">
               {contactFieldDetails.map((contactFieldDetail, index) => (
                 <InputField
                   key={index}

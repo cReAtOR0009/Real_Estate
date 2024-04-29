@@ -12,7 +12,7 @@ const SelectField2 = ({ label, options, styles, onChange }) => (
           {option}
         </option>
       ))}
-    </select>
+    </select>   
   </div>
 );
 

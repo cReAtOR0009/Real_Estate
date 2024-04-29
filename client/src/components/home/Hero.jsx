@@ -35,7 +35,7 @@ const Hero = () => {
         >
           <section className="mt-[30px]">
             <div className="headerTextContainer">
-              <h1 className={`${styles.heading} `}>
+              <h1 className={`${styles.heading}`}>
                 Discover Your Dream Property with Estatein{user}
               </h1>
               <p>{token?.slice(180)}</p>
@@ -44,7 +44,7 @@ const Hero = () => {
                 Explore our listings to find the home that matches your dreams.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row sm:gap-[20px] my-[60px]">
+            <div className="flex flex-col sm:flex-row gap-[20px] my-[60px]">
               <button
                 className={`${styles.buttonPadding} ${styles.blackButton}`}
               >

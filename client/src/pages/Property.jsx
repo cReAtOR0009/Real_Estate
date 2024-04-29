@@ -131,7 +131,7 @@ const Property = () => {
             <div
               className={`${styles.houseCardForProperty} flex flex-col text-[15px] p-[20px] border border-Grey-15 rounded-[12px]`}
             >
-              <div className="flex justify-between">
+              <div className="flex justify-between flex-wrap">
                 <div className="flex">
                   <p className="text-[20px]">
                     {address.street},{address.city},{address.state},

@@ -531,7 +531,7 @@ const AddProperty = () => {
         {/* Add input className="p-[5px] border border-solid border-Grey-60 h-[50px]" fields for other properties */}
         <div className="flex flex-wrap gap-[30px]">
           <SelectField2
-            label={"Property Type"}
+            label={"propertyType"}
             onChange={handleChange}
             styles={`${styles.inputFied}  min-w-[100px]`}
             options={[
