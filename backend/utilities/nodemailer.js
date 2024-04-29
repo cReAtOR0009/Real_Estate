@@ -3,9 +3,9 @@ const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const dotEnv = require("dotenv");
 
-dotEnv.config();
+dotEnv.config(); 
 
-console.log("helloooo");
+// console.log("helloooo");
 
 const createTransporter = async () => {
   const oauth2Client = new OAuth2(

@@ -7,7 +7,7 @@ module.exports = async () => {
             console.log('Development mode');
             connectString = process.env.DB_URL_DEV;
         }
-        // console.log(connectString);   
+        console.log(connectString);   
         await mongoose.connect(connectString, {
             useNewUrlParser: true,
         });
