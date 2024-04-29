@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useFetchPropertiesQuery } from "../../features/auth/authApiSlice.js";
 import { styles } from "../../styles/styles.js";
 import InputField from "../formComponent/InputField.jsx";
-import SelectField from "../formComponent/selectField.jsx";
+import SelectField from "../formComponent/SelectField.jsx";
 import SelectField2 from "../formComponent/SelectField2.jsx";
 import HeaderContainer from "../textComponents/HeaderContainer.jsx";
 import Journey from "../smallcomponents/Journey.jsx";
