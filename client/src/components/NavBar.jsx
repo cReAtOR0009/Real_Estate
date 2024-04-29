@@ -13,7 +13,7 @@ import {
 } from "../features/auth/authSlice";
 import { useSelector } from "react-redux";
 
-import CartList from "./CartList.jsx";
+import CartList from "./cartList.jsx";
 
 const ItemContainer = (image, title, quantity) => {
   return <></>;
