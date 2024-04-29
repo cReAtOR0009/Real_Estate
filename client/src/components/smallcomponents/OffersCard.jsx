@@ -9,7 +9,7 @@ const OffersCard = ({ offer, icon, icon2 }) => {
       <p>{offer}</p>
       <img src={icon2} alt="" />
     </div>
-  );
+  ); 
 };
 
 export default OffersCard;
