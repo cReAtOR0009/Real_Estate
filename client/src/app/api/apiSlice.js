@@ -3,6 +3,7 @@ import { setCredentials, logOut } from "../../features/auth/authSlice";
 
 const Dev_mode = import.meta.env.VITE_APP_DEV
 const baseUrl = Dev_mode == "true"?"http://localhost:3000":"https://real-estate-backend-xpz7.onrender.com" 
+console.log("base url: ", baseUrl)
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrl,
