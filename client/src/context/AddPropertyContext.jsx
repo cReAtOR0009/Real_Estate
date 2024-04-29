@@ -50,7 +50,7 @@ export const initialFormData = {
 };
 
 export const formReducer = (state, action) => {
-  console.log("state", state);
+  // console.log("state", state);
   // console.log("state", state.images);
   switch (action.type) {
     case "ADD_TO_FORM":
@@ -92,10 +92,10 @@ export const formReducer = (state, action) => {
       let amenityValueValueArray = amenityValue
         .split(",")
         .map((tag) => tag.trim());
-      console.log("amenity :", amenity, "amenityValue", amenityValue);
+      // console.log("amenity :", amenity, "amenityValue", amenityValueValueArray);
       return {
         ...state,
-        [amenity]: { ...state.amenities, ...[amenityValueValueArray] },
+        [amenity]: amenityValueValueArray,
       };
     case "ADD_ADDITIONAL_FEATURES_FIELD":
       return {
