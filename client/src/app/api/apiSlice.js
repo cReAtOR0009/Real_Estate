@@ -1,8 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials, logOut } from "../../features/auth/authSlice";
 
+const Dev_mode = import.meta.env.VITE_APP_DEV
+const baseUrl = Dev_mode == "true"?"http://localhost:3000":"https://real-estate-backend-xpz7.onrender.com" 
+
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3000",
+  baseUrl: baseUrl,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -12,7 +15,7 @@ const baseQuery = fetchBaseQuery({
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
-    return headers;
+    return headers; 
   },
 });
 
