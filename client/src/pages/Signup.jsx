@@ -83,7 +83,7 @@ const Signup = () => {
       errorRef.current.focus();
     }
   };
-  console.log("isloading...4", isLoading)
+  // console.log("isloading...4", isLoading)
   return (
     <div className="mt-[100px] sm:mt-[100px] flex min-h-[70vh] justify-center">
       <div className="p-5 mt-[20px] md:flex-1 flex flex-col justify-center md:max-w-[600px] border border-solid border-Purple-65 rounded-[10px]">

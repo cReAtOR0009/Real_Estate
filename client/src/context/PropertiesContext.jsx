@@ -10,7 +10,7 @@ export const initialState = {
 };
 
 export const PropertyReducer = (state, action) => {
-  console.log("state updated: ", state);
+  // console.log("state updated: ", state);
   switch (action.type) {
     case "FETCH_PROPERTIES":
       console.log(state.properties);
