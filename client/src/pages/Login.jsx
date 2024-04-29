@@ -192,9 +192,9 @@ const Login = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className={`${styles.buttonPadding} bg-Purple-60 w-full  transition duration-300  shadow  focus:outline-none focus: focus:ring-4`}
+                  className={`${styles.buttonPadding} disabled:bg-Purple-75 bg-Purple-60 w-full  transition duration-300  shadow  focus:outline-none focus: focus:ring-4`}
                 >
-                  Log in
+                  { isLoading?"Loading...":"Log in"}
                 </button>
               </div>
             </form>

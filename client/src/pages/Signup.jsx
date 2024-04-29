@@ -18,7 +18,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const [signup, { isLoading }] = useSignupMutation();
-  console.log("isloading...3", isLoading)
+  // console.log("isloading...3", isLoading)
 
   const dispatch = useDispatch();
 
@@ -43,13 +43,13 @@ const Signup = () => {
         throw new Error("Passowrds don't match");
       }
 
-      console.log("isloading1..", isLoading);
+      // console.log("isloading1..", isLoading);
       const userData = await signup({
         email,
         password,
         confirmedPassword,
       }).unwrap();
-      console.log("isloading2..", isLoading);
+      // console.log("isloading2..", isLoading);
       // console.log('RESPONSE', userData)
 
       const {
@@ -174,9 +174,9 @@ const Signup = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`${styles.buttonPadding} bg-Purple-60 w-full  transition duration-300  shadow  focus:outline-none focus: focus:ring-4`}
+              className={`${styles.buttonPadding} disabled:bg-Purple-75 bg-Purple-60 w-full  transition duration-300  shadow  focus:outline-none focus: focus:ring-4`}
             >
-              Sign Up
+            { isLoading?"Loading...":"Sign Up"}
             </button>
           </div>
           <p className="mt-6  text-center">
