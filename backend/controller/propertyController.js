@@ -54,7 +54,7 @@ module.exports.createProperty = async (req, res) => {
       bathrooms,
       size,
       address,
-      amenities:splitnearbyAmenities,
+      amenities:amenities,
       additionalFeatures,
       images: images,
       propertyType,
