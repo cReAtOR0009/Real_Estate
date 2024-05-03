@@ -31,7 +31,7 @@ const CartItem = ({ image, name, id, description, price }) => {
           {image ? (
             <img
               className=" w-36 h-[auto] object-fill lg:w-40 lg:h-15"
-              src={image?.url}
+              src={image}
               alt={`cart image for ${name}`}
             />
           ) : (
