@@ -118,7 +118,7 @@ const FeaturedProperties = () => {
     content = <h1>error fetching data</h1>;
   } else if (properties.isLoading) {
     console.log("properties.isLoading", properties.isLoading);
-    content = <h1>is loading...</h1>;
+    content = <h1 className="flex justify-center loader">is loading...</h1>
   // } else if (properties.properties.length > 0) {
   } else if (properties.properties) {
     console.log("properties.properties.length: ", properties.properties.length);
@@ -144,7 +144,7 @@ const FeaturedProperties = () => {
           {displayedFeaturedItems.map((FeaturedHouse, index) => (
             <FeaturedItemCard key={index} index={index} {...FeaturedHouse} />
           ))}
-          ;
+          
         </div>
 
         <div className="featuredToggle">
@@ -172,7 +172,7 @@ const FeaturedProperties = () => {
       </div>
     );
   } else {
-    content = <div>interesting...................</div>;
+    content = <div>interesting...................</div>
   }
 
   console.log("properties from featured: ", properties);
