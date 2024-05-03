@@ -30,9 +30,11 @@ module.exports.createProperty = async (req, res) => {
       availability,
     } = req.body;
 
-    images?console.log("images: ", images) : ""
+    console.log("nearbyAmenities:", nearbyAmenities) 
 
-    console.log("request body: ", req.body)
+    // images?console.log("images: ", images) : ""
+
+    // console.log("request body: ", req.body)
 
     // Check if property with the same title already exists
     const existingPropertyName = await Property.findOne({ name: title });
