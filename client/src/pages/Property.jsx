@@ -126,7 +126,7 @@ const Property = () => {
       // console.log("tags", tags[0].split(","));
       content = (
         <>
-          (
+          {/* ( */}
           <div className="mt-[100px]">
             <div
               className={`${styles.houseCardForProperty} flex flex-col text-[15px] p-[20px] border border-Grey-15 rounded-[12px]`}
@@ -169,7 +169,7 @@ const Property = () => {
               <div className="imageContainer w-[auto]">
                 {/* <button onClick={handleFetchProperties}></button> */}
                 <img
-                  className="object-cover w-[100%]"
+                  className="object-cover w-[100%] max-h-[100vh]"
                   src={imageToDisplayed}
                   alt={`${name}Image`}
                 />
@@ -374,7 +374,7 @@ const Property = () => {
                     className={`${styles.heading}`}
                   >{`inquire About ${name}`}</h1>
                   <p>
-                    Interested in this property? Fill out the form below, and
+                    Interested in this property? Fill out the form here, and
                     our real estate experts will get back to you with more
                     details, including scheduling a viewing and answering any
                     questions you may have.
@@ -429,16 +429,16 @@ const Property = () => {
                       />
                     </div>
 
-                    <div className="flex justify-center items-center">
-                      <div className="flex justify-end items-end">
+                    <div className="flex justify-center items-center ">
+                      <div className="flex justify-center items-center">
                         <InputField
                           type={"checkbox"}
                           placeholder="I agree with Terms of Use and Privacy Policy"
                           id="agreement"
-                          className={`${styles.inputFied} w-[20px] bg-Grey-08 text-Purple-60 text-center`}
+                          styles={`w-[20px] bg-Grey-08 mt-[-15px] text-Purple-60 text-center flex items-center justify-center`}
                           name="agreement"
                           onChange={() => {}}
-                          styles={styles.inputFied}
+                          // styles={styles.inputFied}
                         />
                         <label
                           htmlFor="agreement"
@@ -549,7 +549,7 @@ const Property = () => {
                               <Fee {...Fees[index + 1]} index={index + 1} />
                             )}
                           </div>
-                        );
+                        )
                       }
                       return null;
                     })}
@@ -572,7 +572,7 @@ const Property = () => {
                               <Fee {...Fees[index + 1]} index={index + 1} />
                             )}
                           </div>
-                        );
+                        )
                       }
                       return null;
                     })}
@@ -589,7 +589,7 @@ const Property = () => {
               />
             </div>
           </div>
-          )
+          {/* ). */}
         </>
       );
     }
@@ -635,7 +635,7 @@ const Property = () => {
     handleFetchProperties();
   }, [data, isLoading, isError, isSuccess]);
 
-  return <>{content}</>;
+  return <>{content}</>
 };
 
 export default Property;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const FaqCard = ({ question, answer, id }) => {
   return (
-    <div className="flex p-[10px] sm:p-[40px] flex-col items-start gap-[24px] rounded-[10px] border border-Grey-15 bg-Grey-08">
+    <div className="flex p-[10px] sm:p-[40px] flex-col justify-between items-start gap-[24px] rounded-[10px] border border-Grey-15 bg-Grey-08">
       <h3>{question}</h3>
       <p className={`${styles.paragraph}`}>{answer}</p>
       <button
