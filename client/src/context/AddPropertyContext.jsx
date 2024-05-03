@@ -95,7 +95,7 @@ export const formReducer = (state, action) => {
       // console.log("amenity :", amenity, "amenityValue", amenityValueValueArray);
       return {
         ...state,
-        [amenity]: amenityValueValueArray,
+        [amenity]: [...amenityValueValueArray],
       };
     case "ADD_ADDITIONAL_FEATURES_FIELD":
       return {
