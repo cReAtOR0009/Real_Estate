@@ -124,9 +124,9 @@ const Property2 = () => {
     },
   ];
 
-  const scrollToTop = (() => {
-    window.scrollTo(0, 0);
-  })();
+  // const scrollToTop = (() => {
+  //   window.scrollTo(0, 0);
+  // })();
 
   const house = Houses.find((house, index) => index == parseInt(propertyid));
   // console.log("house found:", house);

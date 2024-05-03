@@ -116,9 +116,9 @@ const Property = () => {
         addToCart(id, price, description, image, name);
       };
       let displayImage = images[0].imageUrl;
-      const scrollToTop = (() => {
-        window.scrollTo(0, 0);
-      })();
+      // const scrollToTop = (() => {
+      //   window.scrollTo(0, 0);
+      // })();
       // setImageToDisplay(displayImage);
       // console.log("house", house);
       // console.log("nearbyAmenities", nearbyAmenities);
