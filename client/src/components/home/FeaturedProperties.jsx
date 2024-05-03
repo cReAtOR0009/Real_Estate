@@ -22,6 +22,7 @@ const FeaturedItemCard = ({
   index,
 }) => {
   let id = _id;
+  let firstImage = images[0]?.imageUrl;
   const { setNavActive, activeNav } = useContext(NavigationContext);
   const truncateDetails = (content, maxLength) => {
     const words = content.split(" ");
@@ -34,7 +35,7 @@ const FeaturedItemCard = ({
     <div className="featuredItemWrapper border border-Grey-15  bg-Grey-08 p-[15px] sm:p[30px] rounded-[12px]">
       <div className="featuredItem">
         <div>
-          <img src={images[0].url} alt="" />
+          <img src={firstImage} alt="" />
         </div>
         <div>
           <div className="featuredItemText">
