@@ -37,7 +37,7 @@ const Home = () => {
       {/* <NavBar /> */}
       <Hero id="hero" />
       <FeaturedProperties />
-      <div>{scroll}</div>
+      {/* <div>{scroll}</div> */}
       <Testimonials />
       <StartJourney />
       <Faq />

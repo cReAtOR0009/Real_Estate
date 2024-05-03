@@ -115,10 +115,10 @@ const FeaturedProperties = () => {
   };
   if (properties.error) {
     // return (<h1>error fetching data</h1>)
-    content = <h1>error fetching data</h1>;
+    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] text-[30px] text-[red]">error fetching data</div>;
   } else if (properties.isLoading) {
     console.log("properties.isLoading", properties.isLoading);
-    content = <h1 className="flex justify-center loader">is loading...</h1>
+    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] loader"></div>;
   // } else if (properties.properties.length > 0) {
   } else if (properties.properties) {
     console.log("properties.properties.length: ", properties.properties.length);

@@ -218,15 +218,13 @@ const HeroSection = () => {
       return <HouseCard key={index} {...house} index={index} />;
     });
   } else if (isLoading) {
-    content = <div className="mt-[200px]">fetching Data.....</div>;
+    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] loader"></div>;
   } else if (isError) {
     console.log("error: ", isError);
     let errorHere = error.error;
     // setError(errorHere);
     console.log("error:", errorHere);
-    content = (
-      <div className="mt-[200px]">Error fetching Data: {errorHere}</div>
-    );
+    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] text-[30px] text-[red]">error fetching data</div>;
   } else if (Houses.length < 0) {
     console.log("data: ", data);
     content = (
