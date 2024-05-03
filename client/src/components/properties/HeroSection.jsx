@@ -218,22 +218,32 @@ const HeroSection = () => {
       return <HouseCard key={index} {...house} index={index} />;
     });
   } else if (isLoading) {
-    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] loader"></div>;
+    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto]">
+      <h1 className="text-[20px]">fetching Properties....</h1>
+      <div className="loader">
+
+      </div>
+    </div>;
   } else if (isError) {
     console.log("error: ", isError);
     let errorHere = error.error;
     // setError(errorHere);
     console.log("error:", errorHere);
     content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] text-[30px] text-[red]">error fetching data</div>;
-  } else if (Houses.length < 0) {
+  } else if (Houses.length == 0) {
     console.log("data: ", data);
     content = (
       <div className="mt-[200px]">
         Opps, no Property Found in Db :({" "}
-        <button onClick={handleFetchProperties}>Fetch</button>
+        {/* <button onClick={handleFetchProperties}>Fetch again...</button> */}
       </div>
     );
     // return content;
+  } else {
+    content =(<div className="mt-[200px]">
+    Opps, an Unknown Error Occured :({" "}
+    {/* <button onClick={handleFetchProperties}>Fetch again...</button> */}
+  </div>)
   }
 
   // useEffect(() => {
@@ -309,7 +319,7 @@ const HeroSection = () => {
         }
       </div>
 
-      <div className={`${styles.subContainer} houseCardContainer`}>
+      <div className={`${styles.subContainer} houseCardContainer mx-0 my-[auto]`}>
         {content}
       </div>
 

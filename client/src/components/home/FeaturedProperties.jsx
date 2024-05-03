@@ -118,9 +118,13 @@ const FeaturedProperties = () => {
     content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] text-[30px] text-[red]">error fetching data</div>;
   } else if (properties.isLoading) {
     console.log("properties.isLoading", properties.isLoading);
-    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] loader"></div>;
-  // } else if (properties.properties.length > 0) {
-  } else if (properties.properties) {
+    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto]">
+    <h1 className="text-[20px]">fetching Properties....</h1>
+    <div className="loader">
+
+    </div>
+  </div>;
+  } else if (properties.properties.length > 0) {
     console.log("properties.properties.length: ", properties.properties.length);
     const itemsPerDisplay = 3;
     const noOfPages =
@@ -171,8 +175,14 @@ const FeaturedProperties = () => {
         </div>
       </div>
     );
+  } else if (properties.properties === 0) {
+    content =(<div className="mt-[200px]">
+    Opps, no Property Found in Db :({" "}
+  </div>)
   } else {
-    content = <div>interesting...................</div>
+    content =(<div className="mt-[200px]">
+    Opps, an Unknown Error Occured :({" "}
+  </div>)
   }
 
   console.log("properties from featured: ", properties);
