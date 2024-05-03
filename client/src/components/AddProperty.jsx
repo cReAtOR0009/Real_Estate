@@ -6,6 +6,7 @@ import {
   uploadBytesResumable,
   app,
 } from "../firebase.config";
+import { selectCurrentUser, selectCurrentToken } from "../features/auth/authSlice";
 import InputField from "./formComponent/InputField";
 import SelectField2 from "./formComponent/SelectField2";
 import { styles } from "../styles/styles";
@@ -20,6 +21,9 @@ const AddProperty = () => {
   const [errors, setErrors] = useState([]);
   const [addProperty, { isLoading }] = useAddpropertyMutation();
   const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [UploadingFile, setUploadingFile] = useState(0);
+  const user = useSelector(selectCurrentUser);
+  const token = useSelector(selectCurrentToken);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -64,7 +68,7 @@ const AddProperty = () => {
   };
 
   const resetForm = () => {
-    dispatch({ type: "RESET_form" });
+    // dispatch({ type: "RESET_form" });
   };
 
   const handleImageUpload = (e) => {
@@ -84,8 +88,8 @@ const AddProperty = () => {
       FilesData.push({ ...fileWithUrl, file });
     }
 
-    console.log("files with uri: ", FilesData);
-    console.log("last file with uri: ", FilesData[FilesData.length - 1].file);
+    // console.log("files with uri: ", FilesData);
+    // console.log("last file with uri: ", FilesData[FilesData.length - 1].file);
 
     dispatch({ type: "ADD_IMAGES", payload: { value: FilesData } });
   };
@@ -105,9 +109,16 @@ const AddProperty = () => {
     const newErrors = [];
 
     for (const [key, value] of Object.entries(formData)) {
-      if (value === "" && key !== "availability") {
+      // console.log("key:", key, "value: ", value)
+      // if(key === "images" && value.length <= 0) {
+      //     console.log("no images...")
+      // }
+      if (
+        (value === "" && key !== "availability") ||
+        (key === "images" && value.length <= 0)
+      ) {
         newErrors.push(
-          `${key.charAt(0).toUpperCase() + key.slice(1)} is required`
+          `${key.charAt(0).toUpperCase() + key.slice(1)} is/are required`
         );
         isValid = false;
       }
@@ -117,32 +128,31 @@ const AddProperty = () => {
     return isValid;
   };
 
-  const addPropertyWithoutImages = async () => {
-    try {
-      console.log("this is formdata without image", formData.images);
-      const propertyDetails = await addProperty({
-        ...formData,
-      }).unwrap();
-      console.log("propertyDetails:", propertyDetails.data);
-      resetForm();
-    } catch (error) {
-      if (error.data?.error) {
-        setErrors((err) => [...err, error.data.error]);
-      } else {
-        setErrors((err) => [...err, error.message]);
-      }
-      setVisible(true);
-      console.log("visible state:", visible);
-      setTimeout(() => {
-        setVisible(false);
-        // setErrors(error.data.error);
-      }, 15000);
-    }
-  };
+  //   try {
+  //     console.log("this is formdata without image", formData.images);
+  //     const propertyDetails = await addProperty({
+  //       ...formData,
+  //     }).unwrap();
+  //     console.log("propertyDetails:", propertyDetails.data);
+  //     resetForm();
+  //   } catch (error) {
+  //     if (error.data?.error) {
+  //       setErrors((err) => [...err, error.data.error]);
+  //     } else {
+  //       setErrors((err) => [...err, error.message]);
+  //     }
+  //     setVisible(true);
+  //     // console.log("visible state:", visible);
+  //     setTimeout(() => {
+  //       setVisible(false);
+  //       // setErrors(error.data.error);
+  //     }, 15000);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("formData:", formData);
+    // console.log("formData:", formData);
     const formIsValid = validateForm();
 
     // try {
@@ -151,106 +161,100 @@ const AddProperty = () => {
       const folder = formData.propertyType;
       let urlArray = [];
       let progress;
-      console.log("formdata image length:", formData.images.length);
+      // console.log("formdata image length:", formData.images.length);
+      // console.log("formdata image:", formData.images);
+      await Promise.all(
+        formData.images.map(async (image, index) => {
+          console.log("adding formdata with image...", formData.images);
+          // console.log("image: ", image);
+          // console.log(`image to upload ${index}:`, image.file);
+          const file = image.file;
+          // console.log("image type: ", file.type);
 
-      formData.images.length > 0
-        ? await Promise.all(
-            formData.images.map(async (image, index) => {
-              console.log("image: ", image);
-              console.log(`image to upload ${index}:`, image.file);
-              const file = image.file;
-              console.log("image type: ", file.type);
+          const storageRef = ref(storage, `${folder}/${user}${file.name}`);
+          const metadata = {
+            contentType: file.type,
+          };
 
-              const storageRef = ref(storage, `${folder}/${file.name}`);
-              const metadata = {
-                contentType: file.type,
-              };
+          try {
+            const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
-              try {
-                const uploadTask = uploadBytesResumable(
-                  storageRef,
-                  file,
-                  metadata
-                );
-
-                uploadTask.on(
-                  "state_changed",
-                  (snapshot) => {
-                    progress =
-                      (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    setUploadPercentage(Math.round(progress));
-                    console.log("Upload is " + progress + "% done");
-                    switch (snapshot.state) {
-                      case "paused":
-                        console.log("Upload is paused");
-                        break;
-                      case "running":
-                        console.log("Upload is running");
-                        break;
-                    }
-                  },
-                  (error) => {
-                    switch (error.code) {
-                      case "storage/unauthorized":
-                        // User doesn't have permission to access the object
-                        break;
-                      case "storage/canceled":
-                        // User canceled the upload
-                        break;
-                      // ...
-                      case "storage/unknown":
-                        // Unknown error occurred, inspect error.serverResponse
-                        break;
-                    }
-                  },
-                  async () => {
-                    // Upload completed successfully, now we can get the download URL
-                    const downloadURL = await getDownloadURL(
-                      uploadTask.snapshot.ref
-                    );
-                    urlArray.push({ imageUrl: downloadURL });
-                    // console.log("url array: ", urlArray)
-                    formData.images[index].imageUrl = downloadURL;
-                    // formData.images[index] = { imageUrl: downloadURL };
-                    console.log(`File ${index} available at ${downloadURL}`);
-                    console.log(
-                      "formdata images before submisiion: ",
-                      formData.images
-                    );
-                    if (
-                      index == formData.images.length - 1 &&
-                      progress == 100
-                    ) {
-                      // console.log("this is the last image", formData.images[index])
-                      let formatDataToSend = formData;
-                      formatDataToSend.images = urlArray;
-                      const propertyDetails = await addProperty({
-                        ...formatDataToSend,
-                      }).unwrap();
-                      // console.log("formdata images after submisiion: ", formData.images)
-                      resetForm();
-                      console.log("propertyDetails:", propertyDetails.data);
-                    }
-                  }
-                );
-                setErrors([]);
-              } catch (error) {
-                console.error("Error uploading image:", error);
-                if (error.data?.error) {
-                  setErrors((err) => [...err, error.data.error]);
+            uploadTask.on(
+              "state_changed",
+              (snapshot) => {
+                progress =
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("Upload is " + progress + "% done");
+                const nextIndex = formData.images.indexOf(image) + 1;
+                const nextImage = formData.images[nextIndex];
+                setUploadPercentage(Math.round(progress));
+                setUploadingFile(nextImage);
+                if (progress == 100 && nextImage) {
+                  console.log(
+                    `Image ${index} uploaded, proceeding to upload image ${nextIndex}`
+                  );
                 } else {
-                  setErrors((err) => [...err, error.message]);
+                  console.log(`Last image uploaded`);
                 }
-                setVisible(true);
-                console.log("visible state:", visible);
-                setTimeout(() => {
-                  setVisible(false);
-                  // setErrors(error.data.error);
-                }, 15000);
+                switch (snapshot.state) {
+                  case "paused":
+                    console.log("Upload is paused");
+                    break;
+                  case "running":
+                    console.log("Upload is running");
+                    break;
+                }
+              },
+              (error) => {
+                switch (error.code) {
+                  case "storage/unauthorized":
+                    // User doesn't have permission to access the object
+                    break;
+                  case "storage/canceled":
+                    // User canceled the upload
+                    break;
+                  // ...
+                  case "storage/unknown":
+                    // Unknown error occurred, inspect error.serverResponse
+                    break;
+                }
+              },
+              async () => {
+                // Upload completed successfully, now we can get the download URL
+                // const downloadURL = await getDownloadURL(
+                //   uploadTask.snapshot.ref
+                // );
+                if (index == formData.images.length - 1 && progress == 100) {
+                  console.log("this is the last image", formData.images[index]);
+                  let formatDataToSend = formData;
+                  formatDataToSend.images = urlArray;
+                  const propertyDetails = await addProperty({
+                    ...formatDataToSend,
+                  }).unwrap();
+                  // console.log("formdata images after submisiion: ", formData.images)
+                  alert("all images succesfully uploaded");
+                  resetForm();
+                  console.log("propertyDetails:", propertyDetails.data);
+                }
               }
-            })
-          )
-        : addPropertyWithoutImages;
+            );
+            setErrors([]);
+          } catch (error) {
+            console.error("Error uploading image:", error);
+            if (error.data?.error) {
+              setErrors((err) => [...err, error.data.error]);
+            } else {
+              setErrors((err) => [...err, error.message]);
+            }
+            setVisible(true);
+            // console.log("visible state:", visible);
+            setTimeout(() => {
+              setVisible(false);
+              // setErrors(error.data.error);
+            }, 15000);
+          }
+        })
+      );
     }
   };
 
@@ -290,6 +294,7 @@ const AddProperty = () => {
       <h2 className="text-[25px] text-center">Add New Property</h2>
       {/* {errors.title && <span className="text-[20px]">{errors.title}</span>} */}
       <form className="flex flex-col" onSubmit={handleSubmit}>
+        {/* PROPERTY NAME AND DESCRIPTION */}
         <div className="flex items-end justify-between flex-wrap gap-[20px] my-[20px]">
           <InputField
             placeholder="Property Name"
@@ -311,6 +316,7 @@ const AddProperty = () => {
             />
           </div>
         </div>
+        {/* property price, bedrooms, bathrooms, size and address information */}
         <div className="flex flex-wrap gap-[30px]">
           <InputField
             placeholder="Set property Price"
@@ -571,9 +577,14 @@ const AddProperty = () => {
         {/* Images */}
         <div className="flex  justify-center items-center flex-wrap gap-[10px]">
           <div className="my-[20px]">
+            {/* {} */}
+            {/* <p>{uploadPercentage}</p>
+            <p>{UploadingFile}</p> */}
+
             <label>Add Property Images:</label>
             <input type="file" multiple onChange={handleImageUpload} />
-            {formData.images.length > 0 && (
+            {console.log("formData.images:", formData.images)}
+            {formData.images.length > 0 ? (
               <div className="flex flex-wrap gap-[10px] border border-solid border-Purple-60 rounded-[10px] p-[10px]">
                 {formData.images.map((image, index) => (
                   <img
@@ -584,9 +595,12 @@ const AddProperty = () => {
                   />
                 ))}
               </div>
+            ) : (
+              "no image added yet"
             )}
           </div>
         </div>
+        {/* ADD PROPERTY BUTTON */}
         <button
           className={`${styles.buttonPadding} bg-Purple-60`}
           type="submit"
