@@ -59,7 +59,7 @@ const HouseCard = ({
   index,
 }) => {
   let id = _id;
-  console.log("id: ", id);
+  // console.log("id: ", id);
   const { setNavActive, activeNav } = useContext(NavigationContext);
   const { addToCart, toggleCart } = useContext(CartContext);
   const handleAddToCart = () => {
@@ -140,6 +140,20 @@ const HouseCard = ({
 
 const HeroSection = () => {
   // const [HouseData, setHouses] = useState(null);
+  const [scroll, setScroll] = useState(0);
+
+  const updateScroll = () => {
+    // console.log("window.scrollY", window.scrollY);
+    // const postion = window.scrollY;
+    // window.addEventListener("scroll", updateScroll);
+    // setScroll(postion);
+    // console.log("scrollyyy", scroll);
+
+    // return () => {
+    //   // window.scrollTo(0, scroll)
+    //   return window.removeEventListener("scroll", updateScroll);
+    // };
+  };
 
   const [searchParams, setsearchParams] = useState({
     Location: "",
@@ -195,9 +209,6 @@ const HeroSection = () => {
     isUninitialized,
     refetch,
   } = useFetchPropertiesQuery();
-  const scrollToTop = (() => {
-    window.scrollTo(0, 0);
-  })();
   let content;
   console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
 
@@ -227,7 +238,12 @@ const HeroSection = () => {
     // return content;
   }
 
+  // useEffect(() => {
+  //   updateScroll();
+  // }, [scroll]);
+
   useEffect(() => {
+
     const handleFetchProperties = async () => {
       // console.log("fectching Properties.....");
       if (isError) {
@@ -243,8 +259,9 @@ const HeroSection = () => {
       }
     };
     handleFetchProperties();
+    updateScroll();
     console.log("content: ", content);
-  }, [data, isLoading, isError, isSuccess]);
+  }, [data, isLoading, isError, isSuccess, scroll]);
 
   return (
     <>
