@@ -60,11 +60,12 @@ const HouseCard = ({
 }) => {
   let id = _id;
   // console.log("id: ", id);
-  const { setNavActive, activeNav } = useContext(NavigationContext);
-  const { addToCart, toggleCart } = useContext(CartContext);
+  // const { setNavActive, activeNav } = useContext(NavigationContext);
+  // const { addToCart, toggleCart } = useContext(CartContext);
+  
   const handleAddToCart = () => {
-    addToCart(id, price, description, images[0]?.imageUrl, name);
-    toggleCart();
+    // addToCart(id, price, description, images[0]?.imageUrl, name);
+    // toggleCart();
   };
   const truncateDetails = (content, maxLength) => {
     const words = content.split(" ");
@@ -142,18 +143,6 @@ const HeroSection = () => {
   // const [HouseData, setHouses] = useState(null);
   const [scroll, setScroll] = useState(0);
 
-  const updateScroll = () => {
-    // console.log("window.scrollY", window.scrollY);
-    // const postion = window.scrollY;
-    // window.addEventListener("scroll", updateScroll);
-    // setScroll(postion);
-    // console.log("scrollyyy", scroll);
-
-    // return () => {
-    //   // window.scrollTo(0, scroll)
-    //   return window.removeEventListener("scroll", updateScroll);
-    // };
-  };
 
   const [searchParams, setsearchParams] = useState({
     Location: "",
@@ -196,8 +185,8 @@ const HeroSection = () => {
     e.preventDefault();
     console.log("Form data submitted:", propertyChoice);
   };
-
   const [Houses, setHouses] = useState([]);
+
   const {
     currentData,
     data: data,
@@ -210,11 +199,30 @@ const HeroSection = () => {
     refetch,
   } = useFetchPropertiesQuery();
   let content;
-  console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
+
+  useEffect(() => {
+
+    const handleFetchProperties = async () => {
+      // console.log("fectching Properties.....");
+      if (isError) {
+        // console.log("error fetching properties");
+        // return setError(["Error fetching Properties"]);
+      } else {
+        // If no error, set houses data from the fetched data
+        setHouses(data.data);
+        // console.log("Houses: ", data);
+        console.log("currentData: ", currentData);
+        // house = Houses.find((house, index) => house._id == propertyid);
+      }
+    };
+    handleFetchProperties();
+    // console.log("content: ", content);
+  }, [data, isLoading, isError, isSuccess, scroll]);
+  // console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
 
   if (Houses.length > 0) {
     content = Houses.map((house, index) => {
-      console.log("housecars: " + index, house);
+      // console.log("housecars: " + index, house);
       return <HouseCard key={index} {...house} index={index} />;
     });
   } else if (isLoading) {
@@ -246,30 +254,7 @@ const HeroSection = () => {
   </div>)
   }
 
-  // useEffect(() => {
-  //   updateScroll();
-  // }, [scroll]);
 
-  useEffect(() => {
-
-    const handleFetchProperties = async () => {
-      // console.log("fectching Properties.....");
-      if (isError) {
-        // console.log("error fetching properties");
-        // return setError(["Error fetching Properties"]);
-      } else {
-        // If no error, set houses data from the fetched data
-        setHouses(data.data);
-        // console.log("Houses: ", data);
-        console.log("currentData: ", currentData);
-        console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
-        // house = Houses.find((house, index) => house._id == propertyid);
-      }
-    };
-    handleFetchProperties();
-    updateScroll();
-    console.log("content: ", content);
-  }, [data, isLoading, isError, isSuccess, scroll]);
 
   return (
     <>
