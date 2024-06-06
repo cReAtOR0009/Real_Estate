@@ -129,28 +129,6 @@ const AddProperty = () => {
     return isValid;
   };
 
-  //   try {
-  //     console.log("this is formdata without image", formData.images);
-  //     const propertyDetails = await addProperty({
-  //       ...formData,
-  //     }).unwrap();
-  //     console.log("propertyDetails:", propertyDetails.data);
-  //     resetForm();
-  //   } catch (error) {
-  //     if (error.data?.error) {
-  //       setErrors((err) => [...err, error.data.error]);
-  //     } else {
-  //       setErrors((err) => [...err, error.message]);
-  //     }
-  //     setVisible(true);
-  //     // console.log("visible state:", visible);
-  //     setTimeout(() => {
-  //       setVisible(false);
-  //       // setErrors(error.data.error);
-  //     }, 15000);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("formData:", formData);
