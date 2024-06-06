@@ -1,6 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,  } from "react";
+import { useDispatch } from "react-redux";
 import { NavigationContext } from "../context/navigationContext";
 import { CartContext } from "../context/cartContext";
+import { logOut } from "../features/auth/authSlice";
+import Login from "../pages/Login.jsx";
 
 import { Link } from "react-router-dom";
 import { navLinks, companydetails } from "../assets/textAssets";
@@ -26,6 +29,17 @@ const NavBar = () => {
   const token = useSelector(selectCurrentToken);
   // console.log("cart: ", cart);
   const [showNav, setShowNav] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleAuthClick = () => {
+    if (token) {
+        dispatch(logOut());
+    } else {
+        // Navigate to login page
+        // navigate('/login');
+        return <Login />
+    }
+  }
 
   return (
     <>
@@ -59,9 +73,15 @@ const NavBar = () => {
                   }
                   className="px-[15px] py-[10px] w-[150px] h-[50px] text-center "
                 >
-                  {navlink.title === "Login" && token
-                    ? "Logout"
-                    : navlink.title}
+                  
+                  {navlink.title === "Login" ? (
+                <button onClick={handleAuthClick}>
+                    {token ? "Logout" : "Login"}
+                </button>
+            ) : (
+                navlink.title
+            )}
+                  
                 </Link>
               </li>
             ))}
