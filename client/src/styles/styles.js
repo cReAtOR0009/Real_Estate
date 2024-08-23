@@ -1,6 +1,8 @@
 import { Container } from "postcss";
 
 const styles = {
+  mainContainer:"px-[10px] md:px-[80px] xl:px-[162px] my-[50px] md:my-[70px] xl:my-[100px]",
+  topContainer:"px-[10px] md:px-[80px] xl:px-[162px] mt-[150px] md:mt-[170px] xl:mt-[200px] mb-[50px] md:mb-[70px] xl:mb-[100px]",
   paddedContainer:
     " px-[16px] py-[50px]  md:p-[80px] md:pt-[100px] md:pr-[200px] md:pb-[130px] lg:pl[100px] lg:pt-[100px] lg:pr-[200px] lg:pb-[130px] xl:px-[400px] xl:py-[150px]",
     marginnedContainer:
@@ -36,9 +38,9 @@ const styles = {
   blackButton: "border border-Grey-15  rounded-[8px]",
   formContainer:
     "px-[20px] py:[20px] m-[10px] md:p-[30px] md:m-[30px] lg:p-[50px] lg:m-[80px] xl:p-[100px] xl:m-[100px]",
-  inputFied:
+  inputField:
     "px-[16px] py-[20px] border border-Grey-15 rounded-[6px] bg-Grey-10 text-Grey-40 lg:rounded-[8px] text-[14px]",
-  inputFied2:
+  inputFiedl2:
     "px-[36px] py-[20px] border border-Grey-15 rounded-[6px] bg-Grey-08 text-Grey-40 lg:rounded-[8px] text-[14px]",
   checkbox: "p-[5px] border border-solid border-Grey-60 h-[50px]",
 };

@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const dotEnv = require("dotenv");
 const cors = require("cors");
 const dbConnection = require("./database/connection");
+const CLIENT_URL = process.env.DEV?"http://localhost:5173/":"http://localhost:5173"
 
 
 dotEnv.config();
@@ -18,7 +19,7 @@ app.use(express.json());
 
 //cors
 const corsOptions = {
-  origin: true,
+  origin: CLIENT_URL,
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -32,9 +33,9 @@ const myMiddleware = (req, res, next) => {
   next();
 };
 
-app.use("/auth/user", require("./routes/userRoutes"));
-app.use("/auth/property", require("./routes/propertyRoutes"));
-app.use("/auth/checkout", require("./routes/checkoutRoutes"));
+app.use("/api/v1/auth/user", require("./routes/userRoutes"));
+app.use("/api/v1/auth/property", require("./routes/propertyRoutes"));
+app.use("/api/v1/auth/checkout", require("./routes/checkoutRoutes"));
 
 //show a simple text for browser access
 app.get("/auth", myMiddleware, (req, res, next) =>

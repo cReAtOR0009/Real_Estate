@@ -478,28 +478,34 @@ export const searchinputs = [
     searchBtn: arrowDownicon,
   },
 ];
+
 export const propertyPreferences = [
   {
     value: "Property Type",
     icon: locationIcon,
-    options: ["Property Type", "option2", "option3", "option4"],
+    options: ['House', 'Apartment', 'Condo', 'Land', 'Commercial', 'Villa'],
   },
   {
-    value: "Pricing Range",
+    value: "Min Price",
     icon: locationIcon,
-    options: ["Pricing Range", "option2", "option3", "option4"],
+    options: ['100000', '200000', '500000', '500000+'],
+  },
+  {
+    value: "Max Price",
+    icon: locationIcon,
+    options: ['100000', '200000', '500000', '50000000'],
   },
   {
     value: "Property Size",
     icon: locationIcon,
-    options: ["Property Size", "option2", "option3", "option4"],
+    options: ['< 1000', '1000 - 2000', '2000 - 3000', '> 3000'],
   },
   {
     value: "Build Year",
     icon: locationIcon,
-    options: ["Build Year", "option2", "option3", "option4"],
+    options: ['<1980', '1980 - 2000', '2000 - 2015', '2024>'],
   },
-];
+]
 
 // export const Houses = [
 //   {
@@ -1099,3 +1105,71 @@ export const monthlyExpenses = [
     price: "100",
   },
 ];
+
+
+// AboutPage
+
+export const Aboutvalues = [
+  {
+    logo:iconContainer,
+    header:"Trust",
+    paragraph:"Trust is the cornerstone of every successful real estate transaction.",
+  },
+  {
+    logo:iconContainer,
+    header:"Excellence",
+    paragraph:"We set the bar high for ourselves. From the properties we list to the services we provide.",
+  },
+  {
+    logo:iconContainer,
+    header:"Client-Centric",
+    paragraph:"Your dreams and needs are at the center of our universe. We listen, understand.",
+  },
+  {
+    logo:iconContainer,
+    header:"Our commitement",
+    paragraph:"We are dedicated to providing you with the highest level of service, professionalism.",
+  },
+]
+
+export const AboutAchivements = [
+  {
+    heading:"3+ Years of Excellence",
+    paragraph:"With over 3 years in the industry, we've amassed a wealth of knowledge and experience, becoming a go-to resource for all things real estate."
+  },
+  {
+    heading:"Happy Clients",
+    paragraph:"Our greatest achievement is the satisfaction of our clients. Their success stories fuel our passion for what we do."
+  },
+  {
+    heading:"Industry Recognition",
+    paragraph:"We've earned the respect of our peers and industry leaders, with accolades and awards that reflect our commitment to excellence."
+  },
+]
+
+export const AboutExperience = [
+  {
+    heading:"Discover a World of Possibilities",
+    paragraph:"Your journey begins with exploring our carefully curated property listings. Use our intuitive search tools to filter properties based on your preferences, including location, type, size, and budget."
+  },
+  {
+    heading:"Narrowing Down Your Choices",
+    paragraph:"Once you've found properties that catch your eye, save them to your account or make a shortlist. This allows you to compare and revisit your favorites as you make your decision."
+  },
+  {
+    heading:"Personalized Guidance",
+    paragraph:"Have questions about a property or need more information? Our dedicated team of real estate experts is just a call or message away."
+  },
+  {
+    heading:"See It for Yourself",
+    paragraph:"Arrange viewings of the properties you're interested in. We'll coordinate with the property owners and accompany you to ensure you get a firsthand look at your potential new home."
+  },
+  {
+    heading:"Making Informed Decisions",
+    paragraph:"Before making an offer, our team will assist you with due diligence, including property inspections, legal checks, and market analysis. We want you to be fully informed and confident in your choice."
+  },
+  {
+    heading:"Getting the Best Deal",
+    paragraph:"We'll help you negotiate the best terms and prepare your offer. Our goal is to secure the property at the right price and on favorable terms."
+  },
+]

@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useFetchPropertiesQuery } from "../../features/auth/authApiSlice.js";
+import {
+  useFetchPropertiesQuery,
+  useSearchPropertiesQuery,
+} from "../../features/auth/authApiSlice.js";
 import { styles } from "../../styles/styles.js";
 import InputField from "../formComponent/InputField.jsx";
 import SelectField from "../formComponent/SelectField.jsx";
@@ -21,33 +24,6 @@ import { CartContext } from "../../context/cartContext.jsx";
 import MainHeaderContainer from "../smallcomponents/MainHeaderContainer.jsx";
 import Amenity from "../Amenity.jsx";
 
-const SearchParameterInput = ({
-  icon,
-  placeholder,
-  id,
-  name,
-  handleSearchChange,
-  type,
-  searchBtn,
-}) => {
-  return (
-    <div className="flex align-middle w-[100%] relative px-[12px] py-[14px] border border-solid border-Grey-15 rounded-[8px]  bg-Grey-08">
-      <img className=" " src={icon} alt="" />
-      <input
-        type={type}
-        placeholder={placeholder}
-        id={id}
-        name={name}
-        onChange={(e) => handleSearchChange(e, name)}
-        className="border-l border-solid border-Grey-15 ml-[8px] pl-[8px] text-left "
-      />
-      <button className="absolute bottom-50 right-5 md:right-[10px]">
-        <img src={searchBtn} alt="" />
-      </button>
-    </div>
-  );
-};
-
 const HouseCard = ({
   _id,
   images,
@@ -59,10 +35,11 @@ const HouseCard = ({
   index,
 }) => {
   let id = _id;
-  // console.log("id: ", id);
+  // console.log("images: ", images);
+  // console.log("images zero: ", images[0].imageUrl);
   // const { setNavActive, activeNav } = useContext(NavigationContext);
   // const { addToCart, toggleCart } = useContext(CartContext);
-  
+
   const handleAddToCart = () => {
     // addToCart(id, price, description, images[0]?.imageUrl, name);
     // toggleCart();
@@ -99,13 +76,16 @@ const HouseCard = ({
             )} */}
             <div className="flex flex-wrap border border-y-[2px] border-Grey-15 p-[10px] gap-[10px]">
               {Object.keys(amenities).map((ammenity, index) => {
-                return (
-                  <Amenity
-                    icon={Object.keys(amenities)[index]}
-                    available={Object.values(amenities)[index]}
-                    text={Object.keys(amenities)[index]}
-                  />
-                );
+                if (ammenity !== "_id") {
+                  return (
+                    <Amenity
+                      icon={Object.keys(amenities)[index]}
+                      available={Object.values(amenities)[index]}
+                      text={Object.keys(amenities)[index]}
+                      key={index}
+                    />
+                  );
+                }
               })}
             </div>
             <p
@@ -140,18 +120,22 @@ const HouseCard = ({
 };
 
 const HeroSection = () => {
-  // const [HouseData, setHouses] = useState(null);
-  const [scroll, setScroll] = useState(0);
 
-
+  const [Houses, setHouses] = useState([]);
+  const [searchName, setSearchName] = useState("");
   const [searchParams, setsearchParams] = useState({
-    Location: "",
-    propertyType: "",
-    calender: "",
-    pricingRange: "",
-    buildYear: "",
+    // property_city: "",
+    // property_state: "",
+    // bedrooms: "",
+    // bathrooms: "",
+    // property_status: "",
+    ["property name"]: searchName,
+    ["property type"]: "",
+    ["property size"]: "",
+    ["build year"]: "",
+    ["min price"]: "",
+    ["max price"]: "",
   });
-
   const [propertyChoice, setpropertyChoice] = useState({
     "First Name": "",
     "Last Name": "",
@@ -166,27 +150,6 @@ const HeroSection = () => {
     message: "",
     agree: false,
   });
-
-  const handleSearchChange = (e, property) => {
-    setsearchParams((initialValue) => ({
-      ...initialValue,
-      [property]: e.target.value,
-    }));
-    // console.log(searchParams);
-  };
-  const handlePropertyPreferenceChange = (e, property) => {
-    setpropertyChoice((initialValue) => ({
-      ...initialValue,
-      [property]: e.target.value,
-    }));
-    // console.log(searchParams);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form data submitted:", propertyChoice);
-  };
-  const [Houses, setHouses] = useState([]);
-
   const {
     currentData,
     data: data,
@@ -198,27 +161,71 @@ const HeroSection = () => {
     isUninitialized,
     refetch,
   } = useFetchPropertiesQuery();
+  
+  const {
+    data: searchData,
+    error: searchError,
+    isLoading: searchLoading,
+  } = useSearchPropertiesQuery(searchParams, {
+    skip: !Object.keys(searchParams).length,
+  });
+
+
+  const handleSearchChange = (e, property) => {
+    property.toLowerCase()
+    setsearchParams((initialValue) => ({
+      ...initialValue,
+      [property]: e.target.value,
+    }));
+  };
+
+  // console.log("searchParams:", searchParams);
+  const handlePropertyPreferenceChange = (e, property) => {
+    setpropertyChoice((initialValue) => ({
+      ...initialValue,
+      [property]: e.target.value,
+    }));
+    // console.log(searchParams);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    let content = "";
+    if (searchLoading) {
+      console.log("loading...");
+      content = `<div>Loading...</div>`;
+    } else if (searchError) {
+      console.log("search Error...");
+      console.log("search Error...", searchError);
+      content = `<div>Error: ${searchError.message}</div>`;
+    } else if (searchData) {
+      console.log(searchData); // Example: Log searchData to console
+      setHouses(searchData.data)
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log("Form data submitted:", propertyChoice);
+  };
+
   let content;
 
   useEffect(() => {
-
     const handleFetchProperties = async () => {
-      // console.log("fectching Properties.....");
       if (isError) {
-        // console.log("error fetching properties");
-        // return setError(["Error fetching Properties"]);
-      } else {
+  
+      } else if (!isError && data.status == 200) {
         // If no error, set houses data from the fetched data
         setHouses(data.data);
-        // console.log("Houses: ", data);
-        console.log("currentData: ", currentData);
-        // house = Houses.find((house, index) => house._id == propertyid);
+       
       }
     };
     handleFetchProperties();
     // console.log("content: ", content);
-  }, [data, isLoading, isError, isSuccess, scroll]);
-  // console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
+  }, [ isLoading]);
+  
 
   if (Houses.length > 0) {
     content = Houses.map((house, index) => {
@@ -226,35 +233,39 @@ const HeroSection = () => {
       return <HouseCard key={index} {...house} index={index} />;
     });
   } else if (isLoading) {
-    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto]">
-      <h1 className="text-[20px]">fetching Properties....</h1>
-      <div className="loader">
-
+    content = (
+      <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto]">
+        <h1 className="text-[20px]">fetching Properties....</h1>
+        <div className="loader"></div>
       </div>
-    </div>;
+    );
   } else if (isError) {
     console.log("error: ", isError);
     let errorHere = error.error;
     // setError(errorHere);
     console.log("error:", errorHere);
-    content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] text-[30px] text-[red]">error fetching data</div>;
+    content = (
+      <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] text-[30px] text-[red]">
+        error fetching data
+      </div>
+    );
   } else if (Houses.length == 0) {
     console.log("data: ", data);
     content = (
-      <div className="mt-[200px]">
-        Opps, no Property Found in Db :({" "}
-        {/* <button onClick={handleFetchProperties}>Fetch again...</button> */}
-      </div>
+      // <div className="text-center mx-auto">
+        "Opps, no Property Found :("
+        // {/* <button onClick={handleFetchProperties}>Fetch again...</button> */}
+      // </div>
     );
     // return content;
   } else {
-    content =(<div className="mt-[200px]">
-    Opps, an Unknown Error Occured :({" "}
-    {/* <button onClick={handleFetchProperties}>Fetch again...</button> */}
-  </div>)
+    content = (
+      <div className="mt-[200px]">
+        Opps, an Unknown Error Occured :({" "}
+        {/* <button onClick={handleFetchProperties}>Fetch again...</button> */}
+      </div>
+    );
   }
-
-
 
   return (
     <>
@@ -267,30 +278,45 @@ const HeroSection = () => {
           />
         }
       </div>
-      <div className={` ${styles.searchContainer}  md:mt-[-40px] flex-col`}>
-        <div className="flex justify-between  bg-Grey-08 gap-[20px] px-[10px] py-[10px] rounded border border-solid border-Grey-15 md:mx-[90px] md:py-[16px] md:px-[20px]">
-          <input
-            className="my-[10px] w-[100%] border border-Grey-15  md:px-[0px] md:my-[0px]"
-            type="text"
-            placeholder="Search For A Property"
-          />
-          <button className="flex whitespace-nowrap px-[20px] py-[10px] w-[] bg-Purple-60 rounded-[8px]">
-            <img src={searchIcon} alt="" />
-            Find Property
-          </button>
-        </div>
-        <form
-          action=""
-          className="flex flex-col sm:flex-wrap gap-[20px] justify-between mt-[20px] p-[20px] bg-Grey-10  rounded-[12px] md:flex-row lg:flex-nowrap md:mt-[-5px]"
-        >
-          {propertyPreferences.map((propertyPreference, index) => (
-            <SelectField
-              key={index}
-              {...propertyPreference}
-              onChange={(e) => handleSearchChange(e, propertyPreference.value)}
-              styles={`${styles.inputFied2} flex-1 `}
+      <div
+        className={` ${styles.searchContainer} flex  md:mt-[-40px] flex-col`}
+      >
+        <form action="" className="" onSubmit={handleSearch}>
+          <div className="flex justify-between  bg-Grey-08 gap-[20px] px-[10px] py-[10px] rounded border border-solid border-Grey-15 md:mx-[90px] md:py-[16px] md:px-[20px]">
+            <input
+              // onChange={(e) => handleSetName(e.target.value)}
+              onChange={(e) =>
+                handleSearchChange(e, e.target.name.toLocaleLowerCase())
+              }
+              // value={searchName}
+              name="property Name"
+              className="my-[10px] w-[100%] border border-Grey-15  md:px-[0px] md:my-[0px] p-2"
+              type="text"
+              placeholder="Search For A Property"
             />
-          ))}
+            <button
+              onClick={(e) => handleSearch(e)}
+              className="flex whitespace-nowrap px-[20px] py-[10px] w-[] bg-Purple-60 rounded-[8px]"
+            >
+              <img src={searchIcon} alt="" />
+              Find Property
+            </button>
+          </div>
+          <div className=" flex  sm:flex-wrap gap-[20px] justify-between mt-[20px] p-[20px] bg-Grey-10  rounded-[12px]lg:flex-nowrap md:mt-[-5px]">
+            {propertyPreferences.map((propertyPreference, index) => (
+              <div className="min-w-[100px w-full sm:w-auto">
+                <SelectField
+                  key={index}
+                  {...propertyPreference}
+                  label={propertyPreference.value}
+                  onChange={(e) =>
+                    handleSearchChange(e, propertyPreference.value.toLocaleLowerCase())
+                  }
+                  styles={`${styles.inputFied2} flex-1 `}
+                />
+              </div>
+            ))}
+          </div>
         </form>
       </div>
 
@@ -304,7 +330,9 @@ const HeroSection = () => {
         }
       </div>
 
-      <div className={`${styles.subContainer} houseCardContainer mx-0 my-[auto]`}>
+      <div
+        className={`${styles.subContainer} houseCardContainer mx-0 my-[auto] text-center`}
+      >
         {content}
       </div>
 

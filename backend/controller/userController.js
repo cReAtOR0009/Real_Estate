@@ -34,6 +34,7 @@ module.exports.signup = async (req, res) => {
 
     salt = bcrypt.genSaltSync(parseInt(process.env.HASH_SALT));
     encryptedPassword = bcrypt.hashSync(password, salt || 15);
+    
 
     let newUser = new User({
       firstName: firstName,
@@ -55,8 +56,8 @@ module.exports.signup = async (req, res) => {
     );
 
     //set token as authorization header and cookie for testing and learning only, I would remove one later
-    res.set("Authorization", `Bearer ${token}`);
-    res.cookie("token", token, { httpOnly: true });
+    res.set("Authorization", `Bearer ${token}`); 
+    res.cookie("estatein", token, { httpOnly: true }, {secure:`${!process.env.DEV}`});
     // Return any data you want as a response
     response.status = 200;
     response.message = "User signed up successfully";
@@ -183,20 +184,23 @@ module.exports.login = async (req, res) => {
       throw new Error(serverResponse.USER_ERROR.INVALID_PWORD);
     }
 
+    const age = 1000 * 60 * 60 
     token = jwt.sign(
       { id: existingUser.id, role: existingUser.role },
       process.env.SECRET_KEY || "secretKey",
-      { expiresIn: "1h" }
+      { expiresIn: age }
     );
+    
     //set token as authorization header and cookie for testing and learning only, I would remove one later
     res.set("Authorization", `Bearer ${token}`);
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("estatein", token, { httpOnly: true, secure:`${!process.env.DEV}`, maxAge: age },);
 
     response.status = 200;
     response.message = "user logged in succesfully";
     response.data = await formatMongoData(existingUser);
     response.token = token;
   } catch (error) {
+    response.status = 401;
     response.message = "error";
     response.error = error.message;
     console.log("error:", error);
@@ -280,11 +284,12 @@ module.exports.updateuser = async (req, res) => {
 
 module.exports.sendforgotPasswordEmail = async (req, res) => {
   let response = serverResponse.defaultResponse;
+  console.log("feghddgd......")
 
   try {
     const { email, password1, password2 } = req.body;
 
-    if (password1 !== password2) {
+    if (password1 !== password2) { 
       throw new Error("passwords don't match");
     }
     const existingUser = User.findOne({ email });
@@ -294,7 +299,7 @@ module.exports.sendforgotPasswordEmail = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: userExist.id, password: password1 },
+      { id: existingUser.id, password: password1 },
       process.env.FORGOT_PASSWORD_SECRET_KEY ||
         "FORGOT_PASSWORD_SECRET_KEY secretKey",
       { expiresIn: "1h" }
@@ -311,6 +316,7 @@ module.exports.sendforgotPasswordEmail = async (req, res) => {
   } catch (error) {
     response.message = "error message";
     response.error = error.message;
+    console.log("error:", error.message)
     console.log(
       "something went wrong: controller: signUp sending forgot password email"
     );
@@ -367,6 +373,29 @@ module.exports.verifyForgotEmailPassword = async (req, res) => {
     response.error = error.message;
     console.log(error);
     console.log("something went wrong: controller: verifyForgotEmailPassword");
+  } finally {
+    return res.status(response.status).send(response);
+  }
+};
+
+module.exports.logout = async (req, res) => {
+  let response = {
+    status: 400,
+    message: "",
+    data: {},
+  };
+
+  try {
+    
+    res.clearCookie("estatein")
+    response.status = 200;
+    response.message = "User logged out successfully"
+  } catch (error) {
+    response.status = 500;
+    response.message = "Failed to log out";
+    response.error = error.message;
+    console.error("Error:", error);
+    console.log("something went wrong: controller: login user");
   } finally {
     return res.status(response.status).send(response);
   }

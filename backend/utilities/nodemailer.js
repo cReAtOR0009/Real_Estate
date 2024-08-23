@@ -8,7 +8,7 @@ dotEnv.config();
 // console.log("helloooo");
 
 const createTransporter = async () => {
-  const oauth2Client = new OAuth2(
+  const oauth2Client = await new OAuth2(
     "974662439535-k58n1crprgu45ph3admtemicokau9ull.apps.googleusercontent.com",
     "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",
     "https://developers.google.com/oauthplayground"
@@ -38,8 +38,6 @@ const createTransporter = async () => {
       clientSecret: "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",
       refreshToken:
         "1//04-HJRll1AVyfCgYIARAAGAQSNwF-L9IrvCTUK_tG4jSiTnBLamn0QPSttg1qIK0ewz1eGtvNSZcoWRUjyRXInqBcs3ZcqbhCU0I",
-      accessToken:
-        "ya29.a0Ad52N39dx3jS8W07HHnLU2qgZeNFNrW13kazBPZDtbm_2GzcWCbC3bwHtxfWp5eV6XmTVCyQnlrKBQWrpFak08N2L4UPL3vsC14UXsO5DRzm2ki66dZ6zvR64dPZGlP2ttwLtu8gSLaTqOQjrmmdEwQcumMyOo9MPX_FaCgYKAd4SARMSFQHGX2Mi43uS9QXEjRCekd8viCLYEg0171", // No need to provide accessToken here
       tls: {
         rejectUnauthorized: false,
       },
@@ -48,6 +46,7 @@ const createTransporter = async () => {
 
   return transporter;
 };
+
 
 const sendEmail = async (emailTransporter, emailOptions) => {
   try {

@@ -53,15 +53,17 @@ const FeaturedItemCard = ({
           </div>
           <div className="flex flex-wrap gap-[5px]">
             <div className="flex flex-wrap items-center border border-y-[2px] border-Grey-15 p-[10px] gap-[5px]">
-              {Object.keys(amenities).map((ammenity, index) => {
-                return (
-                  <Amenity
-                    key={index}
-                    icon={Object.keys(amenities)[index]}
-                    available={Object.values(amenities)[index]}
-                    text={Object.keys(amenities)[index]}
-                  />
-                );
+            {Object.keys(amenities).map((ammenity, index) => {
+                if (ammenity !== "_id") {
+                  return (
+                    <Amenity
+                      icon={Object.keys(amenities)[index]}
+                      available={Object.values(amenities)[index]}
+                      text={Object.keys(amenities)[index]}
+                      key={index}
+                    />
+                  );
+                }
               })}
               <p className="text-Purple-60 align-bottom">
                 <Link to={`/properties/${id}`}>Check More...</Link>
@@ -104,20 +106,20 @@ const FeaturedProperties = () => {
   } = useContext(PropertyContext);
 
   const handlePrevClick = (noOfPages) => {
-    console.log("number of page: ", noOfPages);
+    // console.log("number of page: ", noOfPages);
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1)); // Ensure the page doesn't go below 0
   };
 
   // Handle click event for the "Next" button
   const handleNextClick = (noOfPages) => {
-    console.log("number of page: ", noOfPages);
+    // console.log("number of page: ", noOfPages);
     setCurrentPage((prevPage) => Math.min(prevPage + 1, noOfPages)); // Ensure the page doesn't exceed the total number of pages
   };
   if (properties.error) {
     // return (<h1>error fetching data</h1>)
     content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] text-[30px] text-[red]">error fetching data</div>;
   } else if (properties.isLoading) {
-    console.log("properties.isLoading", properties.isLoading);
+    // console.log("properties.isLoading", properties.isLoading);
     content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto]">
     <h1 className="text-[20px]">fetching Properties....</h1>
     <div className="loader">
@@ -125,7 +127,7 @@ const FeaturedProperties = () => {
     </div>
   </div>;
   } else if (properties.properties.length > 0) {
-    console.log("properties.properties.length: ", properties.properties.length);
+    // console.log("properties.properties.length: ", properties.properties.length);
     const itemsPerDisplay = 3;
     const noOfPages =
       FeaturedHouse.length >= 3
@@ -140,8 +142,8 @@ const FeaturedProperties = () => {
       FeaturedHouse >= 3
         ? FeaturedHouse.slice(startIndex, endIndex)
         : FeaturedHouse;
-    console.log("displayedFeaturedItems: ", displayedFeaturedItems);
-    console.log("noOfPages: ", noOfPages);
+    // console.log("displayedFeaturedItems: ", displayedFeaturedItems);
+    // console.log("noOfPages: ", noOfPages);
     content = (
       <div>
         <div className="featuredItemListContainer">
@@ -185,7 +187,7 @@ const FeaturedProperties = () => {
   </div>)
   }
 
-  console.log("properties from featured: ", properties);
+  // console.log("properties from featured: ", properties);
   useEffect(() => {
     // getProperties();
     // console.log("useeffect content: ", content);
@@ -220,7 +222,7 @@ const FeaturedProperties = () => {
 
       <div className="featuredItemsContainerWrapper">
         {content}
-        {console.log("content", content)}
+        {/* {console.log("content", content)} */}
       </div>
     </div>
   );

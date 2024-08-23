@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/auth/authSlice";
 import { useLoginMutation } from "../features/auth/authApiSlice";
+import Welcome from "../features/auth/Welcome";
 
 import { styles } from "../styles/styles";
 import { logo } from "../assets/imageImporter";
@@ -33,7 +34,7 @@ const Login = () => {
     try {
       // console.log("email: ", email, "password", password);
       const userData = await login({ email, password }).unwrap();
-      console.log("userdata:", userData);
+      // console.log("userdata:", userData);
       const {
         data: { email: userEmail },
         token,
@@ -42,6 +43,8 @@ const Login = () => {
       dispatch(setCredentials({ user: userEmail, accessToken: token }));
       setEmail("");
       setPassword("");
+      // console.log("returning welcome")
+      // return <Welcome />
       navigate("/welcome");
     } catch (err) {
       console.log("error: ", err);

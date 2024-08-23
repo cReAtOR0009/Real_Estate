@@ -51,6 +51,9 @@ import icontwitter from "./Icontwitter.png"
 import iconlinkdn from "./Iconlinkdn.png"
 import iconyoutube from "./Iconyoutube.png"
 
+//About Page
+import about1 from "./About1.png"
+
 export {
   logo,
   closeButton,
@@ -102,4 +105,6 @@ export {
   serviceCardIcon2,
   serviceCardIcon3,
   serviceCardIcon4,
+  //About Assest
+  about1
 };

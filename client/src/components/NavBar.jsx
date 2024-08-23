@@ -1,5 +1,6 @@
 import React, { useContext, useState,  } from "react";
 import { useDispatch } from "react-redux";
+import { useLogoutMutation } from "../features/auth/authApiSlice.js";
 import { NavigationContext } from "../context/navigationContext";
 import { CartContext } from "../context/cartContext";
 import { logOut } from "../features/auth/authSlice";
@@ -30,10 +31,18 @@ const NavBar = () => {
   // console.log("cart: ", cart);
   const [showNav, setShowNav] = useState(false);
   const dispatch = useDispatch();
+  const [logout, { isLoading, isError, isSuccess }] = useLogoutMutation();
 
-  const handleAuthClick = () => {
+  const handleAuthClick = async() => {
     if (token) {
+      try {
+        await logout().unwrap();
+        // Handle successful logout (e.g., redirect to login page)
         dispatch(logOut());
+      } catch (err) {
+        // Handle error during logout
+        console.error('Failed to logout:', err);
+      }
     } else {
         // Navigate to login page
         // navigate('/login');
@@ -43,21 +52,21 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className={` bg-Grey-10 `}>
+      <nav className={` bg-Purple-75 `}>
         <div
-          className={`${styles.navContainer} bg-Grey-15 fixed top-0 z-20 w-full flex justify-between items-center p-4`}
+          className={`${styles.navContainer} bg-Purple-75 fixed top-0 z-20 w-full flex justify-between items-center p-4`}
         >
-          <a href="/" className="logo sm:min-w-[200px]">
+          <a href="/" className="logo w-[150px] md:min-w-[150px] lg:[200px]">
             <img src={logo} alt={companydetails.title} />
           </a>
-          <ul className="hidden py-[10px] sm:flex justify-between items-center max-lg:space-x-2  space-x-4">
+          <ul className="hidden py-[10px] md:flex justify-between items-center max-lg:space-x-2  space-x-4">
             {navLinks.map((navlink, index) => (
               <li
                 key={index}
-                className={` text-nowrap max-lg:text-[15px]  ${
+                className={` text-nowrap max-lg:text-[15px] px-[10px]  md:py-[5px] lg:px-[15px]  lg:py-[10px] ${
                   activeNav === navlink.id
-                    ? "rounded-[8px] py-[10px]  bg-Grey-10 border border-Grey-15 "
-                    : "hover:bg-Grey-10 rounded-[8px] py-[10px]"
+                    ? "rounded-[8px]   bg-Grey-10 border border-Grey-15 "
+                    : "hover:bg-Grey-10 rounded-[8px] "
                 }`}
                 onClick={() => setNavActive(navlink.id)}
               >
@@ -71,11 +80,11 @@ const NavBar = () => {
                       // ? "/login"
                       : navlink.id
                   }
-                  className="px-[15px] py-[10px] w-[150px] h-[50px] text-center "
+                  className="  text-center "
                 >
                   
                   {navlink.title === "Login" ? (
-                <button onClick={handleAuthClick}>
+                <button onClick={handleAuthClick} disabled={isLoading}>
                     {token ? "Logout" : "Login"}
                 </button>
             ) : (
@@ -101,17 +110,17 @@ const NavBar = () => {
           </div>
           <div
             onClick={() => setShowNav(true)}
-            className={`${showNav ? "hidden" : "flex"}`}
+            className={`flex md:hidden ${showNav ? "hidden" : "flex"}`}
           >
             <img
               src={openNavButton}
               alt="open nav"
-              className="flex sm:hidden cursor-pointer"
+              className="flex md:hidden cursor-pointer"
             />
           </div>
 
           {showNav ? (
-            <div className="w-[200px] font-[20px] fixed top-0 bg-[#a685fa] z-10 right-0 p-[10px] h-[100vh] flex flex-col sm:hidden">
+            <div className="w-[200px] font-[20px] fixed top-0 bg-[#a685fa] z-10 right-0 p-[10px] h-[100vh] flex flex-col md:hidden">
               <div className="flex justify-between items-center">
                 <a href="/" className=" flex w-[100px] h-[50px] cursor-pointer">
                   <img src={logo} alt={companydetails.title} />
@@ -156,6 +165,17 @@ const NavBar = () => {
               <button className="bg-gray-08 border border-gray-15 rounded p-2">
                 Contact
               </button>
+              <div className="self-center my-auto">
+
+              <button className="relative self-end w-auto" onClick={toggleCart}>
+              <FaOpencart size={30} />
+              <span className="absolute top-[-10px] right-[-10px]">
+                {cart.properties.length}
+              </span>
+              {/* {console.log(cart.properties.length)} */}
+            </button>
+              </div>
+
             </div>
           ) : (
             ""

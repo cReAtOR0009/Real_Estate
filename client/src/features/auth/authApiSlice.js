@@ -4,38 +4,55 @@ export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
-        url: "/auth/user/login",
+        url: "/api/v1/auth/user/login",
         method: "POST",
         body: { ...credentials },
       }),
     }),
     signup: builder.mutation({
       query: (credentials) => ({
-        url: "/auth/user/signup",
+        url: "/api/v1/auth/user/signup",
         method: "POST",
         body: { ...credentials },
       }),
     }),
     addproperty: builder.mutation({
       query: (credentials) => ({
-        url: "/auth/property/add",
+        url: "/api/v1/auth/property/add",
         method: "POST",
         body: { ...credentials },
       }),
     }),
     checkout: builder.mutation({
       query: (credentials) => ({
-        url: "/auth/checkout/",
+        url: "/api/v1/auth/checkout/",
         method: "POST",
         body: { ...credentials },
       }),
     }),
     fetchProperties: builder.query({
       query: () => ({
-        url: "/auth/property/list",
+        url: "/api/v1/auth/property/list",
         method: "GET",
       }),
     }),
+    searchProperties: builder.query({
+      query: (searchParams) => {
+        const queryString = new URLSearchParams(searchParams).toString();
+        console.log("queryString:", queryString) 
+        return {
+          url: `/api/v1/auth/property/search/search?${queryString}`,
+          method: "GET",
+        };
+      },
+    }), 
+    logout: builder.mutation({
+      query: () => ({
+        url: "/api/v1/auth/user/logout",
+        method: "POST",
+      }),
+    }),
+
   }),
 });
 
@@ -45,4 +62,6 @@ export const {
   useAddpropertyMutation,
   useCheckoutMutation,
   useFetchPropertiesQuery,
+  useSearchPropertiesQuery,
+  useLogoutMutation,
 } = authApiSlice;

@@ -7,7 +7,10 @@ import {
   uploadBytesResumable,
   app,
 } from "../firebase.config";
-import { selectCurrentUser, selectCurrentToken } from "../features/auth/authSlice";
+import {
+  selectCurrentUser,
+  selectCurrentToken,
+} from "../features/auth/authSlice";
 import InputField from "./formComponent/InputField";
 import SelectField2 from "./formComponent/SelectField2";
 import { styles } from "../styles/styles";
@@ -69,7 +72,7 @@ const AddProperty = () => {
   };
 
   const resetForm = () => {
-    // dispatch({ type: "RESET_form" });
+    dispatch({ type: "RESET_form" });
   };
 
   const handleImageUpload = (e) => {
@@ -131,7 +134,7 @@ const AddProperty = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("formData:", formData);
+    console.log("formData:", formData);
     const formIsValid = validateForm();
 
     // try {
@@ -200,9 +203,13 @@ const AddProperty = () => {
               },
               async () => {
                 // Upload completed successfully, now we can get the download URL
-                // const downloadURL = await getDownloadURL(
-                //   uploadTask.snapshot.ref
-                // );
+                const downloadURL = await getDownloadURL(
+                  uploadTask.snapshot.ref
+                );
+
+                console.log("downloadURL:", downloadURL);
+                urlArray.push(downloadURL);
+                // formData.uploadedImages
                 if (index == formData.images.length - 1 && progress == 100) {
                   console.log("this is the last image", formData.images[index]);
                   let formatDataToSend = formData;
@@ -252,7 +259,7 @@ const AddProperty = () => {
   }, [errors]);
 
   return (
-    <div className=" mt-[150px] p-[10px]">
+    <div className={` ${styles.navContainer} mt-[150px] p-[10px]`}>
       <div className="fixed m-0 top-[100px] z-[200] text-center text-[15px]">
         {/* errors */}
         {visible && (
@@ -280,14 +287,14 @@ const AddProperty = () => {
             type="text"
             name="title"
             label="title"
-            styles={`${styles.inputFied} md:max-w-[100%]`}
+            styles={`${styles.inputField} md:max-w-[100%]`}
             onChange={handleChange}
             value={formData.title}
           />
           <div className="flex flex-col w-[100%] md:max-w-[50%]">
-            <label>Description:</label>
+            <label htmlFor="description">Description:</label>
             <textarea
-              className={`${styles.inputFied}`}
+              className={`${styles.inputField}`}
               name="description"
               placeholder="describe Property as detailed as possible with 5000 characters"
               value={formData.description}
@@ -302,7 +309,7 @@ const AddProperty = () => {
             type="number"
             name="price"
             label="price"
-            styles={`${styles.inputFied}`}
+            styles={`${styles.inputField}`}
             onChange={handleChange}
             value={formData.price}
           />
@@ -313,7 +320,7 @@ const AddProperty = () => {
             placeholder="number of Bedrooms"
             value={formData.bedrooms}
             onChange={handleChange}
-            styles={styles.inputFied}
+            styles={styles.inputField}
           />
           <InputField
             type="number"
@@ -322,7 +329,7 @@ const AddProperty = () => {
             placeholder="number of Bathrooms"
             value={formData.bathrooms}
             onChange={handleChange}
-            styles={styles.inputFied}
+            styles={styles.inputField}
           />
 
           <InputField
@@ -332,7 +339,7 @@ const AddProperty = () => {
             placeholder="property Size"
             value={formData.size}
             onChange={handleChange}
-            styles={styles.inputFied}
+            styles={styles.inputField}
           />
 
           <InputField
@@ -342,7 +349,7 @@ const AddProperty = () => {
             value={formData.address.street}
             onChange={handleChange}
             placeholder="property Address Street"
-            styles={styles.inputFied}
+            styles={styles.inputField}
           />
           <InputField
             type="text"
@@ -351,7 +358,7 @@ const AddProperty = () => {
             value={formData.address.city}
             onChange={handleChange}
             placeholder="property Address"
-            styles={styles.inputFied}
+            styles={styles.inputField}
           />
           <InputField
             type="text"
@@ -360,7 +367,7 @@ const AddProperty = () => {
             value={formData.address.state}
             onChange={handleChange}
             placeholder="property Address City"
-            styles={styles.inputFied}
+            styles={styles.inputField}
           />
           <InputField
             type="text"
@@ -369,7 +376,7 @@ const AddProperty = () => {
             value={formData.address.zipcode}
             onChange={handleChange}
             placeholder="property address zipcode"
-            styles={styles.inputFied}
+            styles={styles.inputField}
           />
         </div>
 
@@ -461,7 +468,7 @@ const AddProperty = () => {
         {/* nearby amenities */}
         <InputField
           label="Nearby Amenities"
-          styles={styles.inputFied}
+          styles={styles.inputField}
           value={formData.nearbyAmenities}
           type="text"
           name="nearbyAmenities"
@@ -470,7 +477,7 @@ const AddProperty = () => {
         />
 
         {/* Additional Features */}
-        <div className="flex flex-wrap flex-grow  gap-[10px] my-[15px]">
+        <div className="flex flex-wrap flex-grow   gap-[10px] my-[15px]">
           {/* <h2 className="text-[20px] text-center">Additional Features</h2> */}
           {/* <label>Additional Features:</label> */}
           {formData.additionalFeatures.map((feature, index) => (
@@ -480,7 +487,7 @@ const AddProperty = () => {
             >
               <InputField
                 label="Feature Name"
-                styles={styles.inputFied}
+                styles={styles.inputField}
                 type="text"
                 name="name"
                 value={feature.name}
@@ -489,7 +496,7 @@ const AddProperty = () => {
               />
               <InputField
                 label="Feature Description"
-                styles={styles.inputFied}
+                styles={styles.inputField}
                 type="text"
                 name="description"
                 value={feature.description}
@@ -504,13 +511,16 @@ const AddProperty = () => {
               </button>
             </div>
           ))}
-          <button
-            className={`${styles.buttonPadding} w-[100%] bg-Purple-60`}
-            type="button"
-            onClick={addAdditionalFeature}
-          >
-            Click to Add Extra Feature
-          </button>
+
+          <div className="self-center w-full ">
+            <button
+              className={`${styles.buttonPadding} item-center w-full  max-w-[500px] bg-Purple-60 text-center`}
+              type="button"
+              onClick={addAdditionalFeature}
+            >
+              Click to Add Extra Feature
+            </button>
+          </div>
         </div>
 
         {/* Add input className="p-[5px] border border-solid border-Grey-60 h-[50px]" fields for other properties */}
@@ -518,7 +528,7 @@ const AddProperty = () => {
           <SelectField2
             label={"propertyType"}
             onChange={handleChange}
-            styles={`${styles.inputFied}  min-w-[100px]`}
+            styles={`${styles.inputField}  min-w-[100px]`}
             options={[
               "House",
               "Apartment",
@@ -531,11 +541,11 @@ const AddProperty = () => {
           <SelectField2
             label="status"
             onChange={handleChange}
-            styles={`${styles.inputFied} min-w-[100px] `}
+            styles={`${styles.inputField} min-w-[100px] `}
             options={["For Sale", "For Rent", "For Lease"]}
           />
           <InputField
-            styles={styles.inputFied}
+            styles={styles.inputField}
             type="text"
             name="tags"
             label="Tags"
@@ -544,7 +554,7 @@ const AddProperty = () => {
             placeholder="Separate tags with comma"
           />
           <InputField
-            styles={styles.inputFied}
+            styles={styles.inputField}
             type="text"
             name="virtualTour"
             label={"Virtual Tour"}
@@ -560,8 +570,13 @@ const AddProperty = () => {
             {/* <p>{uploadPercentage}</p>
             <p>{UploadingFile}</p> */}
 
-            <label>Add Property Images:</label>
-            <input type="file" multiple onChange={handleImageUpload} />
+            <label htmlFor="property images">Add Property Images:</label>
+            <input
+              type="file"
+              name="property images"
+              multiple
+              onChange={handleImageUpload}
+            />
             {console.log("formData.images:", formData.images)}
             {formData.images.length > 0 ? (
               <div className="flex flex-wrap gap-[10px] border border-solid border-Purple-60 rounded-[10px] p-[10px]">
@@ -580,12 +595,15 @@ const AddProperty = () => {
           </div>
         </div>
         {/* ADD PROPERTY BUTTON */}
-        <button
-          className={`${styles.buttonPadding} bg-Purple-60`}
-          type="submit"
-        >
-          Add Property
-        </button>
+        <div className="self-center w-full">
+          <button
+            className={`${styles.buttonPadding} bg-Purple-60 max-w-[500px] `}
+            type="submit"
+            data-testid="submit-button"
+          >
+            Add Property
+          </button>
+        </div>
         {/* </div> */}
       </form>
     </div>

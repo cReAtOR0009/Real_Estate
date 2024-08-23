@@ -7,11 +7,13 @@ console.log("base url: ", baseUrl)
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrl,
-  credentials: "include",
+  credentials: "include",  
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
-    // console.log("headers: ", headers)
-    // console.log("auth: ", getState().auth);
+    console.log("headers: ", headers)
+    console.log("token: ", token)
+    console.log("getState: ", getState())
+    // console.log("auth: ", getState().auth); 
 
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
@@ -33,7 +35,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       // store new token
       api.dispatch(setCredentials({ ...refreshResult.data, user }));
       // retry the original query with new access token
-      result = await baseQuery(args, api, extraOptions);
+      result = await baseQuery(args, api, extraOptions); 
     } else {
       api.dispatch(logOut());
     }

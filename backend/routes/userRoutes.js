@@ -35,6 +35,10 @@ router.post("/updateuser/:id", authenticateToken, (req, res) => {
   userController.updateuser(req, res);
 });
 
+router.post("/logout", (req, res) => {
+  userController.logout(req, res)
+})
+
 // router.get("/getUserbyid/:id",  (req, res) => { 
 //   userController.getUserbyid(req, res);
 // });

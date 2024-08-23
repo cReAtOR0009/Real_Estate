@@ -1,5 +1,6 @@
-import React from "react";
+import {useContext} from "react";
 import { achievement1, offers } from "../../assets/textAssets";
+import { NavigationContext } from "../../context/navigationContext";
 import {
   hero,
   dreamcircle,
@@ -24,6 +25,7 @@ import {
 const Hero = () => {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
+  const { setNavActive, activeNav } = useContext(NavigationContext);
   return (
     <>
       <header
@@ -51,6 +53,7 @@ const Hero = () => {
                 Learn More
               </button>
               <button
+              onClick={() => setNavActive("properties")}
                 className={`${styles.buttonPadding} ${styles.purpleButton}`}
               >
                 <Link to={"/properties"}>Browse Properties</Link>
