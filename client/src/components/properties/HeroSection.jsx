@@ -378,7 +378,7 @@ const HeroSection = () => {
                   onChange={(e) =>
                     handlePropertyPreferenceChange(e, e.target.value)
                   }
-                  className={`${styles.inputFied} w-[100%]`}
+                  className={`${styles.inputField} w-[100%]`}
                 >
                   {budget.options.map((budget, index) => (
                     <option key={index} value={budget}>
@@ -398,7 +398,7 @@ const HeroSection = () => {
                     onChange={(e) =>
                       handlePropertyPreferenceChange(e, e.target.name)
                     }
-                    className={styles.inputFied}
+                    className={styles.inputField}
                   />
                   <input
                     name="email"
@@ -407,7 +407,7 @@ const HeroSection = () => {
                     onChange={(e) =>
                       handlePropertyPreferenceChange(e, e.target.name)
                     }
-                    className={styles.inputFied}
+                    className={styles.inputField}
                   />
                 </div>
               </div>
