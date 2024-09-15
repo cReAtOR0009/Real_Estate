@@ -61,6 +61,18 @@ const NavBar = () => {
           </a>
           <ul className="hidden py-[10px] md:flex justify-between items-center max-lg:space-x-2  space-x-4">
             {navLinks.map((navlink, index) => (
+                <Link
+                to={
+                  navlink.id === "home"
+                    ? `/`
+                    : navlink.id === "login"
+                    ? "/login"
+                    // : !token
+                    // ? "/login"
+                    : navlink.id
+                }
+                className="  text-center "
+              >
               <li
                 key={index}
                 className={` text-nowrap max-lg:text-[15px] px-[10px]  md:py-[5px] lg:px-[15px]  lg:py-[10px] ${
@@ -70,18 +82,7 @@ const NavBar = () => {
                 }`}
                 onClick={() => setNavActive(navlink.id)}
               >
-                <Link
-                  to={
-                    navlink.id === "home"
-                      ? `/`
-                      : navlink.id === "login"
-                      ? "/login"
-                      // : !token
-                      // ? "/login"
-                      : navlink.id
-                  }
-                  className="  text-center "
-                >
+              
                   
                   {navlink.title === "Login" ? (
                 <button onClick={handleAuthClick} disabled={isLoading}>
@@ -91,8 +92,8 @@ const NavBar = () => {
                 navlink.title
             )}
                   
-                </Link>
               </li>
+                </Link>
             ))}
           </ul>
           <div className="flex gap-[30px]">
