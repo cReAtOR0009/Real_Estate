@@ -12,7 +12,7 @@ import About from "./pages/About";
 import Properties from "./pages/Properties";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
-import Property from "./pages/Property";
+import Property from "./pages/propertyDetails/PropertyDetails";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import AddProperty from "./components/AddProperty";
