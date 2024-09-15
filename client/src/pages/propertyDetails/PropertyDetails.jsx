@@ -1,31 +1,32 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { CartContext } from "../context/cartContext";
+import { CartContext } from "../../context/cartContext";
 import {
   Fees,
   feeTotalInitialCostss,
   monthlyExpenses,
   monthlyFees,
-} from "../assets/textAssets";
-import { faqs } from "../assets/textAssets";
-import FaqCard from "../components/smallcomponents/FaqCard";
-import FaqBox from "../components/smallcomponents/FaqBox";
-import MainHeaderContainer from "../components/smallcomponents/MainHeaderContainer";
-import { rightarrow, leftarrow } from "../assets/textAssets";
+} from "../../assets/textAssets";
+import { faqs } from "../../assets/textAssets";
+import PropertyDetailEnqForm from "./PropertyDetailEnqForm";
+import FaqCard from "../../components/smallcomponents/FaqCard";
+import FaqBox from "../../components/smallcomponents/FaqBox";
+import MainHeaderContainer from "../../components/smallcomponents/MainHeaderContainer";
+import { rightarrow, leftarrow } from "../../assets/textAssets";
 // import { Houses } from "../assets/textAssets";
-import { styles } from "../styles/styles";
-import { useFetchPropertiesQuery } from "../features/auth/authApiSlice";
-import Amenity from "../components/Amenity";
-import { contactFieldDetails } from "../assets/textAssets";
-import InputField from "../components/formComponent/InputField";
+import { styles } from "../../styles/styles";
+import { useFetchPropertiesQuery } from "../../features/auth/authApiSlice";
+import Amenity from "../../components/Amenity";
+import { contactFieldDetails } from "../../assets/textAssets";
+import InputField from "../../components/formComponent/InputField";
 import { MdBathroom, MdLocationOn } from "react-icons/md";
 import { MdBedroomChild } from "react-icons/md";
 import { BsRulers } from "react-icons/bs";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import AdditionalFeatures from "../components/AdditionalFeatures";
-import HeaderContainer from "../components/textComponents/HeaderContainer";
-import Fee from "../components/smallcomponents/Fee";
-import Journey from "../components/smallcomponents/Journey";
+import AdditionalFeatures from "../../components/AdditionalFeatures";
+import HeaderContainer from "../../components/textComponents/HeaderContainer";
+import Fee from "../../components/smallcomponents/Fee";
+import Journey from "../../components/smallcomponents/Journey";
 
 const StarRating = ({ value, review }) => {
   // Ensure the rating is within the valid range (1 to 5)
@@ -115,7 +116,7 @@ const Property = () => {
         let image = images[0]?.imageUrl;
         addToCart(id, price, description, image, name);
       };
-      let displayImage = images[0].imageUrl;
+      let displayImage = images[0]?.imageUrl;
       // const scrollToTop = (() => {
       //   window.scrollTo(0, 0);
       // })();
@@ -374,88 +375,13 @@ const Property = () => {
                     className={`${styles.heading}`}
                   >{`inquire About ${name}`}</h1>
                   <p>
-                    Interested in this property? Fill out the form here, and
-                    our real estate experts will get back to you with more
-                    details, including scheduling a viewing and answering any
-                    questions you may have.
+                    Interested in this property? Fill out the form here, and our
+                    real estate experts will get back to you with more details,
+                    including scheduling a viewing and answering any questions
+                    you may have.
                   </p>
                 </div>
-                <div className="grow sm:max-w-[50vw] p-[20px] border border-solid border-Grey-50 rounded-[10px]">
-                  <form action="" className="flex flex-col gap-[30px]">
-                    {contactFieldDetails.map(
-                      (contactFieldDetail, index) =>
-                        index % 2 === 0 && ( // Render pairs based on even index
-                          <div
-                            className="flex flex-wrap gap-[20px]"
-                            key={index}
-                          >
-                            <InputField
-                              {...contactFieldDetail}
-                              styles={styles.inputFied}
-                            />
-                            {/* Render the second element if it exists */}
-                            {index + 1 < contactFieldDetails.length && (
-                              <InputField
-                                {...contactFieldDetails[index + 1]}
-                                styles={styles.inputFied}
-                              />
-                            )}
-                          </div>
-                        )
-                    )}
-                    <div className="flex flex-col">
-                      <InputField
-                        type={"text"}
-                        placeholder={`${name} ${address.street},${address.city},${address.state} `}
-                        name={"selected property"}
-                        label={"Selected Property"}
-                        onChange={() => {}}
-                        styles={styles.inputFied}
-                        value={`${name} ${address.street},${address.city},${address.state}`}
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label htmlFor="Message" className="my-[10px]">
-                        Message
-                      </label>
-                      <textarea
-                        // type={"textarea"}
-                        placeholder={``}
-                        name="Message"
-                        onChange={() => {}}
-                        className={`${styles.inputFied} mr-[0px]  bg-Grey-08 text-Purple-60 text-center`}
-                        // styles={styles.inputFied}
-                        // value=""
-                      />
-                    </div>
-
-                    <div className="flex justify-center items-center ">
-                      <div className="flex justify-center items-center">
-                        <InputField
-                          type={"checkbox"}
-                          placeholder="I agree with Terms of Use and Privacy Policy"
-                          id="agreement"
-                          styles={`w-[20px] bg-Grey-08 mt-[-15px] text-Purple-60 text-center flex items-center justify-center`}
-                          name="agreement"
-                          onChange={() => {}}
-                          // styles={styles.inputFied}
-                        />
-                        <label
-                          htmlFor="agreement"
-                          className={`${styles.paragraph} text-[10px] m-auto grow-[1]`}
-                        >
-                          I agree with Terms of Use and Privacy Policy
-                        </label>
-                      </div>
-
-                      <button
-                        className={`"hover:bg-[#946cf9] transition-all px-[10px] py-[10px] lg:px-[24px] lg:py-[18px] rounded-[8px] text-[10px] sm:text-[12px] bg-Purple-60`}
-                      >
-                        Send Your Message
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                <PropertyDetailEnqForm  address={address} name={name} id={id}/>
               </div>
             </div>
             <div className="mx-[20px]">
@@ -549,7 +475,7 @@ const Property = () => {
                               <Fee {...Fees[index + 1]} index={index + 1} />
                             )}
                           </div>
-                        )
+                        );
                       }
                       return null;
                     })}
@@ -572,7 +498,7 @@ const Property = () => {
                               <Fee {...Fees[index + 1]} index={index + 1} />
                             )}
                           </div>
-                        )
+                        );
                       }
                       return null;
                     })}
@@ -625,7 +551,8 @@ const Property = () => {
       } else {
         // If no error, set houses data from the fetched data
         setHouses(data.data);
-        setImageToDisplay(data.data[0].images[0].imageUrl);
+        // console.log("data...", data)
+        setImageToDisplay(data.data[0].images[0]?.imageUrl);
         // console.log("Houses: ", data);
         // console.log("currentData: ", currentData);
         // console.log("useFetchPropertiesQuery: ", useFetchPropertiesQuery());
@@ -635,7 +562,7 @@ const Property = () => {
     handleFetchProperties();
   }, [data, isLoading, isError, isSuccess]);
 
-  return <>{content}</>
+  return <>{content}</>;
 };
 
 export default Property;
