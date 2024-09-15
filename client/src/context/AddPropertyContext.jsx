@@ -1,7 +1,7 @@
 import React, { useEffect, createContext, useContext, useReducer } from "react";
 
 export const initialFormData = {
-  id: "01",
+  id: "",
   title: "",
   description: "",
   price: 0,
