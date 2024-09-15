@@ -107,11 +107,12 @@ const HouseCard = ({
               <p className="text-[20px]">{price}</p>
             </div>
 
-            <button
+            <Link
+              to={`${id}`}
               className={`${styles.buttonPadding} rounded-[8px] bg-Purple-60`}
             >
-              <Link to={`${id}`}>View Property Details</Link>
-            </button>
+              <button>View Property Details</button>
+            </Link>
           </div>
         </div>
       </div>
@@ -120,7 +121,6 @@ const HouseCard = ({
 };
 
 const HeroSection = () => {
-
   const [Houses, setHouses] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [searchParams, setsearchParams] = useState({
@@ -161,7 +161,7 @@ const HeroSection = () => {
     isUninitialized,
     refetch,
   } = useFetchPropertiesQuery();
-  
+
   const {
     data: searchData,
     error: searchError,
@@ -170,9 +170,8 @@ const HeroSection = () => {
     skip: !Object.keys(searchParams).length,
   });
 
-
   const handleSearchChange = (e, property) => {
-    property.toLowerCase()
+    property.toLowerCase();
     setsearchParams((initialValue) => ({
       ...initialValue,
       [property]: e.target.value,
@@ -201,7 +200,7 @@ const HeroSection = () => {
       content = `<div>Error: ${searchError.message}</div>`;
     } else if (searchData) {
       console.log(searchData); // Example: Log searchData to console
-      setHouses(searchData.data)
+      setHouses(searchData.data);
     }
   };
 
@@ -215,17 +214,14 @@ const HeroSection = () => {
   useEffect(() => {
     const handleFetchProperties = async () => {
       if (isError) {
-  
       } else if (!isError && data.status == 200) {
         // If no error, set houses data from the fetched data
         setHouses(data.data);
-       
       }
     };
     handleFetchProperties();
     // console.log("content: ", content);
-  }, [ isLoading]);
-  
+  }, [isLoading]);
 
   if (Houses.length > 0) {
     content = Houses.map((house, index) => {
@@ -251,12 +247,11 @@ const HeroSection = () => {
     );
   } else if (Houses.length == 0) {
     console.log("data: ", data);
-    content = (
+    content =
       // <div className="text-center mx-auto">
-        "Opps, no Property Found :("
-        // {/* <button onClick={handleFetchProperties}>Fetch again...</button> */}
-      // </div>
-    );
+      "Opps, no Property Found :(";
+    // {/* <button onClick={handleFetchProperties}>Fetch again...</button> */}
+    // </div>
     // return content;
   } else {
     content = (
@@ -310,7 +305,10 @@ const HeroSection = () => {
                   {...propertyPreference}
                   label={propertyPreference.value}
                   onChange={(e) =>
-                    handleSearchChange(e, propertyPreference.value.toLocaleLowerCase())
+                    handleSearchChange(
+                      e,
+                      propertyPreference.value.toLocaleLowerCase()
+                    )
                   }
                   styles={`${styles.inputFied2} flex-1 `}
                 />
@@ -424,7 +422,7 @@ const HeroSection = () => {
                 name="message"
                 rows="4"
                 cols="50"
-                className={`${styles.inputFied} w-[100%]`}
+                className={`${styles.inputField} w-[100%]`}
                 onChange={(e) =>
                   handlePropertyPreferenceChange(e, e.target.name)
                 }
