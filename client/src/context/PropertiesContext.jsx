@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useContext, useReducer } from "react";
+import React, { useEffect, createContext, useReducer } from "react";
 import { useFetchPropertiesQuery } from "../features/auth/authApiSlice";
 
 export const initialState = {
@@ -29,7 +29,7 @@ export const PropertyReducer = (state, action) => {
       };
     case "SET_ERROR_VALUE":
       const { errorValue } = action.payload;
-      console.log("errror vale from action", errorValue);
+      console.log("errror value from action", errorValue);
       return {
         ...state,
         errorValue: [...state.errorValue, errorValue],
