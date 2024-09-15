@@ -231,8 +231,7 @@ const HeroSection = () => {
   } else if (isLoading) {
     content = (
       <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto]">
-        <h1 className="text-[20px]">fetching Properties....</h1>
-        <div className="loader"></div>
+        <h1 className="text-[20px] text-center">fetching Properties....</h1>
       </div>
     );
   } else if (isError) {
@@ -241,9 +240,9 @@ const HeroSection = () => {
     // setError(errorHere);
     console.log("error:", errorHere);
     content = (
-      <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] text-[30px] text-[red]">
-        error fetching data
-      </div>
+      // <div className="mt-[200px] flex justify-center items-center self-center mx-0 my-[auto] text-center text-[30px] text-[red]">
+        <h1 className="text-center text-[30px] text-[red]">error fetching data</h1>
+      // </div>
     );
   } else if (Houses.length == 0) {
     console.log("data: ", data);
@@ -352,7 +351,7 @@ const HeroSection = () => {
                 <InputField
                   key={index}
                   {...contactFieldDetail}
-                  styles={styles.inputFied}
+                  styles={styles.inputField}
                 />
               ))}
             </div>
@@ -365,7 +364,7 @@ const HeroSection = () => {
                   onChange={(e) =>
                     handlePropertyPreferenceChange(e, propertyPreference.label)
                   }
-                  styles={styles.inputFied}
+                  styles={styles.inputFiedl2}
                 />
               ))}
             </div>
