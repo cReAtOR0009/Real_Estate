@@ -296,7 +296,7 @@ const HeroSection = () => {
               Find Property
             </button>
           </div>
-          <div className=" flex  sm:flex-wrap gap-[20px] justify-between mt-[20px] p-[20px] bg-Grey-10  rounded-[12px]lg:flex-nowrap md:mt-[-5px]">
+          <div className=" flex flex-wrap  sm:flex-wrap gap-[20px] justify-between mt-[20px] p-[20px] bg-Grey-10  rounded-[12px]lg:flex-nowrap md:mt-[-5px]">
             {propertyPreferences.map((propertyPreference, index) => (
               <div className="min-w-[100px w-full sm:w-auto">
                 <SelectField
@@ -309,7 +309,7 @@ const HeroSection = () => {
                       propertyPreference.value.toLocaleLowerCase()
                     )
                   }
-                  styles={`${styles.inputFied2} flex-1 `}
+                  styles={`${styles.inputFiedl2} flex-1 `}
                 />
               </div>
             ))}
