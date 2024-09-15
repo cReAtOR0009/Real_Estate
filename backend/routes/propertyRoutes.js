@@ -16,6 +16,12 @@ router.get("/list", (req, res) => {
     propertyController.listProperty(req, res);  
   });
 
+  // propertyEnquiries
+  router.post("/enquire", (req, res)=> {
+    propertyController.propertyEnquiries(req, res)
+  })
+
+
 router.get("/:id", (req, res) => {
     propertyController.getPropertyById(req, res)
 })

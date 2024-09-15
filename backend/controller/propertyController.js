@@ -1,5 +1,6 @@
 // Import necessary modules and configurations
 const constants = require("../constants/index");
+const propertyEnquiry = require("../database/models/propertyEnquiryModel");
 const Property = require("../database/models/propertyModel");
 const { formatMongoData, checkObjectId } = require("../utilities/formatData");
 const serverResponse = constants.serverResponse.defaultResponse;
@@ -128,6 +129,66 @@ module.exports.getPropertyById = async (req, res) => {
   }
 };
 
+module.exports.propertyEnquiries = async (req, res) => {
+  let response = { ...serverResponse };
+
+  try {
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      selectedProperty,
+      message,
+      agreeToTerms,
+      propertyId,
+    } = req.body;
+
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !phone ||
+      !selectedProperty ||
+      !message ||
+      !agreeToTerms ||
+      !propertyId
+    ) {
+      throw new Error("completes all fields before submitting enquiries form");
+    }
+
+    const property =await Property.findById(propertyId);
+
+    if (!property) {
+      throw new Error("cant make Enquiry for Unkmown Property");
+    }
+
+    const enquiryDetails = new propertyEnquiry({
+        firstName,
+        lastName,
+        email,
+        phone,
+        selectedProperty,
+        message,
+        propertyId,
+        agreeToTerms, 
+        // replied:false
+       })
+
+    const savedDetails =  await enquiryDetails.save()
+
+    response.status = 200;
+    response.message = "Enquiry Successfully Submitted";
+    response.data = await formatMongoData(savedDetails);
+  } catch (error) {
+    response.message = "Error Submiiting enquiry Request";
+    response.error = error.message;
+    console.log("Error Submiiting enquiry Request", error);
+  } finally {
+    return res.status(response.status).send(response);
+  }
+};
+
 module.exports.deletePropertyById = async (req, res) => {
   let response = { ...serverResponse };
   try {
@@ -155,14 +216,13 @@ module.exports.searchProperty = async (req, res) => {
   let response = { ...serverResponse };
   try {
     const {
-      'property name': propertyName,
-      'property type': propertyType,
-      'property size': propertySize,
-      'build year': buildYear,
-      'min price': minPrice,
-      'max price': maxPrice
+      "property name": propertyName,
+      "property type": propertyType,
+      "property size": propertySize,
+      "build year": buildYear,
+      "min price": minPrice,
+      "max price": maxPrice,
     } = req.query;
-    
 
     console.log("queries......", req.query);
     console.log("property_Name:", propertyName);
@@ -170,7 +230,7 @@ module.exports.searchProperty = async (req, res) => {
     // Build the search query
     let query = {};
     if (propertyName) {
-      query.name = { $regex: propertyName, $options: 'i' };
+      query.name = { $regex: propertyName, $options: "i" };
     }
 
     // if (propertyType) {
@@ -181,16 +241,16 @@ module.exports.searchProperty = async (req, res) => {
     //   query["address.state"] = property_state;
     // }
     if (buildYear) {
-      if (buildYear.includes('-')) {
-        const [startYear, endYear] = buildYear.split(' - ').map(year => parseInt(year, 10));
+      if (buildYear.includes("-")) {
+        const [startYear, endYear] = buildYear
+          .split(" - ")
+          .map((year) => parseInt(year, 10));
         query.buildYear = { $gte: startYear, $lte: endYear };
       } else if (buildYear.includes("<")) {
-        query.buildYear ={$lte:buildYear}
+        query.buildYear = { $lte: buildYear };
       } else if (buildYear.includes(">")) {
-        query.buildYear ={$gte:buildYear}
-      }
-       else {
-        
+        query.buildYear = { $gte: buildYear };
+      } else {
         query.buildYear = parseInt(buildYear, 10);
       }
     }
@@ -198,17 +258,17 @@ module.exports.searchProperty = async (req, res) => {
     if (minPrice) {
       query.price = { ...query.price, $gte: Number(minPrice) };
     }
-    
+
     if (maxPrice) {
       query.price = { ...query.price, $lte: Number(maxPrice) };
     }
-    
+
     if (propertyType) {
       query.propertyType = propertyType;
     }
     if (propertySize) {
       query.propertySize = propertySize;
-    } 
+    }
     // if (bedrooms) {
     //   query.bedrooms = { $gte: Number(bedrooms) };
     // }
@@ -217,16 +277,15 @@ module.exports.searchProperty = async (req, res) => {
     //   query.bathrooms = { $gte: Number(bathrooms) };
     // }
 
-    
-        // if (property_status) { 
-        //   query.status = property_status;
-        // } 
+    // if (property_status) {
+    //   query.status = property_status;
+    // }
 
     // Execute the search query
-    console.log("query:", query)
-    const properties = await Property.find(query); 
+    console.log("query:", query);
+    const properties = await Property.find(query);
 
-    console.log("properties:", properties)
+    console.log("properties:", properties);
 
     response.status = 200;
     response.message = "Property found with query.";
@@ -237,6 +296,6 @@ module.exports.searchProperty = async (req, res) => {
     console.log("Error in searching property:", error);
   } finally {
     return res.status(response.status).send(response);
-  } 
+  }
   // });
 };
