@@ -75,18 +75,16 @@ const FeaturedItemCard = ({
               <span>Price</span>
               {`$${price}`}
             </div>
-            <div
-              className={`buyButton ${styles.buttonPadding} ${styles.purpleButton}`}
-            >
-              <button className="">
                 <Link
+            className={`buyButton ${styles.buttonPadding} ${styles.purpleButton}`}
                   to={`properties/${id}`}
                   onClick={() => setNavActive("properties")}
                 >
+              <button className="">
                   View Property Details
-                </Link>{" "}
               </button>
-            </div>
+                </Link>{" "}
+            {/* </div> */}
           </div>
         </div>
       </div>
@@ -104,6 +102,7 @@ const FeaturedProperties = () => {
     properties,
 
   } = useContext(PropertyContext);
+  console.log("properties:", properties)
 
   const handlePrevClick = (noOfPages) => {
     // console.log("number of page: ", noOfPages);
@@ -116,15 +115,16 @@ const FeaturedProperties = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, noOfPages)); // Ensure the page doesn't exceed the total number of pages
   };
   if (properties.error) {
+    console.log("error", properties.errorValue)
     // return (<h1>error fetching data</h1>)
     content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto] text-[30px] text-[red]">error fetching data</div>;
   } else if (properties.isLoading) {
     // console.log("properties.isLoading", properties.isLoading);
     content = <div className="mt-[200px] flex justify-center items-center mx-0 my-[auto]">
     <h1 className="text-[20px]">fetching Properties....</h1>
-    <div className="loader">
+    {/* <div className="loader">
 
-    </div>
+    </div> */}
   </div>;
   } else if (properties.properties.length > 0) {
     // console.log("properties.properties.length: ", properties.properties.length);
