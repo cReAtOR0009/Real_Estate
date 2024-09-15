@@ -53,6 +53,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    propertyEnquiry: builder.mutation({
+      query: (credentials) => ({
+        url: "/api/v1/auth/property/enquire",
+        method: "POST",
+        body: { ...credentials },
+      }),
+    }),
+
   }),
 });
 
@@ -62,6 +70,7 @@ export const {
   useAddpropertyMutation,
   useCheckoutMutation,
   useFetchPropertiesQuery,
+  usePropertyEnquiryMutation,
   useSearchPropertiesQuery,
   useLogoutMutation,
 } = authApiSlice;
