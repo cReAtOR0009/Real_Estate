@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const dotEnv = require("dotenv");
 const cors = require("cors");
 const dbConnection = require("./database/connection");
-const CLIENT_URL = process.env.DEV?"http://localhost:5173/":"http://localhost:5173"
+const CLIENT_URL = process.env.DEV?"http://localhost:5174/":"http://localhost:5174"
 
 
 dotEnv.config();
@@ -23,6 +23,7 @@ const corsOptions = {
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
+
 
 app.use(cors(corsOptions));
 
